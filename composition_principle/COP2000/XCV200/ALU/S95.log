@@ -1,0 +1,38 @@
+CM: 
+CM: Checking...
+CM:  Error   L24/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 24   R_CY is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L25/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 25   R_CY is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Warning   L27/C0 : #0 Warning: C:/cop2000/xcv200/alu/alu.vhd  line 27   Array index range length mismatch. (VSS-4)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  2 error(s) 1 warning(s) found
+CM: 
+CM: Checking...
+CM:  Warning   L28/C0 : #0 Warning: C:/cop2000/xcv200/alu/alu.vhd  line 28   Array index range length mismatch. (VSS-4)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  0 error(s) 1 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM:  Error   L15/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 15   Syntax error.  (VSS-1081) 
+CM:  Error   L24/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 24   Syntax error.  (VSS-1081) 
+CM:  Error   L36/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 36   Entity closing name mismatch. (VSS-1082)  (FPGA-hci-hdlc-unknown) 
+CM:  3 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L28/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 28   C is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L29/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 29   C is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  2 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found

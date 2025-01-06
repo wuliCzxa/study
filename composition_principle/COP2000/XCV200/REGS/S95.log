@@ -1,0 +1,20 @@
+CM: 
+CM: Checking...
+CM:  Error   L23/C0 : #0 Error: C:/cop2000/xcv200/regs/regs.vhd  line 23   Syntax error.  (VSS-1081) 
+CM:  Error   L28/C0 : #0 Error: C:/cop2000/xcv200/regs/regs.vhd  line 28   Syntax error.  (VSS-1081) 
+CM:  Error   L31/C0 : #0 Error: C:/cop2000/xcv200/regs/regs.vhd  line 31   Syntax error.  (VSS-1081) 
+CM:  4 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L72/C0 : #0 Error: C:/cop2000/xcv200/regs/regs.vhd  line 72   Syntax error.  (VSS-1081) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful

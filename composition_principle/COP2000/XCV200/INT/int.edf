@@ -1,0 +1,531 @@
+(edif  INT
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap
+    (keywordLevel 0)
+  )
+  (status
+    (written
+      (timeStamp 2003 10 23 5 36 49)
+      (program "FPGA Express"
+	(version "3.6.1.6817")
+      )
+      (author "Administrator")
+    )
+  )
+  (external VIRTEX
+    (edifLevel 0)
+    (technology
+      (numberDefinition)
+    )
+    (cell BUFGP
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell FDC
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port Q
+	    (direction OUTPUT)
+	  )
+	  (port D
+	    (direction INPUT)
+	  )
+	  (port C
+	    (direction INPUT)
+	  )
+	  (port CLR
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell FDCE
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port Q
+	    (direction OUTPUT)
+	  )
+	  (port D
+	    (direction INPUT)
+	  )
+	  (port C
+	    (direction INPUT)
+	  )
+	  (port CLR
+	    (direction INPUT)
+	  )
+	  (port CE
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell IBUF
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT1
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT2
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port I1
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT3
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port I1
+	    (direction INPUT)
+	  )
+	  (port I2
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell OBUF_S_12
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell VCC
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port P
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+  )
+  (library DESIGNS
+    (edifLevel 0)
+    (technology
+      (numberDefinition)
+    )
+    (cell INT
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port IREN
+	    (direction INPUT)
+	  )
+	  (port EINT
+	    (direction INPUT)
+	  )
+	  (port ICEN
+	    (direction OUTPUT)
+	  )
+	  (port REQ
+	    (direction OUTPUT)
+	  )
+	  (port ACK
+	    (direction OUTPUT)
+	  )
+	  (port RST
+	    (direction INPUT)
+	  )
+	  (port I_REQ
+	    (direction INPUT)
+	  )
+	  (port CLK
+	    (direction INPUT)
+	  )
+	)
+	(contents
+	  (instance R_REQ_reg
+	    (viewRef Netlist_representation
+	      (cellRef FDC
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance R_ACK_reg
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_IREN
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_EINT
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_ICEN
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_REQ
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_ACK
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_RST
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_I_REQ
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C24
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0')")
+	    )
+	    (property INIT
+	      (string "1")
+	    )
+	    (property EQN
+	      (string "(~I0)")
+	    )
+	  )
+	  (instance C25
+	    (viewRef Netlist_representation
+	      (cellRef LUT3
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I1' I2')")
+	    )
+	    (property INIT
+	      (string "02")
+	    )
+	    (property EQN
+	      (string "(I0 * ~I1 * ~I2)")
+	    )
+	  )
+	  (instance C26
+	    (viewRef Netlist_representation
+	      (cellRef LUT2
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 + I1')")
+	    )
+	    (property INIT
+	      (string "B")
+	    )
+	    (property EQN
+	      (string "(I0 + ~I1)")
+	    )
+	  )
+	  (instance C32
+	    (viewRef Netlist_representation
+	      (cellRef BUFGP
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C33
+	    (viewRef Netlist_representation
+	      (cellRef VCC
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (net N_IREN
+	    (joined
+	      (portRef O
+		(instanceRef C_IREN)
+	      )
+	      (portRef I1
+		(instanceRef C25)
+	      )
+	    )
+	  )
+	  (net N_EINT
+	    (joined
+	      (portRef O
+		(instanceRef C_EINT)
+	      )
+	      (portRef I1
+		(instanceRef C26)
+	      )
+	    )
+	  )
+	  (net N_REQ
+	    (joined
+	      (portRef Q
+		(instanceRef R_REQ_reg)
+	      )
+	      (portRef D
+		(instanceRef R_ACK_reg)
+	      )
+	      (portRef I
+		(instanceRef C_REQ)
+	      )
+	      (portRef I0
+		(instanceRef C25)
+	      )
+	    )
+	  )
+	  (net N_ACK
+	    (joined
+	      (portRef Q
+		(instanceRef R_ACK_reg)
+	      )
+	      (portRef I
+		(instanceRef C_ACK)
+	      )
+	      (portRef I2
+		(instanceRef C25)
+	      )
+	    )
+	  )
+	  (net N_RST
+	    (joined
+	      (portRef O
+		(instanceRef C_RST)
+	      )
+	      (portRef I0
+		(instanceRef C26)
+	      )
+	    )
+	  )
+	  (net N_I_REQ
+	    (joined
+	      (portRef C
+		(instanceRef R_REQ_reg)
+	      )
+	      (portRef O
+		(instanceRef C_I_REQ)
+	      )
+	    )
+	  )
+	  (net CLK_BUFGPed
+	    (joined
+	      (portRef C
+		(instanceRef R_ACK_reg)
+	      )
+	      (portRef O
+		(instanceRef C32)
+	      )
+	    )
+	  )
+	  (net n_12
+	    (joined
+	      (portRef CE
+		(instanceRef R_ACK_reg)
+	      )
+	      (portRef I0
+		(instanceRef C24)
+	      )
+	      (portRef O
+		(instanceRef C25)
+	      )
+	    )
+	  )
+	  (net n106
+	    (joined
+	      (portRef CLR
+		(instanceRef R_REQ_reg)
+	      )
+	      (portRef CLR
+		(instanceRef R_ACK_reg)
+	      )
+	      (portRef O
+		(instanceRef C26)
+	      )
+	    )
+	  )
+	  (net N5
+	    (joined
+	      (portRef D
+		(instanceRef R_REQ_reg)
+	      )
+	      (portRef P
+		(instanceRef C33)
+	      )
+	    )
+	  )
+	  (net IREN
+	    (joined
+	      (portRef I
+		(instanceRef C_IREN)
+	      )
+	      (portRef IREN)
+	    )
+	  )
+	  (net EINT
+	    (joined
+	      (portRef I
+		(instanceRef C_EINT)
+	      )
+	      (portRef EINT)
+	    )
+	  )
+	  (net ICEN
+	    (joined
+	      (portRef O
+		(instanceRef C_ICEN)
+	      )
+	      (portRef ICEN)
+	    )
+	  )
+	  (net REQ
+	    (joined
+	      (portRef O
+		(instanceRef C_REQ)
+	      )
+	      (portRef REQ)
+	    )
+	  )
+	  (net ACK
+	    (joined
+	      (portRef O
+		(instanceRef C_ACK)
+	      )
+	      (portRef ACK)
+	    )
+	  )
+	  (net RST
+	    (joined
+	      (portRef I
+		(instanceRef C_RST)
+	      )
+	      (portRef RST)
+	    )
+	  )
+	  (net I_REQ
+	    (joined
+	      (portRef I
+		(instanceRef C_I_REQ)
+	      )
+	      (portRef I_REQ)
+	    )
+	  )
+	  (net CLK
+	    (joined
+	      (portRef CLK)
+	      (portRef I
+		(instanceRef C32)
+	      )
+	    )
+	  )
+	  (net N17
+	    (joined
+	      (portRef I
+		(instanceRef C_ICEN)
+	      )
+	      (portRef O
+		(instanceRef C24)
+	      )
+	    )
+	  )
+	)
+      )
+    )
+  )
+  (design INT
+    (cellRef INT
+      (libraryRef DESIGNS)
+    )
+    (property PART
+      (string "V200-PQ240-6")
+    )
+  )
+)

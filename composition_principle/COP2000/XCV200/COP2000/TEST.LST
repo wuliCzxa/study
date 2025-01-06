@@ -1,0 +1,15 @@
+00 7C01         MOV  A, #1
+            LOOP:
+02 8C10     mov r0, #10h
+            ;mov @r0, a
+            ;nop
+04 C4           out
+05 AC02         JMP  LOOP
+            
+                ORG  0E0H
+E0 D8           rrc  a
+            ;    ADD  A, #01
+            ;    in
+            ;    cpl  a
+E1 EC           RETI
+                END

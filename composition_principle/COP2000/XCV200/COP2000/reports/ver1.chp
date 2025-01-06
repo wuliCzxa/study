@@ -1,0 +1,74 @@
+
+=========
+Chip ver1
+=========
+
+Summary Information:
+--------------------
+Type: Initial implementation
+Source: up to date
+Status: 1 errors, 0 warnings, 0 messages
+Chip create time: 0.782000s
+FSM synthesis: ONEHOT
+
+Target Information:
+-------------------
+Vendor: Xilinx
+Family: VIRTEX
+Device: V200PQ240
+Speed: -6
+
+Chip Parameters:
+----------------
+Optimize for: Speed
+Optimization effort: Low
+Frequency: 10 MHz
+Is module: No
+Keep io pads: No
+Number of flip-flops: 0
+Number of latches: 0
+
+Chip Design Hierarchy:
+----------------------
+COP2000: defined in c:\cop2000\xcv200\cop2000\cop2000.vhd
+
+Primitive reference count:
+--------------------------
+
+Clocks:
+-------
+                           Required  Estimated                       
+Period   Rise     Fall     Freq      Freq       Signal               
+(ns)     (ns)     (ns)     (MHz)     (MHz)                           
+...............................................................
+100        0       50       10.00       n/a     default              
+
+Timing Groups:
+--------------
+                                                                             
+                                                                             
+Name                           Description                                   
+...........................................................................
+(I)                            Input ports                                   
+(O)                            Output ports                                  
+
+Timing Path Groups:
+-------------------
+                                                          Required  Estimated 
+                                                          Delay     Delay     
+From                         To                           (ns)      (ns)      
+..........................................................................
+
+Input Port Timing:
+------------------
+                               Required   Estimated                            
+Port                           Delay      Slack                                
+Name                           (ns)       (ns)       To-Group                  
+...........................................................................
+
+Output Port Timing:
+-------------------
+                               Required   Estimated                            
+Port                           Delay      Slack                                
+Name                           (ns)       (ns)       From-Group                
+...........................................................................

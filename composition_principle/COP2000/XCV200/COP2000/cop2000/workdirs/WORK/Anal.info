@@ -1,0 +1,17 @@
+file {
+  .version = 1;
+  entity {
+    .name = "COP2000";
+    .mra_file = "COP2000.mra";
+    .arch = {"behv"};
+    .syn_files = {"COP2000.syn", "COP2000__BEHV.syn"};
+    param { .name = "ALL_ZERO";
+          }
+    param { .name = "INT_ENTER";
+          }
+    param { .name = "INT_CODE";
+          }
+    param { .name = "DataWidth";
+          }
+   }
+}

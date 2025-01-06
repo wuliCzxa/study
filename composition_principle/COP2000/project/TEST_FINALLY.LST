@@ -1,0 +1,172 @@
+00 7C00     MOV A, #00H          ; 初始化
+02 80       MOV R0, A            ; 初始化R0（数A的原码存储）
+03 81       MOV R1, A            ; 初始化R1（数B的原码存储）
+04 82       MOV R2, A            ; 初始化R2（数A的补码存储）
+05 83       MOV R3, A            ; 初始化R3（数B的补码存储）
+            
+06 88D0     MOV 0D0H, A          ; 初始化内存存储地址0D0H
+08 88D1     MOV 0D1H, A          ; 初始化内存存储地址0D1H
+0A 88D2     MOV 0D2H, A          ; 初始化内存存储地址0D2H
+0C 88E0     MOV 0E0H, A          ; 数A最高位存储
+0E 88E1     MOV 0E1H, A          ; 数A次高位存储
+10 88E2     MOV 0E2H, A          ; 数B最高位存储
+12 88E3     MOV 0E3H, A          ; 数B次高位存储
+14 88E4     MOV 0E4H, A          ; 加法结果最高位存储
+16 88E5     MOV 0E5H, A          ; 加法结果次高位存储
+            
+            INPUT:               ; 输入原码数据
+18 7C1E         MOV A, #1EH      ; 数A的原码(6E,50,94,72,2C,00)
+1A 88D0         MOV 0D0H, A      ; 存储到数A地址
+1C 7C50         MOV A, #50H      ; 数B的原码(0A,3C,F8,88,1E,0A,00)
+1E 88D1         MOV 0D1H, A      ; 存储到数B地址
+20 A022         JC INPUT_CHECK_A
+            
+            INPUT_CHECK_A:
+22 78D0         MOV A, 0D0H      ; 加载数A
+24 5C80         AND A, #80H      ; 确保合法性检查(7位范围内)
+26 A432         JZ GET_A         ; 输入正常跳转存储
+28 ACC0         JMP INPUT_ERROR  ; 输入错误跳转
+            
+            INPUT_CHECK_B:
+2A 78D1         MOV A, 0D1H      ; 加载数B
+2C 5C80         AND A, #80H      ; 确保合法性检查(7位范围内)
+2E A437         JZ GET_B         ; 输入正常跳转存储
+30 ACC0         JMP INPUT_ERROR  ; 输入错误跳转
+            
+            GET_A:
+                ; 数A为7位有效原码，保存R0
+32 78D0         MOV A, 0D0H
+34 80           MOV R0, A
+35 AC2A         JMP INPUT_CHECK_B
+            
+            GET_B:
+                ; 数B为7位有效原码，保存R1
+37 78D1         MOV A, 0D1H
+39 81           MOV R1, A
+            
+            CONVERT_A:
+3A 7C00         MOV A, #00H      ; 清零标志位
+3C 10           ADD A, R0        ; 加载数A原码
+3D A44E         JZ ZERO_A        ; 如果数A为0，跳过转换
+3F 5C40         AND A, #40H      ; 检查符号位（次高位）
+41 A44B         JZ POS_A         ; 如果为正数，跳到正数处理
+43 70           MOV A, R0
+44 E4           CPL A            ; 如果为负数，取反
+45 5C7F         AND A, #7FH      ; 最高位丢弃
+47 1C41         ADD A, #41H      ; 加1得到补码
+49 AC50         JMP SAVE_A
+            
+            POS_A:
+4B 70           MOV A, R0        ; 直接将原码赋值为补码
+4C AC50         JMP SAVE_A
+            
+            ZERO_A:
+4E 7C00         MOV A, #00H      ; 数A为0时，补码也是0
+            
+            SAVE_A:
+50 82           MOV R2, A        ; 将数A的补码存储到R2
+            
+            CONVERT_B:
+51 7C00         MOV A, #00H      ; 清零标志位
+53 11           ADD A, R1        ; 加载数B原码
+54 A465         JZ ZERO_B        ; 如果数B为0，跳过转换
+56 5C40         AND A, #40H      ; 检查符号位（次高位）
+58 A462         JZ POS_B         ; 如果为正数，跳到正数处理
+5A 71           MOV A, R1
+5B E4           CPL A            ; 如果为负数，取反
+5C 5C7F         AND A, #7FH      ; 最高位丢弃
+5E 1C41         ADD A, #41H      ; 加1得到补码
+60 AC67         JMP SAVE_B
+            
+            POS_B:
+62 71           MOV A, R1        ; 直接将原码赋值为补码
+63 AC67         JMP SAVE_B
+            
+            ZERO_B:
+65 7C00         MOV A, #00H      ; 数B为0时，补码也是0
+            
+            SAVE_B:
+67 83           MOV R3, A        ; 将数B的补码存储到R3
+            
+            ADD_OPERATION:
+                ; 补码加法
+68 72           MOV A, R2        ; 加载数A补码
+69 13           ADD A, R3       ; 加数B补码并考虑进位
+6A 88D2         MOV 0D2H, A      ; 暂存结果
+            
+                ; 提取和计算溢出条件
+6C 72           MOV A, R2        ; 获取数A补码的次高位
+6D 5C40         AND A, #40H      ; 提取次高位
+6F 88E0         MOV 0E0H, A      ; 存储次高位
+71 E4           CPL A            ; 取反
+72 88E1         MOV 0E1H, A      ; 存储次高位取反
+            
+74 73           MOV A, R3        ; 获取数B补码的次高位
+75 5C40         AND A, #40H      ; 提取次高位
+77 88E2         MOV 0E2H, A      ; 存储次高位
+79 E4           CPL A            ; 取反
+7A 88E3         MOV 0E3H, A      ; 存储次高位取反
+            
+7C 78D2         MOV A, 0D2H      ; 获取加法结果的次高位
+7E 5C40         AND A, #40H      ; 提取次高位
+80 88E4         MOV 0E4H, A      ; 存储次高位
+82 E4           CPL A            ; 取反
+83 88E5         MOV 0E5H, A      ; 存储次高位取反
+            
+                ; 计算溢出表达式
+85 78E0         MOV A, 0E0H      ; 数A次高位
+87 58E2         AND A, 0E2H      ; 与数B次高位
+89 58E5         AND A, 0E5H      ; 与加法结果次高位取反
+8B 88C0         MOV 0C0H, A      ; 暂存中间结果1
+            
+8D 78E1         MOV A, 0E1H      ; 数A次高位取反
+8F 58E3         AND A, 0E3H      ; 与数B次高位取反
+91 58E4         AND A, 0E4H      ; 与加法结果次高位
+93 68C0         OR A, 0C0H       ; 合并两个结果
+95 A4A9         JZ STORE_RESULT  ; 如果结果为0，不溢出
+            
+                ; 检查是上溢还是下溢
+97 78E0         MOV A, 0E0H      ; 数A次高位
+99 58E2         AND A, 0E2H      ; 与数B次高位
+9B 58E5         AND A, 0E5H      ; 与加法结果次高位取反
+9D A4A4         JZ OVERFLOW_UPPER; 如果为0，跳到上溢处理
+            
+            OVERFLOW_LOWER:
+                ; 下溢处理
+9F 7CFE         MOV A, #0FEH     ; 下溢标志
+A1 C4           OUT              ; 输出
+A2 ACC5         JMP OVER
+            
+            OVERFLOW_UPPER:
+                ; 上溢处理
+A4 7CFF         MOV A, #0FFH     ; 上溢标志
+A6 C4           OUT              ; 输出
+A7 ACC5         JMP OVER
+            
+            STORE_RESULT:
+                ; 正常结果处理
+A9 78D2         MOV A, 0D2H      ; 获取结果
+AB 5C40         AND A, #40H      ; 检查符号位（次高位）
+AD A4B9         JZ POS_RESULT    ; 如果为正数，跳到正数处理
+AF 78D2         MOV A, 0D2H
+B1 4C41         SUBC A, #41H
+B3 E4           CPL A            ; 转换回原码
+B4 5C7F         AND A, #7FH      ; 最高位丢弃
+B6 C4           OUT              ; 输出
+B7 ACC5         JMP OVER
+            
+            POS_RESULT:
+B9 78D2         MOV A, 0D2H      ; 直接将原码赋值为补码
+BB 5C7F         AND A, #7FH      ; 最高位丢弃
+BD C4           OUT
+BE ACC5         JMP OVER
+            
+            INPUT_ERROR:
+                ; 错误输入处理，输出错误状态
+C0 7C80         MOV A, #080H     ; 错误标志
+C2 C4           OUT
+C3 ACC5         JMP OVER
+            
+            OVER:
+C5 ACC5         JMP OVER         ; 程序结束
+            

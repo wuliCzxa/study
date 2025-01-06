@@ -1,0 +1,8 @@
+00 7C12     MOV A, #12H;
+02 8801     MOV 01H, A;
+04 7C34     MOV A, #34H;
+06 8802     MOV 02H, A;
+08 1801     ADD A, 01H;
+0A 8810     MOV 10H, A;
+0C C4       OUT;
+            

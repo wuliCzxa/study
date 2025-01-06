@@ -1,0 +1,182 @@
+            ; 初始化寄存器和相关变量
+00 7C00     MOV A, #00H             ; 初始化A寄存器为0
+02 80       MOV R0, A               ; 清空R0寄存器
+03 81       MOV R1, A               ; 清空R1寄存器
+04 82       MOV R2, A               ; 清空R2寄存器
+05 83       MOV R3, A               ; 清空R3寄存器
+            
+06 88EE     MOV 0EEH, A             ; 初始化命中计数器
+08 88EB     MOV 0EBH, A             ; 初始化循环计数寄存器
+0A 88EA     MOV 0EAH, A             ; 初始化后移循环计数器
+            
+0C 7C04     MOV A, #04H
+0E 88EF     MOV 0EFH, A             ; 初始化未命中计数器
+            ; 主程序入口
+            MAIN:
+10 8CF0         MOV R0, #0F0H       ; 设置R0指针指向0F0H作为初始地址
+12 7C10         MOV A, #10H         ; 设定处理的地址范围长度（16次循环）
+14 88DD         MOV 0DDH, A         ; 设置循环计数器的值
+            
+            PAGE_LOOP:
+16 74           MOV A, @R0          ; 从当前地址读取数据
+17 BC2D         CALL COPY           ; 调用COPY程序，将0E0H~0E3H内容复制到0D5H~0D8H
+19 BC46         CALL SHIFT_PAGE     ; 调用后移程序，将页面后移一位
+1B BC71         CALL COMPARE        ; 比较0E0H~0E3H和0D5H~0D8H内容，更新命中和未命中计数
+            
+            NEXT_PAGE:
+1D 70           MOV A, R0           ; 读取R0
+1E 1C01         ADD A, #01H         ; R0增加1，指向下一地址
+20 80           MOV R0, A           ; 更新R0
+            
+21 78DD         MOV A, 0DDH         ; 读取循环计数器
+23 3C01         SUB A, #01H         ; 减1，判断是否结束
+25 88DD         MOV 0DDH, A         ; 保存更新后的计数器
+27 A42B         JZ END_LOOP         ; 如果计数为0，跳转结束程序
+29 AC16         JMP PAGE_LOOP       ; 否则，跳转到PAGE_LOOP继续循环
+            
+            END_LOOP:
+2B AC2B         JMP END_LOOP        ; 程序结束，进入死循环
+            
+            ; 子程序：COPY
+            ; 功能：将0E0H~0E3H数据复制到0D5H~0D8H
+            COPY:
+2D 8FE0         MOV R3, #0E0H       ; 设置复制起始地址为0E0H
+2F 8E04         MOV R2, #04H        ; 设置复制长度为4
+31 8DD5         MOV R1, #0D5H       ; 设置目标地址为0D5H
+            
+            COPY_LOOP:
+33 77           MOV A, @R3          ; 从0E0H~0E3H读取数据
+34 85           MOV @R1, A          ; 将数据复制到0D5H~0D8H
+35 73           MOV A, R3           ; 当前地址指针后移
+36 1C01         ADD A, #01H
+38 83           MOV R3, A           ; 更新当前地址
+39 71           MOV A, R1           ; 目标地址指针后移
+3A 1C01         ADD A, #01H
+3C 81           MOV R1, A           ; 更新目标地址
+3D 72           MOV A, R2           ; 剩余长度减1
+3E 3C01         SUB A, #01H
+40 82           MOV R2, A
+41 A445         JZ COPY_END         ; 如果剩余长度为0，结束复制
+43 AC33         JMP COPY_LOOP       ; 否则继续复制
+            
+            COPY_END:
+45 CC           RET                 ; 返回主程序
+            
+            ; 子程序：SHIFT_PAGE
+            ; 功能：将0E0H~0E3H的页面后移一位
+            SHIFT_PAGE:
+46 8FE3         MOV R3, #0E3H       ; 设置后移操作的起点为0E3H
+48 7C04         MOV A, #04H         ; 后移页面的数量为4
+4A 88EA         MOV 0EAH, A         ; 存储后移次数
+4C 74           MOV A, @R0
+4D 88D1         MOV 0D1H, A
+4F BC51         CALL SHIFT_LOOP
+            SHIFT_LOOP:
+51 77           MOV A, @R3          ; 从当前地址读取数据
+52 81           MOV R1, A
+53 73           MOV A, R3           ; 当前地址后移
+54 1C01         ADD A, #01H
+56 83           MOV R3, A           ; 写入下一地址
+57 71           MOV A, R1
+58 87           MOV @R3, A
+            
+59 73           MOV A, R3           ; 前移到上一地址
+5A 3C02         SUB A, #02H
+5C 83           MOV R3, A
+5D 78EA         MOV A, 0EAH         ; 更新后移次数
+5F 3C01         SUB A, #01H
+61 88EA         MOV 0EAH, A
+63 A467         JZ SHIFT_END        ; 后移次数完成，退出
+65 AC51         JMP SHIFT_LOOP      ; 否则继续后移
+            
+            SHIFT_END:
+67 78D1         MOV A, 0D1H
+69 88E0         MOV 0E0H, A         ; 将当前原地址数据存入0E0H
+6B 7C00         MOV A, #00H      ; 清空0E4H数据
+6D 88E4         MOV 0E4H, A
+6F AC71         JMP COMPARE                 ; 返回主程序
+            
+            ; 子程序：COMPARE
+            ; 功能：比较0E0H~0E3H和0D5H~0D8H的数据，更新命中/未命中计数
+            COMPARE:
+71 8FE0         MOV R3, #0E0H       ; 设置比较起始地址为0E0H
+73 8E04         MOV R2, #04H        ; 设置比较长度为4
+75 7C00         MOV A, #00H        ; 设置命中标志，初始为0，表示未命中
+77 88EB         MOV 0EBH, A
+            
+            COMPARE_E0:
+79 77           MOV A, @R3          ; 从0E0H读取数据
+7A 8DD5         MOV R1, #0D5H       ; 设置目标比较地址为0D5H
+7C 7C04         MOV A, #04H        ; 设置比较长度为4
+7E 88EC         MOV 0ECH, A
+            
+            COMPARE_E0_LOOP:
+80 75           MOV A, @R1          ; 从0D5H~0D8H中读取数据
+81 37           SUB A, @R3          ; 比较0E0H和0D5H~0D8H中的数据
+82 A49E         JZ MATCH             ; 如果找到匹配项，跳转到MATCH
+            
+84 71           MOV A, R1           ; 目标地址后移
+85 1C01         ADD A, #01H
+87 81           MOV R1, A
+88 78EC         MOV A, 0ECH           ; 剩余比较长度减1
+8A 3C01         SUB A, #01H
+8C 88EC         MOV 0ECH, A
+8E A492         JZ NO_MATCH_E0
+90 AC80         JMP COMPARE_E0_LOOP  ; 如果未比较完，继续
+            
+            NO_MATCH_E0:
+92 73           MOV A, R3
+93 1C01         ADD A, #01H         ; 比较地址后移
+95 83           MOV R3, A
+96 72           MOV A, R2           ; 剩余比较长度减1
+97 3C01         SUB A, #01H
+99 82           MOV R2, A
+9A A4A4         JZ COMPARE_END_E0    ; 如果完成，跳转结束
+9C AC79         JMP COMPARE_E0      ; 否则继续比较
+            
+            MATCH:
+9E 7CFF         MOV A, #0FFH        ; 设置命中标志为1，表示已经找到匹配项
+A0 88EB         MOV 0EBH, A
+A2 ACA4         JMP COMPARE_END_E0  ; 匹配成功，结束比较
+            
+            COMPARE_END_E0:
+A4 78EB         MOV A, 0EBH           ; 读取命中标志
+A6 5C01         AND A, #01H
+A8 A4AE         JZ NO_MATCH         ; 如果未命中，调用未命中程序
+AA BCBD         CALL HIT             ; 如果命中，调用命中次数增加程序
+AC ACB0         JMP NEXT_COMPARE    ; 进入下一次比较
+            
+            NO_MATCH:
+AE BCC6         CALL NULL            ; 如果未命中，调用未命中次数增加程序
+            
+            NEXT_COMPARE:
+B0 73           MOV A, R3           ; 比较地址后移
+B1 1C01         ADD A, #01H
+B3 83           MOV R3, A
+B4 72           MOV A, R2           ; 剩余比较长度减1
+B5 3C01         SUB A, #01H
+B7 82           MOV R2, A
+B8 A4BC         JZ COMPARE_END      ; 如果完成，退出
+BA AC80         JMP COMPARE_E0_LOOP    ; 否则继续比较
+            
+            COMPARE_END:
+BC CC           RET                 ; 返回主程序
+            
+            ; 子程序：命中次数增加程序
+            HIT:
+BD 78EE         MOV A, 0EEH         ; 命中计数器加1
+BF 1C01         ADD A, #01H
+C1 88EE         MOV 0EEH, A
+C3 AC1D         JMP NEXT_PAGE
+C5 CC           RET                 ; 返回主程序
+            
+            ; 子程序：未命中次数增加程序
+            NULL:
+C6 78EF         MOV A, 0EFH         ; 未命中计数器加1
+C8 1C01         ADD A, #01H
+CA 88EF         MOV 0EFH, A
+CC AC1D         JMP NEXT_PAGE
+CE CC           RET                 ; 返回主程序
+            
+            
+            

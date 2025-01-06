@@ -1,0 +1,45 @@
+CM: 
+CM:  0 error(s) 0 warning(s) found
+CM:  Error   L24/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 24   R_CY is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L25/C0 : #0 Error: C:/cop2000/xcv200/alu/alu.vhd  line 25   R_CY is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Warning   L27/C0 : #0 Warning: C:/cop2000/xcv200/alu/alu.vhd  line 27   Array index range length mismatch. (VSS-4)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  2 error(s) 1 warning(s) found
+CM:  Warning   L28/C0 : #0 Warning: C:/cop2000/xcv200/alu/alu.vhd  line 28   Array index range length mismatch. (VSS-4)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  0 error(s) 1 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: 
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM:  0 error(s) 0 warning(s) found
+CM:  Error   L40/C0 : #0 Error: C:/cop2000/xcv200/pc/pc.vhd  line 40   Ports of mode OUT or LINKAGE can not be read.  (VSS-793) 
+CM:  1 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM:  Error   L35/C0 : #0 Error: C:/cop2000/xcv200/int/int.vhd  line 35   Ports of mode OUT or LINKAGE can not be read.  (VSS-793) 
+CM:  Error   L35/C0 : #0 Error: C:/cop2000/xcv200/int/int.vhd  line 35   Static signal name required in process sensitivity list. (VSS-864)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L46/C0 : #0 Error: C:/cop2000/xcv200/int/int.vhd  line 46   Ports of mode OUT or LINKAGE can not be read.  (VSS-793) 
+CM:  3 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found

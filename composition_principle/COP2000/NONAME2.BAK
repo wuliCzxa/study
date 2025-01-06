@@ -1,0 +1,7 @@
+MOV A, #12H;
+MOV 01H, A;
+MOV A, #34H;
+MOV 02H, A;
+ADD A, 01H;
+MOV 10H, A;
+OUT;

@@ -1,0 +1,5 @@
+00 21          ADDC   A, R1
+01 35          SUB    A, @R1
+02 5C55        AND    A, #55H
+04 6802        OR     A, 02H
+               END

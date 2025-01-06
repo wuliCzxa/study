@@ -1,0 +1,156 @@
+00 7C00     MOV A, #00H          ; ³õÊ¼»¯
+02 80       MOV R0, A            ; ³õÊ¼»¯R0£¨ÊýAµÄÔ­Âë´æ´¢£©
+03 81       MOV R1, A            ; ³õÊ¼»¯R1£¨ÊýBµÄÔ­Âë´æ´¢£©
+04 82       MOV R2, A            ; ³õÊ¼»¯R2£¨ÊýAµÄ²¹Âë´æ´¢£©
+05 83       MOV R3, A            ; ³õÊ¼»¯R3£¨ÊýBµÄ²¹Âë´æ´¢£
+            
+06 88D0     MOV 0D0H, A          ; ³õÊ¼»¯ÄÚ´æ´æ´¢µØÖ·0D0H
+08 88D1     MOV 0D1H, A          ; ³õÊ¼»¯ÄÚ´æ´æ´¢µØÖ·0D1H
+0A 88D2     MOV 0D2H, A          ; ³õÊ¼»¯ÄÚ´æ´æ´¢µØÖ·0D2H
+0C 88E0     MOV 0E0H, A          ; ÊýA×î¸ßÎ»´æ´¢
+0E 88E1     MOV 0E1H, A          ; ÊýA×î¸ßÎ»È¡·´´æ´¢
+10 88E2     MOV 0E2H, A          ; ÊýB×î¸ßÎ»´æ´¢
+12 88E3     MOV 0E3H, A          ; ÊýB×î¸ßÎ»È¡·´´æ´¢
+14 88E4     MOV 0E4H, A          ; ¼Ó·¨½á¹û×î¸ßÎ»´æ´¢
+16 88E5     MOV 0E5H, A          ; ¼Ó·¨½á¹û×î¸ßÎ»È¡·´´æ´¢
+            
+            INPUT:               ; ÊäÈëÔ­ÂëÊý¾Ý
+18 7C50         MOV A, #50H      ; ÊýAµÄÔ­Âë(6E,50,94,94,72,94,00)
+1A 88D0         MOV 0D0H, A      ; ´æ´¢µ½ÊýAµØÖ·
+1C 7C30         MOV A, #30H      ; ÊýBµÄÔ­Âë(0A,3C,F8,88,1E,0A,00)
+1E 88D1         MOV 0D1H, A      ; ´æ´¢µ½ÊýBµØÖ·
+20 A022         JC INPUT_CHECK
+            
+            INPUT_CHECK:
+22 78D0         MOV A, 0D0H      ; ¼ÓÔØÊýA
+24 5CFF         AND A, #0FFH     ; È·±£ÓÐÐ§ÐÔ¼ì²é(7Î»·¶Î§ÄÚ)
+26 A0AE         JC INPUT_ERROR   ; ÊäÈë´íÎóÌø×ª
+28 80           MOV R0, A        ; ´æ´¢µ½R0
+            
+29 78D1         MOV A, 0D1H      ; ¼ÓÔØÊýB
+2B 5CFF         AND A, #0FFH     ; È·±£ÓÐÐ§ÐÔ¼ì²é(7Î»·¶Î§ÄÚ)
+2D A0AE         JC INPUT_ERROR   ; ÊäÈë´íÎóÌø×ª
+2F 81           MOV R1, A        ; ´æ´¢µ½R1
+            
+            CONVERT_A:
+30 70           MOV A, R0        ; ¼ÓÔØÊýAÔ­Âë
+31 A440         JZ ZERO_A        ; Èç¹ûÊýAÎª0£¬Ìø¹ý×ª»»
+33 5C80         AND A, #80H      ; ¼ì²é·ûºÅÎ»
+35 A43D         JZ POS_A         ; Èç¹ûÎªÕýÊý£¬Ìøµ½ÕýÊý´¦Àí
+37 70           MOV A, R0
+38 E4           CPL A            ; Èç¹ûÎª¸ºÊý£¬È¡·´
+39 1C81         ADD A, #81H      ; ¼Ó1µÃµ½²¹Âë
+3B AC42         JMP SAVE_A
+            
+            POS_A:
+3D 70           MOV A, R0        ; Ö±½Ó½«Ô­Âë¸³ÖµÎª²¹Âë
+3E AC42         JMP SAVE_A
+            
+            ZERO_A:
+40 7C00         MOV A, #00H      ; ÊýAÎª0Ê±£¬²¹ÂëÒ²ÊÇ0
+            
+            SAVE_A:
+42 82           MOV R2, A        ; ½«ÊýAµÄ²¹Âë´æ´¢µ½R2
+            
+            CONVERT_B:
+43 7C00         MOV A, #00H
+45 11           ADD A, R1        ; ¼ÓÔØÊýBÔ­Âë
+46 A455         JZ ZERO_B        ; Èç¹ûÊýBÎª0£¬Ìø¹ý×ª»»
+48 5C80         AND A, #80H      ; ¼ì²é·ûºÅÎ»
+4A A452         JZ POS_B         ; Èç¹ûÎªÕýÊý£¬Ìøµ½ÕýÊý´¦Àí
+4C 71           MOV A, R1
+4D E4           CPL A            ; Èç¹ûÎª¸ºÊý£¬È¡·´
+4E 1C81         ADD A, #81H      ; ¼Ó1µÃµ½²¹Âë
+50 AC57         JMP SAVE_B
+            
+            POS_B:
+52 71           MOV A, R1        ; Ö±½Ó½«Ô­Âë¸³ÖµÎª²¹Âë
+53 AC57         JMP SAVE_B
+            
+            ZERO_B:
+55 7C00         MOV A, #00H      ; ÊýBÎª0Ê±£¬²¹ÂëÒ²ÊÇ0
+            
+            SAVE_B:
+57 83           MOV R3, A        ; ½«ÊýBµÄ²¹Âë´æ´¢µ½R3
+            
+            ADD_OPERATION:
+                ; ²¹Âë¼Ó·¨
+58 72           MOV A, R2        ; ¼ÓÔØÊýA²¹Âë
+59 23           ADDC A, R3       ; ¼ÓÊýB²¹Âë²¢¿¼ÂÇ½øÎ»
+5A 88D2         MOV 0D2H, A      ; ÔÝ´æ½á¹û
+            
+                ; ÌáÈ¡ºÍ¼ÆËãÒç³öÌõ¼þ
+5C 72           MOV A, R2        ; »ñÈ¡ÊýA²¹ÂëµÄ×î¸ßÎ»
+5D 5C80         AND A, #80H      ; ÌáÈ¡×î¸ßÎ»
+5F 88E0         MOV 0E0H, A      ; ´æ´¢×î¸ßÎ»
+61 E4           CPL A            ; È¡·´
+62 88E1         MOV 0E1H, A      ; ´æ´¢×î¸ßÎ»È¡·´
+            
+64 73           MOV A, R3        ; »ñÈ¡ÊýB²¹ÂëµÄ×î¸ßÎ»
+65 5C80         AND A, #80H      ; ÌáÈ¡×î¸ßÎ»
+67 88E2         MOV 0E2H, A      ; ´æ´¢×î¸ßÎ»
+69 E4           CPL A            ; È¡·´
+6A 88E3         MOV 0E3H, A      ; ´æ´¢×î¸ßÎ»È¡·´
+            
+6C 78D2         MOV A, 0D2H      ; »ñÈ¡¼Ó·¨½á¹ûµÄ×î¸ßÎ»
+6E 5C80         AND A, #80H      ; ÌáÈ¡×î¸ßÎ»
+70 88E4         MOV 0E4H, A      ; ´æ´¢×î¸ßÎ»
+72 E4           CPL A            ; È¡·´
+73 88E5         MOV 0E5H, A      ; ´æ´¢×î¸ßÎ»È¡·´
+            
+                ; ¼ÆËãÒç³ö±í´ïÊ½
+75 78E0         MOV A, 0E0H      ; ÊýA×î¸ßÎ»
+77 58E2         AND A, 0E2H      ; ÓëÊýB×î¸ßÎ»
+79 58E5         AND A, 0E5H      ; Óë¼Ó·¨½á¹û×î¸ßÎ»È¡·´
+7B 88C0         MOV 0C0H, A      ; ÔÝ´æÖÐ¼ä½á¹û1
+            
+7D 78E1         MOV A, 0E1H      ; ÊýA×î¸ßÎ»È¡·´
+7F 58E3         AND A, 0E3H      ; ÓëÊýB×î¸ßÎ»È¡·´
+81 58E4         AND A, 0E4H      ; Óë¼Ó·¨½á¹û×î¸ßÎ»
+83 68C0         OR A, 0C0H       ; ºÏ²¢Á½¸ö½á¹û
+85 A499         JZ STORE_RESULT  ; Èç¹û½á¹ûÎª0£¬²»Òç³ö
+            
+                ; ¼ì²éÊÇÉÏÒç»¹ÊÇÏÂÒç
+87 78E0         MOV A, 0E0H      ; ÊýA×î¸ßÎ»
+89 58E2         AND A, 0E2H      ; ÓëÊýB×î¸ßÎ»
+8B 58E5         AND A, 0E5H      ; Óë¼Ó·¨½á¹û×î¸ßÎ»È¡·´
+8D A494         JZ OVERFLOW_UPPER; Èç¹ûÎª0£¬Ìøµ½ÉÏÒç´¦Àí
+            
+            OVERFLOW_LOWER:
+                ; ÏÂÒç´¦Àí
+8F 7CFE         MOV A, #0FEH     ; ÏÂÒç±êÖ¾
+91 C4           OUT              ; Êä³ö
+92 ACAC         JMP OVER
+            
+            OVERFLOW_UPPER:
+                ;ÉÏÒç´¦Àí
+94 7CFF         MOV A, #0FFH     ; ÉÏÒç±êÖ¾
+96 C4           OUT              ; Êä³ö
+97 ACAC         JMP OVER
+            
+            STORE_RESULT:
+                ; Õý³£½á¹û´¦Àí
+99 78D2         MOV A, 0D2H      ; »ñÈ¡½á¹û
+9B 5C80         AND A, #80H      ; ¼ì²é·ûºÅÎ»
+9D A4A7         JZ POS_RESULT    ; Èç¹ûÎªÕýÊý£¬Ìøµ½ÕýÊý´¦Àí
+9F 78D2         MOV A, 0D2H
+A1 4C81         SUBC A, #81H      
+A3 E4           CPL A            ; ×ª»»»ØÔ­Âë
+A4 C4           OUT              ; Êä³ö
+A5 ACAC         JMP OVER
+                    
+            POS_RESULT:
+A7 78D2         MOV A, 0D2H      ; Ö±½Ó½«Ô­Âë¸³ÖµÎª²¹Âë
+A9 C4           OUT
+AA ACAC         JMP OVER
+                
+            OVER:
+AC ACAC         JMP OVER         ; ³ÌÐò½áÊø
+               
+            INPUT_ERROR:
+                ; ´íÎóÊäÈë´¦Àí£¬Êä³ö´íÎó×´Ì¬ 
+AE 7CFF         MOV A, #0FFH     ; ´íÎó±êÖ¾
+B0 C4           OUT
+B1 ACAC         JMP OVER
+               
+            

@@ -1,0 +1,8 @@
+00 7C00           MOV A, #00H;
+02 1C01     LOOP: ADD A, #01H
+04 AC02           JMP LOOP
+                  
+                  ORG 0F0H
+F0 3C01           SUB A,#01H
+F2 EC             RETI
+            
