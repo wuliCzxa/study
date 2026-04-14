@@ -1,0 +1,57 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'PCB30DJS.LYT'.
+CADCAM generated at 17:36:43 on 2014年2月8日星期六.
+
+File List
+---------
+Top Copper              : PCB30DJS - CADCAM Top Copper.TXT
+Bottom Copper           : PCB30DJS - CADCAM Bottom Copper.TXT
+Top Silk Screen         : PCB30DJS - CADCAM Top Silk Screen.TXT
+Top Solder Resist       : PCB30DJS - CADCAM Top Solder Resist.TXT
+Bottom Solder Resist    : PCB30DJS - CADCAM Bottom Solder Resist.TXT
+Mechanical 1            : PCB30DJS - CADCAM Mechanical 1.TXT
+Drill                   : PCB30DJS - CADCAM Drill.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
+
+D10	CIRCLE  D=25th                                                            DRAW
+D11	CIRCLE  D=40th                                                            DRAW
+D12	CIRCLE  D=50th                                                            FLASH
+D13	DIL     W=60th                H=100th               C=12th                FLASH
+D14	SQUARE  S=50th                                                            FLASH
+D15	SQUARE  S=60th                                                            FLASH
+D16	CIRCLE  D=70th                                                            FLASH
+D17	CIRCLE  D=80th                                                            FLASH
+D18	CIRCLE  D=120th                                                           FLASH
+D19	CIRCLE  D=60th                                                            FLASH
+D70	SQUARE  S=80th                                                            FLASH
+D71	CIRCLE  D=8th                                                             DRAW
+D20	DIL     W=80th                H=120th               C=12th                FLASH
+D21	SQUARE  S=70th                                                            FLASH
+D22	CIRCLE  D=90th                                                            FLASH
+D23	CIRCLE  D=100th                                                           FLASH
+D24	CIRCLE  D=140th                                                           FLASH
+D25	SQUARE  S=100th                                                           FLASH
+D26	CIRCLE  D=150th                                                           FLASH
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+T01	20th (0-15)
+T02	30th (0-15)
+T03	25th (0-15)
+T04	70th (0-15)
+T05	40th (0-15)
+T06	110th (0-15)
+
+
+[END OF FILE]

@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>jpeg/background.jpg</file>
+        <file>jpeg/background_1.jpg</file>
+        <file>jpeg/background_high.jpg</file>
+        <file>jpeg/bug.png</file>
+        <file>jpeg/icon-close.jpg</file>
+        <file>jpeg/login.jpg</file>
+        <file>jpeg/login_high.jpg</file>
+        <file>jpeg/max.jpg</file>
+        <file>jpeg/min.jpg</file>
+        <file>jpeg/paishe.jpg</file>
+        <file>jpeg/parent.jpg</file>
+        <file>jpeg/quanbushuju.jpg</file>
+        <file>jpeg/tuichu.jpg</file>
+        <file>jpeg/tuku.jpg</file>
+        <file>jpeg/zuixiaohua.jpg</file>
+        <file>jpeg/display.png</file>
+        <file>jpeg/hide.png</file>
+    </qresource>
+</RCC>

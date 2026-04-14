@@ -1,0 +1,120 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/13/2016  11:57:08  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTOPTR)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?MAIN
+            DATA    0010H     0003H     UNIT         ?DT?_STRING?MAIN
+            DATA    0013H     0003H     UNIT         _DATA_GROUP_
+            IDATA   0016H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0067H     INBLOCK      ?PR?DISPLAY?MAIN
+            CODE    006AH     003BH     UNIT         ?C?LIB_CODE
+            CODE    00A5H     002DH     INBLOCK      ?PR?_STRING?MAIN
+            CODE    00D2H     0025H     INBLOCK      ?PR?_SET1302?MAIN
+            CODE    00F7H     0023H     INBLOCK      ?PR?_GET1302?MAIN
+            CODE    011AH     0020H     INBLOCK      ?PR?LCD_INITIAL?MAIN
+            CODE    013AH     001DH     INBLOCK      ?PR?_WRITE_DATA?MAIN
+            CODE    0157H     001BH     INBLOCK      ?PR?_DELAY?MAIN
+            CODE    0172H     0017H     INBLOCK      ?PR?_WRITE_COMMAND?MAIN
+            CODE    0189H     0016H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    019FH     0013H     INBLOCK      ?PR?_WR1302?MAIN
+            CODE    01B2H     0011H     INBLOCK      ?PR?CHECK_BUSY?MAIN
+            CODE    01C3H     0010H     INBLOCK      ?PR?_INPUT?MAIN
+            CODE    01D3H     0010H     INBLOCK      ?PR?OUTPUT?MAIN
+            CODE    01E3H     000FH     INBLOCK      ?PR?_RE1302?MAIN
+            CODE    01F2H     000CH     UNIT         ?C_C51STARTUP
+            CODE    01FEH     0007H     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:57:08  PAGE 2
+
+
+?PR?MAIN?MAIN                   -----    -----
+  +--> ?PR?LCD_INITIAL?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SET1302?MAIN
+  +--> ?PR?_GET1302?MAIN
+  +--> ?PR?DISPLAY?MAIN
+
+?PR?LCD_INITIAL?MAIN            -----    -----
+  +--> ?PR?_DELAY?MAIN
+  +--> ?PR?_WRITE_COMMAND?MAIN
+
+?PR?_WRITE_COMMAND?MAIN         -----    -----
+  +--> ?PR?CHECK_BUSY?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_SET1302?MAIN               0013H    0001H
+  +--> ?PR?_WR1302?MAIN
+
+?PR?_WR1302?MAIN                -----    -----
+  +--> ?PR?_INPUT?MAIN
+
+?PR?_GET1302?MAIN               0013H    0003H
+  +--> ?PR?_RE1302?MAIN
+
+?PR?_RE1302?MAIN                -----    -----
+  +--> ?PR?_INPUT?MAIN
+  +--> ?PR?OUTPUT?MAIN
+
+?PR?DISPLAY?MAIN                -----    -----
+  +--> ?PR?_WRITE_COMMAND?MAIN
+  +--> ?PR?_WRITE_DATA?MAIN
+
+?PR?_WRITE_DATA?MAIN            -----    -----
+  +--> ?PR?CHECK_BUSY?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?CLDPTR
+  C:006AH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0083H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_STRING?MAIN
+
+Program Size: data=23.0 xdata=0 code=517
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

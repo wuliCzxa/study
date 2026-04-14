@@ -1,0 +1,11 @@
+注：
+每个EXP实验的文件夹下文件夹分别是P_ASM、P_EMULATOR_C，P_PROTEUS_C，P_EMULATOR_ASM。
+P_PROTEUS_ASM	为PROTEUS汇编实例工程
+P_PROTEUS_C	为PROTEUS C51仿真实例工程
+P_EMULATOR_C	为硬件仿真器（可选配件）C51实例工程
+P_EMULATOR_ASM	为硬件仿真器汇编实例工程
+一般情况下P_PROTEUS_ASM，P_PROTEUS_C和P_EMULATOR_C和P_EMULATOR_ASM都支持ISP下载脱机运行
+
+P_ISP_C，P_ISP_ASM为ISP下载脱机运行实例。比如看门狗实验，仿真器不支持，因为复位信号被仿真器接管，所以就只能做硬件脱机实验，通过ISP下载程序。
+
+如果文件夹带有（缺省）说明暂时没有提供此程序，可根据需要再添加。

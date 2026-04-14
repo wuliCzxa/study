@@ -1,0 +1,9 @@
+file {
+  .version = 1;
+  entity {
+    .name = "REGS";
+    .mra_file = "REGS.mra";
+    .arch = {"behv"};
+    .syn_files = {"REGS.syn", "REGS__BEHV.syn"};
+   }
+}

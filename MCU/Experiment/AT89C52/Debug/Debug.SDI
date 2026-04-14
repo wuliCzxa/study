@@ -1,0 +1,109 @@
+,,,; ----------- 头文件与寄存器定义 -----------
+,,,ORG 0000H            ; 程序起始地址
+0000,02 00 10,,LJMP MAIN            ; 跳转到主程序
+,,,ORG 0003H            ; 外部中断0向量地址
+0003,02 00 2F,,LJMP INT0_ISR        ; 中断服务程序
+,,,
+,,,; ----------- 常量定义 -----------
+000D,,,SEG_PORT EQU P0      ; 段选数据口（接74HC573）
+000D,,,BIT_PORT EQU P2      ; 位选控制口（接74HC138，P2.0-P2.2）
+,,,
+,,,; 共阳数码管段码表（0-9）
+0006,,SEG_TABLE,SEG_TABLE:
+0006,C0 F9 A4 B0,,    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+,,,
+,,,; ----------- 变量定义 -----------
+,,,DSEG AT 30H
+0030,,COUNT,COUNT:     DS 2      ; 16位计数器（0-999999）
+0032,,DIGITS,DIGITS:    DS 6      ; 存储6位BCD码
+0038,,DIG_INDEX,DIG_INDEX: DS 1      ; 当前显示位索引（0-5）
+,,,
+,,,; ----------- 主程序 -----------
+000C,,,CSEG
+0010,,MAIN,MAIN:
+0010,75 81 5F,,    MOV SP, #5FH      ; 初始化栈指针
+0013,12 00 1E,,    LCALL INIT        ; 初始化硬件
+0016,12 00 2B,,    LCALL DISPLAY_INIT ; 初始化显示
+,,,
+0019,,LOOP,LOOP:
+0019,12 00 4E,,    LCALL UPDATE_DISPLAY ; 更新数码管显示
+001C,80 FB,,    SJMP LOOP          ; 主循环
+,,,
+,,,; ----------- 初始化函数 -----------
+001E,,INIT,INIT:
+,,,    ; 配置外部中断0（下降沿触发）
+001E,D2 88,,    SETB IT0          ; 边沿触发模式
+0020,D2 A8,,    SETB EX0          ; 允许INT0中断
+0022,D2 AF,,    SETB EA           ; 开总中断
+,,,    ; 初始化计数器
+0024,75 30 00,,    MOV COUNT, #0
+0027,75 31 00,,    MOV COUNT+1, #0
+002A,22,,    RET
+,,,
+002B,,DISPLAY_INIT,DISPLAY_INIT:
+002B,75 38 00,,    MOV DIG_INDEX, #0 ; 从第0位开始显示
+002E,22,,    RET
+,,,
+,,,; ----------- 中断服务程序（按键计数） -----------
+002F,,INT0_ISR,INT0_ISR:
+002F,C0 E0,,    PUSH ACC          ; 保护现场
+0031,C0 D0,,    PUSH PSW
+,,,    ; 计数器加1（16位）
+0033,E5 30,,    MOV A, COUNT
+0035,24 01,,    ADD A, #1
+0037,F5 30,,    MOV COUNT, A
+0039,E5 31,,    MOV A, COUNT+1
+003B,34 00,,    ADDC A, #0
+003D,F5 31,,    MOV COUNT+1, A
+,,,    ; 转换为6位BCD码
+003F,12 00 47,,    LCALL COUNT_TO_BCD
+0042,D0 D0,,    POP PSW           ; 恢复现场
+0044,D0 E0,,    POP ACC
+0046,32,,    RETI
+,,,
+,,,; ----------- 计数器转BCD码 -----------
+0047,,COUNT_TO_BCD,COUNT_TO_BCD:
+0047,78 32,,    MOV R0, #DIGITS   ; R0指向BCD数组
+0049,79 06,,    MOV R1, #6        ; 6位数字
+004B,7A 00,,    MOV R2, #0        ; 清零临时变量
+,,,    ; 此处省略具体转换代码（可用除法或查表法）
+004D,22,,    RET
+,,,
+,,,; ----------- 动态显示更新 -----------
+004E,,UPDATE_DISPLAY,UPDATE_DISPLAY:
+,,,    ; 1. 关闭当前位选（消隐）
+004E,74 07,,    MOV A, #07H       ; 74HC138输入111（不选任何位）
+0050,F5 A0,,    MOV BIT_PORT, A
+,,,    ; 2. 输出段码
+0052,E5 38,,    MOV A, DIG_INDEX  ; 获取当前位索引
+0054,24 06,,    ADD A, #SEG_TABLE ; 计算段码地址
+0056,93,,    MOVC A, @A+DPTR   ; 读取段码
+0057,F5 80,,    MOV SEG_PORT, A   ; 输出到74HC573
+,,,    ; 3. 打开当前位选
+0059,E5 38,,    MOV A, DIG_INDEX  ; 位索引（0-5）
+005B,F5 A0,,    MOV BIT_PORT, A    ; 74HC138选择对应位
+,,,    ; 4. 更新位索引
+005D,05 38,,    INC DIG_INDEX
+005F,E5 38,,    MOV A, DIG_INDEX
+0061,B4 06 03,,    CJNE A, #6, SKIP_RESET
+0064,75 38 00,,    MOV DIG_INDEX, #0  ; 超过5则归零
+0067,,SKIP_RESET,SKIP_RESET:
+,,,    ; 5. 延时1ms
+0067,12 00 6B,,    LCALL DELAY_1MS
+006A,22,,    RET
+,,,
+,,,; ----------- 延时1ms -----------
+006B,,DELAY_1MS,DELAY_1MS:
+006B,7E 0A,,    MOV R6, #10
+006D,,DELAY_LOOP,DELAY_LOOP:
+006D,7F 05,,    MOV R7, #5
+006F,DF FE,,    DJNZ R7, $
+0071,DE FA,,    DJNZ R6, DELAY_LOOP
+0073,22,,    RET
+,,,
+,,,; ----------- 段码表存储 -----------
+,,,ORG 300H
+0300,,SEG_DATA,SEG_DATA:
+0300,C0 F9 A4 B0,,    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+,,,
+000E,,,END

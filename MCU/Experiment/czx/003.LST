@@ -1,0 +1,73 @@
+A51 MACRO ASSEMBLER  003                                                                  03/15/2025 09:43:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 003.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 003.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0
+0000 0115              2     AJMP START
+0050                   3     ORG 50H
+                       4     
+0003                   5     ORG 003H
+0003 012A              6     AJMP EXT0_ISR
+                       7     
+0013                   8     ORG 0013H
+0013 0131              9     AJMP EXT1_ISR
+                      10     
+0015                  11     START:
+0015 759000           12     MOV P1, #00H
+0018 7800             13     MOV R0, #00H
+                      14     
+001A D288             15     SETB IT0
+001C D2A8             16     SETB EX0
+001E D2B8             17     SETB PX0
+                      18     
+0020 D28A             19     SETB IT1
+0022 D2AA             20     SETB EX1
+0024 C2BA             21     CLR PX1
+                      22     
+0026 D2AF             23     SETB EA
+                      24     
+0028                  25     MAIN_LOOP:
+0028 80FE             26     SJMP MAIN_LOOP
+                      27     
+002A                  28     EXT0_ISR:
+002A 08               29     INC R0
+002B E8               30     MOV A, R0
+002C 547F             31     ANL A,#7FH
+002E F590             32     MOV P1, A
+0030 32               33     RETI                                            
+                      34     
+0031                  35     EXT1_ISR:
+0031 B297             36     CPL P1.7
+0033 32               37     RETI
+                      38     END
+A51 MACRO ASSEMBLER  003                                                                  03/15/2025 09:43:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+EXT0_ISR . . . . .  C ADDR   002AH   A   
+EXT1_ISR . . . . .  C ADDR   0031H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+MAIN_LOOP. . . . .  C ADDR   0028H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PX0. . . . . . . .  B ADDR   00B8H.0 A   
+PX1. . . . . . . .  B ADDR   00B8H.2 A   
+START. . . . . . .  C ADDR   0015H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

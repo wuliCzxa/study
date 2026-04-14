@@ -1,0 +1,408 @@
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil-4\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.
+                    -OBJ)
+
+line level    source
+
+   1          /***********************************************************  
+   2          文件名称： main.c 
+   3          作 者：    zw sangel
+   4          版 本：    V1.00
+   5          说 明：    DS18B20温度传感器实验 
+   6          修改记录：  
+   7          ------------------------------------------------------------
+   8          *功能描述: 实时测量周边环境的温度，并提供数码管显示温度值                                                 
+             -                                                                            
+   9          *-----------------------------------------------------------                                                                            
+             -               
+  10          *接线说明：P00~P07-SA~SH，P10~P11-C0~C1,P37-DQ                                                                                        
+             - 
+  11          *                                                                                                         
+             -                                                   
+  12          ************************************************************/
+  13          #include <reg52.h>
+  14          #include <intrins.h>
+  15          #define uchar unsigned char
+  16          #define uint unsigned int 
+  17          
+  18          uchar code seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x01};
+  19          
+  20          
+  21          sbit DQ=P3^7;   //定义io口
+  22          void delay5(uchar);
+  23          void init_ds18b20(void);
+  24          uchar readbyte(void);
+  25          void writebyte(uchar);
+  26          uchar retemp(void);
+  27          /*********主函数********************************************/
+  28          void main(void)
+  29          {
+  30   1      uchar i,temp;
+  31   1      delay5(1000);
+  32   1      temp=retemp(); //读取温度值
+  33   1      while(1)
+  34   1              {
+  35   2                               
+  36   2                      for(i=0;i<50;i++)
+  37   2                      {
+  38   3                      P0 = seg[temp/10];      // 输出十位
+  39   3                      P1 = 0x01;
+  40   3                      delay5(1000);           //延时5ms
+  41   3                      if(i==0)                        //扫描50次 采样一次
+  42   3                      temp=retemp();
+  43   3              P0=0xff;
+  44   3      
+  45   3                      P0 = seg[temp%10];      // 输出个位
+  46   3                      P1 = 0x02;       
+  47   3                      delay5(1000);           //延时5ms
+  48   3      
+  49   3              P0=0xff;
+  50   3                      }
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 2   
+
+  51   2                                
+  52   2              }
+  53   1      
+  54   1      }
+  55          
+  56           /*--------------精确延时5us子程序---------*/   
+  57          void delay5(uchar n)
+  58          {
+  59   1               do
+  60   1               {
+  61   2               _nop_();
+  62   2               _nop_();
+  63   2               _nop_();
+  64   2               n--;
+  65   2               }
+  66   1               while(n);
+  67   1      }
+  68          /*--------------初始化函数--------------------*/
+  69          void init_ds18b20(void)
+  70          {
+  71   1               uchar x=0; 
+  72   1               DQ =0;    
+  73   1               delay5(100); 
+  74   1               DQ =1;    
+  75   1               delay5(5);
+  76   1               delay5(20);
+  77   1      }
+  78          /*--------------读取一字节函数----------------*/
+  79          uchar readbyte(void)
+  80          {
+  81   1              uchar i=0;
+  82   1              uchar date=0;
+  83   1              for (i=8;i>0;i--)
+  84   1               {
+  85   2                        DQ =0;
+  86   2                        delay5(1);
+  87   2                        DQ =1;        //15微秒内拉释放总线
+  88   2                        date>>=1;
+  89   2                        if(DQ)
+  90   2                        date|=0x80;
+  91   2                        delay5(11);
+  92   2               }
+  93   1              return(date);
+  94   1      }
+  95          /*--------------写一字节函数------------------*/
+  96          void writebyte(uchar dat)
+  97          {
+  98   1       uchar i=0;
+  99   1       for(i=8;i>0;i--)
+ 100   1               {
+ 101   2                DQ =0;
+ 102   2                DQ =dat&0x01;    //写"1" 在15微秒内拉低
+ 103   2                delay5(12);      //写"0" 拉低60微秒
+ 104   2                DQ = 1;          
+ 105   2                dat>>=1;
+ 106   2                delay5(5);
+ 107   2                }
+ 108   1      }
+ 109          /*--------------读取温度函数------------------*/
+ 110          uchar retemp(void)
+ 111          {
+ 112   1              uchar a,b,tt;
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 3   
+
+ 113   1              uint t;
+ 114   1              init_ds18b20();         //初始化
+ 115   1              writebyte(0xCC);        //写命令
+ 116   1              writebyte(0x44);
+ 117   1              init_ds18b20();
+ 118   1              writebyte(0xCC); 
+ 119   1              writebyte(0xBE); 
+ 120   1              a=readbyte();           //读出低位
+ 121   1              b=readbyte();           //读出高位
+ 122   1              t=b;
+ 123   1              t<<=8;
+ 124   1              t=t|a;
+ 125   1              tt=t*0.0625;            //转换为摄氏温度值
+ 126   1              return(tt);
+ 127   1      }
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 4   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 31
+0000 7FE8              MOV     R7,#0E8H
+0002 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 32
+0004 1100        R     ACALL   retemp
+0006 8F00        R     MOV     temp,R7
+0008         ?C0001:
+                                           ; SOURCE LINE # 33
+                                           ; SOURCE LINE # 34
+                                           ; SOURCE LINE # 36
+0008 E4                CLR     A
+0009 F500        R     MOV     i,A
+000B         ?C0003:
+                                           ; SOURCE LINE # 37
+                                           ; SOURCE LINE # 38
+000B E500        R     MOV     A,temp
+000D 75F00A            MOV     B,#0AH
+0010 84                DIV     AB
+0011 900000      R     MOV     DPTR,#seg
+0014 93                MOVC    A,@A+DPTR
+0015 F580              MOV     P0,A
+                                           ; SOURCE LINE # 39
+0017 759001            MOV     P1,#01H
+                                           ; SOURCE LINE # 40
+001A 7FE8              MOV     R7,#0E8H
+001C 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 41
+001E E500        R     MOV     A,i
+0020 7004              JNZ     ?C0006
+                                           ; SOURCE LINE # 42
+0022 1100        R     ACALL   retemp
+0024 8F00        R     MOV     temp,R7
+0026         ?C0006:
+                                           ; SOURCE LINE # 43
+0026 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 45
+0029 E500        R     MOV     A,temp
+002B 75F00A            MOV     B,#0AH
+002E 84                DIV     AB
+002F E5F0              MOV     A,B
+0031 900000      R     MOV     DPTR,#seg
+0034 93                MOVC    A,@A+DPTR
+0035 F580              MOV     P0,A
+                                           ; SOURCE LINE # 46
+0037 759002            MOV     P1,#02H
+                                           ; SOURCE LINE # 47
+003A 7FE8              MOV     R7,#0E8H
+003C 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 49
+003E 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 50
+0041 0500        R     INC     i
+0043 E500        R     MOV     A,i
+0045 C3                CLR     C
+0046 9432              SUBB    A,#032H
+0048 40C1              JC      ?C0003
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 5   
+
+004A 80BC              SJMP    ?C0001
+             ; FUNCTION main (END)
+
+             ; FUNCTION _delay5 (BEGIN)
+                                           ; SOURCE LINE # 57
+;---- Variable 'n' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 58
+0000         ?C0010:
+                                           ; SOURCE LINE # 60
+                                           ; SOURCE LINE # 61
+0000 00                NOP     
+                                           ; SOURCE LINE # 62
+0001 00                NOP     
+                                           ; SOURCE LINE # 63
+0002 00                NOP     
+                                           ; SOURCE LINE # 64
+0003 DFFB              DJNZ    R7,?C0010
+                                           ; SOURCE LINE # 65
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 67
+0005 22                RET     
+             ; FUNCTION _delay5 (END)
+
+             ; FUNCTION init_ds18b20 (BEGIN)
+                                           ; SOURCE LINE # 69
+                                           ; SOURCE LINE # 70
+                                           ; SOURCE LINE # 71
+0000 E4                CLR     A
+0001 F500        R     MOV     x,A
+                                           ; SOURCE LINE # 72
+0003 C2B7              CLR     DQ
+                                           ; SOURCE LINE # 73
+0005 7F64              MOV     R7,#064H
+0007 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 74
+0009 D2B7              SETB    DQ
+                                           ; SOURCE LINE # 75
+000B 7F05              MOV     R7,#05H
+000D 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 76
+000F 7F14              MOV     R7,#014H
+0011 0100        R     AJMP    _delay5
+             ; FUNCTION init_ds18b20 (END)
+
+             ; FUNCTION readbyte (BEGIN)
+                                           ; SOURCE LINE # 79
+                                           ; SOURCE LINE # 80
+                                           ; SOURCE LINE # 81
+;---- Variable 'i' assigned to Register 'R6' ----
+0000 E4                CLR     A
+                                           ; SOURCE LINE # 82
+;---- Variable 'date' assigned to Register 'R5' ----
+0001 FD                MOV     R5,A
+                                           ; SOURCE LINE # 83
+0002 7E08              MOV     R6,#08H
+0004         ?C0013:
+                                           ; SOURCE LINE # 84
+                                           ; SOURCE LINE # 85
+0004 C2B7              CLR     DQ
+                                           ; SOURCE LINE # 86
+0006 7F01              MOV     R7,#01H
+0008 1100        R     ACALL   _delay5
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 6   
+
+                                           ; SOURCE LINE # 87
+000A D2B7              SETB    DQ
+                                           ; SOURCE LINE # 88
+000C ED                MOV     A,R5
+000D C3                CLR     C
+000E 13                RRC     A
+000F FD                MOV     R5,A
+                                           ; SOURCE LINE # 89
+0010 30B703            JNB     DQ,?C0016
+                                           ; SOURCE LINE # 90
+0013 430580            ORL     AR5,#080H
+0016         ?C0016:
+                                           ; SOURCE LINE # 91
+0016 7F0B              MOV     R7,#0BH
+0018 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 92
+001A DEE8              DJNZ    R6,?C0013
+001C         ?C0014:
+                                           ; SOURCE LINE # 93
+001C AF05              MOV     R7,AR5
+                                           ; SOURCE LINE # 94
+001E         ?C0017:
+001E 22                RET     
+             ; FUNCTION readbyte (END)
+
+             ; FUNCTION _writebyte (BEGIN)
+                                           ; SOURCE LINE # 96
+;---- Variable 'dat' assigned to Register 'R6' ----
+0000 AE07              MOV     R6,AR7
+                                           ; SOURCE LINE # 97
+                                           ; SOURCE LINE # 98
+;---- Variable 'i' assigned to Register 'R5' ----
+                                           ; SOURCE LINE # 99
+0002 7D08              MOV     R5,#08H
+0004         ?C0018:
+                                           ; SOURCE LINE # 100
+                                           ; SOURCE LINE # 101
+0004 C2B7              CLR     DQ
+                                           ; SOURCE LINE # 102
+0006 EE                MOV     A,R6
+0007 13                RRC     A
+0008 92B7              MOV     DQ,C
+                                           ; SOURCE LINE # 103
+000A 7F0C              MOV     R7,#0CH
+000C 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 104
+000E D2B7              SETB    DQ
+                                           ; SOURCE LINE # 105
+0010 EE                MOV     A,R6
+0011 C3                CLR     C
+0012 13                RRC     A
+0013 FE                MOV     R6,A
+                                           ; SOURCE LINE # 106
+0014 7F05              MOV     R7,#05H
+0016 1100        R     ACALL   _delay5
+                                           ; SOURCE LINE # 107
+0018 DDEA              DJNZ    R5,?C0018
+                                           ; SOURCE LINE # 108
+001A         ?C0021:
+001A 22                RET     
+             ; FUNCTION _writebyte (END)
+
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 7   
+
+             ; FUNCTION retemp (BEGIN)
+                                           ; SOURCE LINE # 110
+                                           ; SOURCE LINE # 111
+                                           ; SOURCE LINE # 114
+0000 1100        R     ACALL   init_ds18b20
+                                           ; SOURCE LINE # 115
+0002 7FCC              MOV     R7,#0CCH
+0004 1100        R     ACALL   _writebyte
+                                           ; SOURCE LINE # 116
+0006 7F44              MOV     R7,#044H
+0008 1100        R     ACALL   _writebyte
+                                           ; SOURCE LINE # 117
+000A 1100        R     ACALL   init_ds18b20
+                                           ; SOURCE LINE # 118
+000C 7FCC              MOV     R7,#0CCH
+000E 1100        R     ACALL   _writebyte
+                                           ; SOURCE LINE # 119
+0010 7FBE              MOV     R7,#0BEH
+0012 1100        R     ACALL   _writebyte
+                                           ; SOURCE LINE # 120
+0014 1100        R     ACALL   readbyte
+;---- Variable 'a' assigned to Register 'R4' ----
+0016 AC07              MOV     R4,AR7
+                                           ; SOURCE LINE # 121
+0018 1100        R     ACALL   readbyte
+;---- Variable 'b' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 122
+;---- Variable 't' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 123
+001A EF                MOV     A,R7
+001B FE                MOV     R6,A
+                                           ; SOURCE LINE # 124
+001C AD04              MOV     R5,AR4
+001E ED                MOV     A,R5
+001F FF                MOV     R7,A
+                                           ; SOURCE LINE # 125
+0020 AC06              MOV     R4,AR6
+0022 E4                CLR     A
+0023 1100        E     ACALL   ?C?FCASTI
+0025 E4                CLR     A
+0026 FB                MOV     R3,A
+0027 FA                MOV     R2,A
+0028 7980              MOV     R1,#080H
+002A 783D              MOV     R0,#03DH
+002C 1100        E     ACALL   ?C?FPMUL
+002E 1100        E     ACALL   ?C?CASTF
+;---- Variable 'tt' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 126
+                                           ; SOURCE LINE # 127
+0030         ?C0022:
+0030 22                RET     
+             ; FUNCTION retemp (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    208    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.00   MAIN                                                                  03/09/2017 14:56:04 PAGE 8   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,9 @@
+file {
+  .version = 1;
+  entity {
+    .name = "pc";
+    .mra_file = "pc.mra";
+    .arch = {"behv"};
+    .syn_files = {"PC.syn", "PC__BEHV.syn"};
+   }
+}

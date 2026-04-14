@@ -1,0 +1,99 @@
+A51 MACRO ASSEMBLER  004                                                                  03/22/2025 08:56:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 004.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 004.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0
+0000 0150              2             AJMP START
+                       3             
+000B                   4             ORG     000BH
+000B 0178              5             AJMP    TIMER0_ISR
+                       6             
+0050                   7             ORG 50H
+                       8             
+0050                   9             START:
+0050 759000           10                     MOV P1, #00H
+0053 7800             11                     MOV     R0,     #0
+                      12             
+0055 758961           13                     MOV     TMOD,   #61H
+0058 758C3C           14                     MOV     TH0,    #3CH
+005B 758AB0           15                     MOV     TL0,    #0B0H
+005E 758D00           16                     MOV     TH1,    #00H
+0061 758B00           17                     MOV     TL1,    #00H
+0064 790A             18                     MOV R1,#10
+                      19                     
+0066 D2AF             20                     SETB    EA
+0068 D2A9             21                     SETB    ET0
+006A D28C             22                     SETB    TR0
+006C D28E             23                     SETB    TR1
+                      24             
+006E                  25             MAIN_LOOP:
+                      26                     
+006E E58B             27                     MOV     A,      TL1
+0070 A200             28                     MOV     C,      0
+0072 92E7             29                     MOV     ACC.7,  C
+                      30     
+0074 F590             31                     MOV     P1,     A
+0076 80F6             32                     SJMP    MAIN_LOOP       
+                      33             
+0078                  34             TIMER0_ISR:
+0078 C0E0             35                     PUSH    ACC
+007A C0D0             36                     PUSH    PSW
+                      37             
+007C 08               38                     INC     R0
+007D B80404           39                     CJNE    R0,     #4,     TIMER0_RET
+                      40                     
+0080                  41                     T_L1:
+0080 B200             42                             CPL     0
+0082 7800             43                             MOV     R0,     #0
+                      44                     
+0084                  45                     TIMER0_RET:
+                      46     
+0084 758C3C           47                             MOV     TH0,    #3CH
+0087 758AB0           48                             MOV     TL0,    #0B0H
+008A D904             49     DJNZ R1,LOP1
+008C B2B0             50     CPL P3.0
+008E 790A             51     MOV R1,#10      
+0090 D0D0             52     LOP1:           POP     PSW
+0092 D0E0             53                             POP     ACC
+0094 32               54                             RETI
+                      55             
+                      56             END
+                             
+A51 MACRO ASSEMBLER  004                                                                  03/22/2025 08:56:58 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+LOP1 . . . . . . .  C ADDR   0090H   A   
+MAIN_LOOP. . . . .  C ADDR   006EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+START. . . . . . .  C ADDR   0050H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TIMER0_ISR . . . .  C ADDR   0078H   A   
+TIMER0_RET . . . .  C ADDR   0084H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+T_L1 . . . . . . .  C ADDR   0080H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

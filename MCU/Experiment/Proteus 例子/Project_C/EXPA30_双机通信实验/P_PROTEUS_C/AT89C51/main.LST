@@ -1,0 +1,115 @@
+C51 COMPILER V9.00   MAIN                                                                  07/14/2016 10:40:32 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          #define outk P1
+   5          #define out1 P0
+   6          #define out2 P2
+   7          
+   8          uchar code seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0xff};
+   9          uchar key,send,rec;
+  10          
+  11          uchar scan(void);
+  12          void  delayms(uint);
+  13          
+  14          void main(void)
+  15          {
+  16   1      TMOD=0X20; //设置定时器1工作在方式2
+  17   1      TH1=0XF2;
+  18   1      TL1=0XF2;
+  19   1      TR1=1;
+  20   1      SCON=0X50; //串口工作在方式1，REN=1允许接收数据
+  21   1      PCON=0X00; //波特率不加倍
+  22   1      EA=1;
+  23   1      ES=1;
+  24   1      EX1=1;
+  25   1      EX0=1;
+  26   1      while(1)
+  27   1              {
+  28   2              outk=0x07;
+  29   2              out1=seg[send];
+  30   2              out2=seg[rec];
+  31   2              }
+  32   1      }
+  33          
+  34          uchar scan(void)
+  35          {
+  36   1      uchar k=10,m,n,in;
+  37   1      delayms(10);
+  38   1      outk=0x07;
+  39   1      if((outk&0x07)!=0x07)
+  40   1              {
+  41   2              for(m=0;m<3;m++)
+  42   2                      {
+  43   3                      outk=~(0x01<<(m+3));
+  44   3                      for(n=0;n<3;n++)
+  45   3                              {
+  46   4                              in=outk;
+  47   4                              in=in>>n;
+  48   4                              if((in&0x01)==0)
+  49   4                                      {
+  50   5                                      if((in&0x01)==0){k=n+m*3;break;}
+  51   5                                      }
+  52   4                              }
+  53   3                      if(k!=10)break;
+  54   3                      }
+  55   2              }
+C51 COMPILER V9.00   MAIN                                                                  07/14/2016 10:40:32 PAGE 2   
+
+  56   1      return(k);
+  57   1      }
+  58          
+  59          void delayms(uint j)
+  60          {
+  61   1      uchar i;
+  62   1      for(;j>0;j--)
+  63   1              {i=250;
+  64   2               while(--i);
+  65   2               i=249;
+  66   2               while(--i);
+  67   2              }
+  68   1      }
+  69          
+  70          void ext0()interrupt 0
+  71          {
+  72   1      EX0=0;
+  73   1      key=scan();
+  74   1      if(key!=10)send=key+1;
+  75   1      EX0=1;
+  76   1      }
+  77          
+  78          void ext1()interrupt 2
+  79          {
+  80   1      ES=0;;
+  81   1      SBUF=send;
+  82   1      while(!TI);
+  83   1      TI=0;ES=1;
+  84   1      }
+  85          
+  86          void com()interrupt 4
+  87          {
+  88   1      RI=0;
+  89   1      rec=SBUF;
+  90   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    248    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

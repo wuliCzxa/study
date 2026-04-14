@@ -1,0 +1,280 @@
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 11:57:08 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*******************************************************************************  
+   2          文件名称： main.c 
+   3          作 者：    zw sangel
+   4          版 本：    V1.00
+   5          说 明：    DS1302时钟实验 
+   6          修改记录：  
+   7          *******************************************************************************/
+   8          /*******************************************************************************    
+   9          * 功能描述:时钟显示                                                                       
+  10          *                                                             
+  11          *接线说明：P00~P07-DB0~DB7，P20-RS，P21-RW，P22-EN,P10-RST,P11-SCLK,P12-IO
+  12          *******************************************************************************/
+  13          
+  14          #include <reg52.h>
+  15          //#include "absacc.h"
+  16          #include <intrins.h>
+  17          #define uchar unsigned char
+  18          #define uint unsigned int
+  19          #define out P0
+  20          /////////////////////////////////////
+  21          //#define LCD_WC XBYTE[0X7FFC]
+  22          //#define LCD_WD XBYTE[0X7FFD]
+  23          //#define LCD_RC XBYTE[0X7FFE]
+  24          void check_busy(void);
+  25          void write_command(uchar com);
+  26          void write_data(uchar dat);
+  27          void LCD_initial(void);
+  28          void string(uchar ad,uchar *s);
+  29          void lcd_test(void);
+  30          void delay(uint);
+  31          /***********端口定义**********************************************************/
+  32          sbit rs=P2^0;
+  33          sbit rw=P2^1;
+  34          sbit en=P2^2;
+  35          
+  36          sbit rst=P1^0;
+  37          sbit sclk=P1^1;
+  38          sbit io=P1^2;
+  39          
+  40          sbit bit7=ACC^7;
+  41          sbit bit0=ACC^0;
+  42          
+  43          void input(uchar);
+  44          uchar output(void);
+  45          void wr1302(uchar,uchar);
+  46          uchar re1302(uchar);
+  47          void set1302(uchar *p);
+  48          void get1302(uchar curtime[]) ;
+  49          void display(void);
+  50          /***********************时钟初始值*********************************************/
+  51          uchar code clock[7]={0x50,0x59,0x23,0x31,0x07,0x07,0x11};
+  52          uchar time[8];
+  53          /***********************主函数*************************************************/
+  54          void main(void)
+  55          {
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 11:57:08 PAGE 2   
+
+  56   1      LCD_initial();       //LCD1602初始化
+  57   1      set1302(clock);      //设置时钟
+  58   1      while(1)
+  59   1              {
+  60   2              get1302(time);   //获取时钟值
+  61   2              display();
+  62   2              }                                //显示
+  63   1      }
+  64          ///////////////////////////////////////////
+  65          /*八位数据写入函数*/
+  66          void input(uchar date)
+  67          {
+  68   1      uchar i;
+  69   1      ACC=date;
+  70   1      for(i=8; i>0; i--)
+  71   1              {
+  72   2              io=bit0;
+  73   2              sclk=1;
+  74   2              sclk=0;
+  75   2              ACC=ACC>>1;
+  76   2              }
+  77   1      }
+  78          /*八位数据读出函数*/
+  79          uchar output(void)
+  80          {
+  81   1      uchar i;
+  82   1      for(i=8; i>0; i--)
+  83   1              {
+  84   2              ACC=ACC>>1;
+  85   2              bit7=io;
+  86   2              sclk=1;
+  87   2              sclk=0;         
+  88   2              }
+  89   1              return(ACC);
+  90   1      }
+  91          /*写寄存器函数*/
+  92          void wr1302(uchar add,uchar date)
+  93            {
+  94   1        rst=0;
+  95   1        sclk=0;
+  96   1        rst=1;
+  97   1        input(add);
+  98   1        input(date);
+  99   1        sclk=1;
+ 100   1        rst=0;
+ 101   1        }
+ 102          /*读寄存器函数*/
+ 103          uchar re1302(uchar add)
+ 104          {
+ 105   1        uchar date;
+ 106   1        rst=0;
+ 107   1        sclk=0;
+ 108   1        rst=1;
+ 109   1        input(add);
+ 110   1        date=output();
+ 111   1        sclk=1;
+ 112   1        rst=0;
+ 113   1        return(date);
+ 114   1        }
+ 115           /*设置时间初值函数*/
+ 116          void set1302(uchar *p)
+ 117            {
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 11:57:08 PAGE 3   
+
+ 118   1       uchar i;
+ 119   1       uchar add=0x80;
+ 120   1       wr1302(0x8e,0x00);
+ 121   1       for(i=7;i>0;i--)
+ 122   1               {
+ 123   2               wr1302(add,*p);
+ 124   2               p++;
+ 125   2               add+=2;
+ 126   2           }
+ 127   1       wr1302(0x8e,0x00);
+ 128   1        }
+ 129          /*读当前时间值函数*/
+ 130           void get1302(uchar curtime[]) 
+ 131          {
+ 132   1          uchar i;
+ 133   1          uchar add=0x81;
+ 134   1          for (i=0;i<8;i++)
+ 135   1              {
+ 136   2              curtime[i]=re1302(add);
+ 137   2              add+=2;  
+ 138   2              }
+ 139   1              
+ 140   1      }
+ 141          ///////////////////////////////////////////
+ 142          //1ms延时程序
+ 143          void delay(uint j)
+ 144          {
+ 145   1      uchar i=250;
+ 146   1      for(;j>0;j--)
+ 147   1              {
+ 148   2              while(--i);
+ 149   2              i=249;
+ 150   2              while(--i);
+ 151   2              i=250;
+ 152   2              }
+ 153   1      }
+ 154          //查忙程序
+ 155          void check_busy(void)
+ 156          {
+ 157   1              uchar dt;
+ 158   1              do
+ 159   1              {
+ 160   2                      dt=0xff;
+ 161   2                      en=0;
+ 162   2                      rs=0;   
+ 163   2                      rw=1;
+ 164   2                      en=1;
+ 165   2                      dt=out;
+ 166   2              }while(dt&0x80);
+ 167   1              en=0;
+ 168   1      }
+ 169          //写控制指令
+ 170          void write_command(uchar com)
+ 171          {
+ 172   1      check_busy();
+ 173   1      en=0;
+ 174   1      rs=0;
+ 175   1      rw=0;
+ 176   1      out=com;
+ 177   1      en=1;
+ 178   1      _nop_();
+ 179   1      en=0;
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 11:57:08 PAGE 4   
+
+ 180   1      delay(10);
+ 181   1      }
+ 182          //写数据指令
+ 183          void write_data(uchar dat)
+ 184          {
+ 185   1      check_busy();
+ 186   1      en=0;
+ 187   1      rs=1;
+ 188   1      rw=0;
+ 189   1      out=dat;
+ 190   1      en=1;
+ 191   1      _nop_();
+ 192   1      en=0;
+ 193   1      delay(10);      
+ 194   1      }
+ 195          //液晶屏初始化
+ 196          void LCD_initial(void)
+ 197          {
+ 198   1              delay(1);
+ 199   1              write_command(0x30);
+ 200   1              write_command(0x38);//8位总线,双行显示，5X7的点阵字符
+ 201   1              write_command(0x0C);//开整体显示,光标关，无黑块
+ 202   1      //      write_command(0x01);//清屏
+ 203   1              write_command(0x06);//光标右移
+ 204   1              write_command(0x01);
+ 205   1              delay(10);
+ 206   1      }
+ 207          
+ 208          //输出字符串
+ 209          void string(uchar ad,uchar *s)
+ 210          {
+ 211   1      write_command(ad);
+ 212   1      while(*s>0)
+ 213   1              {
+ 214   2              write_data(*s++);
+ 215   2              delay(100);
+ 216   2              }
+ 217   1      }
+ 218          
+ 219          void display(void)
+ 220          {
+ 221   1              write_command(0x84);//写年
+ 222   1              write_data(time[6]/16+0x30);
+ 223   1              write_data(time[6]%16+0x30);
+ 224   1      
+ 225   1              write_data(0x2D); //写“-”
+ 226   1              write_command(0x87);//写月
+ 227   1              write_data(time[4]/16+0x30);
+ 228   1              write_data(time[4]%16+0x30);
+ 229   1      
+ 230   1              write_data(0x2D); //写“-”     
+ 231   1              write_command(0x8a);//写日
+ 232   1              write_data(time[3]/16+0x30);
+ 233   1              write_data(time[3]%16+0x30);
+ 234   1      
+ 235   1              write_command(0xc1);//写星期
+ 236   1              write_data(time[5]%16+0x30);
+ 237   1              
+ 238   1              write_command(0xc4);//写时
+ 239   1              write_data(time[2]/16+0x30);
+ 240   1              write_data(time[2]%16+0x30);
+ 241   1              write_data(0x2D); //写“-”
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 11:57:08 PAGE 5   
+
+ 242   1              write_command(0xc7);//写分
+ 243   1              write_data(time[1]/16+0x30);
+ 244   1              write_data(time[1]%16+0x30);
+ 245   1              write_data(0x2D); //写“-”
+ 246   1              write_command(0xca);//写秒
+ 247   1              write_data(time[0]/16+0x30);
+ 248   1              write_data(time[0]%16+0x30);                            
+ 249   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    436    ----
+   CONSTANT SIZE    =      7    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

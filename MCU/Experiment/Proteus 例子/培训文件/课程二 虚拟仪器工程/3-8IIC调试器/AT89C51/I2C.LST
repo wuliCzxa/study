@@ -1,0 +1,624 @@
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE I2C
+OBJECT MODULE PLACED IN I2C.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\I2C.C ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(I2C.OBJ)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "intrins.h"
+   3          #define uchar unsigned char 
+   4          #define uint unsigned int
+   5          #define out P2
+   6          sbit scl=P1^1;
+   7          sbit sda=P1^0;
+   8          sbit key1=P3^2;
+   9          sbit key2=P3^3;
+  10          uchar data mem[4]_at_ 0x55;     //发送缓冲区的首地址
+  11          uchar mem[4]={0x41,0x42,0x43,0x44}; 
+  12          uchar data rec_mem[4] _at_ 0x60 ;//接收缓冲区的首地址
+  13          void start(void);//开始信号
+  14          void stop(void); //停止信号
+  15          void sack(void); //发送应答信号
+  16          bit rack(void);  //接收应答信号
+  17          void ackn(void); //发送无应答信号
+  18          void send_byte(uchar); //发送一个字节
+  19          uchar rec_byte(void);  //接收一个字节
+  20          void write(void); //写一组数据
+  21          void read(void);  //读一组数据
+  22          void delay3us(void); //延时3us 
+  23          
+  24          void main(void)
+  25          {
+  26   1      EA=1;EX0=1;EX1=1;
+  27   1      while(1);
+  28   1      }
+  29          
+  30          void ext0()interrupt 0
+  31          {
+  32   1      write();
+  33   1      }
+  34          
+  35          void ext1()interrupt 2
+  36          {
+  37   1      read();
+  38   1      }
+  39          
+  40          void read(void)
+  41          {
+  42   1      uchar i;
+  43   1      bit f;
+  44   1      start();                        //开始信号
+  45   1      send_byte(0xa0);        //发从机的地址
+  46   1      f=rack();                       //接收应答
+  47   1      if(!f){
+  48   2      start();                        //开始信号
+  49   2      send_byte(0xa0);
+  50   2      f=rack();
+  51   2              send_byte(0x00);//设置要读取从器件的片内地址
+  52   2              f=rack();
+  53   2              if(!f){
+  54   3                        start();                 //开始信号
+  55   3                        send_byte(0xa1);              
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 2   
+
+  56   3                        f=rack();
+  57   3                        if(!f){
+  58   4                                      for(i=0;i<3;i++)
+  59   4                                              {rec_mem[i]=rec_byte();
+  60   5                                              sack();
+  61   5                                              }
+  62   4                                      rec_mem[3]=rec_byte();ackn();
+  63   4                                      }
+  64   3                        }                                                     
+  65   2                }
+  66   1      stop();out=rec_mem[3];while(!key2);
+  67   1      }
+  68          
+  69          void write(void)
+  70          {
+  71   1      uchar i;
+  72   1      bit f;
+  73   1      start();
+  74   1      send_byte(0xa0);
+  75   1      f=rack();
+  76   1      if(!f){
+  77   2                 send_byte(0x00);
+  78   2                 f=rack();
+  79   2                 if(!f){
+  80   3                                      for(i=0;i<4;i++)
+  81   3                                              {send_byte(mem[i]);
+  82   4                                               f=rack();
+  83   4                                               if(f)break;
+  84   4                                              }
+  85   3                            }
+  86   2                 }
+  87   1      stop();out=0xaa;while(!key1);
+  88   1      }
+  89          
+  90          /*开始信号*/
+  91          void start(void)
+  92          {
+  93   1      scl=1;
+  94   1      sda=1;
+  95   1      delay3us();
+  96   1      sda=0;
+  97   1      delay3us();
+  98   1      scl=0;
+  99   1      }
+ 100          /*停止信号*/
+ 101          void stop(void)
+ 102          {
+ 103   1      scl=0;
+ 104   1      sda=0;
+ 105   1      delay3us();
+ 106   1      scl=1;
+ 107   1      delay3us();
+ 108   1      sda=1;
+ 109   1      delay3us();
+ 110   1      }
+ 111          /*接收一个应答位*/
+ 112          bit rack(void)
+ 113          {
+ 114   1      bit flag;
+ 115   1      scl=1;
+ 116   1      delay3us();
+ 117   1      flag=sda;
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 3   
+
+ 118   1      scl=0;
+ 119   1      return(flag);
+ 120   1      }
+ 121          /*发送一个接收应答位*/
+ 122          void sack(void)
+ 123          {
+ 124   1      sda=0;
+ 125   1      delay3us();
+ 126   1      scl=1;
+ 127   1      delay3us();
+ 128   1      scl=0;
+ 129   1      delay3us();
+ 130   1      sda=1;
+ 131   1      delay3us();
+ 132   1      }
+ 133          /*发送一个非接收接收应答位*/
+ 134          void ackn(void)
+ 135          {
+ 136   1      sda=1;
+ 137   1      delay3us();
+ 138   1      scl=1;
+ 139   1      delay3us();
+ 140   1      scl=0;
+ 141   1      delay3us();
+ 142   1      }
+ 143          /*接收一个字节*/
+ 144          uchar rec_byte(void)
+ 145          {
+ 146   1      uchar i,temp;
+ 147   1      for(i=0;i<8;i++)
+ 148   1              {
+ 149   2              temp<<=1;
+ 150   2              scl=1;
+ 151   2              delay3us();
+ 152   2              temp|=sda;
+ 153   2              scl=0;
+ 154   2              delay3us();
+ 155   2              }
+ 156   1      return(temp);
+ 157   1      }
+ 158          /*发送一个字节*/
+ 159          void send_byte(uchar temp)
+ 160          {
+ 161   1      uchar i;
+ 162   1      scl=0;
+ 163   1      for(i=0;i<8;i++)
+ 164   1              {
+ 165   2              sda=(bit)(temp&0x80);
+ 166   2              scl=1;
+ 167   2              delay3us();
+ 168   2              scl=0;
+ 169   2              temp<<=1;
+ 170   2              }
+ 171   1      sda=1;
+ 172   1      }
+ 173          /*延时3US*/
+ 174          void delay3us(void)
+ 175          {
+ 176   1      _nop_();_nop_();_nop_();
+ 177   1      }
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 4   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 24
+                                           ; SOURCE LINE # 25
+                                           ; SOURCE LINE # 26
+0000 D2AF              SETB    EA
+0002 D2A8              SETB    EX0
+0004 D2AA              SETB    EX1
+0006         ?C0001:
+                                           ; SOURCE LINE # 27
+0006 80FE              SJMP    ?C0001
+             ; FUNCTION main (END)
+
+             ; FUNCTION ext0 (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0F0              PUSH    B
+0004 C083              PUSH    DPH
+0006 C082              PUSH    DPL
+0008 C0D0              PUSH    PSW
+000A 75D000            MOV     PSW,#00H
+000D C000              PUSH    AR0
+000F C001              PUSH    AR1
+0011 C002              PUSH    AR2
+0013 C003              PUSH    AR3
+0015 C004              PUSH    AR4
+0017 C005              PUSH    AR5
+0019 C006              PUSH    AR6
+001B C007              PUSH    AR7
+                                           ; SOURCE LINE # 30
+                                           ; SOURCE LINE # 32
+001D 1100        R     ACALL   write
+                                           ; SOURCE LINE # 33
+001F D007              POP     AR7
+0021 D006              POP     AR6
+0023 D005              POP     AR5
+0025 D004              POP     AR4
+0027 D003              POP     AR3
+0029 D002              POP     AR2
+002B D001              POP     AR1
+002D D000              POP     AR0
+002F D0D0              POP     PSW
+0031 D082              POP     DPL
+0033 D083              POP     DPH
+0035 D0F0              POP     B
+0037 D0E0              POP     ACC
+0039 32                RETI    
+             ; FUNCTION ext0 (END)
+
+             ; FUNCTION ext1 (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0F0              PUSH    B
+0004 C083              PUSH    DPH
+0006 C082              PUSH    DPL
+0008 C0D0              PUSH    PSW
+000A 75D000            MOV     PSW,#00H
+000D C000              PUSH    AR0
+000F C001              PUSH    AR1
+0011 C002              PUSH    AR2
+0013 C003              PUSH    AR3
+0015 C004              PUSH    AR4
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 5   
+
+0017 C005              PUSH    AR5
+0019 C006              PUSH    AR6
+001B C007              PUSH    AR7
+                                           ; SOURCE LINE # 35
+                                           ; SOURCE LINE # 37
+001D 1100        R     ACALL   read
+                                           ; SOURCE LINE # 38
+001F D007              POP     AR7
+0021 D006              POP     AR6
+0023 D005              POP     AR5
+0025 D004              POP     AR4
+0027 D003              POP     AR3
+0029 D002              POP     AR2
+002B D001              POP     AR1
+002D D000              POP     AR0
+002F D0D0              POP     PSW
+0031 D082              POP     DPL
+0033 D083              POP     DPH
+0035 D0F0              POP     B
+0037 D0E0              POP     ACC
+0039 32                RETI    
+             ; FUNCTION ext1 (END)
+
+             ; FUNCTION read (BEGIN)
+                                           ; SOURCE LINE # 40
+                                           ; SOURCE LINE # 41
+                                           ; SOURCE LINE # 44
+0000 1100        R     ACALL   start
+                                           ; SOURCE LINE # 45
+0002 7FA0              MOV     R7,#0A0H
+0004 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 46
+0006 1100        R     ACALL   rack
+0008 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 47
+000A 20003F      R     JB      f,?C0006
+                                           ; SOURCE LINE # 48
+000D 1100        R     ACALL   start
+                                           ; SOURCE LINE # 49
+000F 7FA0              MOV     R7,#0A0H
+0011 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 50
+0013 1100        R     ACALL   rack
+0015 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 51
+0017 E4                CLR     A
+0018 FF                MOV     R7,A
+0019 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 52
+001B 1100        R     ACALL   rack
+001D 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 53
+001F 20002A      R     JB      f,?C0006
+                                           ; SOURCE LINE # 54
+0022 1100        R     ACALL   start
+                                           ; SOURCE LINE # 55
+0024 7FA1              MOV     R7,#0A1H
+0026 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 56
+0028 1100        R     ACALL   rack
+002A 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 57
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 6   
+
+002C 20001D      R     JB      f,?C0006
+                                           ; SOURCE LINE # 58
+002F E4                CLR     A
+0030 F500        R     MOV     i,A
+0032         ?C0009:
+                                           ; SOURCE LINE # 59
+0032 1100        R     ACALL   rec_byte
+0034 7460              MOV     A,#LOW rec_mem
+0036 2500        R     ADD     A,i
+0038 F8                MOV     R0,A
+0039 A607              MOV     @R0,AR7
+                                           ; SOURCE LINE # 60
+003B 1100        R     ACALL   sack
+                                           ; SOURCE LINE # 61
+003D 0500        R     INC     i
+003F E500        R     MOV     A,i
+0041 C3                CLR     C
+0042 9403              SUBB    A,#03H
+0044 40EC              JC      ?C0009
+0046         ?C0010:
+                                           ; SOURCE LINE # 62
+0046 1100        R     ACALL   rec_byte
+0048 8F63              MOV     rec_mem+03H,R7
+004A 1100        R     ACALL   ackn
+                                           ; SOURCE LINE # 63
+                                           ; SOURCE LINE # 64
+                                           ; SOURCE LINE # 65
+004C         ?C0006:
+                                           ; SOURCE LINE # 66
+004C 1100        R     ACALL   stop
+004E 8563A0            MOV     P2,rec_mem+03H
+0051         ?C0012:
+0051 30B3FD            JNB     key2,?C0012
+0054         ?C0013:
+                                           ; SOURCE LINE # 67
+0054         ?C0014:
+0054 22                RET     
+             ; FUNCTION read (END)
+
+             ; FUNCTION write (BEGIN)
+                                           ; SOURCE LINE # 69
+                                           ; SOURCE LINE # 70
+                                           ; SOURCE LINE # 73
+0000 1100        R     ACALL   start
+                                           ; SOURCE LINE # 74
+0002 7FA0              MOV     R7,#0A0H
+0004 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 75
+0006 1100        R     ACALL   rack
+0008 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 76
+000A 200027      R     JB      f,?C0015
+                                           ; SOURCE LINE # 77
+000D E4                CLR     A
+000E FF                MOV     R7,A
+000F 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 78
+0011 1100        R     ACALL   rack
+0013 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 79
+0015 20001C      R     JB      f,?C0015
+                                           ; SOURCE LINE # 80
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 7   
+
+0018 E4                CLR     A
+0019 F500        R     MOV     i,A
+001B         ?C0017:
+                                           ; SOURCE LINE # 81
+001B 7455              MOV     A,#LOW mem
+001D 2500        R     ADD     A,i
+001F F8                MOV     R0,A
+0020 E6                MOV     A,@R0
+0021 FF                MOV     R7,A
+0022 1100        R     ACALL   _send_byte
+                                           ; SOURCE LINE # 82
+0024 1100        R     ACALL   rack
+0026 9200        R     MOV     f,C
+                                           ; SOURCE LINE # 83
+0028 200009      R     JB      f,?C0015
+002B         ?C0020:
+                                           ; SOURCE LINE # 84
+002B         ?C0019:
+002B 0500        R     INC     i
+002D E500        R     MOV     A,i
+002F C3                CLR     C
+0030 9404              SUBB    A,#04H
+0032 40E7              JC      ?C0017
+                                           ; SOURCE LINE # 85
+                                           ; SOURCE LINE # 86
+0034         ?C0015:
+                                           ; SOURCE LINE # 87
+0034 1100        R     ACALL   stop
+0036 75A0AA            MOV     P2,#0AAH
+0039         ?C0021:
+0039 30B2FD            JNB     key1,?C0021
+003C         ?C0022:
+                                           ; SOURCE LINE # 88
+003C         ?C0023:
+003C 22                RET     
+             ; FUNCTION write (END)
+
+             ; FUNCTION start (BEGIN)
+                                           ; SOURCE LINE # 91
+                                           ; SOURCE LINE # 92
+                                           ; SOURCE LINE # 93
+0000 D291              SETB    scl
+                                           ; SOURCE LINE # 94
+0002 D290              SETB    sda
+                                           ; SOURCE LINE # 95
+0004 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 96
+0006 C290              CLR     sda
+                                           ; SOURCE LINE # 97
+0008 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 98
+000A C291              CLR     scl
+                                           ; SOURCE LINE # 99
+000C 22                RET     
+             ; FUNCTION start (END)
+
+             ; FUNCTION stop (BEGIN)
+                                           ; SOURCE LINE # 101
+                                           ; SOURCE LINE # 102
+                                           ; SOURCE LINE # 103
+0000 C291              CLR     scl
+                                           ; SOURCE LINE # 104
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 8   
+
+0002 C290              CLR     sda
+                                           ; SOURCE LINE # 105
+0004 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 106
+0006 D291              SETB    scl
+                                           ; SOURCE LINE # 107
+0008 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 108
+000A D290              SETB    sda
+                                           ; SOURCE LINE # 109
+000C 0100        R     AJMP    delay3us
+             ; FUNCTION stop (END)
+
+             ; FUNCTION rack (BEGIN)
+                                           ; SOURCE LINE # 112
+                                           ; SOURCE LINE # 113
+                                           ; SOURCE LINE # 115
+0000 D291              SETB    scl
+                                           ; SOURCE LINE # 116
+0002 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 117
+0004 A290              MOV     C,sda
+0006 9200        R     MOV     flag,C
+                                           ; SOURCE LINE # 118
+0008 C291              CLR     scl
+                                           ; SOURCE LINE # 119
+000A A200        R     MOV     C,flag
+                                           ; SOURCE LINE # 120
+000C         ?C0026:
+000C 22                RET     
+             ; FUNCTION rack (END)
+
+             ; FUNCTION sack (BEGIN)
+                                           ; SOURCE LINE # 122
+                                           ; SOURCE LINE # 123
+                                           ; SOURCE LINE # 124
+0000 C290              CLR     sda
+                                           ; SOURCE LINE # 125
+0002 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 126
+0004 D291              SETB    scl
+                                           ; SOURCE LINE # 127
+0006 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 128
+0008 C291              CLR     scl
+                                           ; SOURCE LINE # 129
+000A 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 130
+000C D290              SETB    sda
+                                           ; SOURCE LINE # 131
+000E 0100        R     AJMP    delay3us
+             ; FUNCTION sack (END)
+
+             ; FUNCTION ackn (BEGIN)
+                                           ; SOURCE LINE # 134
+                                           ; SOURCE LINE # 135
+                                           ; SOURCE LINE # 136
+0000 D290              SETB    sda
+                                           ; SOURCE LINE # 137
+0002 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 138
+0004 D291              SETB    scl
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 9   
+
+                                           ; SOURCE LINE # 139
+0006 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 140
+0008 C291              CLR     scl
+                                           ; SOURCE LINE # 141
+000A 0100        R     AJMP    delay3us
+             ; FUNCTION ackn (END)
+
+             ; FUNCTION rec_byte (BEGIN)
+                                           ; SOURCE LINE # 144
+                                           ; SOURCE LINE # 145
+                                           ; SOURCE LINE # 147
+0000 E4                CLR     A
+0001 F500        R     MOV     i,A
+0003         ?C0029:
+                                           ; SOURCE LINE # 148
+                                           ; SOURCE LINE # 149
+0003 E500        R     MOV     A,temp
+0005 25E0              ADD     A,ACC
+0007 F500        R     MOV     temp,A
+                                           ; SOURCE LINE # 150
+0009 D291              SETB    scl
+                                           ; SOURCE LINE # 151
+000B 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 152
+000D A290              MOV     C,sda
+000F E4                CLR     A
+0010 33                RLC     A
+0011 4200        R     ORL     temp,A
+                                           ; SOURCE LINE # 153
+0013 C291              CLR     scl
+                                           ; SOURCE LINE # 154
+0015 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 155
+0017 0500        R     INC     i
+0019 E500        R     MOV     A,i
+001B C3                CLR     C
+001C 9408              SUBB    A,#08H
+001E 40E3              JC      ?C0029
+0020         ?C0030:
+                                           ; SOURCE LINE # 156
+0020 AF00        R     MOV     R7,temp
+                                           ; SOURCE LINE # 157
+0022         ?C0032:
+0022 22                RET     
+             ; FUNCTION rec_byte (END)
+
+             ; FUNCTION _send_byte (BEGIN)
+                                           ; SOURCE LINE # 159
+0000 8F00        R     MOV     temp,R7
+                                           ; SOURCE LINE # 160
+                                           ; SOURCE LINE # 162
+0002 C291              CLR     scl
+                                           ; SOURCE LINE # 163
+0004 E4                CLR     A
+0005 F500        R     MOV     i,A
+0007         ?C0033:
+                                           ; SOURCE LINE # 164
+                                           ; SOURCE LINE # 165
+0007 E500        R     MOV     A,temp
+0009 33                RLC     A
+000A 9290              MOV     sda,C
+C51 COMPILER V9.00   I2C                                                                   07/13/2016 11:45:57 PAGE 10  
+
+                                           ; SOURCE LINE # 166
+000C D291              SETB    scl
+                                           ; SOURCE LINE # 167
+000E 1100        R     ACALL   delay3us
+                                           ; SOURCE LINE # 168
+0010 C291              CLR     scl
+                                           ; SOURCE LINE # 169
+0012 E500        R     MOV     A,temp
+0014 25E0              ADD     A,ACC
+0016 F500        R     MOV     temp,A
+                                           ; SOURCE LINE # 170
+0018 0500        R     INC     i
+001A E500        R     MOV     A,i
+001C C3                CLR     C
+001D 9408              SUBB    A,#08H
+001F 40E6              JC      ?C0033
+0021         ?C0034:
+                                           ; SOURCE LINE # 171
+0021 D290              SETB    sda
+                                           ; SOURCE LINE # 172
+0023 22                RET     
+             ; FUNCTION _send_byte (END)
+
+             ; FUNCTION delay3us (BEGIN)
+                                           ; SOURCE LINE # 174
+                                           ; SOURCE LINE # 175
+                                           ; SOURCE LINE # 176
+0000 00                NOP     
+0001 00                NOP     
+0002 00                NOP     
+                                           ; SOURCE LINE # 177
+0003 22                RET     
+             ; FUNCTION delay3us (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    413    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       3
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

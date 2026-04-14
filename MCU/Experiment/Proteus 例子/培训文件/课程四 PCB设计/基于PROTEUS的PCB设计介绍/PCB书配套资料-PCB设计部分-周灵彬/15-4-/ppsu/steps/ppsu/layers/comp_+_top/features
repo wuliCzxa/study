@@ -1,0 +1,6 @@
+# XDBGEN converter version 211
+#comp_+_top
+@0 .geometry
+@1 .drill
+@2 .pad_usage
+&0  

@@ -1,0 +1,45 @@
+C51 COMPILER V9.00   MAIN                                                                  10/28/2015 13:56:07 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          #include "reg51.h"
+   2          #include "intrins.h"
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          #define in  P3
+   6          #define out  P1
+   7          
+   8          void main(void)
+   9          {
+  10   1      uchar i;
+  11   1      bit m;
+  12   1      while(1)
+  13   1              {
+  14   2               for(i=0;i<8;i++)
+  15   2                      {
+  16   3                      m=(in>>i)&0x01;
+  17   3                      if(m==0)out=_crol_(0xfe,i);
+  18   3                      }                                               
+  19   2                      
+  20   2              }
+  21   1      
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     38    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

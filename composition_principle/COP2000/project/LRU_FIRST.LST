@@ -1,0 +1,51 @@
+00 7C00     MOV A, #00H          ; 初始化累加器A为0
+02 80       MOV R0, A            ; 初始化寄存器R0为0
+03 81       MOV R1, A            ; 初始化寄存器R1为0
+04 82       MOV R2, A            ; 初始化寄存器R2为0
+05 83       MOV R3, A            ; 初始化寄存器R3为0
+            
+06 88EF     MOV 0EFH, A          ; 初始化存储位置0EFH为0
+08 88EE     MOV 0EEH, A          ; 初始化存储位置0EEH为0
+0A 88EB     MOV 0EBH, A          ; 初始化存储位置0EBH为0
+0C 88EA     MOV 0EAH, A          ; 初始化存储位置0EAH为0
+0E 88DF     MOV 0DFH, A          ; 初始化存储位置0DFH为0
+10 88DE     MOV 0DEH, A          ; 初始化存储位置0DEH为0
+            
+            MAIN:
+12 8CF0          MOV R0, #0F0H   ; 设置R0为数据起始地址0F0H
+            
+14 7C04          MOV A, #04H     ; 初始化页面缓冲区大小为4
+16 88DD          MOV 0DDH, A     ; 将页面缓冲区大小存入地址0DDH
+18 8CF0          MOV R0, #0F0H   ; 重设R0为数据起始地址
+1A 8FE3          MOV R3, #0E3H   ; 设置R3为页面缓冲区尾地址
+1C 74            MOV A, @R0      ; 从地址R0读取数据到A
+1D 87            MOV @R3, A      ; 将数据从A存入R3指向的位置
+1E BC22          CALL NHIT       ; 调用未命中页面的处理函数
+20 BC29          CALL NULL       ; 调用空页面的处理函数
+            
+            NHIT:
+22 78EE          MOV A, 0EEH
+24 1C01          ADD A, #01H         ; 更新未命中计数
+26 88EE          MOV 0EEH, A
+28 CC            RET
+            
+            NULL:
+29 78DD          MOV A, 0DDH
+2B 3C01          SUB A, #01H         ; 更新空页面计数
+2D 88DD          MOV 0DDH, A
+2F C4            OUT
+30 A440          JZ TIME             ; 如果空页面耗尽，调用时间更新
+32 70            MOV A, R0
+33 1C01          ADD A, #01H         ; 地址递增
+35 80            MOV R0, A
+36 73            MOV A, R3
+37 3C01          SUB A, #01H         ; 地址递减
+39 83            MOV R3, A
+3A 74            MOV A, @R0
+3B 87            MOV @R3, A
+3C BC22          CALL NHIT           ; 处理页面未命中逻辑
+3E AC29          JMP NULL
+            
+            TIME:
+40 AC40          JMP TIME
+            

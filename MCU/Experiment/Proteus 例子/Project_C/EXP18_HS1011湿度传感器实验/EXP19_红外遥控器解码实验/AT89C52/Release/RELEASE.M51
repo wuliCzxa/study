@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/28/2016  15:07:38  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SLCMP)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000DH     UNIT         ?DT?MAIN
+            DATA    0015H     0005H     UNIT         _DATA_GROUP_
+            IDATA   001AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00ECH     INBLOCK      ?PR?MAIN?MAIN
+            CODE    00EFH     004DH     INBLOCK      ?PR?_WRITE_IR?MAIN
+            CODE    013CH     0043H     UNIT         ?CO?MAIN
+            CODE    017FH     0038H     INBLOCK      ?PR?INIT?MAIN
+            CODE    01B7H     0027H     INBLOCK      ?PR?_DELAY?MAIN
+            CODE    01DEH     0020H     INBLOCK      ?PR?IR_GET_LOW?MAIN
+            CODE    01FEH     0020H     INBLOCK      ?PR?IR_GET_HIGH?MAIN
+            CODE    021EH     0016H     UNIT         ?C?LIB_CODE
+            CODE    0234H     0012H     INBLOCK      ?PR?_WRITE_COM?MAIN
+            CODE    0246H     0012H     INBLOCK      ?PR?_WRITE_DATE?MAIN
+            CODE    0258H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0015H    0004H
+  +--> ?PR?INIT?MAIN
+  +--> ?PR?IR_GET_LOW?MAIN
+  +--> ?PR?IR_GET_HIGH?MAIN
+  +--> ?PR?_WRITE_IR?MAIN
+
+?PR?INIT?MAIN                  -----    -----
+  +--> ?PR?_WRITE_COM?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2016  15:07:38  PAGE 2
+
+
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_WRITE_COM?MAIN            -----    -----
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_DELAY?MAIN                -----    -----
+  +--> ?PR?_WRITE_DATE?MAIN
+
+?PR?_WRITE_IR?MAIN             0019H    0001H
+  +--> ?PR?_WRITE_COM?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY?MAIN
+  +--> ?PR?_WRITE_DATE?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?SLCMP
+  C:021EH         PUBLIC        ?C?SLCMP
+  -------         ENDMOD        ?C?SLCMP
+
+Program Size: data=27.0 xdata=0 code=612
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

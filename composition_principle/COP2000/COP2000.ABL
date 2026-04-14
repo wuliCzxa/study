@@ -1,0 +1,801 @@
+
+module COP2000
+Title 'COP2000'
+
+Declarations
+  XRD    PIN 26 istype 'COM';
+  EMWR   PIN  3 istype 'COM';
+  EMRD   PIN 25 istype 'COM';
+  PCOE   PIN  4 istype 'COM';
+  EMEN   PIN 24 istype 'COM';
+  IREN   PIN  5 istype 'COM';
+  EINT   PIN 23 istype 'COM';
+  ELP    PIN 21 istype 'COM';
+
+  MAREN  PIN 20 istype 'COM';
+  MAROE  PIN  1 istype 'COM';
+  OUTEN  PIN 19 istype 'COM';
+  STEN   PIN 84 istype 'COM';
+  RRD    PIN 18 istype 'COM';
+  RWR    PIN 83 istype 'COM';
+  CN     PIN 17 istype 'COM';
+  FEN    PIN 15 istype 'COM';
+
+  X2     PIN 14 istype 'COM';
+  X1     PIN  6 istype 'COM';
+  X0     PIN 13 istype 'COM';
+  WEN    PIN  7 istype 'COM';
+  AEN    PIN 12 istype 'COM';
+  S2     PIN  9 istype 'COM';
+  S1     PIN 11 istype 'COM';
+  S0     PIN 10 istype 'COM';
+
+  IBUS7  PIN 32;
+  IBUS6  PIN 34;
+  IBUS5  PIN 36;
+  IBUS4  PIN 37;
+  IBUS3  PIN 33;
+  IBUS2  PIN 35;
+  IBUS1  PIN 43;
+  IBUS0  PIN 44;
+
+  CK     PIN 39;
+  RST    PIN 40;
+
+  RT1    PIN 82 istype 'REG';
+  RT0    PIN  2 istype 'REG';
+
+  CT1    PIN 77 istype 'COM';
+  CT0    PIN 79 istype 'COM';
+
+  MON    PIN 80;
+
+  IR7    NODE istype 'REG';
+  IR6    NODE istype 'REG';
+  IR5    NODE istype 'REG';
+  IR4    NODE istype 'REG';
+  IR3    NODE istype 'REG';
+  IR2    NODE istype 'REG';
+  IR1    NODE istype 'REG';
+  IR0    NODE istype 'REG';
+
+  T3     NODE istype 'COM';
+  T2     NODE istype 'COM';
+  T1     NODE istype 'COM';
+  T0     NODE istype 'COM';
+
+Equations
+
+  // XRD 1
+  !XRD    =  IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 ;     // READ     A, MM
+
+  // EMWR 2
+  !EMWR   =  IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 ;     // MOV      MM, A
+
+  // EMRD 100
+  !EMRD   = !IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // _FATCH_  
+            !IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // ADD      A, #II
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T3 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 #     // SUB      A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T3 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T2 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // AND      A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // MOV      A, R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // MOV      A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // MOV      A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // WRITE    MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // WRITE    MM, A
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // JMP      MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // JMP      MM
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // CALL     MM
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // CALL     MM
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OUT      
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RET      
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // RRC      A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // NOP      
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // CPL      A
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RETI     
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 ;     // UNDEF
+
+  // PCOE 86
+  !PCOE   = !IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // _FATCH_  
+            !IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // ADD      A, #II
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T3 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 #     // SUB      A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T3 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T2 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // AND      A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // MOV      A, R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // MOV      A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // MOV      A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // WRITE    MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // WRITE    MM, A
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // JMP      MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // JMP      MM
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T3 #     // CALL     MM
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // CALL     MM
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OUT      
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RET      
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // RRC      A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // NOP      
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // CPL      A
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RETI     
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 ;     // UNDEF
+
+  // EMEN 38
+  !EMEN   = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T3 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T3 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T2 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // MOV      A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // WRITE    MM, A
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // JMP      MM
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 ;     // CALL     MM
+
+  // IREN 64
+  !IREN   = !IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // _FATCH_  
+            !IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // MOV      A, R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // MOV      A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // MOV      R?, #II
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // WRITE    MM, A
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // JMP      MM
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 #     // CALL     MM
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T0 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T0 #     // OUT      
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RET      
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T0 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T0 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T0 #     // RRC      A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T0 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T0 #     // NOP      
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T0 #     // CPL      A
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T0 #     // RETI     
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T0 #     // UNDEF
+             IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T0 ;     // UNDEF
+
+  // EINT 1
+  !EINT   =  IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // RETI     
+
+  // ELP 7
+  !ELP    =  IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // JC       MM
+             IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // JZ       MM
+             IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // JMP      MM
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // CALL     MM
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // RET      
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // RETI     
+
+  // MAREN 19
+  !MAREN  = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T3 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // ADD      A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T3 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T3 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T3 #     // SUB      A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T3 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T3 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T3 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T3 #     // AND      A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T3 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T3 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // MOV      A, MM
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // WRITE    MM, A
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T3 ;     // CALL     MM
+
+  // MAROE 19
+  !MAROE  = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // ADD      A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // SUB      A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // AND      A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // MOV      A, MM
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // READ     A, MM
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // WRITE    MM, A
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 ;     // CALL     MM
+
+  // OUTEN 2
+  !OUTEN  =  IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // WRITE    MM, A
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 ;     // OUT      
+
+  // STEN 2
+  !STEN   =  IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 ;     // CALL     MM
+
+  // RRD 15
+  !RRD    = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T3 #     // ADD      A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T2 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T3 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T2 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T3 #     // SUB      A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T2 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T3 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T3 #     // AND      A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T2 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T3 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // MOV      A, R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // MOV      A, @R?
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 ;     // MOV      @R?, A
+
+  // RWR 2
+  !RWR    =  IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // MOV      R?, #II
+
+  // CN 2
+  !CN     =  IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 ;     // RL       A
+
+  // FEN 29
+  !FEN    = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // OR       A, #II
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // RRC      A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 ;     // CPL      A
+
+  // X2 7
+  !X2     =  IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // _INT_    
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T3 #     // CALL     MM
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 #     // CALL     MM
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // RET      
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // RETI     
+
+  // X1 34
+  !X1     = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // OR       A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // WRITE    MM, A
+             IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // _INT_    
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OUT      
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // RRC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 ;     // CPL      A
+
+  // X0 35
+  !X0     = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // OR       A, #II
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // MOV      R?, A
+             IR7 & !IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // MOV      @R?, A
+             IR7 & !IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // MOV      MM, A
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // WRITE    MM, A
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // IN       
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OUT      
+             IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // RET      
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // CPL      A
+             IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // RETI     
+
+  // WEN 24
+  !WEN    = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T2 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T2 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T2 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T2 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T2 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T2 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T2 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T2 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T2 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T2 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T2 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T2 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T2 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T2 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T2 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T2 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T2 ;     // OR       A, #II
+
+  // AEN 35
+  !AEN    = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 #     // SUBC     A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // OR       A, #II
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // MOV      A, R?
+            !IR7 &  IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // MOV      A, @R?
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // MOV      A, MM
+            !IR7 &  IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // MOV      A, #II
+             IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // READ     A, MM
+             IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // IN       
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // RR       A
+             IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // RL       A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // RRC      A
+             IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // RLC      A
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 ;     // CPL      A
+
+  // S2 16
+  !S2     = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // AND      A, R?
+            !IR7 &  IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // AND      A, @R?
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // AND      A, MM
+            !IR7 &  IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // AND      A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // OR       A, #II
+
+  // S1 16
+  !S1     = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 & !IR2 & T1 #     // SUB      A, R?
+            !IR7 & !IR6 &  IR5 &  IR4 & !IR3 &  IR2 & T1 #     // SUB      A, @R?
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 & !IR2 & T1 #     // SUB      A, MM
+            !IR7 & !IR6 &  IR5 &  IR4 &  IR3 &  IR2 & T1 #     // SUB      A, #II
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 & !IR2 & T1 #     // SUBC     A, R?
+            !IR7 &  IR6 & !IR5 & !IR4 & !IR3 &  IR2 & T1 #     // SUBC     A, @R?
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 & !IR2 & T1 #     // SUBC     A, MM
+            !IR7 &  IR6 & !IR5 & !IR4 &  IR3 &  IR2 & T1 ;     // SUBC     A, #II
+
+  // S0 13
+  !S0     = !IR7 & !IR6 & !IR5 &  IR4 & !IR3 & !IR2 & T1 #     // ADD      A, R?
+            !IR7 & !IR6 & !IR5 &  IR4 & !IR3 &  IR2 & T1 #     // ADD      A, @R?
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 & !IR2 & T1 #     // ADD      A, MM
+            !IR7 & !IR6 & !IR5 &  IR4 &  IR3 &  IR2 & T1 #     // ADD      A, #II
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // ADDC     A, R?
+            !IR7 & !IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // ADDC     A, @R?
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // ADDC     A, MM
+            !IR7 & !IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // ADDC     A, #II
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 & !IR2 & T1 #     // OR       A, R?
+            !IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 #     // OR       A, @R?
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 & !IR2 & T1 #     // OR       A, MM
+            !IR7 &  IR6 &  IR5 & !IR4 &  IR3 &  IR2 & T1 #     // OR       A, #II
+             IR7 &  IR6 &  IR5 & !IR4 & !IR3 &  IR2 & T1 ;     // CPL      A
+
+  // Does not output when MON is high
+  XRD.OE    = !MON;
+  EMWR.OE   = !MON;
+  EMRD.OE   = !MON;
+  PCOE.OE   = !MON;
+  EMEN.OE   = !MON;
+  IREN.OE   = !MON;
+  EINT.OE   = !MON;
+  ELP.OE    = !MON;
+  MAREN.OE  = !MON;
+  MAROE.OE  = !MON;
+  OUTEN.OE  = !MON;
+  STEN.OE   = !MON;
+  RRD.OE    = !MON;
+  RWR.OE    = !MON;
+  CN.OE     = !MON;
+  FEN.OE    = !MON;
+  X2.OE     = !MON;
+  X1.OE     = !MON;
+  X0.OE     = !MON;
+  WEN.OE    = !MON;
+  AEN.OE    = !MON;
+  S2.OE     = !MON;
+  S1.OE     = !MON;
+  S0.OE     = !MON;
+
+  // Load IR register
+  [IR7..IR0]    := [IBUS7..IBUS0];
+  [IR7..IR0].CE  = !IREN;
+  [IR7..IR0].AR  = !RST;
+  [IR7..IR0].CLK = CK;
+
+  // T counter
+  WHEN !RT1 & !RT0 THEN {
+    [RT1..RT0] := [CT1..CT0];
+  } ELSE {
+    [RT1..RT0] := [RT1..RT0] - 1;
+  }
+  [RT1..RT0].CLK = CK;
+  [RT1..RT0].AR  = !RST;
+
+  // set T
+  T3 =  RT1 &  RT0;
+  T2 =  RT1 & !RT0;
+  T1 = !RT1 &  RT0;
+  T0 = !RT1 & !RT0;
+
+  // calc constant for T counter
+  TRUTH_TABLE ([IBUS7,IBUS6,IBUS5,IBUS4,IBUS3,IBUS2] -> [CT1, CT0])
+               [    0,    0,    0,    0,    0,    0] -> [  0,   0]; // Fetch
+               [    0,    0,    0,    0,    0,    1] -> [  0,   0]; // UNDEF
+               [    0,    0,    0,    0,    1,    0] -> [  0,   0]; // UNDEF
+               [    0,    0,    0,    0,    1,    1] -> [  0,   0]; // UNDEF
+               [    0,    0,    0,    1,    0,    0] -> [  1,   0]; // ADD      A, R?
+               [    0,    0,    0,    1,    0,    1] -> [  1,   1]; // ADD      A, @R?
+               [    0,    0,    0,    1,    1,    0] -> [  1,   1]; // ADD      A, MM
+               [    0,    0,    0,    1,    1,    1] -> [  1,   0]; // ADD      A, #II
+               [    0,    0,    1,    0,    0,    0] -> [  1,   0]; // ADDC     A, R?
+               [    0,    0,    1,    0,    0,    1] -> [  1,   1]; // ADDC     A, @R?
+               [    0,    0,    1,    0,    1,    0] -> [  1,   1]; // ADDC     A, MM
+               [    0,    0,    1,    0,    1,    1] -> [  1,   0]; // ADDC     A, #II
+               [    0,    0,    1,    1,    0,    0] -> [  1,   0]; // SUB      A, R?
+               [    0,    0,    1,    1,    0,    1] -> [  1,   1]; // SUB      A, @R?
+               [    0,    0,    1,    1,    1,    0] -> [  1,   1]; // SUB      A, MM
+               [    0,    0,    1,    1,    1,    1] -> [  1,   0]; // SUB      A, #II
+               [    0,    1,    0,    0,    0,    0] -> [  1,   0]; // SUBC     A, R?
+               [    0,    1,    0,    0,    0,    1] -> [  1,   1]; // SUBC     A, @R?
+               [    0,    1,    0,    0,    1,    0] -> [  1,   1]; // SUBC     A, MM
+               [    0,    1,    0,    0,    1,    1] -> [  1,   0]; // SUBC     A, #II
+               [    0,    1,    0,    1,    0,    0] -> [  1,   0]; // AND      A, R?
+               [    0,    1,    0,    1,    0,    1] -> [  1,   1]; // AND      A, @R?
+               [    0,    1,    0,    1,    1,    0] -> [  1,   1]; // AND      A, MM
+               [    0,    1,    0,    1,    1,    1] -> [  1,   0]; // AND      A, #II
+               [    0,    1,    1,    0,    0,    0] -> [  1,   0]; // OR       A, R?
+               [    0,    1,    1,    0,    0,    1] -> [  1,   1]; // OR       A, @R?
+               [    0,    1,    1,    0,    1,    0] -> [  1,   1]; // OR       A, MM
+               [    0,    1,    1,    0,    1,    1] -> [  1,   0]; // OR       A, #II
+               [    0,    1,    1,    1,    0,    0] -> [  0,   1]; // MOV      A, R?
+               [    0,    1,    1,    1,    0,    1] -> [  1,   0]; // MOV      A, @R?
+               [    0,    1,    1,    1,    1,    0] -> [  1,   0]; // MOV      A, MM
+               [    0,    1,    1,    1,    1,    1] -> [  0,   1]; // MOV      A, #II
+               [    1,    0,    0,    0,    0,    0] -> [  0,   1]; // MOV      R?, A
+               [    1,    0,    0,    0,    0,    1] -> [  1,   0]; // MOV      @R?, A
+               [    1,    0,    0,    0,    1,    0] -> [  1,   0]; // MOV      MM, A
+               [    1,    0,    0,    0,    1,    1] -> [  0,   1]; // MOV      R?, #II
+               [    1,    0,    0,    1,    0,    0] -> [  1,   0]; // READ     A, MM
+               [    1,    0,    0,    1,    0,    1] -> [  1,   0]; // WRITE    MM, A
+               [    1,    0,    0,    1,    1,    0] -> [  0,   0]; // UNDEF
+               [    1,    0,    0,    1,    1,    1] -> [  0,   0]; // UNDEF
+               [    1,    0,    1,    0,    0,    0] -> [  0,   1]; // JC       MM
+               [    1,    0,    1,    0,    0,    1] -> [  0,   1]; // JZ       MM
+               [    1,    0,    1,    0,    1,    0] -> [  0,   0]; // UNDEF
+               [    1,    0,    1,    0,    1,    1] -> [  0,   1]; // JMP      MM
+               [    1,    0,    1,    1,    0,    0] -> [  0,   0]; // UNDEF
+               [    1,    0,    1,    1,    0,    1] -> [  0,   0]; // UNDEF
+               [    1,    0,    1,    1,    1,    0] -> [  1,   0]; // _INT_    
+               [    1,    0,    1,    1,    1,    1] -> [  1,   1]; // CALL     MM
+               [    1,    1,    0,    0,    0,    0] -> [  0,   1]; // IN       
+               [    1,    1,    0,    0,    0,    1] -> [  0,   1]; // OUT      
+               [    1,    1,    0,    0,    1,    0] -> [  0,   0]; // UNDEF
+               [    1,    1,    0,    0,    1,    1] -> [  0,   1]; // RET      
+               [    1,    1,    0,    1,    0,    0] -> [  0,   1]; // RR       A
+               [    1,    1,    0,    1,    0,    1] -> [  0,   1]; // RL       A
+               [    1,    1,    0,    1,    1,    0] -> [  0,   1]; // RRC      A
+               [    1,    1,    0,    1,    1,    1] -> [  0,   1]; // RLC      A
+               [    1,    1,    1,    0,    0,    0] -> [  0,   0]; // NOP      
+               [    1,    1,    1,    0,    0,    1] -> [  0,   1]; // CPL      A
+               [    1,    1,    1,    0,    1,    0] -> [  0,   0]; // UNDEF
+               [    1,    1,    1,    0,    1,    1] -> [  0,   1]; // RETI     
+               [    1,    1,    1,    1,    0,    0] -> [  0,   0]; // UNDEF
+               [    1,    1,    1,    1,    0,    1] -> [  0,   0]; // UNDEF
+               [    1,    1,    1,    1,    1,    0] -> [  0,   0]; // UNDEF
+               [    1,    1,    1,    1,    1,    1] -> [  0,   0]; // UNDEF
+
+end COP2000
+

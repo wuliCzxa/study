@@ -1,0 +1,200 @@
+C51 COMPILER V9.00   MAIN                                                                  04/28/2016 15:07:37 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*************************************************  
+   2          *文件名称： main.c 
+   3          *作 者：    
+   4          *版 本：    V1.00
+   5          *说 明：    红外遥控器解码实验
+   6          *修改记录：  
+   7          --------------------------------------------------
+   8          *Descriptoon: 
+   9          *接线说明：P34-红外接收,P25-RS,P26-RW,P27-EN,
+  10                     P00~P07-DB0~DB7                 
+  11          **************************************************/                         
+  12          
+  13          #include <reg52.h>
+  14          
+  15          #define uchar unsigned char
+  16          #define uint unsigned int
+  17          #define c(x)(x*110592/120000) //晶振11.0592
+  18          
+  19          uchar Lcd_Buf[4];             //显示数据缓冲区         
+  20          unsigned char Ir_Buf[4];      //用于保存解码结果
+  21          sbit Ir_Pin=P3^4;             //红外线数据接口
+  22          sbit rs=P2^0;                     //LCD数据命令端
+  23          sbit rw=P2^1;                     //读写接口
+  24          sbit lcde=P2^2;                   //使能接口
+  25          uchar code table[]=" WWW.WINDWAY.CN ";//LCD显示数据
+  26          uchar code table1[]="Wait for IR in..";
+  27          uchar code table2[]="  IR DATA...";
+  28                             
+  29                     unsigned char code Led_Tab[]={
+  30                  0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xf8,
+  31                  0x80,0x90,0x88,0x83,0xC6,0xA1,0x86,0x8E};   //共阳极数码显示码0-F
+  32          unsigned char code Led_Sel[]={0xf,0xf,0xb,0x7}; //数码管位选，屏蔽前两位
+  33          unsigned char Led_Buf[4]; //显示缓冲区
+  34          char Led_Index;           //定义位选         
+  35          unsigned char Ir_Buf[4];  //用于保存解码结果
+  36          
+  37          sbit LCD_E = P2^7;
+  38          //========1MS延时====================================
+  39          void delay(uint z)
+  40          {
+  41   1              uint x,y;
+  42   1              for(x=z;x>0;x--)
+  43   1                      for(y=113;y>0;y--);
+  44   1      }
+  45          //======LCD写命令=====
+  46          void write_com(uchar com)
+  47          {
+  48   1              rs=0;
+  49   1              lcde=0;
+  50   1              P0=com;
+  51   1              lcde=1;
+  52   1              delay(1);//延时1MS跳过忙信号
+  53   1              lcde=0;
+  54   1              delay(1);
+  55   1      }
+C51 COMPILER V9.00   MAIN                                                                  04/28/2016 15:07:37 PAGE 2   
+
+  56          //======LCD写数据=====================================
+  57          void write_date(uchar date)
+  58          {
+  59   1              rs=1;
+  60   1              lcde=0;
+  61   1              P0=date;
+  62   1              lcde=1;
+  63   1              delay(1);
+  64   1              lcde=0;
+  65   1              delay(1);
+  66   1      }
+  67          //=====初始化函数=====================================
+  68          void init()
+  69          {       
+  70   1              uchar num;
+  71   1              rw=0;           //允许LCD写
+  72   1              lcde=0;
+  73   1              write_com(0x38);//显示模式设置                                                    
+  74   1              write_com(0x0c);//显示开及光标设置
+  75   1              write_com(0x06);//显示光标移动设置
+  76   1              write_com(0x01);//清屏
+  77   1              write_com(0x80);//显示首地址
+  78   1              for(num=0;num<15;num++)//显示第一行
+  79   1              {
+  80   2                      write_date(table[num]);
+  81   2                      delay(1);
+  82   2              }
+  83   1              write_com(0x80+0x40);//显示第二行
+  84   1              for(num=0;num<16;num++)
+  85   1              {
+  86   2                      write_date(table1[num]);
+  87   2                      delay(1);
+  88   2              }
+  89   1              TMOD=0x10;              //设置定时器0、1工作模式为1
+  90   1      }
+  91          //=====显示解码========================================
+  92          void write_ir(uchar date)
+  93          {
+  94   1              uchar tmp, num,ff;        
+  95   1      
+  96   1              if(ff==0)
+  97   1              {
+  98   2                      ff++;
+  99   2                      write_com(0x01);
+ 100   2                      write_com(0x80);
+ 101   2                      for(num=0;num<12;num++)
+ 102   2                      {
+ 103   3                              write_date(table2[num]);
+ 104   3                              delay(1);
+ 105   3                      }               
+ 106   2              }
+ 107   1              
+ 108   1              write_com(0xC0+6);//定位在第二行第六位
+ 109   1              tmp = date>>4;                  // 高四位        
+ 110   1              write_date(tmp > 9 ? 'A'+tmp-10 : '0'+tmp);
+ 111   1              write_com(0xC0+7);//定位第二行第七位       
+ 112   1              tmp = date&0x0F;                        // 低四位
+ 113   1              write_date(tmp > 9 ? 'A'+tmp-10 : '0'+tmp);      
+ 114   1      
+ 115   1      }
+ 116          //======================================================
+ 117          //解码取回低电平
+C51 COMPILER V9.00   MAIN                                                                  04/28/2016 15:07:37 PAGE 3   
+
+ 118          unsigned int Ir_Get_Low()
+ 119          {
+ 120   1              TL1=0;
+ 121   1              TH1=0;
+ 122   1              TR1=1;
+ 123   1              while(!Ir_Pin && (TH1&0x80)==0);   //等待低电平到来              
+ 124   1              TR1=0;           
+ 125   1              return TH1*256+TL1;//提取低电平时间间隔时长
+ 126   1      }
+ 127          //======================================================
+ 128          //解码取回高电平========================================
+ 129          unsigned int Ir_Get_High()
+ 130          {
+ 131   1              TL1=0;
+ 132   1              TH1=0;
+ 133   1              TR1=1;
+ 134   1              while(Ir_Pin && (TH1&0x80)==0);//等待高电平到来
+ 135   1              TR1=0;
+ 136   1              return TH1*256+TL1;//提取高电平时间间隔时长
+ 137   1      }
+ 138          //======================================================
+ 139          //======================================================
+ 140          
+ 141          void main()
+ 142          {
+ 143   1              unsigned int temp;
+ 144   1              char i,j;
+ 145   1              init(); //初始化
+ 146   1      //=====用do做循环，等待遥控按键=========================
+ 147   1              do{
+ 148   2      restart:
+ 149   2                      while(Ir_Pin) ;//等待低电平
+ 150   2      
+ 151   2                      temp=Ir_Get_Low();//把低电平附给变量
+ 152   2                      if(temp<c(8500) || temp>c(9500)) continue;//引导脉冲低电平等待9000us
+ 153   2                      temp=Ir_Get_High();//把高电平附给变量
+ 154   2                      if(temp<c(4000) || temp>c(5000)) continue;//引导脉冲高电平等待4500us
+ 155   2                      //连续读出32个字节
+ 156   2                      for(i=0;i<4;i++) //4个字节
+ 157   2                      {
+ 158   3                              for(j=0;j<8;j++) //每个字节8位
+ 159   3                              {
+ 160   4                                      temp=Ir_Get_Low();
+ 161   4                                      if(temp<c(200) || temp>c(800)) goto restart;//等待560us跳过低电平
+ 162   4                                      temp=Ir_Get_High();
+ 163   4                                      if(temp<c(200) || temp>c(2000)) goto restart;//等待1000us跳过高电平
+ 164   4                                      Ir_Buf[i]>>=1;//把电平移进数组
+ 165   4                                      if(temp>c(1120)) Ir_Buf[i]|=0x80;//若为高电平再填1
+ 166   4                              }
+ 167   3                      }  
+ 168   2                      write_ir(Ir_Buf[2]);//调用显示  
+ 169   2              }       
+ 170   1              while(1);//循环
+ 171   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    508    ----
+   CONSTANT SIZE    =     67    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13       5
+C51 COMPILER V9.00   MAIN                                                                  04/28/2016 15:07:37 PAGE 4   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

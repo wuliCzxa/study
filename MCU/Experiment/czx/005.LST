@@ -1,0 +1,89 @@
+A51 MACRO ASSEMBLER  005                                                                  03/29/2025 09:22:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 005.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 005.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG     0
+0000 020050            2             LJMP    MAIN
+0050                   3             ORG     50H
+0050                   4             MAIN:
+0050 758160            5                     MOV     SP,     #60H
+0053 115B              6                     ACALL   INIT_UART
+0055 116E              7     lop1:   ACALL   RECEIVE_DATA
+0057 117E              8                     ACALL   SEND_ACK
+0059 80FA              9                     SJMP    lop1
+                      10     
+005B                  11             INIT_UART:
+005B 758920           12                     MOV     TMOD,   #20H
+005E 758DF4           13                     MOV     TH1,    #0F4H
+0061 758BF4           14                     MOV     TL1,    #0F4H
+0064 D28E             15                     SETB    TR1
+                      16     
+0066 759850           17                     MOV     SCON,   #50H
+0069 C298             18                     CLR     RI
+006B C299             19                     CLR     TI
+006D 22               20                     RET
+                      21     
+006E                  22             RECEIVE_DATA:
+006E 7830             23                     MOV     R0,     #30H
+0070 7F08             24                     MOV     R7,     #08H
+                      25     
+0072                  26             RECV_LOOP:
+0072 3098FD           27                     JNB     RI,     $
+0075 C298             28                     CLR     RI
+0077 E599             29                     MOV     A,      SBUF
+0079 F6               30                     MOV     @R0,    A
+007A 08               31                     INC     R0
+007B DFF5             32                     DJNZ    R7,     RECV_LOOP
+007D 22               33                     RET
+                      34             
+007E                  35             SEND_ACK:
+007E 7455             36                     MOV     A,      #55H
+0080 F599             37                     MOV     SBUF,   A
+0082 118A             38                     ACALL   SEND_BYTE
+                      39                     
+0084 74AA             40                     MOV     A,      #0AAH
+0086 F599             41                     MOV     SBUF,   A
+0088 118A             42                     ACALL   SEND_BYTE
+                      43                     
+008A                  44             SEND_BYTE:
+008A 3099FD           45                     JNB     TI,     $
+008D C299             46                     CLR     TI
+008F 22               47                     RET
+                      48             
+                      49             END     
+                                             
+A51 MACRO ASSEMBLER  005                                                                  03/29/2025 09:22:22 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+INIT_UART. . . . .  C ADDR   005BH   A   
+LOP1 . . . . . . .  C ADDR   0055H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+RECEIVE_DATA . . .  C ADDR   006EH   A   
+RECV_LOOP. . . . .  C ADDR   0072H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEND_ACK . . . . .  C ADDR   007EH   A   
+SEND_BYTE. . . . .  C ADDR   008AH   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

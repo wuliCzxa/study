@@ -1,0 +1,163 @@
+C51 COMPILER V9.00   MAIN                                                                  07/28/2017 09:23:51 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          /*************************************************************
+   2          *
+   3          *
+   4          *
+   5          *
+   6           *************************************************************/
+   7          #include <reg51.h>
+   8          #include <stdio.h>
+   9          #define uchar unsigned char
+  10          #define uint unsigned int
+  11          
+  12          sbit led=P2^0;          //位定义
+  13          sbit outside_int0=P3^2;
+  14          sbit outside_int1=P3^3;
+  15          /********************************************************************
+  16          * 名称 : Outside_Init0()
+  17          * 功能 : 外部中断0 的初始化
+  18          * 输入 : 无
+  19          * 输出 : 无
+  20          ***********************************************************************/
+  21            void Outside_Init0(void);
+  22          /********************************************************************
+  23          * 名称 : Outside_Init1()
+  24          * 功能 : 外部中断1 的初始化
+  25          * 输入 : 无
+  26          * 输出 : 无
+  27          ***********************************************************************/
+  28          void Outside_Init1(void)
+  29          {
+  30   1              EX1 = 1;  //开外部中断0
+  31   1      //      IT1 = 0;  //电平触发 
+  32   1              IT1 = 1;  //边沿触发
+  33   1              EA = 1;   //开总中断
+  34   1      }
+  35          //////////////主函数//////////////////////////
+  36          void main(void)
+  37           { 
+  38   1         Outside_Init0();
+  39   1         Outside_Init1();
+  40   1         while (1);  
+  41   1       }
+  42           /////////////外部中断函数0///////////////////////////
+  43           void Outside_Int0(void) interrupt 0
+  44           {
+  45   1          EA=0;
+  46   1          led=~led;
+  47   1          while(!outside_int0);
+  48   1          EA=1;
+  49   1        }
+  50            ///////////外部中断函数1/////////////////////
+  51           void Outside_Int1(void) interrupt 2
+  52           {
+  53   1          EA=0;
+  54   1          led=~led;
+C51 COMPILER V9.00   MAIN                                                                  07/28/2017 09:23:51 PAGE 2   
+
+  55   1      //    while(!outside_int1);
+  56   1          EA=1;
+  57   1        }
+  58            void Outside_Init0(void)
+  59          {
+  60   1              EX0 = 1;  //开外部中断0
+  61   1              IT0 = 0;  //电平触发 
+  62   1      //      IT0 = 1;  //边沿触发
+  63   1              EA = 1;   //开总中断
+  64   1      }
+C51 COMPILER V9.00   MAIN                                                                  07/28/2017 09:23:51 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION Outside_Init1 (BEGIN)
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+0000 D2AA              SETB    EX1
+                                           ; SOURCE LINE # 32
+0002 D28A              SETB    IT1
+                                           ; SOURCE LINE # 33
+0004 D2AF              SETB    EA
+                                           ; SOURCE LINE # 34
+0006 22                RET     
+             ; FUNCTION Outside_Init1 (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+                                           ; SOURCE LINE # 38
+0000 1100        R     ACALL   Outside_Init0
+                                           ; SOURCE LINE # 39
+0002 1100        R     ACALL   Outside_Init1
+0004         ?C0002:
+                                           ; SOURCE LINE # 40
+0004 80FE              SJMP    ?C0002
+             ; FUNCTION main (END)
+
+             ; FUNCTION Outside_Int0 (BEGIN)
+                                           ; SOURCE LINE # 43
+                                           ; SOURCE LINE # 45
+0000 C2AF              CLR     EA
+                                           ; SOURCE LINE # 46
+0002 B2A0              CPL     led
+0004         ?C0005:
+                                           ; SOURCE LINE # 47
+0004 30B2FD            JNB     outside_int0,?C0005
+0007         ?C0006:
+                                           ; SOURCE LINE # 48
+0007 D2AF              SETB    EA
+                                           ; SOURCE LINE # 49
+0009 32                RETI    
+             ; FUNCTION Outside_Int0 (END)
+
+             ; FUNCTION Outside_Int1 (BEGIN)
+                                           ; SOURCE LINE # 51
+                                           ; SOURCE LINE # 53
+0000 C2AF              CLR     EA
+                                           ; SOURCE LINE # 54
+0002 B2A0              CPL     led
+                                           ; SOURCE LINE # 56
+0004 D2AF              SETB    EA
+                                           ; SOURCE LINE # 57
+0006 32                RETI    
+             ; FUNCTION Outside_Int1 (END)
+
+             ; FUNCTION Outside_Init0 (BEGIN)
+                                           ; SOURCE LINE # 58
+                                           ; SOURCE LINE # 59
+                                           ; SOURCE LINE # 60
+0000 D2A8              SETB    EX0
+                                           ; SOURCE LINE # 61
+C51 COMPILER V9.00   MAIN                                                                  07/28/2017 09:23:51 PAGE 4   
+
+0002 C288              CLR     IT0
+                                           ; SOURCE LINE # 63
+0004 D2AF              SETB    EA
+                                           ; SOURCE LINE # 64
+0006 22                RET     
+             ; FUNCTION Outside_Init0 (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     37    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

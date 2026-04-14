@@ -1,0 +1,53 @@
+A51 MACRO ASSEMBLER  001                                                                  05/25/2025 18:38:23 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN 001.OBJ
+ASSEMBLER INVOKED BY: E:\Software\Keil_v5\C51\BIN\A51.EXE 001.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG             0
+0000 020050            2             LJMP    MAIN
+0050                   3             ORG             50H
+                       4     
+0050                   5             MAIN:
+0050 7840              6                     MOV R0, #40H
+0052 7A10              7                     MOV     R2,     #10H
+0054                   8             LOOP:
+0054 E8                9                     MOV     A,      R0
+0055 C3               10                     CLR     C
+0056 9440             11                     SUBB    A,      #40H
+0058 F6               12                     MOV     @R0,    A
+0059 08               13                     INC     R0
+005A DAF8             14                     DJNZ    R2,     LOOP
+                      15     
+005C 7840             16                     MOV     R0,     #40H
+005E 901050           17                     MOV     DPTR,   #1050H
+0061 7A10             18                     MOV     R2,     #10H
+0063                  19             COPY_LOOP:
+0063 E6               20                     MOV     A,      @R0
+0064 F0               21                     MOVX    @DPTR,  A
+0065 08               22                     INC     R0
+0066 A3               23                     INC     DPTR
+0067 DAFA             24                     DJNZ    R2,     COPY_LOOP
+                      25     
+0069 80FE             26                     SJMP    $
+                      27             END
+A51 MACRO ASSEMBLER  001                                                                  05/25/2025 18:38:23 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COPY_LOOP. . . . .  C ADDR   0063H   A   
+LOOP . . . . . . .  C ADDR   0054H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

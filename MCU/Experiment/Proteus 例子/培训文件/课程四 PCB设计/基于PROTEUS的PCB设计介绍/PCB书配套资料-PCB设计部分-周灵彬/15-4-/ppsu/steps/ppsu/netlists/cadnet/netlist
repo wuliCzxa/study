@@ -1,0 +1,71 @@
+# XDBGEN converter version 211
+H optimize n staggered n
+$0 00000
+$1 00004
+$2 00007
+$3 00008
+$4 00009
+$5 analog
+$6 digitalxx
+$7 gndpower
+$8 unregpp
+$9 vout
+$10 $NONE$
+0 0.002 -0.009212 0.186613 T e e staggered 0 0 0
+0 0.002 0.240788 0.136613 T e e staggered 0 0 0
+0 0.002 -0.009212 0.186613 D e e staggered 0 0 0
+0 0.002 0.240788 0.136613 D e e staggered 0 0 0
+1 0.002 -0.109212 -0.113387 T e e staggered 0 0 0
+1 0.002 -0.254212 -0.198387 T e e staggered 0 0 0
+1 0.002 0.080788 -0.288387 T e e staggered 0 0 0
+1 0.002 -0.109212 -0.113387 D e e staggered 0 0 0
+1 0.002 -0.254212 -0.198387 D e e staggered 0 0 0
+1 0.002 0.080788 -0.288387 D e e staggered 0 0 0
+2 0.002 0.090788 0.186613 T e e staggered 0 0 0
+2 0.002 0.090788 0.286613 T e e staggered 0 0 0
+2 0.002 0.090788 0.186613 D e e staggered 0 0 0
+2 0.002 0.090788 0.286613 D e e staggered 0 0 0
+3 0.002 -0.209212 0.186613 T e e staggered 0 0 0
+3 0.002 -0.209212 0.286613 T e e staggered 0 0 0
+3 0.002 -0.359212 0.111613 T e e staggered 0 0 0
+3 0.002 -0.009212 0.286613 T e e staggered 0 0 0
+3 0.002 -0.209212 0.186613 D e e staggered 0 0 0
+3 0.002 -0.209212 0.286613 D e e staggered 0 0 0
+3 0.002 -0.359212 0.111613 D e e staggered 0 0 0
+3 0.002 -0.009212 0.286613 D e e staggered 0 0 0
+4 0.002 -0.129212 0.286613 T e e staggered 0 0 0
+4 0.002 -0.271712 0.429113 T e e staggered 0 0 0
+4 0.002 -0.129212 0.286613 D e e staggered 0 0 0
+4 0.002 -0.271712 0.429113 D e e staggered 0 0 0
+5 0.002 -0.009212 -0.113387 T e e staggered 0 0 0
+5 0.002 0.290788 -0.283387 T e e staggered 0 0 0
+5 0.002 0.165788 -0.388387 T e e staggered 0 0 0
+5 0.002 -0.009212 -0.113387 D e e staggered 0 0 0
+5 0.002 0.290788 -0.283387 D e e staggered 0 0 0
+5 0.002 0.165788 -0.388387 D e e staggered 0 0 0
+6 0.002 0.128288 0.429113 T e e staggered 0 0 0
+6 0.002 0.230788 0.476613 T e e staggered 0 0 0
+6 0.002 0.128288 0.429113 D e e staggered 0 0 0
+6 0.002 0.230788 0.476613 D e e staggered 0 0 0
+7 0.002 0.090788 -0.113387 T e e staggered 0 0 0
+7 0.002 0.145788 -0.198387 T e e staggered 0 0 0
+7 0.002 0.290788 -0.183387 T e e staggered 0 0 0
+7 0.002 -0.289212 0.286613 T e e staggered 0 0 0
+7 0.002 0.090788 -0.113387 D e e staggered 0 0 0
+7 0.002 0.145788 -0.198387 D e e staggered 0 0 0
+7 0.002 0.290788 -0.183387 D e e staggered 0 0 0
+7 0.002 -0.289212 0.286613 D e e staggered 0 0 0
+8 0.002 -0.109212 0.186613 T e e staggered 0 0 0
+8 0.002 0.240788 0.036613 T e e staggered 0 0 0
+8 0.002 0.240788 0.286613 T e e staggered 0 0 0
+8 0.002 -0.109212 0.186613 D e e staggered 0 0 0
+8 0.002 0.240788 0.036613 D e e staggered 0 0 0
+8 0.002 0.240788 0.286613 D e e staggered 0 0 0
+9 0.002 0.240788 -0.063387 T e e staggered 0 0 0
+9 0.002 -0.319212 -0.288387 T e e staggered 0 0 0
+9 0.002 -0.359212 -0.188387 T e e staggered 0 0 0
+9 0.002 -0.134212 -0.388387 T e e staggered 0 0 0
+9 0.002 0.240788 -0.063387 D e e staggered 0 0 0
+9 0.002 -0.319212 -0.288387 D e e staggered 0 0 0
+9 0.002 -0.359212 -0.188387 D e e staggered 0 0 0
+9 0.002 -0.134212 -0.388387 D e e staggered 0 0 0

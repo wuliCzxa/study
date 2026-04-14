@@ -1,0 +1,103 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/22/2016  10:20:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     01D3H     UNIT         ?C?LIB_CODE
+            CODE    01D6H     004CH     INBLOCK      ?PR?MAIN?MAIN
+            CODE    0222H     0031H     INBLOCK      ?PR?RETEMP?MAIN
+            CODE    0253H     001FH     INBLOCK      ?PR?READBYTE?MAIN
+            CODE    0272H     001BH     INBLOCK      ?PR?_WRITEBYTE?MAIN
+            CODE    028DH     0013H     INBLOCK      ?PR?INIT_DS18B20?MAIN
+            CODE    02A0H     000CH     UNIT         ?C_C51STARTUP
+            CODE    02ACH     000BH     UNIT         ?CO?MAIN
+            CODE    02B7H     0006H     INBLOCK      ?PR?_DELAY5?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0002H
+  +--> ?PR?_DELAY5?MAIN
+  +--> ?PR?RETEMP?MAIN
+  +--> ?CO?MAIN
+
+?PR?RETEMP?MAIN                -----    -----
+  +--> ?PR?INIT_DS18B20?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/22/2016  10:20:48  PAGE 2
+
+
+  +--> ?PR?_WRITEBYTE?MAIN
+  +--> ?PR?READBYTE?MAIN
+
+?PR?INIT_DS18B20?MAIN          000AH    0001H
+  +--> ?PR?_DELAY5?MAIN
+
+?PR?_WRITEBYTE?MAIN            -----    -----
+  +--> ?PR?_DELAY5?MAIN
+
+?PR?READBYTE?MAIN              -----    -----
+  +--> ?PR?_DELAY5?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?FPMUL
+  C:0003H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FCAST
+  C:0113H         PUBLIC        ?C?FCASTC
+  C:010EH         PUBLIC        ?C?FCASTI
+  C:0109H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0147H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?LNEG
+  C:01C8H         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+Program Size: data=12.0 xdata=0 code=701
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

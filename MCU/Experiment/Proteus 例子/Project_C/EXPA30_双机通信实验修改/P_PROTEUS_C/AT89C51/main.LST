@@ -1,0 +1,157 @@
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 16:31:58 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          #define outk P1
+   5          #define out P0
+   6          #define con P2
+   7          
+   8          uchar code seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e};
+   9          uchar key_buffer[8]={0x88,0xc0,0xc0,0xbf,0xbf,0x83,0xc0,0xc0};
+  10          
+  11          void seg_scan(void);
+  12          uchar scan(void);
+  13          void  delayms(uint);
+  14          volatile uchar s_seg=0; 
+  15          bit ok;
+  16          uchar key,send,rec;
+  17          
+  18          void main(void)
+  19          {
+  20   1      TMOD=0X21; //设置定时器1工作在方式2,定时器0工作在方式0
+  21   1      TH1=0XFD;//波特率9600
+  22   1      TL1=0XFD;
+  23   1      TR1=1; //打开定时器1
+  24   1      TH0=(65536-3000)/256;//计时3ms
+  25   1      TL0=(65536-3000)%256;
+  26   1      TR0=1;//打开定时器0
+  27   1      SCON=0X50; //串口工作在方式1，REN=1允许接收数据
+  28   1      PCON=0X00; //波特率不加倍
+  29   1      EA=1;   //开总中断、外中断1（边沿触发）、外中断0（电平触发）、定时器0中断，开串行中断
+  30   1      EX1=1;
+  31   1      IT1=1;
+  32   1      EX0=1;
+  33   1      IT0=1;
+  34   1      ET0=1;   
+  35   1      ES=1;
+  36   1      
+  37   1      while(1)
+  38   1              {
+  39   2              outk=0xf0;
+  40   2              if(ok){ok=0;seg_scan();}
+  41   2              }
+  42   1      }
+  43          
+  44          uchar scan(void)          //按键扫描
+  45          {
+  46   1      uchar k=16,m,n,in;
+  47   1      delayms(10);
+  48   1      outk=0xf0;              //扫描所有行
+  49   1      if((outk&0xf0)!=0xf0)
+  50   1              {
+  51   2              for(m=0;m<4;m++)
+  52   2                      {
+  53   3                      outk=~(0x01<<m);
+  54   3                      for(n=0;n<4;n++)
+  55   3                              {
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 16:31:58 PAGE 2   
+
+  56   4                              in=outk;
+  57   4                              in=in>>(4+n);
+  58   4                              if((in&0x01)==0)
+  59   4                                      {
+  60   5                                      delayms(10);
+  61   5                                      if((in&0x01)==0){k=n+m*4;break;}
+  62   5                                      }
+  63   4                              }
+  64   3                      if(k!=16){break;}
+  65   3                      }
+  66   2              }
+  67   1      return(k);
+  68   1      }
+  69          
+  70          void delayms(uint j)  //ms延时
+  71          {
+  72   1      uchar i;
+  73   1      for(;j>0;j--)
+  74   1              {i=250;
+  75   2               while(--i);
+  76   2               i=249;
+  77   2               while(--i);
+  78   2              }
+  79   1      }
+  80          
+  81          void seg_scan(void)       //数码管扫描
+  82          {
+  83   1              out=key_buffer[s_seg];
+  84   1              con=(1<<s_seg);
+  85   1              s_seg++;
+  86   1              if(s_seg==8)s_seg=0;
+  87   1      }
+  88          
+  89          void ext0()interrupt 0   //矩阵键盘扫描中断
+  90          {
+  91   1      EX0=0;
+  92   1      key=scan();
+  93   1      if(key!=16)send=key,key_buffer[1]=seg[key/10],key_buffer[2]=seg[key%10];
+  94   1      
+  95   1      
+  96   1      ES=0;
+  97   1      SBUF=send;
+  98   1      while(!TI);
+  99   1      TI=0;
+ 100   1      ES=1;
+ 101   1      EX0=1;
+ 102   1      
+ 103   1      
+ 104   1      }
+ 105          
+ 106          void timer0(void)interrupt 1  //定时3ms，扫描数码管
+ 107          {
+ 108   1      ok=1;
+ 109   1      TH0=(65536-3000)/256;
+ 110   1      TL0=(65536-3000)%256;
+ 111   1      out=0xff;
+ 112   1      }
+ 113          
+ 114          /*void ext1()interrupt 2        //按单按键后开始通信
+ 115          {
+ 116          EX1=0;
+ 117          ES=0;
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 16:31:58 PAGE 3   
+
+ 118          SBUF=send;
+ 119          while(!TI);
+ 120          TI=0;
+ 121          ES=1;
+ 122          EX1=1;
+ 123          }*/
+ 124          
+ 125          void com()interrupt 4   //接收中断
+ 126          {
+ 127   1      RI=0;
+ 128   1      rec=SBUF;
+ 129   1      key_buffer[6]=seg[rec/10],key_buffer[7]=seg[rec%10]; 
+ 130   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    395    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

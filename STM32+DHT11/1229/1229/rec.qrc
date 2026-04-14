@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>jpeg/background.jpg</file>
+        <file>jpeg/background2.jpg</file>
+        <file>jpeg/parent.jpg</file>
+        <file>jpeg/background1.jpg</file>
+        <file>jpeg/Temperature and Humidity Monitoring.jpg</file>
+        <file>jpeg/background2.png</file>
+        <file>jpeg/parent.png</file>
+    </qresource>
+</RCC>

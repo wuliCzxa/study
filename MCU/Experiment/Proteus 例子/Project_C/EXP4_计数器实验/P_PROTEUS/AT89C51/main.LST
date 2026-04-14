@@ -1,0 +1,302 @@
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          /************************************************************************ 
+   2          文件名称： main.c 
+   3          作 者：    
+   4          版 本：    V1.00
+   5          说 明：    计数器实验 
+   6          修改记录：  
+   7          -------------------------------------------------------------------------   
+   8          * 功能描述: 计数器程序
+   9          * 对外部脉冲进行计数，并通过4位数码管显示计数值 
+  10          -------------------------------------------------------------------------
+  11          * 接线说明：P00~P07——SA~SH，P20~P23——C0~C3，P34——外部脉冲
+  12          *                                                           
+  13          *************************************************************************/
+  14          #include <reg52.h>
+  15          #include <intrins.h>
+  16          #define uchar unsigned char       //数据类型宏定义
+  17          #define uint unsigned int
+  18          #define out  P0                           //IO端口定义
+  19          /*******共阳数码管 0 ，  1  ，2  ，3 ， 4  ，5  ，6 ， 7，  8  ，9 ******/
+  20          uchar code seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x01};
+  21          
+  22          uint i = 0;      //全局变量 
+  23          uint cnt=0;
+  24          /***********主函数*******************************************************/
+  25          void main(void)
+  26          {
+  27   1              int j;
+  28   1      
+  29   1              TMOD=0x15;                          // 定时器0工作于计数方式，工作方式1，16位计数
+  30   1                                                  // 定时器1工作于定时方式，工作方式1，16位定时
+  31   1              TH0=0;                                                          // 清零计数器
+  32   1              TL0=0;
+  33   1              TH1=0x4C;                                                       // 12M晶振工作下，定时50ms
+  34   1              TL1=0x00;
+  35   1              TR0=1;                                                          // 启动定时器0
+  36   1              TR1=1;                                                          // 启动定时器1
+  37   1              IE=0x88;                                                        // 打开定时中断1和总中断
+  38   1              while(1)
+  39   1              {                        
+  40   2                      P2=0x00;                                                // 输出百位
+  41   2                      out = seg[cnt/100];     
+  42   2                      P2 = 0x01;
+  43   2                      for(j=0;j<100;j++);
+  44   2      
+  45   2                      P2=0x00;
+  46   2                      out = seg[cnt%100/10];                  // 输出十位
+  47   2                      P2 = 0x02;       
+  48   2                      for(j=0;j<100;j++);       
+  49   2      
+  50   2                      P2=0x00;                                                
+  51   2                      out = seg[cnt%10];                              // 输出个位
+  52   2                      P2 = 0x04;
+  53   2                      for(j=0;j<100;j++);
+  54   2              }                  
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 2   
+
+  55   1      }
+  56           
+  57          /***********计数器T0中断处理函数******************************************/
+  58          void Timer1_ISR() interrupt 3
+  59          {
+  60   1              static char j = 0;
+  61   1               i++;
+  62   1              TH1=0x4C;                                                  // 重设定时器值，50ms @ 12MHz XTAL
+  63   1              TL1=0x00;
+  64   1              if(++j == 20)                                      // 50ms * 20 = 1S
+  65   1              {                         
+  66   2                      j = 0;
+  67   2                      i = (TH0 << 8) | TL0;              // 1S内的计数值
+  68   2                      cnt=i;
+  69   2                      i=0;
+  70   2                      TH0 = 0;                                           // 清零计数
+  71   2                      TL0 = 0;         
+  72   2              }
+  73   1      }
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 25
+                                           ; SOURCE LINE # 26
+                                           ; SOURCE LINE # 29
+0000 758915            MOV     TMOD,#015H
+                                           ; SOURCE LINE # 31
+0003 E4                CLR     A
+0004 F58C              MOV     TH0,A
+                                           ; SOURCE LINE # 32
+0006 F58A              MOV     TL0,A
+                                           ; SOURCE LINE # 33
+0008 758D4C            MOV     TH1,#04CH
+                                           ; SOURCE LINE # 34
+000B F58B              MOV     TL1,A
+                                           ; SOURCE LINE # 35
+000D D28C              SETB    TR0
+                                           ; SOURCE LINE # 36
+000F D28E              SETB    TR1
+                                           ; SOURCE LINE # 37
+0011 75A888            MOV     IE,#088H
+0014         ?C0001:
+                                           ; SOURCE LINE # 38
+                                           ; SOURCE LINE # 39
+                                           ; SOURCE LINE # 40
+0014 E4                CLR     A
+0015 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 41
+0017 AE00        R     MOV     R6,cnt
+0019 AF00        R     MOV     R7,cnt+01H
+001B FC                MOV     R4,A
+001C 7D64              MOV     R5,#064H
+001E 1100        E     ACALL   ?C?UIDIV
+0020 7400        R     MOV     A,#LOW seg
+0022 2F                ADD     A,R7
+0023 F582              MOV     DPL,A
+0025 7400        R     MOV     A,#HIGH seg
+0027 3E                ADDC    A,R6
+0028 F583              MOV     DPH,A
+002A E4                CLR     A
+002B 93                MOVC    A,@A+DPTR
+002C F580              MOV     P0,A
+                                           ; SOURCE LINE # 42
+002E 75A001            MOV     P2,#01H
+                                           ; SOURCE LINE # 43
+;---- Variable 'j' assigned to Register 'R6/R7' ----
+0031 E4                CLR     A
+0032 FF                MOV     R7,A
+0033 FE                MOV     R6,A
+0034         ?C0003:
+0034 0F                INC     R7
+0035 BF0001            CJNE    R7,#00H,?C0015
+0038 0E                INC     R6
+0039         ?C0015:
+0039 EF                MOV     A,R7
+003A 6464              XRL     A,#064H
+003C 4E                ORL     A,R6
+003D 70F5              JNZ     ?C0003
+003F         ?C0004:
+                                           ; SOURCE LINE # 45
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 4   
+
+003F E4                CLR     A
+0040 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 46
+0042 AE00        R     MOV     R6,cnt
+0044 AF00        R     MOV     R7,cnt+01H
+0046 FC                MOV     R4,A
+0047 7D64              MOV     R5,#064H
+0049 1100        E     ACALL   ?C?UIDIV
+004B 7E00              MOV     R6,#00H
+004D 7F0A              MOV     R7,#0AH
+004F CF                XCH     A,R7
+0050 CD                XCH     A,R5
+0051 CF                XCH     A,R7
+0052 CE                XCH     A,R6
+0053 CC                XCH     A,R4
+0054 CE                XCH     A,R6
+0055 1100        E     ACALL   ?C?UIDIV
+0057 7400        R     MOV     A,#LOW seg
+0059 2F                ADD     A,R7
+005A F582              MOV     DPL,A
+005C 7400        R     MOV     A,#HIGH seg
+005E 3E                ADDC    A,R6
+005F F583              MOV     DPH,A
+0061 E4                CLR     A
+0062 93                MOVC    A,@A+DPTR
+0063 F580              MOV     P0,A
+                                           ; SOURCE LINE # 47
+0065 75A002            MOV     P2,#02H
+                                           ; SOURCE LINE # 48
+0068 E4                CLR     A
+0069 FE                MOV     R6,A
+006A FF                MOV     R7,A
+006B         ?C0006:
+006B 0F                INC     R7
+006C BF0001            CJNE    R7,#00H,?C0016
+006F 0E                INC     R6
+0070         ?C0016:
+0070 EF                MOV     A,R7
+0071 6464              XRL     A,#064H
+0073 4E                ORL     A,R6
+0074 70F5              JNZ     ?C0006
+0076         ?C0007:
+                                           ; SOURCE LINE # 50
+0076 E4                CLR     A
+0077 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 51
+0079 AE00        R     MOV     R6,cnt
+007B AF00        R     MOV     R7,cnt+01H
+007D FC                MOV     R4,A
+007E 7D0A              MOV     R5,#0AH
+0080 1100        E     ACALL   ?C?UIDIV
+0082 7400        R     MOV     A,#LOW seg
+0084 2D                ADD     A,R5
+0085 F582              MOV     DPL,A
+0087 7400        R     MOV     A,#HIGH seg
+0089 3C                ADDC    A,R4
+008A F583              MOV     DPH,A
+008C E4                CLR     A
+008D 93                MOVC    A,@A+DPTR
+008E F580              MOV     P0,A
+                                           ; SOURCE LINE # 52
+0090 75A004            MOV     P2,#04H
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 5   
+
+                                           ; SOURCE LINE # 53
+0093 E4                CLR     A
+0094 FE                MOV     R6,A
+0095 FF                MOV     R7,A
+0096         ?C0009:
+0096 C3                CLR     C
+0097 EF                MOV     A,R7
+0098 9464              SUBB    A,#064H
+009A EE                MOV     A,R6
+009B 6480              XRL     A,#080H
+009D 9480              SUBB    A,#080H
+009F 4002              JC      $ + 4H
+00A1 0100        R     AJMP    ?C0001
+00A3 0F                INC     R7
+00A4 BF0001            CJNE    R7,#00H,?C0017
+00A7 0E                INC     R6
+00A8         ?C0017:
+00A8 80EC              SJMP    ?C0009
+             ; FUNCTION main (END)
+
+             ; FUNCTION Timer1_ISR (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+0004 75D000            MOV     PSW,#00H
+0007 C005              PUSH    AR5
+0009 C007              PUSH    AR7
+                                           ; SOURCE LINE # 58
+                                           ; SOURCE LINE # 61
+000B 0500        R     INC     i+01H
+000D E500        R     MOV     A,i+01H
+000F 7002              JNZ     ?C0018
+0011 0500        R     INC     i
+0013         ?C0018:
+                                           ; SOURCE LINE # 62
+0013 758D4C            MOV     TH1,#04CH
+                                           ; SOURCE LINE # 63
+0016 758B00            MOV     TL1,#00H
+                                           ; SOURCE LINE # 64
+0019 0500        R     INC     j
+001B E500        R     MOV     A,j
+001D B4141E            CJNE    A,#014H,?C0014
+                                           ; SOURCE LINE # 65
+                                           ; SOURCE LINE # 66
+0020 750000      R     MOV     j,#00H
+                                           ; SOURCE LINE # 67
+0023 AF8C              MOV     R7,TH0
+0025 EF                MOV     A,R7
+0026 AD8A              MOV     R5,TL0
+0028 F500        R     MOV     i,A
+002A ED                MOV     A,R5
+002B F500        R     MOV     i+01H,A
+                                           ; SOURCE LINE # 68
+002D 850000      R     MOV     cnt,i
+0030 F500        R     MOV     cnt+01H,A
+                                           ; SOURCE LINE # 69
+0032 750000      R     MOV     i,#00H
+0035 750000      R     MOV     i+01H,#00H
+                                           ; SOURCE LINE # 70
+0038 758C00            MOV     TH0,#00H
+                                           ; SOURCE LINE # 71
+003B 758A00            MOV     TL0,#00H
+                                           ; SOURCE LINE # 72
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:34:35 PAGE 6   
+
+                                           ; SOURCE LINE # 73
+003E         ?C0014:
+003E D007              POP     AR7
+0040 D005              POP     AR5
+0042 D0D0              POP     PSW
+0044 D0E0              POP     ACC
+0046 32                RETI    
+             ; FUNCTION Timer1_ISR (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    241    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

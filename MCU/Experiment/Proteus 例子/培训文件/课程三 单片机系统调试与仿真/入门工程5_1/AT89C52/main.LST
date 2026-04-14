@@ -1,0 +1,313 @@
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          #define led_out P0
+   7          
+   8          uchar code tableYI[10] = 
+   9          {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};//共阴
+  10          uchar code tableYA[10] = 
+  11          {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x83,0xf8,0x80,0x98};//共阳
+  12          uchar code buffer1[] =
+  13          {"Welcome to Proteus software"};        //字符串
+  14          uchar code buffer2[] =
+  15          {0,1,2,3,4,5,6,7,8,9};          //数组
+  16          uchar buffer3;
+  17          
+  18          ///////////////串口初始化//////////////////////
+  19          void Com_Init(void)
+  20          {
+  21   1           TMOD = 0x20;       //定时器1 方式2，八位自动重载功能00100000               
+  22   1           TH1 = 0xFd;
+  23   1           TR1 = 1;
+  24   1           SCON = 0x50;       //设置串口工作方式1 ，允许接收01010000  
+  25   1           SBUF=0;
+  26   1           ES = 1;            //开串口中断
+  27   1           EA = 1;            //开总中断
+  28   1      }
+  29          /////////////发送一个字符数据//////////////////////////
+  30          void Com_SendBye(uchar dat)
+  31          {
+  32   1            SBUF=dat;
+  33   1            while(!TI);       //如果发送完毕，硬件会置位TI
+  34   1            TI=0;             //TI清零
+  35   1      }
+  36          /////////////发送字符串//////////////////////////
+  37           void Com_SendStr(uchar *dat)
+  38           {      
+  39   1          while(1)
+  40   1          {
+  41   2            if(*dat == '\0')  //在每个字符串的最后，会有一个'\0'
+  42   2              break;
+  43   2            else 
+  44   2            {
+  45   3               SBUF=*dat;
+  46   3               while(!TI);       //如果发送完毕，硬件会置位TI
+  47   3               TI = 0;                //TI清零
+  48   3               dat++;
+  49   3            }
+  50   2         }
+  51   1       }
+  52          ///////////////延时函数/////////////////////////
+  53          void delayms(uint j)              //1ms延时
+  54          {
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 2   
+
+  55   1         uchar i;
+  56   1         for(;j>0;j--)
+  57   1        {
+  58   2            i=250;
+  59   2            while(--i);
+  60   2            i=249;
+  61   2            while(--i);
+  62   2         }
+  63   1      }
+  64          //////////////主函数//////////////////////////
+  65          void main(void)
+  66           { 
+  67   1         uchar i=0;
+  68   1         Com_Init();
+  69   1          
+  70   1          
+  71   1         Com_SendStr(buffer1);
+  72   1         Com_SendBye(0x0d);   //0x0d相当于字符的“\r”   —————— 回车键
+  73   1         for(;i<10;i++)
+  74   1         {
+  75   2            Com_SendBye(buffer2[i]+0x30);     //加上0x30对应ascii表0-9
+  76   2         }
+  77   1         
+  78   1         
+  79   1         while (1)
+  80   1         {
+  81   2            led_out=tableYA[buffer3];
+  82   2          }
+  83   1       }
+  84           
+  85           //////////////////串口中断函数//////////////////////////
+  86           void Com_Int(void) interrupt 4
+  87          {
+  88   1      //      static uchar i = 7;    //定义为静态变量，当重新进入这个子函数时 i 的值不会发生改变
+  89   1              if(RI == 1)                //当硬件接收到一个数据时，RI会置位
+  90   1              {
+  91   2                      buffer3 = SBUF - 0x30; //这里减去0x30是因为从电脑中发送过来的数据是ASCII码。
+  92   2                      RI = 0;  
+  93   2              }
+  94   1      }
+  95          
+  96          
+  97          
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION Com_Init (BEGIN)
+                                           ; SOURCE LINE # 19
+                                           ; SOURCE LINE # 20
+                                           ; SOURCE LINE # 21
+0000 758920            MOV     TMOD,#020H
+                                           ; SOURCE LINE # 22
+0003 758DFD            MOV     TH1,#0FDH
+                                           ; SOURCE LINE # 23
+0006 D28E              SETB    TR1
+                                           ; SOURCE LINE # 24
+0008 759850            MOV     SCON,#050H
+                                           ; SOURCE LINE # 25
+000B E4                CLR     A
+000C F599              MOV     SBUF,A
+                                           ; SOURCE LINE # 26
+000E D2AC              SETB    ES
+                                           ; SOURCE LINE # 27
+0010 D2AF              SETB    EA
+                                           ; SOURCE LINE # 28
+0012 22                RET     
+             ; FUNCTION Com_Init (END)
+
+             ; FUNCTION _Com_SendBye (BEGIN)
+                                           ; SOURCE LINE # 30
+;---- Variable 'dat' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 31
+                                           ; SOURCE LINE # 32
+0000 8F99              MOV     SBUF,R7
+0002         ?C0002:
+                                           ; SOURCE LINE # 33
+0002 3099FD            JNB     TI,?C0002
+0005         ?C0003:
+                                           ; SOURCE LINE # 34
+0005 C299              CLR     TI
+                                           ; SOURCE LINE # 35
+0007 22                RET     
+             ; FUNCTION _Com_SendBye (END)
+
+             ; FUNCTION _Com_SendStr (BEGIN)
+                                           ; SOURCE LINE # 37
+;---- Variable 'dat' assigned to Register 'R1/R2/R3' ----
+                                           ; SOURCE LINE # 38
+0000         ?C0005:
+                                           ; SOURCE LINE # 39
+                                           ; SOURCE LINE # 40
+                                           ; SOURCE LINE # 41
+0000 1100        E     ACALL   ?C?CLDPTR
+0002 FF                MOV     R7,A
+0003 7001              JNZ     ?C0007
+                                           ; SOURCE LINE # 42
+0005 22                RET     
+0006         ?C0007:
+                                           ; SOURCE LINE # 44
+                                           ; SOURCE LINE # 45
+0006 8F99              MOV     SBUF,R7
+0008         ?C0009:
+                                           ; SOURCE LINE # 46
+0008 3099FD            JNB     TI,?C0009
+000B         ?C0010:
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 4   
+
+                                           ; SOURCE LINE # 47
+000B C299              CLR     TI
+                                           ; SOURCE LINE # 48
+000D 7401              MOV     A,#01H
+000F 29                ADD     A,R1
+0010 F9                MOV     R1,A
+0011 E4                CLR     A
+0012 3A                ADDC    A,R2
+0013 FA                MOV     R2,A
+                                           ; SOURCE LINE # 49
+                                           ; SOURCE LINE # 50
+0014 80EA              SJMP    ?C0005
+             ; FUNCTION _Com_SendStr (END)
+
+             ; FUNCTION _delayms (BEGIN)
+                                           ; SOURCE LINE # 53
+;---- Variable 'j' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 54
+                                           ; SOURCE LINE # 56
+0000         ?C0012:
+0000 D3                SETB    C
+0001 EF                MOV     A,R7
+0002 9400              SUBB    A,#00H
+0004 EE                MOV     A,R6
+0005 9400              SUBB    A,#00H
+0007 400F              JC      ?C0019
+                                           ; SOURCE LINE # 57
+                                           ; SOURCE LINE # 58
+;---- Variable 'i' assigned to Register 'R5' ----
+0009 7DFA              MOV     R5,#0FAH
+000B         ?C0015:
+                                           ; SOURCE LINE # 59
+000B DDFE              DJNZ    R5,?C0015
+000D         ?C0016:
+                                           ; SOURCE LINE # 60
+000D 7DF9              MOV     R5,#0F9H
+000F         ?C0017:
+                                           ; SOURCE LINE # 61
+000F DDFE              DJNZ    R5,?C0017
+0011         ?C0018:
+                                           ; SOURCE LINE # 62
+0011         ?C0014:
+0011 EF                MOV     A,R7
+0012 1F                DEC     R7
+0013 70EB              JNZ     ?C0012
+0015 1E                DEC     R6
+0016         ?C0028:
+0016 80E8              SJMP    ?C0012
+                                           ; SOURCE LINE # 63
+0018         ?C0019:
+0018 22                RET     
+             ; FUNCTION _delayms (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 65
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 67
+;---- Variable 'i' assigned to Register 'R6' ----
+0000 E4                CLR     A
+0001 FE                MOV     R6,A
+                                           ; SOURCE LINE # 68
+0002 1100        R     ACALL   Com_Init
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 5   
+
+                                           ; SOURCE LINE # 71
+0004 7BFF              MOV     R3,#0FFH
+0006 7A00        R     MOV     R2,#HIGH buffer1
+0008 7900        R     MOV     R1,#LOW buffer1
+000A 1100        R     ACALL   _Com_SendStr
+                                           ; SOURCE LINE # 72
+000C 7F0D              MOV     R7,#0DH
+000E 1100        R     ACALL   _Com_SendBye
+                                           ; SOURCE LINE # 73
+0010         ?C0020:
+0010 EE                MOV     A,R6
+0011 C3                CLR     C
+0012 940A              SUBB    A,#0AH
+0014 500D              JNC     ?C0023
+                                           ; SOURCE LINE # 74
+                                           ; SOURCE LINE # 75
+0016 EE                MOV     A,R6
+0017 900000      R     MOV     DPTR,#buffer2
+001A 93                MOVC    A,@A+DPTR
+001B 2430              ADD     A,#030H
+001D FF                MOV     R7,A
+001E 1100        R     ACALL   _Com_SendBye
+                                           ; SOURCE LINE # 76
+0020 0E                INC     R6
+0021 80ED              SJMP    ?C0020
+0023         ?C0023:
+                                           ; SOURCE LINE # 79
+                                           ; SOURCE LINE # 80
+                                           ; SOURCE LINE # 81
+0023 E500        R     MOV     A,buffer3
+0025 900000      R     MOV     DPTR,#tableYA
+0028 93                MOVC    A,@A+DPTR
+0029 F580              MOV     P0,A
+                                           ; SOURCE LINE # 82
+002B 80F6              SJMP    ?C0023
+             ; FUNCTION main (END)
+
+             ; FUNCTION Com_Int (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 86
+                                           ; SOURCE LINE # 89
+0004 309808            JNB     RI,?C0027
+                                           ; SOURCE LINE # 90
+                                           ; SOURCE LINE # 91
+0007 E599              MOV     A,SBUF
+0009 24D0              ADD     A,#0D0H
+000B F500        R     MOV     buffer3,A
+                                           ; SOURCE LINE # 92
+000D C298              CLR     RI
+                                           ; SOURCE LINE # 93
+                                           ; SOURCE LINE # 94
+000F         ?C0027:
+000F D0D0              POP     PSW
+0011 D0E0              POP     ACC
+0013 32                RETI    
+             ; FUNCTION Com_Int (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    139    ----
+C51 COMPILER V9.00   MAIN                                                                  01/11/2018 15:49:27 PAGE 6   
+
+   CONSTANT SIZE    =     58    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

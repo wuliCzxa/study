@@ -1,0 +1,160 @@
+00 7C00     MOV A, #00H          ; 初始化累加器A为0
+02 80       MOV R0, A            ; 初始化寄存器R0为0
+03 81       MOV R1, A            ; 初始化寄存器R1为0
+04 82       MOV R2, A            ; 初始化寄存器R2为0
+05 83       MOV R3, A            ; 初始化寄存器R3为0
+            
+06 88EF     MOV 0EFH, A          ; 初始化存储位置0EFH为0
+08 88EE     MOV 0EEH, A          ; 初始化存储位置0EEH为0
+0A 88EB     MOV 0EBH, A          ; 初始化存储位置0EBH为0
+0C 88EA     MOV 0EAH, A          ; 初始化存储位置0EAH为0
+0E 88DF     MOV 0DFH, A          ; 初始化存储位置0DFH为0
+10 88DE     MOV 0DEH, A          ; 初始化存储位置0DEH为0
+            
+            MAIN:
+12 8CF0          MOV R0, #0F0H   ; 设置R0为数据起始地址0F0H
+            
+14 7C06          MOV A, #06H     ; 初始化页面缓冲区大小为4
+16 88DD          MOV 0DDH, A     ; 将页面缓冲区大小存入地址0DDH
+18 8CF0          MOV R0, #0F0H   ; 重设R0为数据起始地址
+1A 8FE5          MOV R3, #0E5H   ; 设置R3为页面缓冲区尾地址
+1C 74            MOV A, @R0      ; 从地址R0读取数据到A
+1D 87            MOV @R3, A      ; 将数据从A存入R3指向的位置
+1E BCA4          CALL NHIT       ; 调用未命中页面的处理函数
+20 BCAB          CALL NULL       ; 调用空页面的处理函数
+22 BCA2          CALL TIME       ; 调用时间更新函数
+24 BC26          CALL PAGES      ; 调用页面管理函数
+            
+            PAGES:
+26 8CF6         MOV R0, #0F6H       ; 初始化R0为0F4H地址
+28 8E0A         MOV R2, #10         ; 设置循环次数为16，用于处理0F0H到0FFH的地址范围
+            
+            PAGE_LOOP:
+2A 74           MOV A, @R0          ; 读取当前R0指向地址的数据
+2B BC44         CALL CHECK_EXISTENCE ; 检查该数据是否已存在页面缓冲区
+2D A437         JZ NEXT_ADDRESS      ; 如果存在，则跳转到处理下一个地址
+            
+2F BC80         CALL SHIFT_PAGE      ; 如果不存在，调用页面后移逻辑
+31 88E0         MOV 0E0H, A         ; 将当前数据存入页面缓冲区头部0E0H
+33 7C00         MOV A, #00H         ; 清空0E4H用于腾出空间
+35 88E6         MOV 0E6H, A
+            
+            NEXT_ADDRESS:
+37 70           MOV A, R0
+38 1C01         ADD A, #01          ; 增加R0地址，指向下一个数据
+3A 80           MOV R0, A
+3B 72           MOV A, R2
+3C 3C01         SUB A, #01          ; 减少循环计数器值
+3E 82           MOV R2, A
+3F A4CA         JZ OVER             ; 如果循环结束，跳转到OVER
+41 AC2A         JMP PAGE_LOOP        ; 未完成循环时，继续处理下一个地址
+43 CC           RET
+            
+            CHECK_EXISTENCE:
+44 8FE0         MOV R3, #0E0H       ; 设置R3为页面缓冲区起始地址
+46 7C06         MOV A, #06H         ; 设置检查范围为4（缓冲区大小）
+48 88EB         MOV 0EBH, A
+            
+            CHECK_LOOP:
+4A 77           MOV A, @R3          ; 从缓冲区读取数据
+4B 34           SUB A, @R0          ; 比较当前缓冲区数据与R0指向的数据
+4C A473         JZ EXIST            ; 如果相等，说明数据已存在
+4E 73           MOV A, R3
+4F 1C01         ADD A, #01H         ; 移动R3到下一个缓冲区地址
+51 83           MOV R3, A
+52 78EB         MOV A, 0EBH
+54 3C01         SUB A, #01          ; 检查剩余检查次数
+56 88EB         MOV 0EBH, A
+58 A465         JZ LOOP             ; 如果检查完成，跳转到LOOP
+5A AC4A         JMP CHECK_LOOP       ; 否则继续检查
+            
+                ; CLR C标志位逻辑，通过MOV, ADD, SUB实现
+5C 7C00         MOV A, #00H         ; 清零A寄存器
+            
+5E 78EE         MOV A, 0EEH
+60 1C01         ADD A, #01H
+62 88EE         MOV 0EEH, A
+64 CC           RET
+            
+            LOOP:
+65 BC80         CALL SHIFT_PAGE      ; 调用页面后移逻辑
+            LOOP2:
+67 78D0         MOV A, 0D0H
+69 88E0         MOV 0E0H, A         ; 将当前数据存入缓冲区头部
+6B 7C00         MOV A, #00H         ; 清空最后一个缓冲区地址的数据
+6D 88E6         MOV 0E6H, A
+6F BCA4         CALL NHIT
+71 BC37         CALL NEXT_ADDRESS
+            
+            EXIST:
+                ; SETB C标志位逻辑，通过MOV, ADD实现
+73 7CFF         MOV A, #0FFH
+75 1C01         ADD A, #01H          ; 通过加法设置进位标志
+77 78EF         MOV A, 0EFH
+79 1C01         ADD A, #01H
+7B 88EF         MOV 0EFH, A
+7D AC37         JMP NEXT_ADDRESS
+7F CC           RET
+            
+            SHIFT_PAGE:
+80 8FE5         MOV R3, #0E5H       ; 设置后移起点为缓冲区尾部地址0E3H
+82 7C06         MOV A, #06H         ; 设置后移次数为缓冲区大小4
+84 88EA         MOV 0EAH, A
+86 74           MOV A, @R0
+87 88D0         MOV 0D0H, A
+89 BC8B         CALL SHIFT_LOOP
+            
+            SHIFT_LOOP:
+8B 77           MOV A, @R3
+8C 81           MOV R1, A
+8D 73           MOV A, R3
+8E 1C01         ADD A, #01H
+90 83           MOV R3, A
+91 71           MOV A, R1
+92 87           MOV @R3, A
+93 73           MOV A, R3
+94 3C02         SUB A, #02H
+96 83           MOV R3, A
+97 78EA         MOV A, 0EAH
+99 3C01         SUB A, #01H
+9B 88EA         MOV 0EAH, A
+9D A467         JZ LOOP2
+9F AC8B         JMP SHIFT_LOOP       ; 完成后移逻辑
+A1 CC           RET
+            
+            TIME:
+A2 BC26          CALL PAGES          ; 时间管理逻辑调用页面管理
+            
+            NHIT:
+A4 78EE          MOV A, 0EEH
+A6 1C01          ADD A, #01H         ; 更新未命中计数
+A8 88EE          MOV 0EEH, A
+AA CC            RET
+            
+            NULL:
+AB 78DD          MOV A, 0DDH
+AD 3C01          SUB A, #01H         ; 更新空页面计数
+AF 88DD          MOV 0DDH, A
+B1 C4            OUT
+B2 A4A2          JZ TIME             ; 如果空页面耗尽，调用时间更新
+B4 70            MOV A, R0
+B5 1C01          ADD A, #01H         ; 地址递增
+B7 80            MOV R0, A
+B8 73            MOV A, R3
+B9 3C01          SUB A, #01H         ; 地址递减
+BB 83            MOV R3, A
+BC 74            MOV A, @R0
+BD 87            MOV @R3, A
+BE BCA4          CALL NHIT           ; 处理页面未命中逻辑
+C0 ACAB          JMP NULL
+            
+            HIT:
+C2 78EF          MOV A, 0EFH
+C4 1C01          ADD A, #01H         ; 更新命中计数
+C6 88EF          MOV 0EFH, A
+C8 BC26          CALL PAGES          ; 页面更新逻辑
+            
+            OVER:
+CA ACCA          JMP OVER            ; 程序结束
+            
+            

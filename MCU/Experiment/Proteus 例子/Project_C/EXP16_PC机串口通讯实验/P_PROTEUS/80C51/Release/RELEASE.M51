@@ -1,0 +1,89 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/11/2016  14:30:07  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     001FH     UNIT         ?DT?MAIN
+            DATA    0027H     0006H     UNIT         _DATA_GROUP_
+            IDATA   002DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0019H     INBLOCK      ?PR?_DELAYMS?MAIN
+                    001CH     0007H                  *** GAP ***
+            CODE    0023H     0002H     ABSOLUTE     
+            CODE    0025H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B1H     0037H     INBLOCK      ?PR?INT_UART_REV?MAIN
+            CODE    00E8H     002BH     UNIT         ?C?LIB_CODE
+            CODE    0113H     0024H     UNIT         ?C_INITSEG
+            CODE    0137H     0022H     INBLOCK      ?PR?_UART_SENDSTRING?MAIN
+            CODE    0159H     0016H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    016FH     0016H     INBLOCK      ?PR?UART_INIT?MAIN
+            CODE    0185H     0008H     INBLOCK      ?PR?_UART_SENDDATA?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?PR?INT_UART_REV?MAIN             0027H    0003H
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                     -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/11/2016  14:30:07  PAGE 2
+
+
+  +--> ?PR?UART_INIT?MAIN
+  +--> ?PR?_UART_SENDSTRING?MAIN
+  +--> ?PR?_UART_SENDDATA?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+?PR?_UART_SENDSTRING?MAIN         002AH    0003H
+  +--> ?PR?_UART_SENDDATA?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?CLDPTR
+  C:00E8H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0101H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+Program Size: data=46.0 xdata=0 code=390
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

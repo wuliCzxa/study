@@ -1,0 +1,164 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/26/2017  11:00:38  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO DEBUG.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  DEBUG.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?C_INITSEG
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0002H     ABSOLUTE     
+            CODE    000DH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0099H     0055H     UNIT         ?C?LIB_CODE
+            CODE    00EEH     003DH     INBLOCK      ?PR?TIME0_INT?MAIN
+            CODE    012BH     0022H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    014DH     0019H     INBLOCK      ?PR?_DELAYMS?MAIN
+            CODE    0166H     0014H     UNIT         ?CO?MAIN
+            CODE    017AH     0010H     INBLOCK      ?PR?TIME0_INIT?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   DEBUG.OMF (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIME0_INT?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIME0_INIT?MAIN
+  +--> ?CO?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/26/2017  11:00:38  PAGE 2
+
+
+  +--> ?PR?_DELAYMS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  DEBUG.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:00B0H.4       PUBLIC        KEY1
+  C:0170H         PUBLIC        tableYA
+  C:012BH         PUBLIC        main
+  C:0166H         PUBLIC        tableYI
+  D:0089H         PUBLIC        TMOD
+  B:00A0H.0       PUBLIC        led
+  C:017AH         PUBLIC        Time0_Init
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  C:00EEH         PUBLIC        Time0_Int
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:0008H         PUBLIC        i
+  C:014DH         PUBLIC        _delayms
+  -------         PROC          TIME0_INIT
+  C:017AH         LINE#         20
+  C:017AH         LINE#         21
+  C:017AH         LINE#         22
+  C:017DH         LINE#         23
+  C:0180H         LINE#         24
+  C:0183H         LINE#         25
+  C:0185H         LINE#         26
+  C:0187H         LINE#         27
+  C:0189H         LINE#         28
+  -------         ENDPROC       TIME0_INIT
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        j
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:014DH         LINE#         30
+  C:014DH         LINE#         31
+  C:014DH         LINE#         33
+  C:0156H         LINE#         34
+  C:0156H         LINE#         35
+  C:0158H         LINE#         36
+  C:015AH         LINE#         37
+  C:015CH         LINE#         38
+  C:015EH         LINE#         39
+  C:0165H         LINE#         40
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/26/2017  11:00:38  PAGE 3
+
+
+  C:012BH         LINE#         42
+  C:012BH         LINE#         43
+  C:012BH         LINE#         44
+  C:012DH         LINE#         45
+  C:012DH         LINE#         46
+  C:012DH         LINE#         47
+  C:0145H         LINE#         48
+  C:014BH         LINE#         49
+  -------         ENDPROC       MAIN
+  -------         PROC          TIME0_INT
+  C:00EEH         LINE#         52
+  C:00FBH         LINE#         54
+  C:00FEH         LINE#         55
+  C:0101H         LINE#         56
+  C:0104H         LINE#         57
+  C:0104H         LINE#         58
+  C:010AH         LINE#         59
+  C:010AH         LINE#         60
+  C:010AH         LINE#         61
+  C:010DH         LINE#         62
+  C:010DH         LINE#         63
+  C:0113H         LINE#         64
+  C:0116H         LINE#         65
+  C:0116H         LINE#         66
+  C:011EH         LINE#         67
+  C:011EH         LINE#         68
+  C:011EH         LINE#         69
+  C:011EH         LINE#         70
+  C:011EH         LINE#         71
+  C:011EH         LINE#         72
+  C:0120H         LINE#         73
+  -------         ENDPROC       TIME0_INT
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?UIDIV
+  C:0099H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=11.0 xdata=0 code=391
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

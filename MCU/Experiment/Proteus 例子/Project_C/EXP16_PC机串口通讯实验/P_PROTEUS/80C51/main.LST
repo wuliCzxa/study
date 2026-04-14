@@ -1,0 +1,137 @@
+C51 COMPILER V9.00   MAIN                                                                  07/11/2016 14:30:07 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*****************************************************
+   2          程序功能：MCU不停向PC机发送数据,在屏幕上显示公司网站
+   3          ------------------------------------------------------
+   4          通信格式：N.8.1, 9600
+   5          ------------------------------------------------------
+   6          测试说明：打开串口调试助手，正确设置通信格式，观察屏幕
+   7          接线说明：P30-TXD，P31-RXD，TXD_RS232-Pin2，RXD_RS232-Pin3
+   8          ******************************************************/
+   9          #include <reg52.h>
+  10          #define uchar unsigned char
+  11          #define uint unsigned int
+  12          uchar a[]="www.windway.cn";
+  13          uchar b[]="Welcome to you!";
+  14          
+  15          void UART_Init(void);
+  16          void UART_SendData(uchar dat);
+  17          void UART_SendString(uchar *p);
+  18          void Delayms(uint j);
+  19          /********************************************************* 
+  20          **函数名称：main()
+  21          **函数功能：主函数 
+  22          *********************************************************/
+  23          void main(void)
+  24          {
+  25   1              UART_Init();
+  26   1              while(1)
+  27   1              {
+  28   2                      UART_SendString(a);        //发送字符串
+  29   2                      UART_SendData('\n');   //换行
+  30   2                      Delayms(100);              //延时
+  31   2              
+  32   2          }
+  33   1      
+  34   1      }
+  35          
+  36          
+  37          /********************************************************* 
+  38          **函数名称：UART_Init()
+  39          **函数功能：串口初始化 
+  40          *********************************************************/
+  41          void UART_Init(void)
+  42          {
+  43   1              SCON=0x50;
+  44   1          TMOD=0x20;
+  45   1              PCON=0x00;
+  46   1          TH1 =0xfd;
+  47   1              TL1 =0xfd;  //预置初值，设波特率为9600
+  48   1              TR1 =1; 
+  49   1              ES  =1;
+  50   1              EA  =1;         //开中断
+  51   1      
+  52   1      }
+  53          
+  54          /********************************************************* 
+  55          **函数名称：UART_SendData()
+C51 COMPILER V9.00   MAIN                                                                  07/11/2016 14:30:07 PAGE 2   
+
+  56          **函数功能：串口发送一个字节的数据 
+  57          *********************************************************/
+  58          void UART_SendData(uchar dat)
+  59          {
+  60   1              SBUF=dat;      //发送数据
+  61   1              while(TI==0);  //判断是否发送完
+  62   1              TI=1;   
+  63   1      }
+  64          
+  65          /********************************************************* 
+  66          **函数名称：
+  67          **函数功能：
+  68          *********************************************************/
+  69          void UART_SendString(uchar *p)
+  70          {
+  71   1        while(*p!='\0')
+  72   1        {
+  73   2         UART_SendData(*p++);
+  74   2        }
+  75   1      
+  76   1      }
+  77          
+  78          
+  79           /********************************************************* 
+  80          **函数名称：Delay()
+  81          **函数功能：延时函数 
+  82          *********************************************************/
+  83          void Delayms(uint j)
+  84          {
+  85   1      uchar i;
+  86   1      for(;j>0;j--)
+  87   1              {i=250;
+  88   2               while(--i);
+  89   2               i=249;
+  90   2               while(--i);
+  91   2              }
+  92   1      }
+  93          
+  94          
+  95          /********************************************************* 
+  96          **函数名称：INT_UART_Rev()
+  97          **函数功能：串口接收中断函数 
+  98          *********************************************************/
+  99          void INT_UART_Rev() interrupt 4
+ 100          {
+ 101   1              uchar *temp;
+ 102   1              if(RI)
+ 103   1               {
+ 104   2                 RI=0;
+ 105   2                 *temp++=SBUF;
+ 106   2                // UART_SendString(temp);
+ 107   2                // UART_SendString("ok");
+ 108   2               }
+ 109   1      
+ 110   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    166    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.00   MAIN                                                                  07/11/2016 14:30:07 PAGE 3   
+
+   DATA SIZE        =     31       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

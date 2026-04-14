@@ -1,0 +1,174 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/31/2017  13:45:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO DEBUG.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  DEBUG.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?C_INITSEG
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0002H     ABSOLUTE     
+                    000DH     0006H                  *** GAP ***
+            CODE    0013H     0002H     ABSOLUTE     
+            CODE    0015H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00A1H     004BH     INBLOCK      ?PR?TIME0_INT?MAIN
+            CODE    00ECH     003EH     INBLOCK      ?PR?OUTSIDE_INT0?MAIN
+            CODE    012AH     0019H     INBLOCK      ?PR?_DELAY1MS?MAIN
+            CODE    0143H     0010H     INBLOCK      ?PR?TIME0_INIT?MAIN
+            CODE    0153H     000BH     INBLOCK      ?PR?OUTSIDE_INIT0?MAIN
+            CODE    015EH     0009H     INBLOCK      ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   DEBUG.OMF (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?OUTSIDE_INT0?MAIN
+  +--> ?PR?_DELAY1MS?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?OUTSIDE_INIT0?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/31/2017  13:45:49  PAGE 2
+
+
+  +--> ?PR?TIME0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  DEBUG.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  C:0153H         PUBLIC        Outside_Init0
+  D:00B8H         PUBLIC        IP
+  C:00ECH         PUBLIC        Outside_Int0
+  C:012AH         PUBLIC        _delay1ms
+  C:015EH         PUBLIC        main
+  D:0008H         PUBLIC        count
+  D:0089H         PUBLIC        TMOD
+  C:0143H         PUBLIC        Time0_Init
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  C:00A1H         PUBLIC        Time0_Int
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:000AH         PUBLIC        a
+  D:000BH         PUBLIC        b
+  -------         PROC          _DELAY1MS
+  D:0006H         SYMBOL        j
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:012AH         LINE#         12
+  C:012AH         LINE#         13
+  C:012AH         LINE#         15
+  C:0133H         LINE#         16
+  C:0133H         LINE#         17
+  C:0135H         LINE#         18
+  C:0137H         LINE#         19
+  C:0139H         LINE#         20
+  C:013BH         LINE#         21
+  C:0142H         LINE#         22
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          OUTSIDE_INIT0
+  C:0153H         LINE#         29
+  C:0153H         LINE#         30
+  C:0153H         LINE#         31
+  C:0155H         LINE#         32
+  C:0157H         LINE#         34
+  C:0159H         LINE#         35
+  C:015BH         LINE#         36
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/31/2017  13:45:49  PAGE 3
+
+
+  C:015DH         LINE#         37
+  -------         ENDPROC       OUTSIDE_INIT0
+  -------         PROC          TIME0_INIT
+  C:0143H         LINE#         44
+  C:0143H         LINE#         45
+  C:0143H         LINE#         46
+  C:0146H         LINE#         48
+  C:0149H         LINE#         49
+  C:014CH         LINE#         51
+  C:014EH         LINE#         52
+  C:0150H         LINE#         53
+  C:0152H         LINE#         54
+  -------         ENDPROC       TIME0_INIT
+  -------         PROC          MAIN
+  C:015EH         LINE#         56
+  C:015EH         LINE#         57
+  C:015EH         LINE#         58
+  C:0160H         LINE#         59
+  C:0162H         LINE#         60
+  C:0165H         LINE#         61
+  C:0165H         LINE#         62
+  C:0165H         LINE#         63
+  -------         ENDPROC       MAIN
+  -------         PROC          OUTSIDE_INT0
+  C:00ECH         LINE#         66
+  C:00FBH         LINE#         69
+  C:00FEH         LINE#         70
+  C:00FEH         LINE#         71
+  C:010EH         LINE#         72
+  C:0114H         LINE#         73
+  C:011DH         LINE#         75
+  -------         ENDPROC       OUTSIDE_INT0
+  -------         PROC          TIME0_INT
+  C:00A1H         LINE#         77
+  C:00ACH         LINE#         79
+  C:00AFH         LINE#         80
+  C:00B2H         LINE#         81
+  C:00BAH         LINE#         82
+  C:00C2H         LINE#         83
+  C:00C2H         LINE#         84
+  C:00C8H         LINE#         85
+  C:00D7H         LINE#         86
+  C:00D9H         LINE#         87
+  C:00E3H         LINE#         89
+  C:00E3H         LINE#         90
+  -------         ENDPROC       TIME0_INT
+  -------         ENDMOD        MAIN
+
+Program Size: data=13.0 xdata=0 code=350
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

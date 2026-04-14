@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"点阵程序.obj" 
+TO "点阵程序" 
+RAMSIZE(256) 

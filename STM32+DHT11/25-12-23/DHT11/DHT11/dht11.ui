@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dht11</class>
+ <widget class="QWidget" name="dht11">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>810</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>dht11</string>
+  </property>
+  <widget class="QLabel" name="time_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>-10</y>
+     <width>351</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>楷体</family>
+     <pointsize>16</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#time_label {
+    font-size: 13px;
+	font: 16pt &quot;楷体&quot;;
+    color:  rgb(0, 0, 60);
+    border-radius: 10px;
+    padding: 10px;
+    qproperty-alignment: AlignCenter;
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>0</y>
+     <width>41</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+	background-color: rgba(255, 0, 0, 100);
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditClear"/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>26</width>
+     <height>26</height>
+    </size>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+   <property name="autoExclusive">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="minButton">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>0</y>
+     <width>41</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+     background-color: rgba(244, 239, 231,220);
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ListRemove"/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="background">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>810</width>
+     <height>550</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="rec.qrc">:/new/prefix1/jpeg/parent.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="operator_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>810</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <widget class="QPushButton" name="btn_reading">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>400</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="toolTip">
+     <string>Close</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	color:black;
+	font:16pt&quot;华文新魏&quot;;
+	border: 1px solid #A7A8B6;
+	border-radius: 8px;
+	background-color: rgb(255, 179, 23);
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+     background-color: rgb(255, 212, 123);
+	border: 1px solid #726f6b;
+}
+QPushButton:pressed {	
+	border: 1px solid #A7A8B6;
+}</string>
+    </property>
+    <property name="text">
+     <string>实时读取</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_background">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/background.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_history">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>90</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="toolTip">
+     <string>Close</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	color:black;
+	font:16pt&quot;华文新魏&quot;;
+	border: 1px solid #A7A8B6;
+	border-radius: 8px;
+	background-color: rgb(255, 179, 23);
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+     background-color: rgb(255, 212, 123);
+	border: 1px solid #726f6b;
+}
+QPushButton:pressed {	
+	border: 1px solid #A7A8B6;
+}</string>
+    </property>
+    <property name="text">
+     <string>历史数据</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="time_list">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>128</y>
+      <width>321</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#time_list {
+    background-color: rgba(244, 239, 231,120);
+    border: 1px solid white; 
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding: 5px;
+}
+</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_dht11_1">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>150</y>
+      <width>281</width>
+      <height>279</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label {
+    background-color: rgba(244, 239, 231,120);
+    border: 1px solid white; 
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding: 5px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/111.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelTemperature">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>150</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>方正姚体</family>
+      <pointsize>45</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgba(31, 31, 46, 226);
+font: 45pt &quot;方正姚体&quot;;</string>
+    </property>
+    <property name="text">
+     <string>00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Temperature_position">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>160</y>
+      <width>61</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>隶书</family>
+      <pointsize>23</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 23pt &quot;隶书&quot;;
+color: rgb(85, 85, 127);</string>
+    </property>
+    <property name="text">
+     <string>℃</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Humidity_position">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>270</y>
+      <width>91</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>隶书</family>
+      <pointsize>23</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 23pt &quot;隶书&quot;;
+color: rgb(85, 85, 127);</string>
+    </property>
+    <property name="text">
+     <string>％RH</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelHumidity">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>260</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>方正姚体</family>
+      <pointsize>45</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgba(31, 31, 46, 226);
+font: 45pt &quot;方正姚体&quot;;</string>
+    </property>
+    <property name="text">
+     <string>00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Humidity">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>260</y>
+      <width>101</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;
+color: rgb(69, 69, 103);</string>
+    </property>
+    <property name="text">
+     <string>Humidity：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Temperature">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>150</y>
+      <width>111</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;
+color: rgb(69, 69, 103);</string>
+    </property>
+    <property name="text">
+     <string>Temperature：</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_stoping">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>400</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="toolTip">
+     <string>Close</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	color:black;
+	font:16pt&quot;华文新魏&quot;;
+	border: 1px solid #A7A8B6;
+	border-radius: 8px;
+	background-color: rgb(255, 179, 23);
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+     background-color: rgb(255, 212, 123);
+	border: 1px solid #726f6b;
+}
+QPushButton:pressed {	
+	border: 1px solid #A7A8B6;
+}</string>
+    </property>
+    <property name="text">
+     <string>停止采集</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboPort">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>70</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#comboBox {
+	color: rgb(41, 41, 41);
+	font: 14pt &quot;微软雅黑&quot;;
+    background-color: rgba(244, 239, 231,120);
+    border: 1px solid white; 
+    border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+    padding: 5px;
+}
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>COM1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM6</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM7</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>COM8</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="Temperature_2">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>60</y>
+      <width>61</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;
+color: rgb(69, 69, 103);</string>
+    </property>
+    <property name="text">
+     <string>Num：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_dht11_2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>150</y>
+      <width>281</width>
+      <height>279</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label {
+    background-color: rgba(244, 239, 231,120);
+    border: 1px solid white; 
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    padding: 5px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/000.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>label_background</zorder>
+   <zorder>btn_reading</zorder>
+   <zorder>btn_history</zorder>
+   <zorder>time_list</zorder>
+   <zorder>label_dht11_1</zorder>
+   <zorder>labelTemperature</zorder>
+   <zorder>Temperature_position</zorder>
+   <zorder>Humidity_position</zorder>
+   <zorder>labelHumidity</zorder>
+   <zorder>Humidity</zorder>
+   <zorder>Temperature</zorder>
+   <zorder>btn_stoping</zorder>
+   <zorder>comboPort</zorder>
+   <zorder>Temperature_2</zorder>
+   <zorder>label_dht11_2</zorder>
+  </widget>
+  <widget class="QPushButton" name="Button_last">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>0</y>
+     <width>40</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:hover {
+     background-color: rgba(244, 239, 231,220);
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditUndo"/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>22</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="charts_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>810</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_background_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/background.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QChartView" name="line_chart" native="true">
+    <property name="geometry">
+     <rect>
+      <x>79</x>
+      <y>79</y>
+      <width>651</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="login_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>810</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_Password">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>230</y>
+      <width>105</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;</string>
+    </property>
+    <property name="text">
+     <string>PassWord：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Username">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>103</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;</string>
+    </property>
+    <property name="text">
+     <string>UserName：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Username_LineEdit">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>110</y>
+      <width>261</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;方正粗黑宋简体&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Password_LineEdit">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>230</y>
+      <width>261</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;方正粗黑宋简体&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/login.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="loginButton">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>340</y>
+      <width>153</width>
+      <height>49</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+                    font: 17pt &quot;华文楷体&quot;;
+                </string>
+    </property>
+    <property name="text">
+     <string>登录</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="displayButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>240</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/display.png</normaloff>:/new/prefix1/jpeg/display.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hideButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>240</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/hide.png</normaloff>:/new/prefix1/jpeg/hide.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <zorder>label_4</zorder>
+   <zorder>label_Password</zorder>
+   <zorder>label_Username</zorder>
+   <zorder>Username_LineEdit</zorder>
+   <zorder>Password_LineEdit</zorder>
+   <zorder>loginButton</zorder>
+   <zorder>displayButton</zorder>
+   <zorder>hideButton</zorder>
+  </widget>
+  <widget class="QWidget" name="enroll_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>810</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_password">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>180</y>
+      <width>115</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;</string>
+    </property>
+    <property name="text">
+     <string>PassWord ：</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enrollButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>360</y>
+      <width>153</width>
+      <height>49</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+     font: 17pt &quot;华文楷体&quot;;</string>
+    </property>
+    <property name="text">
+     <string>注册</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="password_LineEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>180</y>
+      <width>261</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;方正粗黑宋简体&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_comfirm">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>270</y>
+      <width>111</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Comfirm  ：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_username">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>127</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 500 15pt &quot;爱奇艺黑体 Medium&quot;;</string>
+    </property>
+    <property name="text">
+     <string>UserName：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="username_LineEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>90</y>
+      <width>261</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;方正粗黑宋简体&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="comfirm_LineEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>270</y>
+      <width>261</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;方正粗黑宋简体&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/login.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="displayButton2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>190</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/display.png</normaloff>:/new/prefix1/jpeg/display.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hideButton2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>190</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/hide.png</normaloff>:/new/prefix1/jpeg/hide.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="displayButton1">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>280</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/display.png</normaloff>:/new/prefix1/jpeg/display.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hideButton1">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>280</y>
+      <width>41</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {	
+	border: none;
+	border-radius: 8px;
+	background-color: transparent;
+     padding: 10px;
+     border-radius: 5px;
+}
+QPushButton:pressed {	
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="rec.qrc">
+      <normaloff>:/new/prefix1/jpeg/hide.png</normaloff>:/new/prefix1/jpeg/hide.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>26</width>
+      <height>26</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Esc</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
+   <zorder>label_password</zorder>
+   <zorder>enrollButton</zorder>
+   <zorder>password_LineEdit</zorder>
+   <zorder>label_comfirm</zorder>
+   <zorder>label_username</zorder>
+   <zorder>username_LineEdit</zorder>
+   <zorder>comfirm_LineEdit</zorder>
+   <zorder>displayButton2</zorder>
+   <zorder>displayButton1</zorder>
+   <zorder>hideButton1</zorder>
+   <zorder>hideButton2</zorder>
+  </widget>
+  <widget class="QWidget" name="menu_widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>810</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="rec.qrc">:/new/prefix1/jpeg/login.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="login_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>300</y>
+      <width>201</width>
+      <height>53</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+                    font: 17pt &quot;华文楷体&quot;;
+                </string>
+    </property>
+    <property name="text">
+     <string>登录</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enroll_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>134</y>
+      <width>201</width>
+      <height>53</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+     font: 17pt &quot;华文楷体&quot;;</string>
+    </property>
+    <property name="text">
+     <string>注册</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>closeButton</zorder>
+  <zorder>minButton</zorder>
+  <zorder>time_label</zorder>
+  <zorder>Button_last</zorder>
+  <zorder>charts_widget</zorder>
+  <zorder>menu_widget</zorder>
+  <zorder>enroll_widget</zorder>
+  <zorder>login_widget</zorder>
+  <zorder>operator_widget</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QWidget</extends>
+   <header>qchartview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="rec.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,138 @@
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:38:54 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          
+   2          #include <reg51.h>
+   3          #include <stdio.h>
+   4          #define uchar unsigned char
+   5          #define uint unsigned int
+   6          
+   7          sbit led=P2^0;          //位定义
+   8          
+   9          uint count=0;
+  10          /********************************************************************
+  11          * 名称 : Time0_Init()
+  12          * 功能 : 定时器的初始化，1ms  12M晶振 即初值加1只要1us。
+  13          * 输入 : 无
+  14          * 输出 : 无
+  15          ***********************************************************************/
+  16          void Time0_Init()
+  17          {
+  18   1              TMOD = 0x00;    //方式1，16位定时功能      
+  19   1      //      TMOD = 0x04;    //方式0，13位计数功能
+  20   1              TH0  = 0xE0;    //高八低5位
+  21   1              TL0  = 0x18;
+  22   1           
+  23   1              ET0 = 1;
+  24   1              EA = 1;         
+  25   1              TR0 = 1;                
+  26   1      }
+  27          //////////////主函数//////////////////////////
+  28          void main(void)
+  29           { 
+  30   1         Time0_Init();
+  31   1         while (1);  
+  32   1       }
+  33           /////////////定时器中断函数0///////////////////////////
+  34          void Time0_Int() interrupt 1
+  35           {
+  36   1          TH0  = 0xE0;
+  37   1          TL0  = 0x18;
+  38   1          count++;
+  39   1          if(count==1000)
+  40   1          {
+  41   2             count=0;
+  42   2              led=~led;
+  43   2          }
+  44   1        }
+  45          
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:38:54 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION Time0_Init (BEGIN)
+                                           ; SOURCE LINE # 16
+                                           ; SOURCE LINE # 17
+                                           ; SOURCE LINE # 18
+0000 E4                CLR     A
+0001 F589              MOV     TMOD,A
+                                           ; SOURCE LINE # 20
+0003 758CE0            MOV     TH0,#0E0H
+                                           ; SOURCE LINE # 21
+0006 758A18            MOV     TL0,#018H
+                                           ; SOURCE LINE # 23
+0009 D2A9              SETB    ET0
+                                           ; SOURCE LINE # 24
+000B D2AF              SETB    EA
+                                           ; SOURCE LINE # 25
+000D D28C              SETB    TR0
+                                           ; SOURCE LINE # 26
+000F 22                RET     
+             ; FUNCTION Time0_Init (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+0000 1100        R     ACALL   Time0_Init
+0002         ?C0002:
+                                           ; SOURCE LINE # 31
+0002 80FE              SJMP    ?C0002
+             ; FUNCTION main (END)
+
+             ; FUNCTION Time0_Int (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 34
+                                           ; SOURCE LINE # 36
+0004 758CE0            MOV     TH0,#0E0H
+                                           ; SOURCE LINE # 37
+0007 758A18            MOV     TL0,#018H
+                                           ; SOURCE LINE # 38
+000A 0500        R     INC     count+01H
+000C E500        R     MOV     A,count+01H
+000E 7002              JNZ     ?C0007
+0010 0500        R     INC     count
+0012         ?C0007:
+                                           ; SOURCE LINE # 39
+0012 B4E80D            CJNE    A,#0E8H,?C0006
+0015 E500        R     MOV     A,count
+0017 B40308            CJNE    A,#03H,?C0006
+                                           ; SOURCE LINE # 40
+                                           ; SOURCE LINE # 41
+001A 750000      R     MOV     count,#00H
+001D 750000      R     MOV     count+01H,#00H
+                                           ; SOURCE LINE # 42
+0020 B2A0              CPL     led
+                                           ; SOURCE LINE # 43
+                                           ; SOURCE LINE # 44
+0022         ?C0006:
+0022 D0D0              POP     PSW
+0024 D0E0              POP     ACC
+C51 COMPILER V9.00   MAIN                                                                  04/17/2018 06:38:54 PAGE 3   
+
+0026 32                RETI    
+             ; FUNCTION Time0_Int (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     59    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

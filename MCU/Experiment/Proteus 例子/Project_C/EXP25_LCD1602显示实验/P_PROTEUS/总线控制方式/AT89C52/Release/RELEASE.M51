@@ -1,0 +1,94 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/26/2015  15:41:12  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0035H     UNIT         ?CO?MAIN
+            CODE    0038H     0029H     INBLOCK      ?PR?_STRING?MAIN
+            CODE    0061H     0020H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    0081H     0019H     INBLOCK      ?PR?DELAY400MS?MAIN
+            CODE    009AH     0019H     UNIT         ?C?LIB_CODE
+            CODE    00B3H     0014H     INBLOCK      ?PR?LCDINIT?MAIN
+            CODE    00C7H     000FH     INBLOCK      ?PR?DELAY5MS?MAIN
+            CODE    00D6H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00E2H     000BH     INBLOCK      ?PR?_WRITE_COMMAND?MAIN
+            CODE    00EDH     000BH     INBLOCK      ?PR?_WRITE_DATA?MAIN
+            CODE    00F8H     0005H     INBLOCK      ?PR?CHECKBUSY?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                   -----    -----
+  +--> ?PR?LCDINIT?MAIN
+  +--> ?PR?DELAY400MS?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_STRING?MAIN
+  +--> ?PR?_WRITE_COMMAND?MAIN
+
+?PR?LCDINIT?MAIN                -----    -----
+  +--> ?PR?_WRITE_COMMAND?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/26/2015  15:41:12  PAGE 2
+
+
+
+?PR?_WRITE_COMMAND?MAIN         -----    -----
+  +--> ?PR?CHECKBUSY?MAIN
+  +--> ?PR?DELAY5MS?MAIN
+
+?PR?CHECKBUSY?MAIN              000BH    0001H
+  +--> ?PR?DELAY5MS?MAIN
+
+?PR?_STRING?MAIN                0008H    0003H
+  +--> ?PR?_WRITE_COMMAND?MAIN
+  +--> ?PR?_WRITE_DATA?MAIN
+  +--> ?PR?DELAY400MS?MAIN
+
+?PR?_WRITE_DATA?MAIN            -----    -----
+  +--> ?PR?CHECKBUSY?MAIN
+  +--> ?PR?DELAY5MS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?CLDPTR
+  C:009AH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+Program Size: data=13.0 xdata=0 code=253
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

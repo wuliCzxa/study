@@ -1,0 +1,229 @@
+C51 COMPILER V9.00   MAIN                                                                  08/07/2017 10:29:58 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          uchar j=0;
+   7          
+   8          unsigned char code tabP0[]={
+   9           0x00,0x7E,0x42,0x42,0x42,0x42,0x7E,0x00,
+  10           0x00,0x08,0x14,0x22,0x41,0x22,0x14,0x08,
+  11           0x81,0x42,0x24,0x18,0x18,0x24,0x42,0x81,
+  12           0x00,0x3C,0x24,0x24,0xFF,0x24,0x24,0x3C
+  13          };
+  14          
+  15          unsigned char code tabP2[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F};
+  16          
+  17          ///////////////延时函数/////////////////////////
+  18          void delayms(uint j)              //1ms延时
+  19          {
+  20   1      uchar i;
+  21   1      for(;j>0;j--)
+  22   1              {
+  23   2               i=250;
+  24   2               while(--i);
+  25   2               i=249;
+  26   2               while(--i);
+  27   2              }
+  28   1      }
+  29          /********************************************************************
+  30          * 名称 : Outside_Init0()
+  31          * 功能 : 外部中断0 的初始化
+  32          * 输入 : 无
+  33          * 输出 : 无
+  34          ***********************************************************************/
+  35          void Outside_Init0(void)
+  36          {
+  37   1              EX0 = 1;  //开外部中断0
+  38   1      //      IT0 = 0;  //电平触发 
+  39   1              IT0 = 1;  //边沿触发
+  40   1              EA = 1;   //开总中断
+  41   1      }
+  42          
+  43          //////////////主函数//////////////////////////
+  44          void main()
+  45          {
+  46   1              uchar i;
+  47   1              Outside_Init0();
+  48   1              while(1)
+  49   1              {
+  50   2                      for(i=0;i<8;i++)
+  51   2                      {
+  52   3                              P0=0;
+  53   3                              P2=0XFF;
+  54   3                              P2=tabP2[i];
+C51 COMPILER V9.00   MAIN                                                                  08/07/2017 10:29:58 PAGE 2   
+
+  55   3                              P0=tabP0[8*j+i];
+  56   3                              delayms(2);
+  57   3                      }               
+  58   2              }
+  59   1      }
+  60           /////////////外部中断函数0///////////////////////////
+  61           void Outside_Int0(void) interrupt 0
+  62           {
+  63   1          EA=0;
+  64   1          j++;
+  65   1          if(j>3)j=0;
+  66   1          EA=1;
+  67   1        }
+C51 COMPILER V9.00   MAIN                                                                  08/07/2017 10:29:58 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _delayms (BEGIN)
+                                           ; SOURCE LINE # 18
+;---- Variable 'j' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 19
+                                           ; SOURCE LINE # 21
+0000         ?C0001:
+0000 D3                SETB    C
+0001 EF                MOV     A,R7
+0002 9400              SUBB    A,#00H
+0004 EE                MOV     A,R6
+0005 9400              SUBB    A,#00H
+0007 400F              JC      ?C0008
+                                           ; SOURCE LINE # 22
+                                           ; SOURCE LINE # 23
+;---- Variable 'i' assigned to Register 'R5' ----
+0009 7DFA              MOV     R5,#0FAH
+000B         ?C0004:
+                                           ; SOURCE LINE # 24
+000B DDFE              DJNZ    R5,?C0004
+000D         ?C0005:
+                                           ; SOURCE LINE # 25
+000D 7DF9              MOV     R5,#0F9H
+000F         ?C0006:
+                                           ; SOURCE LINE # 26
+000F DDFE              DJNZ    R5,?C0006
+0011         ?C0007:
+                                           ; SOURCE LINE # 27
+0011         ?C0003:
+0011 EF                MOV     A,R7
+0012 1F                DEC     R7
+0013 70EB              JNZ     ?C0001
+0015 1E                DEC     R6
+0016         ?C0018:
+0016 80E8              SJMP    ?C0001
+                                           ; SOURCE LINE # 28
+0018         ?C0008:
+0018 22                RET     
+             ; FUNCTION _delayms (END)
+
+             ; FUNCTION Outside_Init0 (BEGIN)
+                                           ; SOURCE LINE # 35
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+0000 D2A8              SETB    EX0
+                                           ; SOURCE LINE # 39
+0002 D288              SETB    IT0
+                                           ; SOURCE LINE # 40
+0004 D2AF              SETB    EA
+                                           ; SOURCE LINE # 41
+0006 22                RET     
+             ; FUNCTION Outside_Init0 (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 44
+                                           ; SOURCE LINE # 45
+                                           ; SOURCE LINE # 47
+0000 1100        R     ACALL   Outside_Init0
+0002         ?C0010:
+                                           ; SOURCE LINE # 48
+C51 COMPILER V9.00   MAIN                                                                  08/07/2017 10:29:58 PAGE 4   
+
+                                           ; SOURCE LINE # 49
+                                           ; SOURCE LINE # 50
+;---- Variable 'i' assigned to Register 'R4' ----
+0002 E4                CLR     A
+0003 FC                MOV     R4,A
+0004         ?C0012:
+                                           ; SOURCE LINE # 51
+                                           ; SOURCE LINE # 52
+0004 E4                CLR     A
+0005 F580              MOV     P0,A
+                                           ; SOURCE LINE # 53
+0007 75A0FF            MOV     P2,#0FFH
+                                           ; SOURCE LINE # 54
+000A EC                MOV     A,R4
+000B 900000      R     MOV     DPTR,#tabP2
+000E 93                MOVC    A,@A+DPTR
+000F F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 55
+0011 75F008            MOV     B,#08H
+0014 E500        R     MOV     A,j
+0016 A4                MUL     AB
+0017 2C                ADD     A,R4
+0018 F582              MOV     DPL,A
+001A E4                CLR     A
+001B 35F0              ADDC    A,B
+001D F583              MOV     DPH,A
+001F E582              MOV     A,DPL
+0021 2400        R     ADD     A,#LOW tabP0
+0023 F582              MOV     DPL,A
+0025 E583              MOV     A,DPH
+0027 3400        R     ADDC    A,#HIGH tabP0
+0029 F583              MOV     DPH,A
+002B E4                CLR     A
+002C 93                MOVC    A,@A+DPTR
+002D F580              MOV     P0,A
+                                           ; SOURCE LINE # 56
+002F 7F02              MOV     R7,#02H
+0031 7E00              MOV     R6,#00H
+0033 1100        R     ACALL   _delayms
+                                           ; SOURCE LINE # 57
+0035 0C                INC     R4
+0036 BC08CB            CJNE    R4,#08H,?C0012
+0039 80C7              SJMP    ?C0010
+             ; FUNCTION main (END)
+
+             ; FUNCTION Outside_Int0 (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 61
+                                           ; SOURCE LINE # 63
+0004 C2AF              CLR     EA
+                                           ; SOURCE LINE # 64
+0006 0500        R     INC     j
+                                           ; SOURCE LINE # 65
+0008 E500        R     MOV     A,j
+000A D3                SETB    C
+000B 9403              SUBB    A,#03H
+000D 4003              JC      ?C0016
+000F 750000      R     MOV     j,#00H
+0012         ?C0016:
+                                           ; SOURCE LINE # 66
+0012 D2AF              SETB    EA
+C51 COMPILER V9.00   MAIN                                                                  08/07/2017 10:29:58 PAGE 5   
+
+                                           ; SOURCE LINE # 67
+0014 D0D0              POP     PSW
+0016 D0E0              POP     ACC
+0018 32                RETI    
+             ; FUNCTION Outside_Int0 (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    116    ----
+   CONSTANT SIZE    =     40    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

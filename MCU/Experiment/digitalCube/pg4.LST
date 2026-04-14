@@ -1,0 +1,88 @@
+A51 MACRO ASSEMBLER  PG4                                                                  11/24/2023 11:02:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN pg4.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE pg4.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 0100H
+0100                   4     MAIN:
+0100 753012            5             MOV 30H,#12H
+0103 753134            6             MOV 31H,#34H
+0106 753256            7             MOV 32H,#56H
+0109                   8     ST:
+0109 7E03              9             MOV R6,#03H ;3BYTE              
+010B 7B01             10             MOV R3,#01H     ;FLAG DIGITAI
+010D 7830             11             MOV R0,#30H     ;BASE ADDRESS
+                      12     
+010F                  13     DP:
+010F 908001           14             MOV DPTR,#8001H ;CS0    BS
+0112 EB               15             MOV A,R3
+0113 F0               16             MOVX @DPTR,A
+0114 EB               17             MOV A,R3
+0115 23               18             RL A
+0116 FB               19             MOV R3,A
+0117 E6               20             MOV A,@R0
+0118 75F010           21             MOV B,#10H
+011B 84               22             DIV AB                  ;HIGH 8BIT
+011C 900149           23             MOV DPTR,#TABLE                          ;PAR
+011F 93               24             MOVC A,@A+DPTR
+0120 908002           25             MOV DPTR,#8002H
+0123 F0               26             MOVX @DPTR,A
+0124 3140             27             ACALL DELAY
+                      28     
+0126 908001           29             MOV DPTR,#8001H   
+0129 EB               30             MOV A,R3
+012A F0               31             MOVX @DPTR,A
+012B EB               32             MOV A,R3
+012C 23               33             RL A
+012D FB               34             MOV R3,A
+012E E5F0             35             MOV A,B
+0130 900149           36             MOV DPTR,#TABLE
+0133 93               37             MOVC A,@A+DPTR
+0134 908002           38             MOV DPTR,#8002H
+0137 F0               39             MOVX @DPTR,A
+0138 3140             40             ACALL DELAY
+                      41     
+013A 08               42             INC R0
+013B DED2             43             DJNZ R6,DP
+013D 020109           44             LJMP ST
+                      45     
+0140                  46     DELAY:
+0140 7D01             47             MOV R5,#01H
+0142                  48             DL:
+0142 7C3F             49                     MOV R4,#3FH
+0144 DCFE             50                     DJNZ R4,$
+0146 DDFA             51                     DJNZ R5,DL
+0148 22               52                     RET
+                      53     
+0149                  54     TABLE:
+0149 3F065B4F         55             DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
+014D 666D7D07                
+0151 7F6F                    
+                      56             END
+A51 MACRO ASSEMBLER  PG4                                                                  11/24/2023 11:02:57 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   0140H   A   
+DL . . . . . . . .  C ADDR   0142H   A   
+DP . . . . . . . .  C ADDR   010FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+ST . . . . . . . .  C ADDR   0109H   A   
+TABLE. . . . . . .  C ADDR   0149H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,45 @@
+CM:  Error   L7/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 7   STD_LIGUC_VECTOR is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L14/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 14   The intermediate file for entity REG is not in the library bound to WORK.  (VSS-1084) 
+CM:  2 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L7/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 7   STD_LIGUC_VECTOR is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L14/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 14   The intermediate file for entity REG is not in the library bound to WORK.  (VSS-1084) 
+CM:  2 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L23/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 23   Type mismatch on left and/or right operand of binary operator.  (VSS-523) 
+CM:  Error   L24/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 24   A is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  2 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L23/C0 : #0 Error: C:/cop2000/xcv200/reg/reg.vhd  line 23   Type mismatch on left and/or right operand of binary operator.  (VSS-523) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found

@@ -1,0 +1,217 @@
+C51 COMPILER V9.00   MAIN                                                                  02/27/2018 11:52:27 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE MAIN.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #define uchar unsigned char //宏定义
+   3          #define uint unsigned int
+   4          uchar data_byte;
+   5          uchar data_byte1;
+   6          uchar data_Humcha=15; //湿度差阈值
+   7          uchar Tem_Z,Tem_X,Hum_Z,Hum_X,Check;
+   8          uchar Tem_Z1,Tem_X1,Hum_Z1,Hum_X1,Check1;
+   9          char jiaodu=0;
+  10          char jiaodu2=0;
+  11          char jiaodu3=0;
+  12          char jiaodu4=0;
+  13          uchar jiaodu1;
+  14          uint count=0;
+  15          uint count2=0;
+  16          uchar count1=0;
+  17          uchar com_shuju[5]={0,0,1,5,0};
+  18          uchar code turn[]={0xF3,0xF2,0xF6,0xF4,0xFc,0xF8,0xF9,0xF1};
+  19          uchar buffer[10];
+  20          uchar i1,i2,i3;
+  21          uchar moshi[6]="AT:  %";
+  22          uchar moshi0[6]="M";
+  23          uchar moshi1=0;
+  24          
+  25          uchar caidan=0;//菜单页面
+  26          
+  27          #include "delay.h"
+  28          #include "DHT11.H"
+  29          #include "LCD1602.H"
+  30          #include "com.h"
+  31          #include "IT.h"
+  32          //#include "chuang.h"
+  33          #include "TIME.h"
+  34          
+  35          
+  36          sbit IT0_JIAN=P3^2;
+  37          sbit IT1_JIA=P3^3;
+  38          sbit cai=P3^4;
+  39          sbit mot=P2^2;
+  40          
+  41           
+  42          //主函数
+  43          void main()
+  44          {
+  45   1              i1=0;
+  46   1              i3=0;
+  47   1              i2=0;
+  48   1              caidan=0;
+  49   1              LCD_Init();
+  50   1              Outside_Init();
+  51   1              Time0_Init();
+  52   1              Com_Init();
+  53   1              IP=0X07;
+  54   1       while(1) 
+  55   1       {
+C51 COMPILER V9.00   MAIN                                                                  02/27/2018 11:52:27 PAGE 2   
+
+  56   2                      
+  57   2              if(cai==0)
+  58   2              {
+  59   3                      while(!cai);
+  60   3                      caidan++;
+  61   3                      if(caidan>3)caidan=0;
+  62   3                       write_com(0x01); //清屏
+  63   3              }
+  64   2              
+  65   2              if(caidan==0)
+  66   2              {
+  67   3                      Rec_DHT();
+  68   3                      LCD_Display(); 
+  69   3                      if(count>40)
+  70   3                      {
+  71   4                              count=0;
+  72   4                              fasong();
+  73   4                      }
+  74   3                    ///////窗户电机//////////
+  75   3                      if(jiaodu<jiaodu3)
+  76   3                      {
+  77   4                              if(i3==1)
+  78   4                              {       
+  79   5                                      jiaodu2=jiaodu;
+  80   5                                      i2=jiaodu3-jiaodu;
+  81   5                                      i3=0;
+  82   5                              }
+  83   4                              if(i2!=0)
+  84   4                              {
+  85   5                                      i2--;
+  86   5                                      jiaodu3--;
+  87   5                                      i1 = i1 > 0 ? i1-1 : 7; 
+  88   5                                      P1=turn[i1];    
+  89   5                              }
+  90   4                              if(jiaodu2!=jiaodu)
+  91   4                                      i3=1;
+  92   4                      }
+  93   3                      if(jiaodu>jiaodu3)
+  94   3                      {
+  95   4                              if(i3==1)
+  96   4                              {       
+  97   5                                      jiaodu2=jiaodu;
+  98   5                                      i2=jiaodu-jiaodu3;
+  99   5                                      i3=0;
+ 100   5                              }
+ 101   4                              if(i2!=0)
+ 102   4                              {
+ 103   5                                      i2--;   
+ 104   5                                      jiaodu3++;
+ 105   5                                      i1 = i1 <7 ? i1+1 : 0;  
+ 106   5                                      P1=turn[i1];    
+ 107   5                              }
+ 108   4                              if(jiaodu2!=jiaodu)
+ 109   4                                      i3=1;
+ 110   4                      }
+ 111   3              }
+ 112   2              if(caidan==1)
+ 113   2              {
+ 114   3                      LCD_Displaysetmode();
+ 115   3              }
+ 116   2              
+ 117   2              if(caidan==2)
+C51 COMPILER V9.00   MAIN                                                                  02/27/2018 11:52:27 PAGE 3   
+
+ 118   2              {
+ 119   3                      LCD_Displayset();
+ 120   3              }
+ 121   2              if(caidan==3)
+ 122   2              {
+ 123   3                      LCD_Displaysta();
+ 124   3              }
+ 125   2              
+ 126   2              if(Hum_Z-Hum_Z1<data_Humcha)
+ 127   2              {RED=1;GRE=0;}
+ 128   2              if((Hum_Z-Hum_Z1>=50)&&(Hum_Z-Hum_Z1>=data_Humcha))
+ 129   2              {RED=0;GRE=1;}
+ 130   2              if((Hum_Z-Hum_Z1<50)&&(Hum_Z-Hum_Z1>=data_Humcha))
+ 131   2              {RED=1;GRE=1;}
+ 132   2       }
+ 133   1      }
+ 134          
+ 135          
+ 136           /////////////外部中断函数0///////////////////////////
+ 137           void Outside_Int0(void) interrupt 0
+ 138           {
+ 139   1          EA=0;
+ 140   1              while(!IT0_JIAN);
+ 141   1               if(caidan==1)
+ 142   1               {
+ 143   2                      moshi1=0;
+ 144   2               }
+ 145   1               if(caidan==2)
+ 146   1               {
+ 147   2                      data_Humcha--;
+ 148   2                       if(data_Humcha<=1)data_Humcha=1;
+ 149   2               }
+ 150   1               if(caidan==3)
+ 151   1               {
+ 152   2                       jiaodu--;
+ 153   2                       if(jiaodu<=-90)jiaodu=-90;
+ 154   2               }
+ 155   1               
+ 156   1          EA=1;
+ 157   1        }
+ 158            ///////////外部中断函数1/////////////////////
+ 159           void Outside_Int1(void) interrupt 2
+ 160           {
+ 161   1          EA=0;
+ 162   1              while(!IT1_JIA);
+ 163   1               if(caidan==1)
+ 164   1               {
+ 165   2                      moshi1=1;
+ 166   2               }
+ 167   1               if(caidan==2)
+ 168   1               {
+ 169   2                      data_Humcha++;
+ 170   2                       if(data_Humcha>=99)data_Humcha=99;
+ 171   2               }
+ 172   1               if(caidan==3)
+ 173   1               {
+ 174   2                       jiaodu++;
+ 175   2                       if(jiaodu>=90)jiaodu=90;
+ 176   2               }
+ 177   1          EA=1;
+ 178   1        }
+ 179             /////////////定时器中断函数0///////////////////////////
+C51 COMPILER V9.00   MAIN                                                                  02/27/2018 11:52:27 PAGE 4   
+
+ 180          void Time0_Int() interrupt 1
+ 181           {
+ 182   1          TH0  = 0x3c;
+ 183   1          TL0  = 0xb0;
+ 184   1          count++;
+ 185   1               
+ 186   1        }
+ 187            
+ 188          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1874    ----
+   CONSTANT SIZE    =    129    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     55       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

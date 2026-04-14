@@ -1,0 +1,3555 @@
+(edif  pc
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap
+    (keywordLevel 0)
+  )
+  (status
+    (written
+      (timeStamp 2003 10 23 4 22 14)
+      (program "UNKNOWN"
+	(version "3.6.1.6817")
+      )
+      (author "Administrator")
+    )
+  )
+  (external VIRTEX
+    (edifLevel 0)
+    (technology
+      (numberDefinition)
+    )
+    (cell BUFGP
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell FDCE
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port Q
+	    (direction OUTPUT)
+	  )
+	  (port D
+	    (direction INPUT)
+	  )
+	  (port C
+	    (direction INPUT)
+	  )
+	  (port CLR
+	    (direction INPUT)
+	  )
+	  (port CE
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell GND
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port G
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell IBUF
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT1
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT3
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port I1
+	    (direction INPUT)
+	  )
+	  (port I2
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell LUT4
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port I0
+	    (direction INPUT)
+	  )
+	  (port I1
+	    (direction INPUT)
+	  )
+	  (port I2
+	    (direction INPUT)
+	  )
+	  (port I3
+	    (direction INPUT)
+	  )
+	  (port O
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell MUXCY_L
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port LO
+	    (direction OUTPUT)
+	  )
+	  (port S
+	    (direction INPUT)
+	  )
+	  (port DI
+	    (direction INPUT)
+	  )
+	  (port CI
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell OBUF_S_12
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port I
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+    (cell VCC
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port P
+	    (direction OUTPUT)
+	  )
+	)
+      )
+    )
+    (cell XORCY
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port O
+	    (direction OUTPUT)
+	  )
+	  (port LI
+	    (direction INPUT)
+	  )
+	  (port CI
+	    (direction INPUT)
+	  )
+	)
+      )
+    )
+  )
+  (library DESIGNS
+    (edifLevel 0)
+    (technology
+      (numberDefinition)
+    )
+    (cell pc
+      (cellType GENERIC)
+      (view Netlist_representation
+	(viewType NETLIST)
+	(interface
+	  (port
+	    (rename D_15 "D<15>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_14 "D<14>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_13 "D<13>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_12 "D<12>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_11 "D<11>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_10 "D<10>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_9 "D<9>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_8 "D<8>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_7 "D<7>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_6 "D<6>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_5 "D<5>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_4 "D<4>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_3 "D<3>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_2 "D<2>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_1 "D<1>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename D_0 "D<0>")
+	    (direction INPUT)
+	  )
+	  (port
+	    (rename PC_15 "PC<15>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_14 "PC<14>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_13 "PC<13>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_12 "PC<12>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_11 "PC<11>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_10 "PC<10>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_9 "PC<9>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_8 "PC<8>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_7 "PC<7>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_6 "PC<6>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_5 "PC<5>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_4 "PC<4>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_3 "PC<3>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_2 "PC<2>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_1 "PC<1>")
+	    (direction OUTPUT)
+	  )
+	  (port
+	    (rename PC_0 "PC<0>")
+	    (direction OUTPUT)
+	  )
+	  (port C
+	    (direction INPUT)
+	  )
+	  (port Z
+	    (direction INPUT)
+	  )
+	  (port ELP
+	    (direction INPUT)
+	  )
+	  (port PC1
+	    (direction INPUT)
+	  )
+	  (port IR2
+	    (direction INPUT)
+	  )
+	  (port IR3
+	    (direction INPUT)
+	  )
+	  (port RST
+	    (direction INPUT)
+	  )
+	  (port CLK
+	    (direction INPUT)
+	  )
+	)
+	(contents
+	  (instance
+	    (rename C41_C3_C0 "C41/C3/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C3_C1 "C41/C3/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C3_C3 "C41/C3/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C4_C0 "C41/C4/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C4_C1 "C41/C4/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C4_C3 "C41/C4/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C5_C0 "C41/C5/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C5_C1 "C41/C5/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C5_C3 "C41/C5/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C6_C0 "C41/C6/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C6_C1 "C41/C6/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C6_C3 "C41/C6/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C7_C0 "C41/C7/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C7_C1 "C41/C7/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C7_C3 "C41/C7/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C8_C0 "C41/C8/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C8_C1 "C41/C8/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C8_C3 "C41/C8/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C9_C0 "C41/C9/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C9_C1 "C41/C9/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C9_C3 "C41/C9/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C10_C0 "C41/C10/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C10_C1 "C41/C10/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C10_C3 "C41/C10/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C11_C0 "C41/C11/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C11_C1 "C41/C11/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C11_C3 "C41/C11/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C12_C0 "C41/C12/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C12_C1 "C41/C12/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C12_C3 "C41/C12/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C13_C0 "C41/C13/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C13_C1 "C41/C13/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C13_C3 "C41/C13/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C14_C0 "C41/C14/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C14_C1 "C41/C14/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C14_C3 "C41/C14/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C15_C0 "C41/C15/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C15_C1 "C41/C15/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C15_C3 "C41/C15/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C16_C0 "C41/C16/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C16_C1 "C41/C16/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C16_C3 "C41/C16/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C17_C0 "C41/C17/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C17_C1 "C41/C17/C1")
+	    (viewRef Netlist_representation
+	      (cellRef MUXCY_L
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C17_C3 "C41/C17/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename C41_C18_C0 "C41/C18/C0")
+	    (viewRef Netlist_representation
+	      (cellRef XORCY
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C41_C18_C3 "C41/C18/C3")
+	    (viewRef Netlist_representation
+	      (cellRef LUT1
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0)")
+	    )
+	    (property INIT
+	      (string "2")
+	    )
+	    (property EQN
+	      (string "(I0)")
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_0 "RPC_reg<0>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_1 "RPC_reg<1>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_2 "RPC_reg<2>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_3 "RPC_reg<3>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_4 "RPC_reg<4>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_5 "RPC_reg<5>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_6 "RPC_reg<6>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_7 "RPC_reg<7>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_8 "RPC_reg<8>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_9 "RPC_reg<9>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_10 "RPC_reg<10>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_11 "RPC_reg<11>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_12 "RPC_reg<12>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_13 "RPC_reg<13>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_14 "RPC_reg<14>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename RPC_reg_15 "RPC_reg<15>")
+	    (viewRef Netlist_representation
+	      (cellRef FDCE
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_15 "C_D<15>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_14 "C_D<14>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_13 "C_D<13>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_12 "C_D<12>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_11 "C_D<11>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_10 "C_D<10>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_9 "C_D<9>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_8 "C_D<8>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_7 "C_D<7>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_6 "C_D<6>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_5 "C_D<5>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_4 "C_D<4>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_3 "C_D<3>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_2 "C_D<2>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_1 "C_D<1>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_D_0 "C_D<0>")
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_15 "C_PC<15>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_14 "C_PC<14>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_13 "C_PC<13>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_12 "C_PC<12>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_11 "C_PC<11>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_10 "C_PC<10>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_9 "C_PC<9>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_8 "C_PC<8>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_7 "C_PC<7>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_6 "C_PC<6>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_5 "C_PC<5>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_4 "C_PC<4>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_3 "C_PC<3>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_2 "C_PC<2>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_1 "C_PC<1>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance
+	    (rename C_PC_0 "C_PC<0>")
+	    (viewRef Netlist_representation
+	      (cellRef OBUF_S_12
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_C
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_Z
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_ELP
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_PC1
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_IR2
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_IR3
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C_RST
+	    (viewRef Netlist_representation
+	      (cellRef IBUF
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C184
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C185
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C186
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C187
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C188
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C189
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C190
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C191
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C192
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C193
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C194
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C195
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C196
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C197
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C198
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 I2 + I2 I3' + I0' I3 I1)")
+	    )
+	    (property INIT
+	      (string "E4F0")
+	    )
+	    (property EQN
+	      (string "(I0 * I2 + I2 * ~I3 + ~I0 * I3 * I1)")
+	    )
+	  )
+	  (instance C199
+	    (viewRef Netlist_representation
+	      (cellRef LUT3
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I1 + I0' I2)")
+	    )
+	    (property INIT
+	      (string "DC")
+	    )
+	    (property EQN
+	      (string "(I1 + ~I0 * I2)")
+	    )
+	  )
+	  (instance C200
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I1 I2 + I2 I3' + I1' I3 I0)")
+	    )
+	    (property INIT
+	      (string "E2F0")
+	    )
+	    (property EQN
+	      (string "(I1 * I2 + I2 * ~I3 + ~I1 * I3 * I0)")
+	    )
+	  )
+	  (instance C201
+	    (viewRef Netlist_representation
+	      (cellRef LUT4
+		(libraryRef VIRTEX)
+	      )
+	    )
+	    (property lut_function
+	      (string "(I0 + I1' I2 + I1 I3)")
+	    )
+	    (property INIT
+	      (string "FEBA")
+	    )
+	    (property EQN
+	      (string "(I0 + ~I1 * I2 + I1 * I3)")
+	    )
+	  )
+	  (instance C206
+	    (viewRef Netlist_representation
+	      (cellRef BUFGP
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C207
+	    (viewRef Netlist_representation
+	      (cellRef VCC
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (instance C208
+	    (viewRef Netlist_representation
+	      (cellRef GND
+		(libraryRef VIRTEX)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_15 "N_D<15>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_15)
+	      )
+	      (portRef I1
+		(instanceRef C184)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_14 "N_D<14>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_14)
+	      )
+	      (portRef I1
+		(instanceRef C185)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_13 "N_D<13>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_13)
+	      )
+	      (portRef I1
+		(instanceRef C186)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_12 "N_D<12>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_12)
+	      )
+	      (portRef I1
+		(instanceRef C187)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_11 "N_D<11>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_11)
+	      )
+	      (portRef I1
+		(instanceRef C188)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_10 "N_D<10>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_10)
+	      )
+	      (portRef I1
+		(instanceRef C189)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_9 "N_D<9>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_9)
+	      )
+	      (portRef I1
+		(instanceRef C190)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_8 "N_D<8>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_8)
+	      )
+	      (portRef I1
+		(instanceRef C191)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_7 "N_D<7>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_7)
+	      )
+	      (portRef I1
+		(instanceRef C192)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_6 "N_D<6>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_6)
+	      )
+	      (portRef I1
+		(instanceRef C193)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_5 "N_D<5>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_5)
+	      )
+	      (portRef I1
+		(instanceRef C194)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_4 "N_D<4>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_4)
+	      )
+	      (portRef I1
+		(instanceRef C195)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_3 "N_D<3>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_3)
+	      )
+	      (portRef I1
+		(instanceRef C196)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_2 "N_D<2>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_2)
+	      )
+	      (portRef I1
+		(instanceRef C197)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_1 "N_D<1>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_1)
+	      )
+	      (portRef I1
+		(instanceRef C198)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_D_0 "N_D<0>")
+	    (joined
+	      (portRef O
+		(instanceRef C_D_0)
+	      )
+	      (portRef I0
+		(instanceRef C200)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_15 "N_PC<15>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C18_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_15)
+	      )
+	      (portRef I
+		(instanceRef C_PC_15)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_14 "N_PC<14>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C17_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_14)
+	      )
+	      (portRef I
+		(instanceRef C_PC_14)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_13 "N_PC<13>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C16_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_13)
+	      )
+	      (portRef I
+		(instanceRef C_PC_13)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_12 "N_PC<12>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C15_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_12)
+	      )
+	      (portRef I
+		(instanceRef C_PC_12)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_11 "N_PC<11>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C14_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_11)
+	      )
+	      (portRef I
+		(instanceRef C_PC_11)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_10 "N_PC<10>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C13_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_10)
+	      )
+	      (portRef I
+		(instanceRef C_PC_10)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_9 "N_PC<9>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C12_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_9)
+	      )
+	      (portRef I
+		(instanceRef C_PC_9)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_8 "N_PC<8>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C11_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_8)
+	      )
+	      (portRef I
+		(instanceRef C_PC_8)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_7 "N_PC<7>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C10_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_7)
+	      )
+	      (portRef I
+		(instanceRef C_PC_7)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_6 "N_PC<6>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C9_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_6)
+	      )
+	      (portRef I
+		(instanceRef C_PC_6)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_5 "N_PC<5>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C8_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_5)
+	      )
+	      (portRef I
+		(instanceRef C_PC_5)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_4 "N_PC<4>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C7_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_4)
+	      )
+	      (portRef I
+		(instanceRef C_PC_4)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_3 "N_PC<3>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C6_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_3)
+	      )
+	      (portRef I
+		(instanceRef C_PC_3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_2 "N_PC<2>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C5_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_2)
+	      )
+	      (portRef I
+		(instanceRef C_PC_2)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_1 "N_PC<1>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C4_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_1)
+	      )
+	      (portRef I
+		(instanceRef C_PC_1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename N_PC_0 "N_PC<0>")
+	    (joined
+	      (portRef I0
+		(instanceRef C41_C3_C3)
+	      )
+	      (portRef Q
+		(instanceRef RPC_reg_0)
+	      )
+	      (portRef I
+		(instanceRef C_PC_0)
+	      )
+	    )
+	  )
+	  (net N_C
+	    (joined
+	      (portRef O
+		(instanceRef C_C)
+	      )
+	      (portRef I2
+		(instanceRef C201)
+	      )
+	    )
+	  )
+	  (net N_Z
+	    (joined
+	      (portRef O
+		(instanceRef C_Z)
+	      )
+	      (portRef I3
+		(instanceRef C201)
+	      )
+	    )
+	  )
+	  (net N_ELP
+	    (joined
+	      (portRef O
+		(instanceRef C_ELP)
+	      )
+	      (portRef I0
+		(instanceRef C184)
+	      )
+	      (portRef I0
+		(instanceRef C185)
+	      )
+	      (portRef I0
+		(instanceRef C186)
+	      )
+	      (portRef I0
+		(instanceRef C187)
+	      )
+	      (portRef I0
+		(instanceRef C188)
+	      )
+	      (portRef I0
+		(instanceRef C189)
+	      )
+	      (portRef I0
+		(instanceRef C190)
+	      )
+	      (portRef I0
+		(instanceRef C191)
+	      )
+	      (portRef I0
+		(instanceRef C192)
+	      )
+	      (portRef I0
+		(instanceRef C193)
+	      )
+	      (portRef I0
+		(instanceRef C194)
+	      )
+	      (portRef I0
+		(instanceRef C195)
+	      )
+	      (portRef I0
+		(instanceRef C196)
+	      )
+	      (portRef I0
+		(instanceRef C197)
+	      )
+	      (portRef I0
+		(instanceRef C198)
+	      )
+	      (portRef I0
+		(instanceRef C199)
+	      )
+	      (portRef I1
+		(instanceRef C200)
+	      )
+	    )
+	  )
+	  (net N_PC1
+	    (joined
+	      (portRef O
+		(instanceRef C_PC1)
+	      )
+	      (portRef I1
+		(instanceRef C199)
+	      )
+	    )
+	  )
+	  (net N_IR2
+	    (joined
+	      (portRef O
+		(instanceRef C_IR2)
+	      )
+	      (portRef I1
+		(instanceRef C201)
+	      )
+	    )
+	  )
+	  (net N_IR3
+	    (joined
+	      (portRef O
+		(instanceRef C_IR3)
+	      )
+	      (portRef I0
+		(instanceRef C201)
+	      )
+	    )
+	  )
+	  (net N_RST
+	    (joined
+	      (portRef CLR
+		(instanceRef RPC_reg_0)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_1)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_2)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_3)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_4)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_5)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_6)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_7)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_8)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_9)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_10)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_11)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_12)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_13)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_14)
+	      )
+	      (portRef CLR
+		(instanceRef RPC_reg_15)
+	      )
+	      (portRef O
+		(instanceRef C_RST)
+	      )
+	    )
+	  )
+	  (net CLK_BUFGPed
+	    (joined
+	      (portRef C
+		(instanceRef RPC_reg_0)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_1)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_2)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_3)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_4)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_5)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_6)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_7)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_8)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_9)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_10)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_11)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_12)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_13)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_14)
+	      )
+	      (portRef C
+		(instanceRef RPC_reg_15)
+	      )
+	      (portRef O
+		(instanceRef C206)
+	      )
+	    )
+	  )
+	  (net N121
+	    (joined
+	      (portRef O
+		(instanceRef C41_C3_C0)
+	      )
+	      (portRef I2
+		(instanceRef C200)
+	      )
+	    )
+	  )
+	  (net N122
+	    (joined
+	      (portRef O
+		(instanceRef C41_C4_C0)
+	      )
+	      (portRef I2
+		(instanceRef C198)
+	      )
+	    )
+	  )
+	  (net N123
+	    (joined
+	      (portRef O
+		(instanceRef C41_C5_C0)
+	      )
+	      (portRef I2
+		(instanceRef C197)
+	      )
+	    )
+	  )
+	  (net N124
+	    (joined
+	      (portRef O
+		(instanceRef C41_C6_C0)
+	      )
+	      (portRef I2
+		(instanceRef C196)
+	      )
+	    )
+	  )
+	  (net N125
+	    (joined
+	      (portRef O
+		(instanceRef C41_C7_C0)
+	      )
+	      (portRef I2
+		(instanceRef C195)
+	      )
+	    )
+	  )
+	  (net N126
+	    (joined
+	      (portRef O
+		(instanceRef C41_C8_C0)
+	      )
+	      (portRef I2
+		(instanceRef C194)
+	      )
+	    )
+	  )
+	  (net N127
+	    (joined
+	      (portRef O
+		(instanceRef C41_C9_C0)
+	      )
+	      (portRef I2
+		(instanceRef C193)
+	      )
+	    )
+	  )
+	  (net N128
+	    (joined
+	      (portRef O
+		(instanceRef C41_C10_C0)
+	      )
+	      (portRef I2
+		(instanceRef C192)
+	      )
+	    )
+	  )
+	  (net N129
+	    (joined
+	      (portRef O
+		(instanceRef C41_C11_C0)
+	      )
+	      (portRef I2
+		(instanceRef C191)
+	      )
+	    )
+	  )
+	  (net N130
+	    (joined
+	      (portRef O
+		(instanceRef C41_C12_C0)
+	      )
+	      (portRef I2
+		(instanceRef C190)
+	      )
+	    )
+	  )
+	  (net N131
+	    (joined
+	      (portRef O
+		(instanceRef C41_C13_C0)
+	      )
+	      (portRef I2
+		(instanceRef C189)
+	      )
+	    )
+	  )
+	  (net N132
+	    (joined
+	      (portRef O
+		(instanceRef C41_C14_C0)
+	      )
+	      (portRef I2
+		(instanceRef C188)
+	      )
+	    )
+	  )
+	  (net N133
+	    (joined
+	      (portRef O
+		(instanceRef C41_C15_C0)
+	      )
+	      (portRef I2
+		(instanceRef C187)
+	      )
+	    )
+	  )
+	  (net N134
+	    (joined
+	      (portRef O
+		(instanceRef C41_C16_C0)
+	      )
+	      (portRef I2
+		(instanceRef C186)
+	      )
+	    )
+	  )
+	  (net N135
+	    (joined
+	      (portRef O
+		(instanceRef C41_C17_C0)
+	      )
+	      (portRef I2
+		(instanceRef C185)
+	      )
+	    )
+	  )
+	  (net N136
+	    (joined
+	      (portRef O
+		(instanceRef C41_C18_C0)
+	      )
+	      (portRef I2
+		(instanceRef C184)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N0 "C41/N0")
+	    (joined
+	      (portRef CI
+		(instanceRef C41_C3_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C3_C1)
+	      )
+	      (portRef P
+		(instanceRef C207)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N3 "C41/N3")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C3_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C4_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C4_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N6 "C41/N6")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C4_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C5_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C5_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N9 "C41/N9")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C5_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C6_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C6_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N12 "C41/N12")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C6_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C7_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C7_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N15 "C41/N15")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C7_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C8_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C8_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N18 "C41/N18")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C8_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C9_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C9_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N21 "C41/N21")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C9_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C10_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C10_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N24 "C41/N24")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C10_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C11_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C11_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N27 "C41/N27")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C11_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C12_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C12_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N30 "C41/N30")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C12_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C13_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C13_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N33 "C41/N33")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C13_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C14_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C14_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N36 "C41/N36")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C14_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C15_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C15_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N39 "C41/N39")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C15_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C16_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C16_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N42 "C41/N42")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C16_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C17_C0)
+	      )
+	      (portRef CI
+		(instanceRef C41_C17_C1)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_N45 "C41/N45")
+	    (joined
+	      (portRef LO
+		(instanceRef C41_C17_C1)
+	      )
+	      (portRef CI
+		(instanceRef C41_C18_C0)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N6 "C42/N6")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_0)
+	      )
+	      (portRef O
+		(instanceRef C200)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N12 "C42/N12")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_1)
+	      )
+	      (portRef O
+		(instanceRef C198)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N18 "C42/N18")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_2)
+	      )
+	      (portRef O
+		(instanceRef C197)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N24 "C42/N24")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_3)
+	      )
+	      (portRef O
+		(instanceRef C196)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N30 "C42/N30")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_4)
+	      )
+	      (portRef O
+		(instanceRef C195)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N36 "C42/N36")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_5)
+	      )
+	      (portRef O
+		(instanceRef C194)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N42 "C42/N42")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_6)
+	      )
+	      (portRef O
+		(instanceRef C193)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N48 "C42/N48")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_7)
+	      )
+	      (portRef O
+		(instanceRef C192)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N54 "C42/N54")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_8)
+	      )
+	      (portRef O
+		(instanceRef C191)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N60 "C42/N60")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_9)
+	      )
+	      (portRef O
+		(instanceRef C190)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N66 "C42/N66")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_10)
+	      )
+	      (portRef O
+		(instanceRef C189)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N72 "C42/N72")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_11)
+	      )
+	      (portRef O
+		(instanceRef C188)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N78 "C42/N78")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_12)
+	      )
+	      (portRef O
+		(instanceRef C187)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N84 "C42/N84")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_13)
+	      )
+	      (portRef O
+		(instanceRef C186)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N90 "C42/N90")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_14)
+	      )
+	      (portRef O
+		(instanceRef C185)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C42_N96 "C42/N96")
+	    (joined
+	      (portRef D
+		(instanceRef RPC_reg_15)
+	      )
+	      (portRef O
+		(instanceRef C184)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C3_N2 "C41/C3/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C3_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C3_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C3_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C3_N0 "C41/C3/N0")
+	    (joined
+	      (portRef DI
+		(instanceRef C41_C3_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C4_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C5_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C6_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C7_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C8_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C9_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C10_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C11_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C12_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C13_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C14_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C15_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C16_C1)
+	      )
+	      (portRef DI
+		(instanceRef C41_C17_C1)
+	      )
+	      (portRef G
+		(instanceRef C208)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C4_N2 "C41/C4/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C4_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C4_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C4_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C5_N2 "C41/C5/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C5_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C5_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C5_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C6_N2 "C41/C6/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C6_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C6_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C6_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C7_N2 "C41/C7/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C7_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C7_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C7_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C8_N2 "C41/C8/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C8_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C8_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C8_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C9_N2 "C41/C9/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C9_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C9_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C9_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C10_N2 "C41/C10/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C10_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C10_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C10_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C11_N2 "C41/C11/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C11_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C11_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C11_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C12_N2 "C41/C12/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C12_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C12_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C12_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C13_N2 "C41/C13/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C13_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C13_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C13_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C14_N2 "C41/C14/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C14_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C14_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C14_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C15_N2 "C41/C15/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C15_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C15_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C15_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C16_N2 "C41/C16/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C16_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C16_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C16_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C17_N2 "C41/C17/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C17_C0)
+	      )
+	      (portRef S
+		(instanceRef C41_C17_C1)
+	      )
+	      (portRef O
+		(instanceRef C41_C17_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename C41_C18_N2 "C41/C18/N2")
+	    (joined
+	      (portRef LI
+		(instanceRef C41_C18_C0)
+	      )
+	      (portRef O
+		(instanceRef C41_C18_C3)
+	      )
+	    )
+	  )
+	  (net
+	    (rename D_15 "D<15>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_15)
+	      )
+	      (portRef D_15)
+	    )
+	  )
+	  (net
+	    (rename D_14 "D<14>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_14)
+	      )
+	      (portRef D_14)
+	    )
+	  )
+	  (net
+	    (rename D_13 "D<13>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_13)
+	      )
+	      (portRef D_13)
+	    )
+	  )
+	  (net
+	    (rename D_12 "D<12>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_12)
+	      )
+	      (portRef D_12)
+	    )
+	  )
+	  (net
+	    (rename D_11 "D<11>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_11)
+	      )
+	      (portRef D_11)
+	    )
+	  )
+	  (net
+	    (rename D_10 "D<10>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_10)
+	      )
+	      (portRef D_10)
+	    )
+	  )
+	  (net
+	    (rename D_9 "D<9>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_9)
+	      )
+	      (portRef D_9)
+	    )
+	  )
+	  (net
+	    (rename D_8 "D<8>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_8)
+	      )
+	      (portRef D_8)
+	    )
+	  )
+	  (net
+	    (rename D_7 "D<7>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_7)
+	      )
+	      (portRef D_7)
+	    )
+	  )
+	  (net
+	    (rename D_6 "D<6>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_6)
+	      )
+	      (portRef D_6)
+	    )
+	  )
+	  (net
+	    (rename D_5 "D<5>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_5)
+	      )
+	      (portRef D_5)
+	    )
+	  )
+	  (net
+	    (rename D_4 "D<4>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_4)
+	      )
+	      (portRef D_4)
+	    )
+	  )
+	  (net
+	    (rename D_3 "D<3>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_3)
+	      )
+	      (portRef D_3)
+	    )
+	  )
+	  (net
+	    (rename D_2 "D<2>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_2)
+	      )
+	      (portRef D_2)
+	    )
+	  )
+	  (net
+	    (rename D_1 "D<1>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_1)
+	      )
+	      (portRef D_1)
+	    )
+	  )
+	  (net
+	    (rename D_0 "D<0>")
+	    (joined
+	      (portRef I
+		(instanceRef C_D_0)
+	      )
+	      (portRef D_0)
+	    )
+	  )
+	  (net
+	    (rename PC_15 "PC<15>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_15)
+	      )
+	      (portRef PC_15)
+	    )
+	  )
+	  (net
+	    (rename PC_14 "PC<14>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_14)
+	      )
+	      (portRef PC_14)
+	    )
+	  )
+	  (net
+	    (rename PC_13 "PC<13>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_13)
+	      )
+	      (portRef PC_13)
+	    )
+	  )
+	  (net
+	    (rename PC_12 "PC<12>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_12)
+	      )
+	      (portRef PC_12)
+	    )
+	  )
+	  (net
+	    (rename PC_11 "PC<11>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_11)
+	      )
+	      (portRef PC_11)
+	    )
+	  )
+	  (net
+	    (rename PC_10 "PC<10>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_10)
+	      )
+	      (portRef PC_10)
+	    )
+	  )
+	  (net
+	    (rename PC_9 "PC<9>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_9)
+	      )
+	      (portRef PC_9)
+	    )
+	  )
+	  (net
+	    (rename PC_8 "PC<8>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_8)
+	      )
+	      (portRef PC_8)
+	    )
+	  )
+	  (net
+	    (rename PC_7 "PC<7>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_7)
+	      )
+	      (portRef PC_7)
+	    )
+	  )
+	  (net
+	    (rename PC_6 "PC<6>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_6)
+	      )
+	      (portRef PC_6)
+	    )
+	  )
+	  (net
+	    (rename PC_5 "PC<5>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_5)
+	      )
+	      (portRef PC_5)
+	    )
+	  )
+	  (net
+	    (rename PC_4 "PC<4>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_4)
+	      )
+	      (portRef PC_4)
+	    )
+	  )
+	  (net
+	    (rename PC_3 "PC<3>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_3)
+	      )
+	      (portRef PC_3)
+	    )
+	  )
+	  (net
+	    (rename PC_2 "PC<2>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_2)
+	      )
+	      (portRef PC_2)
+	    )
+	  )
+	  (net
+	    (rename PC_1 "PC<1>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_1)
+	      )
+	      (portRef PC_1)
+	    )
+	  )
+	  (net
+	    (rename PC_0 "PC<0>")
+	    (joined
+	      (portRef O
+		(instanceRef C_PC_0)
+	      )
+	      (portRef PC_0)
+	    )
+	  )
+	  (net C
+	    (joined
+	      (portRef I
+		(instanceRef C_C)
+	      )
+	      (portRef C)
+	    )
+	  )
+	  (net Z
+	    (joined
+	      (portRef I
+		(instanceRef C_Z)
+	      )
+	      (portRef Z)
+	    )
+	  )
+	  (net ELP
+	    (joined
+	      (portRef I
+		(instanceRef C_ELP)
+	      )
+	      (portRef ELP)
+	    )
+	  )
+	  (net PC1
+	    (joined
+	      (portRef I
+		(instanceRef C_PC1)
+	      )
+	      (portRef PC1)
+	    )
+	  )
+	  (net IR2
+	    (joined
+	      (portRef I
+		(instanceRef C_IR2)
+	      )
+	      (portRef IR2)
+	    )
+	  )
+	  (net IR3
+	    (joined
+	      (portRef I
+		(instanceRef C_IR3)
+	      )
+	      (portRef IR3)
+	    )
+	  )
+	  (net RST
+	    (joined
+	      (portRef I
+		(instanceRef C_RST)
+	      )
+	      (portRef RST)
+	    )
+	  )
+	  (net CLK
+	    (joined
+	      (portRef CLK)
+	      (portRef I
+		(instanceRef C206)
+	      )
+	    )
+	  )
+	  (net N229
+	    (joined
+	      (portRef CE
+		(instanceRef RPC_reg_0)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_1)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_2)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_3)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_4)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_5)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_6)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_7)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_8)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_9)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_10)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_11)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_12)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_13)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_14)
+	      )
+	      (portRef CE
+		(instanceRef RPC_reg_15)
+	      )
+	      (portRef O
+		(instanceRef C199)
+	      )
+	    )
+	  )
+	  (net syn360
+	    (joined
+	      (portRef I3
+		(instanceRef C184)
+	      )
+	      (portRef I3
+		(instanceRef C185)
+	      )
+	      (portRef I3
+		(instanceRef C186)
+	      )
+	      (portRef I3
+		(instanceRef C187)
+	      )
+	      (portRef I3
+		(instanceRef C188)
+	      )
+	      (portRef I3
+		(instanceRef C189)
+	      )
+	      (portRef I3
+		(instanceRef C190)
+	      )
+	      (portRef I3
+		(instanceRef C191)
+	      )
+	      (portRef I3
+		(instanceRef C192)
+	      )
+	      (portRef I3
+		(instanceRef C193)
+	      )
+	      (portRef I3
+		(instanceRef C194)
+	      )
+	      (portRef I3
+		(instanceRef C195)
+	      )
+	      (portRef I3
+		(instanceRef C196)
+	      )
+	      (portRef I3
+		(instanceRef C197)
+	      )
+	      (portRef I3
+		(instanceRef C198)
+	      )
+	      (portRef I2
+		(instanceRef C199)
+	      )
+	      (portRef I3
+		(instanceRef C200)
+	      )
+	      (portRef O
+		(instanceRef C201)
+	      )
+	    )
+	  )
+	)
+      )
+    )
+  )
+  (design pc
+    (cellRef pc
+      (libraryRef DESIGNS)
+    )
+    (property PART
+      (string "V200-PQ240-6")
+    )
+  )
+)

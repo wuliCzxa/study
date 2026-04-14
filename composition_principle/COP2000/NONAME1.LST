@@ -1,0 +1,7 @@
+00 8C12     MOV R0, #12H;
+02 8D23     MOV R1, #23H;
+04 10       ADD A, R0;
+05 11       ADD A, R1;
+06 83       MOV R3, A;
+07 C4       OUT
+            

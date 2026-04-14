@@ -1,0 +1,3 @@
+"..\..\Labcenter Electronics\Proteus 7 Professional\Test\shiyan001.obj" 
+TO "..\..\Labcenter Electronics\Proteus 7 Professional\Test\shiyan001" 
+PRINT(".\Listings\shiyan001.m51")

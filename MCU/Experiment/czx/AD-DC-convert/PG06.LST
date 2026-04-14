@@ -1,0 +1,63 @@
+A51 MACRO ASSEMBLER  PG06                                                                 04/12/2025 10:15:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN PG06.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE PG06.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0
+0000 0150              2     AJMP MAIN
+0050                   3     ORG 50H
+0050                   4     MAIN:
+0050 7530B0            5     MOV 30H,#0B0H
+0053                   6     OPEN:
+                       7     
+0053 30B00F            8         JNB P3.0,CLOSE
+0056 908000            9         MOV DPTR,#8000H
+0059 7400             10         MOV A,#0
+005B F0               11         MOVX @DPTR,A
+005C 30B1FD           12         JNB P3.1,$
+005F E0               13         MOVX A,@DPTR
+                      14         
+0060 F590             15         MOV P1,A
+0062 020053           16         LJMP OPEN
+                      17     
+0065                  18     CLOSE:
+                      19             
+0065 908000           20         MOV DPTR,#8000H
+0068 7400             21         MOV A,#0
+006A F0               22         MOVX @DPTR,A
+                      23     
+006B 909000           24         MOV DPTR,#9000H
+006E E530             25         MOV A,30H
+0070 F0               26         MOVX @DPTR,A
+                      27     
+0071 908001           28         MOV DPTR,#8001H
+0074 30B1FD           29         JNB P3.1,$
+0077 E0               30         MOVX A,@DPTR
+                      31     
+0078 F590             32         MOV P1,A
+007A 020050           33         LJMP MAIN
+                      34         
+                      35         END
+A51 MACRO ASSEMBLER  PG06                                                                 04/12/2025 10:15:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CLOSE. . . . . . .  C ADDR   0065H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+OPEN . . . . . . .  C ADDR   0053H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

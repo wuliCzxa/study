@@ -1,0 +1,146 @@
+CM: 
+CM: Checking...
+CM:  Warning   L8/C0 : #0 Warning: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 8   Array index range length mismatch (string literal too long). (VSS-737)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  Warning   L9/C0 : #0 Warning: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 9   Array index range length mismatch (string literal too long). (VSS-737)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  Warning   L10/C0 : #0 Warning: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 10   Array index range length mismatch (string literal too long). (VSS-737)  (FPGA-hci-hdlc-unknown-warning) 
+CM:  0 error(s) 3 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L23/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 23   The intermediate file for entity EX26 is not in the library bound to WORK.  (VSS-1084) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L402/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 402   RD is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L403/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 403   RD is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L1093/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 1093   Expression must be the name of an object whose subtype is locally static, or it must be a qualified expression or type conversion whose type mark denotes a locally static subtype.  (VSS-1029) 
+CM:  3 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L1093/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 1093   Expression must be the name of an object whose subtype is locally static, or it must be a qualified expression or type conversion whose type mark denotes a locally static subtype.  (VSS-1029) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L1094/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 1094   Signal name required. (VSS-803)  (FPGA-hci-hdlc-unknown) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  Error   L15/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 15   Syntax error.  (VSS-1081) 
+CM:  Error   L22/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 22   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L24/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 24   Syntax error - mode INOUT not allowed here.  (VSS-1081) 
+CM:  Error   L25/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 25   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L28/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 28   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L29/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 29   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L31/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 31   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L32/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 32   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L33/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 33   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L34/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 34   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L35/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 35   Syntax error - mode OUT not allowed here.  (VSS-1081) 
+CM:  Error   L41/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 41   The intermediate file for entity COP2000 is not in the library bound to WORK.  (VSS-1084) 
+CM:  12 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM:  Error   L248/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 248   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L249/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 249   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L250/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 250   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L251/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 251   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L252/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 252   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L253/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 253   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L254/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 254   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L255/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 255   Can not update ports of mode IN or LINKAGE. (VSS-798)  (FPGA-hci-hdlc-unknown) 
+CM:  8 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L247/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 247   Signal declaration is not allowed in a process statement declarative part. (VSS-931)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L250/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 250   RPC is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L252/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 252   RPC is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  Error   L256/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 256   RPC is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  4 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM:  Error   L245/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 245   Syntax error.  (VSS-1081) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  Error   L253/C0 : #0 Error: C:/cop2000/xcv200/cop2000/cop2000.vhd  line 253   LEDA5 is not declared. (VSS-575)  (FPGA-hci-hdlc-unknown) 
+CM:  1 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found
+CM: 
+CM: Checking...
+CM: Check Successful
+CM: 
+CM: Checking...
+CM: Check Successful
+CM:  0 error(s) 0 warning(s) found

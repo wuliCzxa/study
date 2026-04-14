@@ -1,0 +1,48 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'PRO1流水灯20.LYT'.
+CADCAM generated at 18:21:55 on 2014年2月8日星期六.
+
+File List
+---------
+Top Copper              : PRO1流水灯20 - CADCAM Top Copper.TXT
+Bottom Copper           : PRO1流水灯20 - CADCAM Bottom Copper.TXT
+Top Silk Screen         : PRO1流水灯20 - CADCAM Top Silk Screen.TXT
+Top Solder Resist       : PRO1流水灯20 - CADCAM Top Solder Resist.TXT
+Bottom Solder Resist    : PRO1流水灯20 - CADCAM Bottom Solder Resist.TXT
+Mechanical 1            : PRO1流水灯20 - CADCAM Mechanical 1.TXT
+Drill                   : PRO1流水灯20 - CADCAM Drill.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
+
+D10	SQUARE  S=50th                                                            FLASH
+D11	CIRCLE  D=50th                                                            FLASH
+D12	CIRCLE  D=80th                                                            FLASH
+D13	SQUARE  S=80th                                                            FLASH
+D14	CIRCLE  D=70th                                                            FLASH
+D15	CIRCLE  D=100th                                                           FLASH
+D16	CIRCLE  D=8th                                                             DRAW
+D17	CIRCLE  D=40th                                                            DRAW
+D18	CIRCLE  D=15th                                                            DRAW
+D19	SQUARE  S=70th                                                            FLASH
+D70	SQUARE  S=100th                                                           FLASH
+D71	CIRCLE  D=90th                                                            FLASH
+D20	CIRCLE  D=120th                                                           FLASH
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+T01	30th (0-15)
+T02	40th (0-15)
+T03	99th (0-15)
+
+
+[END OF FILE]

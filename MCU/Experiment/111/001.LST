@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  001                                                                  04/08/2025 11:17:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN 001.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 001.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; ----------- Í·ÎÄ¼þÓë¼Ä´æÆ÷¶¨Òå -----------
+0000                   2     ORG 0000H            ; ³ÌÐòÆðÊ¼µØÖ·
+0000 020010            3     LJMP MAIN            ; Ìø×ªµ½Ö÷³ÌÐò
+0003                   4     ORG 0003H            ; Íâ²¿ÖÐ¶Ï0ÏòÁ¿µØÖ·
+0003 02002F            5     LJMP INT0_ISR        ; ÖÐ¶Ï·þÎñ³ÌÐò
+                       6     
+                       7     ; ----------- ³£Á¿¶¨Òå -----------
+  0080                 8     SEG_PORT EQU P0      ; ¶ÎÑ¡Ê¾Ý¿Ú£¨½Ó74HC573£©
+  00A0                 9     BIT_PORT EQU P2      ; Î»Ñ¡¿ØÖÆ¿Ú£¨½Ó74HC138£¬P2.0-P2.2£©
+                      10     
+                      11     ; ¹²ÑôÊÂë¹Ü¶ÎÂë±í£¨0-9£©
+0006                  12     SEG_TABLE:
+0006 C0F9A4B0         13         DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+000A 999282F8                
+000E 8090                    
+                      14     
+                      15     ; ----------- ±äÁ¿¶¨Òå -----------
+----                  16     DSEG AT 30H
+0030                  17     COUNT:     DS 2      ; 16Î»¼ÆÊÆ÷£¨0-999999£©
+0032                  18     DIGITS:    DS 6      ; ´æ´¢6Î»BCDÂë
+0038                  19     DIG_INDEX: DS 1      ; µ±Ç°ÏÔÊ¾Î»Ë÷Ò£¨0-5£©
+                      20     
+                      21     ; ----------- Ö÷³ÌÐò -----------
+----                  22     CSEG
+0010                  23     MAIN:
+0010 75815F           24         MOV SP, #5FH      ; ³õÊ¼»¯Õ»Ö¸Õë
+0013 12001E           25         LCALL INIT        ; ³õÊ¼»¯Ó²¼þ
+0016 12002B           26         LCALL DISPLAY_INIT ; ³õÊ¼»¯ÏÔÊ¾
+                      27     
+0019                  28     LOOP:
+0019 12004E           29         LCALL UPDATE_DISPLAY ; ¸üÐÂÊÂë¹ÜÏÔÊ¾
+001C 80FB             30         SJMP LOOP          ; Ö÷Ñ­»·
+                      31     
+                      32     ; ----------- ³õÊ¼»¯º¯Ê -----------
+001E                  33     INIT:
+                      34         ; ÅäÖÃÍâ²¿ÖÐ¶Ï0£¨ÏÂ½µÑØ´¥·¢£©
+001E D288             35         SETB IT0          ; ±ßÑØ´¥·¢Ä£Ê½
+0020 D2A8             36         SETB EX0          ; ÔÊÐíINT0ÖÐ¶Ï
+0022 D2AF             37         SETB EA           ; ¿ª×ÜÖÐ¶Ï
+                      38         ; ³õÊ¼»¯¼ÆÊÆ÷
+0024 753000           39         MOV COUNT, #0
+0027 753100           40         MOV COUNT+1, #0
+002A 22               41         RET
+                      42     
+002B                  43     DISPLAY_INIT:
+002B 753800           44         MOV DIG_INDEX, #0 ; ´ÓµÚ0Î»¿ªÊ¼ÏÔÊ¾
+002E 22               45         RET
+                      46     
+                      47     ; ----------- ÖÐ¶Ï·þÎñ³ÌÐò£¨°´¼ü¼ÆÊ£© -----------
+002F                  48     INT0_ISR:
+002F C0E0             49         PUSH ACC          ; ±£»¤ÏÖ³¡
+0031 C0D0             50         PUSH PSW
+                      51         ; ¼ÆÊÆ÷¼Ó1£¨16Î»£©
+0033 E530             52         MOV A, COUNT
+0035 2401             53         ADD A, #1
+0037 F530             54         MOV COUNT, A
+0039 E531             55         MOV A, COUNT+1
+003B 3400             56         ADDC A, #0
+A51 MACRO ASSEMBLER  001                                                                  04/08/2025 11:17:02 PAGE     2
+
+003D F531             57         MOV COUNT+1, A
+                      58         ; ×ª»»Îª6Î»BCDÂë
+003F 120047           59         LCALL COUNT_TO_BCD
+0042 D0D0             60         POP PSW           ; »Ö¸´ÏÖ³¡
+0044 D0E0             61         POP ACC
+0046 32               62         RETI
+                      63     
+                      64     ; ----------- ¼ÆÊÆ÷×ªBCDÂë -----------
+0047                  65     COUNT_TO_BCD:
+0047 7832             66         MOV R0, #DIGITS   ; R0Ö¸ÏòBCDÊ×é
+0049 7906             67         MOV R1, #6        ; 6Î»Ê×Ö
+004B 7A00             68         MOV R2, #0        ; ÇåÁãÁÙÊ±±äÁ¿
+                      69         ; ´Ë´¦Ê¡ÂÔ¾ßÌå×ª»»´úÂë£¨¿ÉÓÃ³·¨»ò²é±í·¨£©
+004D 22               70         RET
+                      71     
+                      72     ; ----------- ¶¯Ì¬ÏÔÊ¾¸üÐÂ -----------
+004E                  73     UPDATE_DISPLAY:
+                      74         ; 1. ¹Ø±Õµ±Ç°Î»Ñ¡£¨ÏûÒþ£©
+004E 7407             75         MOV A, #07H       ; 74HC138ÊäÈë111£¨²»Ñ¡ÈÎºÎÎ»£©
+0050 F5A0             76         MOV BIT_PORT, A
+                      77         ; 2. Êä³ö¶ÎÂë
+0052 E538             78         MOV A, DIG_INDEX  ; »ñÈ¡µ±Ç°Î»Ë÷Ò
+0054 2406             79         ADD A, #SEG_TABLE ; ¼ÆËã¶ÎÂëµØÖ·
+0056 93               80         MOVC A, @A+DPTR   ; ¶ÁÈ¡¶ÎÂë
+0057 F580             81         MOV SEG_PORT, A   ; Êä³öµ½74HC573
+                      82         ; 3. ´ò¿ªµ±Ç°Î»Ñ¡
+0059 E538             83         MOV A, DIG_INDEX  ; Î»Ë÷Ò£¨0-5£©
+005B F5A0             84         MOV BIT_PORT, A    ; 74HC138Ñ¡Ôñ¶ÔÓ¦Î»
+                      85         ; 4. ¸üÐÂÎ»Ë÷Ò
+005D 0538             86         INC DIG_INDEX
+005F E538             87         MOV A, DIG_INDEX
+0061 B40603           88         CJNE A, #6, SKIP_RESET
+0064 753800           89         MOV DIG_INDEX, #0  ; ³¬¹5Ôò¹éÁã
+0067                  90     SKIP_RESET:
+                      91         ; 5. ÑÓÊ±1ms
+0067 12006B           92         LCALL DELAY_1MS
+006A 22               93         RET
+                      94     
+                      95     ; ----------- ÑÓÊ±1ms -----------
+006B                  96     DELAY_1MS:
+006B 7E0A             97         MOV R6, #10
+006D                  98     DELAY_LOOP:
+006D 7F32             99         MOV R7, #50
+006F DFFE            100         DJNZ R7, $
+0071 DEFA            101         DJNZ R6, DELAY_LOOP
+0073 22              102         RET
+                     103     
+                     104     ; ----------- ¶ÎÂë±í´æ´¢ -----------
+0300                 105     ORG 300H
+0300                 106     SEG_DATA:
+0300 C0F9A4B0        107         DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+0304 999282F8                
+0308 8090                    
+                     108     
+                     109     END
+A51 MACRO ASSEMBLER  001                                                                  04/08/2025 11:17:02 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+BIT_PORT . . . . .  D ADDR   00A0H   A   
+COUNT. . . . . . .  D ADDR   0030H   A   
+COUNT_TO_BCD . . .  C ADDR   0047H   A   
+DELAY_1MS. . . . .  C ADDR   006BH   A   
+DELAY_LOOP . . . .  C ADDR   006DH   A   
+DIGITS . . . . . .  D ADDR   0032H   A   
+DIG_INDEX. . . . .  D ADDR   0038H   A   
+DISPLAY_INIT . . .  C ADDR   002BH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+INIT . . . . . . .  C ADDR   001EH   A   
+INT0_ISR . . . . .  C ADDR   002FH   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+LOOP . . . . . . .  C ADDR   0019H   A   
+MAIN . . . . . . .  C ADDR   0010H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SEG_DATA . . . . .  C ADDR   0300H   A   
+SEG_PORT . . . . .  D ADDR   0080H   A   
+SEG_TABLE. . . . .  C ADDR   0006H   A   
+SKIP_RESET . . . .  C ADDR   0067H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+UPDATE_DISPLAY . .  C ADDR   004EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

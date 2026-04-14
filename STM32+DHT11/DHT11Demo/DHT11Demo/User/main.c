@@ -1,0 +1,42 @@
+#include "stm32f10x.h"
+#include <stdio.h>
+#include "main.h"
+#include "./led/led.h"
+#include "./serial/serial.h"
+#include "./dht11/dht11.h"
+static __IO uint32_t TimingDelay;
+RCC_ClocksTypeDef RCC_Clocks;
+u8 temperature;
+u8 humidity;
+uint32_t n = 0;
+int main(void) {
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+
+  RCC_GetClocksFreq(&RCC_Clocks);
+  SysTick_Config(RCC_Clocks.HCLK_Frequency / 1000000);
+
+  LED_Init();
+  DHT11_Init();
+  Serial_Init();
+
+  while (1) {
+    DHT11_Read_Data(&temperature, &humidity); //读取温湿度值
+    //Serial_Printf("No.%u 温度:%d℃   湿度:%d%%RH\r\n", n++, temperature, humidity);
+	Serial_Printf("%d %d\r\n", temperature, humidity);
+    LED_Toggle();
+    Delay(1000000);
+
+  }
+}
+void Delay(__IO uint32_t nTime) {
+  TimingDelay = nTime;
+  while (TimingDelay != 0);
+}
+
+void TimingDelay_Decrement(void) {
+  if (TimingDelay != 0x00) {
+    TimingDelay--;
+  }
+}

@@ -1,0 +1,94 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/28/2015  13:53:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51FPS.LIB (?C?FPDIV)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         _DATA_GROUP_
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     02C8H     UNIT         ?C?LIB_CODE
+            CODE    02CBH     020BH     INBLOCK      ?PR?MAIN?MAIN
+            CODE    04D6H     001FH     INBLOCK      ?PR?_DELAY?MAIN
+            CODE    04F5H     000FH     UNIT         ?CO?MAIN
+            CODE    0504H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0007H
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/28/2015  13:53:04  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        ?C?FPMUL
+  C:0003H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPDIV
+  C:010CH         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+
+  -------         MODULE        ?C?FCAST
+  C:01B3H         PUBLIC        ?C?FCASTC
+  C:01AEH         PUBLIC        ?C?FCASTI
+  C:01A9H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:01E7H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?UIDIV
+  C:0268H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?LNEG
+  C:02BDH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+Program Size: data=16.0 xdata=0 code=1296
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

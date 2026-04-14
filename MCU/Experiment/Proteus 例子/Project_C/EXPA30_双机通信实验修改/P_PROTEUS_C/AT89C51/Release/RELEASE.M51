@@ -1,0 +1,83 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/13/2016  16:31:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000CH     UNIT         ?DT?MAIN
+            DATA    0014H     0004H     UNIT         _DATA_GROUP_
+                    0018H     0008H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0002H     ABSOLUTE     
+                    0005H     0006H                  *** GAP ***
+            CODE    000BH     0002H     ABSOLUTE     
+            CODE    000DH     0010H     UNIT         ?CO?MAIN
+                    001DH     0006H                  *** GAP ***
+            CODE    0023H     0002H     ABSOLUTE     
+            CODE    0025H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B1H     0073H     INBLOCK      ?PR?SCAN?MAIN
+            CODE    0124H     006CH     INBLOCK      ?PR?EXT0?MAIN
+            CODE    0190H     0033H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    01C3H     0031H     INBLOCK      ?PR?COM?MAIN
+            CODE    01F4H     0023H     INBLOCK      ?PR?SEG_SCAN?MAIN
+            CODE    0217H     0019H     INBLOCK      ?PR?_DELAYMS?MAIN
+            CODE    0230H     000EH     UNIT         ?C_INITSEG
+            CODE    023EH     000CH     INBLOCK      ?PR?TIMER0?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?PR?EXT0?MAIN                  -----    -----
+  +--> ?PR?SCAN?MAIN
+  +--> ?CO?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  16:31:59  PAGE 2
+
+
+?PR?SCAN?MAIN                  0014H    0004H
+  +--> ?PR?_DELAYMS?MAIN
+
+*** NEW ROOT ***************************************************
+
+?PR?COM?MAIN                   -----    -----
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?SEG_SCAN?MAIN
+
+Program Size: data=25.1 xdata=0 code=574
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

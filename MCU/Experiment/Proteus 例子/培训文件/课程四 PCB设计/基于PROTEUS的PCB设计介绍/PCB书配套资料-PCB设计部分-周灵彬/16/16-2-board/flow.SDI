@@ -1,0 +1,20 @@
+,,,ORG   0H
+0000,02 00 30,,        LJMP  STAR
+,,,        ORG   30H
+0030,74 7F,STAR,STAR:   MOV   A,#7FH            ;(A)←7FH
+0032,23,LOOP,LOOP:   RL    A                 ;循环左移
+0033,F5 A0,,        MOV   P2,A              ;输出到P1口显示
+0035,12 00 3B,,        LCALL DELAY             ;调延时子程序
+0038,02 00 32,,        LJMP  LOOP              ;返回运行
+003B,7F FA,DELAY,DELAY:  MOV   R7,#250   ;延时500ms
+003D,7E FA,D1,D1:     MOV   R6,#250
+003F,00,D2,D2:   NOP
+0040,00,,      NOP
+0041,00,,      NOP
+0042,00,,      NOP
+0043,00,,      NOP
+0044,00,,      NOP
+0045,DE F8,,      DJNZ  R6,D2
+0047,DF F4,,      DJNZ  R7,D1
+0049,22,,      RET
+000E,,,      END

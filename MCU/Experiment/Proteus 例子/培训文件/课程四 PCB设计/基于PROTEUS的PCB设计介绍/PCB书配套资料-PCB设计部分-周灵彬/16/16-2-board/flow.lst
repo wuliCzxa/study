@@ -1,0 +1,147 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	flow.asm
+	Object File:	flow.hex
+	List File:	flow.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:		N      0000	ORG   0H
+    2:	  0000	02 00 30	      	LJMP  STAR
+    3:		N      0030	      	ORG   30H
+    4:	  0030	74 7F		STAR:	MOV   A,#7FH		;(A)←7FH
+    5:	  0032	23		LOOP: 	RL    A			;循环左移
+    6:	  0033	F5 A0		      	MOV   P2,A		;输出到P1口显示
+    7:	  0035	12 00 3B	      	LCALL DELAY		;调延时子程序
+    8:	  0038	02 00 32	      	LJMP  LOOP		;返回运行
+    9:	  003B	7F FA		DELAY:	MOV   R7,#250	;延时500ms
+   10:	  003D	7E FA		D1:   	MOV   R6,#250
+   11:	  003F	00		D2:   NOP
+   12:	  0040	00		      NOP
+   13:	  0041	00		      NOP
+   14:	  0042	00		      NOP
+   15:	  0043	00		      NOP
+   16:	  0044	00		      NOP
+   17:	  0045	DE F8		      DJNZ  R6,D2
+   18:	  0047	DF F4		      DJNZ  R7,D1
+   19:	  0049	22		      RET
+   20:				      END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+D1				  CODE	    003D	  10
+D2				  CODE	    003F	  11
+DELAY				  CODE	    003B	   9
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+LOOP				  CODE	    0032	   5
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+STAR				  CODE	    0030	   4
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+WR				  BIT	      B6

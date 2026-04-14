@@ -1,0 +1,33 @@
+# Writing all output to: E:\P-pcb\Ppsu.log
+unselect all nets
+
+route 2
+
+unselect all nets
+
+clean 1
+
+unselect all nets
+
+reconer diagonal
+Unknown Command
+unselect all nets
+
+recorner diagonal
+
+unselect all nets
+
+recorner diagonal
+
+unselect all nets
+
+clean3
+
+unselect all nets
+
+route 2 1
+
+unselect all nets
+
+route 2 1
+

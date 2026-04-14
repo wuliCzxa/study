@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Administrator\Desktop\Proteus\SHIDU\KEIL\LIZI.uvproj
+Project File Date:  02/23/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+Program Size: data=67.0 xdata=0 code=2270
+creating hex file from "LIZI"...
+"LIZI" - 0 Error(s), 0 Warning(s).

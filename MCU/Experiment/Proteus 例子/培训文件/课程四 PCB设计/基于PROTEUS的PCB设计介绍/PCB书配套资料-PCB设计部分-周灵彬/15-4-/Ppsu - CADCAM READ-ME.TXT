@@ -1,0 +1,56 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'Ppsu.LYT'.
+CADCAM generated at 17:56:37 on 2014年2月8日星期六.
+
+File List
+---------
+Top Copper              : Ppsu - CADCAM Top Copper.TXT
+Bottom Copper           : Ppsu - CADCAM Bottom Copper.TXT
+Top Silk Screen         : Ppsu - CADCAM Top Silk Screen.TXT
+Top Solder Resist       : Ppsu - CADCAM Top Solder Resist.TXT
+Bottom Solder Resist    : Ppsu - CADCAM Bottom Solder Resist.TXT
+Mechanical 1            : Ppsu - CADCAM Mechanical 1.TXT
+Drill                   : Ppsu - CADCAM Drill.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
+
+D10	CIRCLE  D=40th                                                            DRAW
+D11	CIRCLE  D=60th                                                            DRAW
+D12	CIRCLE  D=80th                                                            DRAW
+D13	SQUARE  S=50th                                                            FLASH
+D14	CIRCLE  D=50th                                                            FLASH
+D15	CIRCLE  D=70th                                                            FLASH
+D16	CIRCLE  D=60th                                                            FLASH
+D17	SQUARE  S=80th                                                            FLASH
+D18	CIRCLE  D=80th                                                            FLASH
+D19	CIRCLE  D=120th                                                           FLASH
+D70	CIRCLE  D=8th                                                             DRAW
+D71	CIRCLE  D=12th                                                            DRAW
+D20	CIRCLE  D=20th                                                            DRAW
+D21	CIRCLE  D=10th                                                            DRAW
+D22	SQUARE  S=60th                                                            FLASH
+D23	SQUARE  S=90th                                                            FLASH
+D24	CIRCLE  D=90th                                                            FLASH
+D25	CIRCLE  D=130th                                                           FLASH
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+T01	30th (0-15)
+T02	40th (0-15)
+T03	110th (0-15)
+
+Manufacturing Notes
+-------------------
+生产说明，随设计一同保存，自动放置在CADCAM-READ-ME 文件中。
+
+[END OF FILE]

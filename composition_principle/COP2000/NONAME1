@@ -1,0 +1,6 @@
+MOV R0, #12H;
+MOV R1, #23H;
+ADD A, R0;
+ADD A, R1;
+MOV R3, A;
+OUT

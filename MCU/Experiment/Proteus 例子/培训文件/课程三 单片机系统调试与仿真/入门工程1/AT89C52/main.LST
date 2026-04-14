@@ -1,0 +1,78 @@
+C51 COMPILER V9.00   MAIN                                                                  07/27/2017 09:35:27 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          /*************************************************************
+   2          *
+   3          *
+   4          *
+   5          *
+   6           *************************************************************/
+   7          
+   8          #include <reg51.h>
+   9          #include <stdio.h>
+  10          #define uchar unsigned char
+  11          #define uint unsigned int
+  12          
+  13          //#define led_out P2    //定时P2 名为 LED输出
+  14          
+  15          sbit led=P2^0;          //位定义
+  16          sbit button=P2^1;
+  17          
+  18          
+  19          void main(void)
+  20           { 
+  21   1         //led=0;             //位操作
+  22   1       //  led_out=0xfe;      //寄存器操作
+  23   1         while (1)
+  24   1         {
+  25   2              if(button==0)
+  26   2                led=0; 
+  27   2              else
+  28   2                 led=1;
+  29   2          }
+  30   1            ;
+  31   1       }
+C51 COMPILER V9.00   MAIN                                                                  07/27/2017 09:35:27 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 19
+                                           ; SOURCE LINE # 20
+0000         ?C0001:
+                                           ; SOURCE LINE # 23
+                                           ; SOURCE LINE # 24
+                                           ; SOURCE LINE # 25
+0000 20A104            JB      button,?C0003
+                                           ; SOURCE LINE # 26
+0003 C2A0              CLR     led
+0005 80F9              SJMP    ?C0001
+0007         ?C0003:
+                                           ; SOURCE LINE # 28
+0007 D2A0              SETB    led
+                                           ; SOURCE LINE # 29
+0009 80F5              SJMP    ?C0001
+             ; FUNCTION main (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     11    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

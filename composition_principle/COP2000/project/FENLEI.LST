@@ -1,0 +1,188 @@
+00 8C04     MOV R0, #04H     ; 将循环起始位置设置为1
+            
+02 8D07     MOV R1, #07H     ; 将7存储在R1寄存器中，用于判断是否能被7整除
+            
+            
+            
+04 7C00     MOV A,#00H
+            
+06 88F0     MOV 0F0H, A     ; 正数个数初始化为0
+            
+08 88F1     MOV 0F1H, A     ; 负数个数初始化为0
+            
+0A 88F2     MOV 0F2H, A     ; 零的个数初始化为0
+            
+0C 88F3     MOV 0F3H, A     ; 奇数个数初始化为0
+            
+0E 88F4     MOV 0F4H, A     ; 偶数个数初始化为0
+            
+10 88F5     MOV 0F5H, A     ; 能被7整除的数的个数初始化为0
+            
+            
+            
+            LOOP:
+12 8C04         MOV R0, #04H     ; 将循环起始位置设置为1
+            
+14 70           MOV A,R0	    ; 将R0中的值加载到累加器A中，用于判断循环是否结束
+            
+15 3C05         SUB A,#05H	    ; 设置循环结束位置为101（十进制）101不执行
+            
+17 A46E         JZ LOOP_HOLD    ; 如果循环结束，停止循环
+            
+            
+            
+19 74           MOV A, @R0      ; 将内存中的值加载到累加器A中
+            
+1A 5CFF         AND A,#0FFH     ;设置累加器A
+            
+1C A42B         JZ IS_ZERO      ; 如果值为零，跳转到IS_ZERO标签
+            
+            
+            
+1E 1C80         ADD A,#80H      ;累加器最高位加一
+            
+20 A03A         JC IS_NEGATIVE    ; 如果是负数，跳转到IS_NEGATIVE标签
+            
+            
+            
+22 78F0         MOV A,0F0H      ;读取结果相应位置
+            
+24 1C01         ADD A,#01H      ;累加器加一
+            
+26 88F0         MOV 0F0H, A     ; 增加正数个数计数器
+            
+            
+            
+28 74           MOV A,@R0
+            
+            
+            
+29 AC41         JMP ODD_EVEN_CHECK
+            
+            
+            
+            IS_ZERO:
+            
+2B 78F2         MOV A,0F2H
+            
+2D 1C01         ADD A,#01H
+            
+2F 88F2         MOV 0F2H, A     ; 增加零的个数计数器
+            
+            
+            
+31 78F5         MOV A,0F5H      ;读取结果相应位置
+            
+33 1C01         ADD A,#01H      ;累加器加一
+            
+35 88F5         MOV 0F5H, A        ; 增加能被7整除的数的计数器
+            
+            
+            
+37 74           MOV A,@R0
+            
+38 AC41         JMP ODD_EVEN_CHECK   ; 继续判断奇偶性
+            
+            
+            
+            IS_NEGATIVE:
+            
+3A 78F1         MOV A,0F1H      ;读取结果相应位置
+            
+3C 1C01         ADD A,#01H      ;累加器加一
+            
+3E 88F1         MOV 0F1H, A     ; 增加负数个数计数器
+            
+40 74           MOV A,@R0
+            
+            
+            
+            ODD_EVEN_CHECK:
+            
+41 5C01         AND A, #01H    ; 判断奇偶性
+            
+43 A44E         JZ IS_EVEN     ; 如果是偶数，跳转到IS_EVEN标签
+            
+            
+            
+45 78F3         MOV A,0F3H      ;读取结果相应位置
+            
+47 1C01         ADD A,#01H      ;累加器加一
+            
+49 88F3         MOV 0F3H, A    ; 增加奇数个数计数器
+            
+            
+            
+4B 74           MOV A,@R0
+            
+4C AC54         JMP DIVISIBLE_7_CHECK
+            
+            
+            
+            IS_EVEN:
+            
+4E 78F4         MOV A,0F4H      ;读取结果相应位置
+            
+50 1C01         ADD A,#01H      ;累加器加一
+            
+52 88F4         MOV 0F4H, A    ; 增加偶数个数计数器
+            
+            
+            
+            DIVISIBLE_7_CHECK:
+            
+54 74           MOV A,@R0
+            
+55 5C7F         AND A,#7FH
+            
+            DIV_LOOP:
+            
+57 31           SUB A, R1           ; A减去7
+            
+58 A067         JC NOT_DIVISIBLE_7   ; 如果借位了，则说明不能被7整除
+            
+5A A45E         JZ DIVISIBLE_7       ; 如果为零，则说明能被7整除
+            
+5C AC57         JMP DIV_LOOP
+            
+            DIVISIBLE_7:
+            
+5E 78F5         MOV A,0F5H      ;读取结果相应位置
+            
+60 1C01         ADD A,#01H      ;累加器加一
+            
+62 88F5         MOV 0F5H, A        ; 增加能被7整除的数的计数器
+            
+            
+            
+64 74           MOV A,@R0
+            
+65 AC68         JMP LOOP_NEXT       ; 继续下一个循环
+            
+            
+            
+            NOT_DIVISIBLE_7:
+            
+67 E0           NOP                  ; 不可整除，不进行任何操作
+            
+            
+            
+            LOOP_NEXT:
+            
+68 70           MOV A,R0
+            
+69 1C01         ADD A,#01H              ; 移动到下一个内存位置
+            
+6B 80           MOV R0,A
+            
+6C AC12         JMP LOOP;
+            
+            
+            
+            LOOP_HOLD:
+            
+6E AC6E         JMP LOOP_HOLD     ; 计数完毕，在此处原地循环
+            
+            
+            
+            

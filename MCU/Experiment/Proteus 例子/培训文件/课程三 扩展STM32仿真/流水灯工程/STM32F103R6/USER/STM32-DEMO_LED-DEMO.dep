@@ -1,0 +1,56 @@
+Dependencies for Project 'STM32-DEMO', Target 'LED-DEMO': (DO NOT MODIFY !)
+F (..\CMSIS\startup\startup_stm32f10x_hd.s)(0x4D783CDE)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x--list ..\listing\startup_stm32f10x_hd.lst --xref -o ..\output\startup_stm32f10x_hd.o --depend ..\output\startup_stm32f10x_hd.d)
+F (.\main.c)(0x5A42F679)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\led.h)(0x5A42F1D8)
+F (.\stm32f10x_it.c)(0x4D99A59E)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\stm32f10x_it.o --omf_browse ..\output\stm32f10x_it.crf --depend ..\output\stm32f10x_it.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_it.h)(0x4D99A59E)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+F (.\led.c)(0x5A42F14F)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\led.o --omf_browse ..\output\led.crf --depend ..\output\led.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\led.h)(0x5A42F1D8)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+F (..\FWlib\src\stm32f10x_rcc.c)(0x4D783BB4)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\stm32f10x_rcc.o --omf_browse ..\output\stm32f10x_rcc.crf --depend ..\output\stm32f10x_rcc.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+F (..\FWlib\src\stm32f10x_gpio.c)(0x4D79EEC6)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\stm32f10x_gpio.o --omf_browse ..\output\stm32f10x_gpio.crf --depend ..\output\stm32f10x_gpio.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+F (..\CMSIS\core_cm3.c)(0x4C0C587E)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\core_cm3.o --omf_browse ..\output\core_cm3.crf --depend ..\output\core_cm3.d)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+F (..\CMSIS\system_stm32f10x.c)(0x4D783CB0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\USER -I..\FWlib\inc -I..\FWlib\src-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F10x-DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -o ..\output\system_stm32f10x.o --omf_browse ..\output\system_stm32f10x.crf --depend ..\output\system_stm32f10x.d)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7B744)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\USER\stm32f10x_conf.h)(0x4F740265)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (E:\汪伟捷学习资料\stm32与Proteus仿真工程\流水灯工程\STM32F103R6\FWlib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+F (..\readme.txt)(0x00000000)()

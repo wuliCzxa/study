@@ -1,0 +1,134 @@
+A51 MACRO ASSEMBLER  0062                                                                 04/12/2025 09:07:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 0062.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 0062.ASM SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0080                 1     ADC_PORT        EQU     P0
+  0090                 2     DAC_PORT        EQU     P1
+  00B0                 3     SW_RELAY        EQU     P3
+  00A0                 4     SEG_PORT        EQU     P2
+  00B0                 5     BIT_PORT        EQU     P3
+                       6     
+0000                   7             ORG     0
+0000 020050            8             LJMP    MAIN
+0050                   9             ORG     50H
+                      10     
+0050                  11             MAIN:
+0050 758160           12                     MOV     SP,     #60H
+0053 753080           13                     MOV     30H,    #80H
+                      14     
+0056                  15             MAIN_LOOP:
+0056 A2B0             16                     MOV     C,      SW_RELAY.0
+0058 400A             17                     JC      SWITCH_1
+                      18     
+005A C2B1             19                     CLR     SW_RELAY.1
+005C 120071           20                     LCALL   ADC_CONVERT
+005F 12007E           21                     LCALL   DISPLAY
+0062 80F2             22                     SJMP    MAIN_LOOP
+                      23     
+0064                  24             SWITCH_1:
+0064 D2B1             25                     SETB    SW_RELAY.1
+0066 853090           26                     MOV     DAC_PORT,       30H
+0069 120071           27                     LCALL   ADC_CONVERT
+006C 12007E           28                     LCALL   DISPLAY
+006F 80E5             29                     SJMP    MAIN_LOOP
+                      30     
+0071                  31             ADC_CONVERT:
+0071 7580FF           32                     MOV     ADC_PORT,       #0FFH
+0074 C2B3             33                     CLR     P3.3
+0076 D2B3             34                     SETB    P3.3
+                      35     
+0078                  36             WAIT_EOC:
+0078 20B4FD           37                     JB      P3.4,   WAIT_EOC
+007B E580             38                     MOV     A,      ADC_PORT
+007D 22               39                     RET
+                      40     
+007E                  41             DISPLAY:
+007E 75F064           42                     MOV     B,      #100
+0081 84               43                     DIV     AB
+0082 F540             44                     MOV     40H,    A
+0084 E5F0             45                     MOV     A,      B
+0086 75F00A           46                     MOV     B,      #10
+0089 84               47                     DIV     AB
+008A F541             48                     MOV     41H,    A
+008C 85F042           49                     MOV     42H,    B
+                      50     
+008F 9000B6           51                     MOV     DPTR,   #SEG_TABLE
+                      52     
+0092 E540             53                     MOV     A,      40H
+0094 93               54                     MOVC    A,      @A+DPTR
+0095 F5A0             55                     MOV     SEG_PORT,       A
+0097 C2B2             56                     CLR     BIT_PORT.2
+0099 1200C0           57                     LCALL   DELAY
+009C D2B2             58                     SETB    BIT_PORT.2
+A51 MACRO ASSEMBLER  0062                                                                 04/12/2025 09:07:42 PAGE     2
+
+                      59     
+009E E541             60                     MOV     A,      41H
+00A0 93               61                     MOVC    A,      @A+DPTR
+00A1 F5A0             62                     MOV     SEG_PORT,       A
+00A3 C2B1             63                     CLR     BIT_PORT.1
+00A5 1200C0           64                     LCALL   DELAY
+00A8 D2B1             65                     SETB    BIT_PORT.1
+                      66     
+00AA E542             67                     MOV     A,      42H
+00AC 93               68                     MOVC    A,      @A+DPTR
+00AD F5A0             69                     MOV     SEG_PORT,       A
+00AF C2B0             70                     CLR     BIT_PORT.0
+00B1 1200C0           71                     LCALL   DELAY
+00B4 D2B0             72                     SETB    BIT_PORT.0
+                      73     
+00B6                  74             SEG_TABLE:
+00B6 3F065B4F         75                     DB      3FH,    06H,    5BH,    4FH,    66H,    6DH,    7DH,    07H,    7FH
+                             ,    6FH     ;       0-9
+00BA 666D7D07                
+00BE 7F6F                    
+                      76     
+00C0                  77             DELAY:
+00C0 7E14             78                     MOV     R6,     #20
+                      79     
+00C2                  80             DELAY_LOOP:
+00C2 7FFA             81                     MOV     R7,     #250
+00C4 DFFE             82                     DJNZ    R7,     $
+00C6 DEFA             83                     DJNZ    R6,     DELAY_LOOP
+00C8 22               84                     RET
+                      85     
+                      86             END
+A51 MACRO ASSEMBLER  0062                                                                 04/12/2025 09:07:42 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADC_CONVERT. . . .  C ADDR   0071H   A   
+ADC_PORT . . . . .  D ADDR   0080H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+BIT_PORT . . . . .  D ADDR   00B0H   A   
+DAC_PORT . . . . .  D ADDR   0090H   A   
+DELAY. . . . . . .  C ADDR   00C0H   A   
+DELAY_LOOP . . . .  C ADDR   00C2H   A   
+DISPLAY. . . . . .  C ADDR   007EH   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+MAIN_LOOP. . . . .  C ADDR   0056H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SEG_PORT . . . . .  D ADDR   00A0H   A   
+SEG_TABLE. . . . .  C ADDR   00B6H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+SWITCH_1 . . . . .  C ADDR   0064H   A   
+SW_RELAY . . . . .  D ADDR   00B0H   A   
+WAIT_EOC . . . . .  C ADDR   0078H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

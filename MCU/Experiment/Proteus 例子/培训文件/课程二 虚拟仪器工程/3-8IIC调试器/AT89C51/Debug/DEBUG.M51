@@ -1,0 +1,347 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/13/2016  11:45:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE I2C.OBJ TO DEBUG.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  I2C.OBJ (I2C)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  DEBUG.OMF (I2C)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         _DATA_GROUP_
+                    000EH     0012H                  *** GAP ***
+            BIT     0020H.0   0000H.4   UNIT         _BIT_GROUP_
+                    0020H.4   00A0H.4                *** GAP ***
+            DATA    0055H     0004H     ABSOLUTE     
+                    0059H     0007H                  *** GAP ***
+            DATA    0060H     0004H     ABSOLUTE     
+            IDATA   0064H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0002H     ABSOLUTE     
+            CODE    0005H     000EH     INBLOCK      ?PR?STOP?I2C
+            CODE    0013H     0002H     ABSOLUTE     
+            CODE    0015H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00A1H     0055H     INBLOCK      ?PR?READ?I2C
+            CODE    00F6H     003DH     INBLOCK      ?PR?WRITE?I2C
+            CODE    0133H     003AH     INBLOCK      ?PR?EXT0?I2C
+            CODE    016DH     003AH     INBLOCK      ?PR?EXT1?I2C
+            CODE    01A7H     0024H     INBLOCK      ?PR?_SEND_BYTE?I2C
+            CODE    01CBH     0023H     INBLOCK      ?PR?REC_BYTE?I2C
+            CODE    01EEH     0010H     INBLOCK      ?PR?SACK?I2C
+            CODE    01FEH     000DH     INBLOCK      ?PR?START?I2C
+            CODE    020BH     000DH     INBLOCK      ?PR?RACK?I2C
+            CODE    0218H     000CH     INBLOCK      ?PR?ACKN?I2C
+            CODE    0224H     0008H     INBLOCK      ?PR?MAIN?I2C
+            CODE    022CH     0007H     UNIT         ?C_INITSEG
+            CODE    0233H     0004H     INBLOCK      ?PR?DELAY3US?I2C
+
+
+
+OVERLAY MAP OF MODULE:   DEBUG.OMF (I2C)
+
+
+SEGMENT                           BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH     START    LENGTH
+------------------------------------------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:45:58  PAGE 2
+
+
+?PR?EXT0?I2C                   -----    -----      -----    -----
+  +--> ?PR?WRITE?I2C
+
+?PR?WRITE?I2C                  0020H.0  0000H.1    0008H    0001H
+  +--> ?PR?START?I2C
+  +--> ?PR?_SEND_BYTE?I2C
+  +--> ?PR?RACK?I2C
+  +--> ?PR?STOP?I2C
+
+?PR?START?I2C                  -----    -----      -----    -----
+  +--> ?PR?DELAY3US?I2C
+
+?PR?_SEND_BYTE?I2C             -----    -----      000CH    0002H
+  +--> ?PR?DELAY3US?I2C
+
+?PR?RACK?I2C                   0020H.3  0000H.1    -----    -----
+  +--> ?PR?DELAY3US?I2C
+
+?PR?STOP?I2C                   -----    -----      -----    -----
+  +--> ?PR?DELAY3US?I2C
+
+*** NEW ROOT ***************************************************
+
+?PR?EXT1?I2C                   -----    -----      -----    -----
+  +--> ?PR?READ?I2C
+
+?PR?READ?I2C                   0020H.2  0000H.1    000BH    0001H
+  +--> ?PR?START?I2C
+  +--> ?PR?_SEND_BYTE?I2C
+  +--> ?PR?RACK?I2C
+  +--> ?PR?REC_BYTE?I2C
+  +--> ?PR?SACK?I2C
+  +--> ?PR?ACKN?I2C
+  +--> ?PR?STOP?I2C
+
+?PR?REC_BYTE?I2C               -----    -----      000CH    0002H
+  +--> ?PR?DELAY3US?I2C
+
+?PR?SACK?I2C                   -----    -----      -----    -----
+  +--> ?PR?DELAY3US?I2C
+
+?PR?ACKN?I2C                   -----    -----      -----    -----
+  +--> ?PR?DELAY3US?I2C
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                  -----    -----      -----    -----
+  +--> ?PR?MAIN?I2C
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  DEBUG.OMF (I2C)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:45:58  PAGE 3
+
+
+  -------         MODULE        I2C
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0133H         PUBLIC        ext0
+  D:00B0H         PUBLIC        P3
+  C:016DH         PUBLIC        ext1
+  B:00A8H.7       PUBLIC        EA
+  C:00A1H         PUBLIC        read
+  C:0218H         PUBLIC        ackn
+  C:020BH         PUBLIC        rack
+  C:01EEH         PUBLIC        sack
+  C:0224H         PUBLIC        main
+  C:00F6H         PUBLIC        write
+  C:0233H         PUBLIC        delay3us
+  C:01FEH         PUBLIC        start
+  B:0090H.0       PUBLIC        sda
+  D:0055H         PUBLIC        mem
+  C:01A7H         PUBLIC        _send_byte
+  B:0090H.1       PUBLIC        scl
+  C:0005H         PUBLIC        stop
+  B:00A8H.0       PUBLIC        EX0
+  B:00A8H.2       PUBLIC        EX1
+  C:01CBH         PUBLIC        rec_byte
+  D:0060H         PUBLIC        rec_mem
+  B:00B0H.2       PUBLIC        key1
+  B:00B0H.3       PUBLIC        key2
+  -------         PROC          MAIN
+  C:0224H         LINE#         24
+  C:0224H         LINE#         25
+  C:0224H         LINE#         26
+  C:022AH         LINE#         27
+  -------         ENDPROC       MAIN
+  -------         PROC          EXT0
+  C:0133H         LINE#         30
+  C:0150H         LINE#         32
+  C:0152H         LINE#         33
+  -------         ENDPROC       EXT0
+  -------         PROC          EXT1
+  C:016DH         LINE#         35
+  C:018AH         LINE#         37
+  C:018CH         LINE#         38
+  -------         ENDPROC       EXT1
+  -------         PROC          READ
+  -------         DO            
+  D:000BH         SYMBOL        i
+  B:0020H.2       SYMBOL        f
+  -------         ENDDO         
+  C:00A1H         LINE#         40
+  C:00A1H         LINE#         41
+  C:00A1H         LINE#         44
+  C:00A3H         LINE#         45
+  C:00A7H         LINE#         46
+  C:00ABH         LINE#         47
+  C:00AEH         LINE#         48
+  C:00B0H         LINE#         49
+  C:00B4H         LINE#         50
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:45:58  PAGE 4
+
+
+  C:00B8H         LINE#         51
+  C:00BCH         LINE#         52
+  C:00C0H         LINE#         53
+  C:00C3H         LINE#         54
+  C:00C5H         LINE#         55
+  C:00C9H         LINE#         56
+  C:00CDH         LINE#         57
+  C:00D0H         LINE#         58
+  C:00D3H         LINE#         59
+  C:00DCH         LINE#         60
+  C:00DEH         LINE#         61
+  C:00E7H         LINE#         62
+  C:00EDH         LINE#         63
+  C:00EDH         LINE#         64
+  C:00EDH         LINE#         65
+  C:00EDH         LINE#         66
+  C:00F5H         LINE#         67
+  -------         ENDPROC       READ
+  -------         PROC          WRITE
+  -------         DO            
+  D:0008H         SYMBOL        i
+  B:0020H.0       SYMBOL        f
+  -------         ENDDO         
+  C:00F6H         LINE#         69
+  C:00F6H         LINE#         70
+  C:00F6H         LINE#         73
+  C:00F8H         LINE#         74
+  C:00FCH         LINE#         75
+  C:0100H         LINE#         76
+  C:0103H         LINE#         77
+  C:0107H         LINE#         78
+  C:010BH         LINE#         79
+  C:010EH         LINE#         80
+  C:0111H         LINE#         81
+  C:011AH         LINE#         82
+  C:011EH         LINE#         83
+  C:0121H         LINE#         84
+  C:012AH         LINE#         85
+  C:012AH         LINE#         86
+  C:012AH         LINE#         87
+  C:0132H         LINE#         88
+  -------         ENDPROC       WRITE
+  -------         PROC          START
+  C:01FEH         LINE#         91
+  C:01FEH         LINE#         92
+  C:01FEH         LINE#         93
+  C:0200H         LINE#         94
+  C:0202H         LINE#         95
+  C:0204H         LINE#         96
+  C:0206H         LINE#         97
+  C:0208H         LINE#         98
+  C:020AH         LINE#         99
+  -------         ENDPROC       START
+  -------         PROC          STOP
+  C:0005H         LINE#         101
+  C:0005H         LINE#         102
+  C:0005H         LINE#         103
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:45:58  PAGE 5
+
+
+  C:0007H         LINE#         104
+  C:0009H         LINE#         105
+  C:000BH         LINE#         106
+  C:000DH         LINE#         107
+  C:000FH         LINE#         108
+  C:0011H         LINE#         109
+  -------         ENDPROC       STOP
+  -------         PROC          RACK
+  -------         DO            
+  B:0020H.3       SYMBOL        flag
+  -------         ENDDO         
+  C:020BH         LINE#         112
+  C:020BH         LINE#         113
+  C:020BH         LINE#         115
+  C:020DH         LINE#         116
+  C:020FH         LINE#         117
+  C:0213H         LINE#         118
+  C:0215H         LINE#         119
+  C:0217H         LINE#         120
+  -------         ENDPROC       RACK
+  -------         PROC          SACK
+  C:01EEH         LINE#         122
+  C:01EEH         LINE#         123
+  C:01EEH         LINE#         124
+  C:01F0H         LINE#         125
+  C:01F2H         LINE#         126
+  C:01F4H         LINE#         127
+  C:01F6H         LINE#         128
+  C:01F8H         LINE#         129
+  C:01FAH         LINE#         130
+  C:01FCH         LINE#         131
+  -------         ENDPROC       SACK
+  -------         PROC          ACKN
+  C:0218H         LINE#         134
+  C:0218H         LINE#         135
+  C:0218H         LINE#         136
+  C:021AH         LINE#         137
+  C:021CH         LINE#         138
+  C:021EH         LINE#         139
+  C:0220H         LINE#         140
+  C:0222H         LINE#         141
+  -------         ENDPROC       ACKN
+  -------         PROC          REC_BYTE
+  -------         DO            
+  D:000CH         SYMBOL        i
+  D:000DH         SYMBOL        temp
+  -------         ENDDO         
+  C:01CBH         LINE#         144
+  C:01CBH         LINE#         145
+  C:01CBH         LINE#         147
+  C:01CEH         LINE#         148
+  C:01CEH         LINE#         149
+  C:01D4H         LINE#         150
+  C:01D6H         LINE#         151
+  C:01D8H         LINE#         152
+  C:01DEH         LINE#         153
+  C:01E0H         LINE#         154
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/13/2016  11:45:58  PAGE 6
+
+
+  C:01E2H         LINE#         155
+  C:01EBH         LINE#         156
+  C:01EDH         LINE#         157
+  -------         ENDPROC       REC_BYTE
+  -------         PROC          _SEND_BYTE
+  D:000CH         SYMBOL        temp
+  -------         DO            
+  D:000DH         SYMBOL        i
+  -------         ENDDO         
+  C:01A7H         LINE#         159
+  C:01A9H         LINE#         160
+  C:01A9H         LINE#         162
+  C:01ABH         LINE#         163
+  C:01AEH         LINE#         164
+  C:01AEH         LINE#         165
+  C:01B3H         LINE#         166
+  C:01B5H         LINE#         167
+  C:01B7H         LINE#         168
+  C:01B9H         LINE#         169
+  C:01BFH         LINE#         170
+  C:01C8H         LINE#         171
+  C:01CAH         LINE#         172
+  -------         ENDPROC       _SEND_BYTE
+  -------         PROC          DELAY3US
+  C:0233H         LINE#         174
+  C:0233H         LINE#         175
+  C:0233H         LINE#         176
+  C:0236H         LINE#         177
+  -------         ENDPROC       DELAY3US
+  -------         ENDMOD        I2C
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_SEND_BYTE?I2C
+    CALLER1: ?PR?EXT0?I2C
+    CALLER2: ?PR?EXT1?I2C
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?RACK?I2C
+    CALLER1: ?PR?EXT0?I2C
+    CALLER2: ?PR?EXT1?I2C
+
+Program Size: data=23.4 xdata=0 code=567
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

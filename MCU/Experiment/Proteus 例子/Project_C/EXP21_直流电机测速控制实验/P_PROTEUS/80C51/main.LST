@@ -1,0 +1,112 @@
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 15:19:20 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*************************************************  
+   2          *文件名称： main.c 
+   3          *作 者：    
+   4          *版 本：    V1.00
+   5          *说 明：    直流电机测速控制实验
+   6          *修改记录：  
+   7          --------------------------------------------------
+   8          *Descriptoon: 直流电机在1S中内转的圈数，通过数码管
+   9                        显示测量值
+  10          *接线说明：   P00~P07-SA~SH，P10~P12-C0~C2，P20-SW1
+  11                        P22-IN1，P23-IN2,P34-PLU,EN1-+5V               
+  12          **************************************************/
+  13          
+  14          #include <reg52.h>
+  15          #include <intrins.h>
+  16          #define uchar unsigned char
+  17          #define uint unsigned int
+  18          #define out  P0
+  19          uchar code seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x01};
+  20          /**********端口定义*******************************/
+  21          //sbit EN1=P2^1;
+  22          sbit SW1=P2^0;
+  23          sbit IN1=P2^1;
+  24          sbit IN2=P2^2;
+  25          
+  26          int i = 0;        
+  27          /***********主函数********************************/
+  28          void main(void)
+  29          {
+  30   1              int j;
+  31   1      
+  32   1              TMOD=0x15;                          // 定时器0工作于计数方式，工作方式1，16位计数
+  33   1                                                  // 定时器1工作于定时方式，工作方式1，16位定时
+  34   1              TH0=0;                                                          // 清零计数器
+  35   1              TL0=0;
+  36   1              TH1=0x4C;                                                       // 11.0592M晶振工作下，定时50ms
+  37   1              TL1=0x00;
+  38   1              TR0=1;                                                          // 启动定时器0
+  39   1              TR1=1;                                                          // 启动定时器1
+  40   1              IE=0x88;                                                        // 打开定时中断1和总中断
+  41   1      
+  42   1              while(1)
+  43   1              {       
+  44   2                      if(SW1)                                                 //SW1=1，正转
+  45   2              {
+  46   3                  IN1=1;
+  47   3                  IN2=0;
+  48   3              }
+  49   2              else                                                    //SW1=0，反转
+  50   2              {
+  51   3                  IN1=0;
+  52   3                  IN2=1;
+  53   3              }
+  54   2              //      i=i/4;  
+  55   2                      P1 = 0x00;      
+C51 COMPILER V9.00   MAIN                                                                  07/13/2016 15:19:20 PAGE 2   
+
+  56   2                      out = seg[i/100];                               //输出百位
+  57   2                      P1 = 0x01;
+  58   2                      for(j=0;j<100;j++);
+  59   2                      
+  60   2                      
+  61   2                      P1 = 0x00;
+  62   2                      out = seg[i%100/10];                    // 输出十位
+  63   2                      P1 = 0x02;       
+  64   2                      for(j=0;j<100;j++);       
+  65   2                      
+  66   2                      P1 = 0x00;              
+  67   2                      out = seg[i%10];                                // 输出个位
+  68   2                      P1 = 0x04;
+  69   2                      for(j=0;j<100;j++);
+  70   2              }                  
+  71   1      }
+  72           
+  73          /************计数器1中断处理函数*********************/
+  74          void Timer1_ISR() interrupt 3
+  75          {
+  76   1              static char j = 0;
+  77   1              TH1=0x4C;                                                  // 重设定时器值，50ms @ 11.0592MHz XTAL
+  78   1              TL1=0x00;
+  79   1              if(++j == 20)                                      // 50ms * 20 = 1S
+  80   1              {                         
+  81   2                      j = 0;
+  82   2                      i = (TH0 << 8) | TL0;              // 1S内的计数值即为电机转动速度,单位为：转/秒
+  83   2                      i=i/4;                                             //4个脉冲为一圈，除以4得到转速
+  84   2                      TH0 = 0;                                           // 清零计数
+  85   2                      TL0 = 0;         
+  86   2              }
+  87   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    264    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

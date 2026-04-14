@@ -1,0 +1,185 @@
+A51 MACRO ASSEMBLER  007                                                                  04/19/2025 09:43:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 007.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 007.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0       
+0000 020050            2             LJMP START      
+000B                   3             ORG 000BH       
+000B 0200B9            4             LJMP IT0P       
+0023                   5             ORG 0023H       
+0023 0200E0            6             LJMP INPUT      
+0050                   7             ORG 50H       
+                       8             
+0050                   9             START: 
+                      10     ;           ORL 8EH,    #20H  
+0050 E4               11                     CLR     A
+0051 F533             12                     MOV     33H,    A   
+0053 758921           13                 MOV TMOD,   #21H 
+0056 759850           14                 MOV SCON,   #50H
+0059 758C3C           15                 MOV TH0,    #3CH  
+005C 758AB0           16                 MOV TL0,    #0B0H
+005F 758DF4           17                 MOV TH1,    #0F4H
+0062 758B00           18                 MOV TL1,    #00H 
+0065 D2BC             19                 SETB        PS     
+0067 75A892           20                 MOV IE,     #92H  
+                      21                 ;SETB       TR0      
+006A D28E             22                 SETB        TR1    
+                      23                     
+006C                  24             WAIT_INPUT:
+006C E533             25                     MOV     A,      33H  
+006E 60FC             26                     JZ      WAIT_INPUT
+0070 D28C             27                     SETB    TR0  
+                      28                     
+0072 7C14             29                     MOV     R4,     #20
+                      30             
+0074                  31             LOOP: 
+0074 7830             32                 MOV R0,#30H  
+0076 7920             33                 MOV R1,#20H
+                      34             
+0078                  35             RI0:
+                      36             
+0078                  37             BCD: 
+0078 E6               38                 MOV A,      @R0    
+0079 C4               39                 SWAP A       
+007A 120088           40                 LCALL       DISP    
+007D E6               41                 MOV A,      @R0    
+007E 120088           42                 LCALL       DISP    
+0081 08               43                 INC R0       
+0082 B833F3           44                 CJNE        R0,     #33H,   BCD 
+0085 020074           45                 LJMP        LOOP     
+                      46             
+0088                  47             DISP:
+0088 540F             48                 ANL A,      #0FH    
+008A 9000A2           49                 MOV DPTR,   #TAB
+008D 93               50                 MOVC        A,      @A+DPTR
+008E 908002           51                 MOV DPTR,   #8002H
+0091 F0               52                 MOVX        @DPTR,  A 
+0092 E9               53                 MOV A,      R1     
+0093 908001           54                 MOV DPTR,   #8001H
+0096 F0               55                 MOVX        @DPTR,A
+0097 03               56                 RR A      
+0098 F9               57                 MOV R1,     A     
+0099 1200AC           58                 LCALL       DELAY  
+A51 MACRO ASSEMBLER  007                                                                  04/19/2025 09:43:09 PAGE     2
+
+009C E4               59                 CLR A       
+009D 908001           60                 MOV DPTR,   #8001H
+00A0 F0               61                 MOVX        @DPTR,  A 
+00A1 22               62                 RET          
+                      63             
+00A2                  64             TAB: 
+00A2 3F065B4F         65                     DB      3FH,    06H,    5BH,    4FH,    66H,    6DH,    7DH,    07H,    7FH
+                             ,    6FH
+00A6 666D7D07                
+00AA 7F6F                    
+                      66             
+00AC                  67             DELAY: 
+00AC 7F01             68                 MOV R7,     #1    
+00AE                  69             L0: 
+00AE 7E02             70                 MOV R6,     #2   
+00B0                  71             L1: 
+00B0 7DFA             72                 MOV R5,     #250  
+00B2 DDFE             73                 DJNZ        R5,     $    
+00B4 DEFA             74                 DJNZ        R6,     L1   
+00B6 DFF6             75                 DJNZ        R7,     L0   
+00B8 22               76                 RET          
+                      77             
+00B9                  78             IT0P: 
+00B9 758C3C           79                 MOV TH0,    #3CH  
+00BC 758AB0           80                 MOV TL0,    #0B0H 
+00BF DC1E             81                 DJNZ        R4,     RETURN
+00C1 7C14             82                 MOV R4,     #20   
+00C3 7832             83                 MOV R0,     #32H  
+00C5 75F002           84                 MOV B,      #02H  
+00C8 E4               85                 CLR A        
+00C9 D2D7             86                 SETB        CY      
+00CB 36               87                 ADDC        A,      @R0    
+00CC D4               88                 DA A         
+00CD                  89             MINS: 
+00CD B4600E           90                 CJNE        A,      #60H,   SEND 
+00D0 E4               91                 CLR A      
+00D1 F6               92                 MOV @R0,    A   
+00D2 18               93                 DEC R0       
+00D3 D2D7             94                 SETB        CY      
+00D5 36               95                 ADDC        A,      @R0   
+00D6 D4               96                 DA  A         
+00D7 D5F0F3           97                 DJNZ        B,      MINS  
+00DA B42401           98                 CJNE        A,      #24H,   SEND
+00DD E4               99                 CLR A        
+00DE                 100             SEND: 
+00DE F6              101                 MOV @R0,    A     
+00DF                 102             RETURN: 
+00DF 32              103                 RETI         
+                     104             
+00E0                 105             INPUT: 
+00E0 C298            106                 CLR RI       
+00E2 C2AF            107                 CLR EA 
+                     108                           
+00E4 3098FD          109                 JNB RI,     $
+00E7 C298            110                     CLR     RI
+00E9 859930          111                     MOV 30H,        SBUF     
+                     112             
+00EC 3098FD          113                 JNB RI,     $
+00EF C298            114                     CLR     RI        
+00F1 859931          115                 MOV 31H,    SBUF  
+                     116             
+00F4 3098FD          117                 JNB RI,     $
+00F7 C298            118                     CLR     RI       
+00F9 859932          119                 MOV 32H,    SBUF  
+                     120             
+00FC 753301          121                     MOV     33H,    #01H
+A51 MACRO ASSEMBLER  007                                                                  04/19/2025 09:43:09 PAGE     3
+
+00FF D2AF            122                 SETB EA      
+0101 32              123                 RETI        
+                     124             
+                     125             END             
+A51 MACRO ASSEMBLER  007                                                                  04/19/2025 09:43:09 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BCD. . . . . . . .  C ADDR   0078H   A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DELAY. . . . . . .  C ADDR   00ACH   A   
+DISP . . . . . . .  C ADDR   0088H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INPUT. . . . . . .  C ADDR   00E0H   A   
+IT0P . . . . . . .  C ADDR   00B9H   A   
+L0 . . . . . . . .  C ADDR   00AEH   A   
+L1 . . . . . . . .  C ADDR   00B0H   A   
+LOOP . . . . . . .  C ADDR   0074H   A   
+MINS . . . . . . .  C ADDR   00CDH   A   
+PS . . . . . . . .  B ADDR   00B8H.4 A   
+RETURN . . . . . .  C ADDR   00DFH   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RI0. . . . . . . .  C ADDR   0078H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEND . . . . . . .  C ADDR   00DEH   A   
+START. . . . . . .  C ADDR   0050H   A   
+TAB. . . . . . . .  C ADDR   00A2H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT_INPUT . . . .  C ADDR   006CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

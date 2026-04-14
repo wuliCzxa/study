@@ -1,0 +1,34 @@
+﻿  02.cpp
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(82,7): error C2039: "size_t": 不是 "std" 的成员
+  E:\Software\Microsoft Visual Studio\project\test\test\predefined C++ types (compiler internal)(348,11):
+  参见“std”的声明
+  
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(49,4): error C2065: “cerr”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(49,54): error C2065: “endl”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(57,14): error C2039: "size_t": 不是 "std" 的成员
+  E:\Software\Microsoft Visual Studio\project\test\test\predefined C++ types (compiler internal)(348,11):
+  参见“std”的声明
+  
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(70,9): error C2039: "cerr": 不是 "std" 的成员
+  E:\Software\Microsoft Visual Studio\project\test\test\predefined C++ types (compiler internal)(348,11):
+  参见“std”的声明
+  
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(70,9): error C2065: “cerr”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(70,37): error C2039: "endl": 不是 "std" 的成员
+  E:\Software\Microsoft Visual Studio\project\test\test\predefined C++ types (compiler internal)(348,11):
+  参见“std”的声明
+  
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(70,37): error C2065: “endl”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(71,15): error C2039: "runtime_error": 不是 "std" 的成员
+  E:\Software\Microsoft Visual Studio\project\test\test\predefined C++ types (compiler internal)(348,11):
+  参见“std”的声明
+  
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(71,15): error C3861: “runtime_error”: 找不到标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(90,2): error C2065: “cout”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(91,2): error C2065: “cin”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(96,2): error C2065: “cout”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(97,9): error C2065: “cin”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(102,2): error C2065: “cout”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(105,3): error C2065: “cout”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(108,2): error C2065: “cout”: 未声明的标识符
+E:\Software\Microsoft Visual Studio\project\test\test\02.cpp(108,10): error C2065: “endl”: 未声明的标识符

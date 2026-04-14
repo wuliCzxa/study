@@ -1,0 +1,25 @@
+LABCENTER PROTEUS PICK AND PLACE FILE
+=====================================
+
+Component positions for Ppsu.LYT
+
+Fields: Part ID, Value, Package, Layer, Rotation, X, Y
+Units:  Rotation - degrees, X, Y  - thou
+Notes:  The X, Y value is the centre of package as drawn in ARES.
+        The origin for these values is the Output Origin.
+        The values are a guide only and must be checked manually when
+        setting up automatic insertion equipment.
+
+"U1","CA3140","DIL08",TOP,0,-59.2118,35.6134
+"R2","1k","RES40",TOP,0,-53.2118,-198.387
+"C1","100n","CAP10",TOP,90,290.788,-233.387
+"Q2","BC184","TO92",TOP,0,-209.212,316.613
+"Q1","TIP31","TO220",TOP,270,265.788,36.6134
+"R1","9k1","RES40",TOP,0,-119.212,-288.387
+"D1","OA91","DIODE30",TOP,90,-359.212,-38.3866
+"R3","2k2","RES40",TOP,180,-71.7118,429.113
+"J1","PIN","PIN",TOP,0,-134.212,-388.387
+"J2","PIN","PIN",TOP,0,240.788,286.613
+"J3","PIN","PIN",TOP,0,165.788,-388.387
+"J4","PIN","PIN",TOP,0,230.788,476.613
+"C2","47p","CAP10",TOP,0,40.7882,286.613

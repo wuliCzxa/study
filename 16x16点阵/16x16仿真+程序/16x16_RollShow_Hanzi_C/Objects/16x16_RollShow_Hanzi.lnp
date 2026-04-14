@@ -1,0 +1,3 @@
+".\Objects\16x16_RollShow_Hanzi.obj" 
+TO ".\Objects\16x16_RollShow_Hanzi" 
+PRINT(".\Listings\16x16_RollShow_Hanzi.m51") RAMSIZE(256) 

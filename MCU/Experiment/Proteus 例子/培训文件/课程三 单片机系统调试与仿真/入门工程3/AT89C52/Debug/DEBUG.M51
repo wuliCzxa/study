@@ -1,0 +1,120 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/28/2017  09:23:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO DEBUG.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  DEBUG.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0002H     ABSOLUTE     
+            CODE    0005H     000CH     UNIT         ?C_C51STARTUP
+                    0011H     0002H                  *** GAP ***
+            CODE    0013H     0002H     ABSOLUTE     
+            CODE    0015H     000AH     INBLOCK      ?PR?OUTSIDE_INT0?MAIN
+            CODE    001FH     0007H     INBLOCK      ?PR?OUTSIDE_INIT1?MAIN
+            CODE    0026H     0007H     INBLOCK      ?PR?OUTSIDE_INT1?MAIN
+            CODE    002DH     0007H     INBLOCK      ?PR?OUTSIDE_INIT0?MAIN
+            CODE    0034H     0006H     INBLOCK      ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   DEBUG.OMF (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?OUTSIDE_INIT0?MAIN
+  +--> ?PR?OUTSIDE_INIT1?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  DEBUG.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/28/2017  09:23:51  PAGE 2
+
+
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:002DH         PUBLIC        Outside_Init0
+  C:001FH         PUBLIC        Outside_Init1
+  C:0015H         PUBLIC        Outside_Int0
+  C:0026H         PUBLIC        Outside_Int1
+  C:0034H         PUBLIC        main
+  B:00A0H.0       PUBLIC        led
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  B:00B0H.2       PUBLIC        outside_int0
+  -------         PROC          OUTSIDE_INIT1
+  C:001FH         LINE#         28
+  C:001FH         LINE#         29
+  C:001FH         LINE#         30
+  C:0021H         LINE#         32
+  C:0023H         LINE#         33
+  C:0025H         LINE#         34
+  -------         ENDPROC       OUTSIDE_INIT1
+  -------         PROC          MAIN
+  C:0034H         LINE#         36
+  C:0034H         LINE#         37
+  C:0034H         LINE#         38
+  C:0036H         LINE#         39
+  C:0038H         LINE#         40
+  -------         ENDPROC       MAIN
+  -------         PROC          OUTSIDE_INT0
+  C:0015H         LINE#         43
+  C:0015H         LINE#         45
+  C:0017H         LINE#         46
+  C:0019H         LINE#         47
+  C:001CH         LINE#         48
+  C:001EH         LINE#         49
+  -------         ENDPROC       OUTSIDE_INT0
+  -------         PROC          OUTSIDE_INT1
+  C:0026H         LINE#         51
+  C:0026H         LINE#         53
+  C:0028H         LINE#         54
+  C:002AH         LINE#         56
+  C:002CH         LINE#         57
+  -------         ENDPROC       OUTSIDE_INT1
+  -------         PROC          OUTSIDE_INIT0
+  C:002DH         LINE#         58
+  C:002DH         LINE#         59
+  C:002DH         LINE#         60
+  C:002FH         LINE#         61
+  C:0031H         LINE#         63
+  C:0033H         LINE#         64
+  -------         ENDPROC       OUTSIDE_INIT0
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=56
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

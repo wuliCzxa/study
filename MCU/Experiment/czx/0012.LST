@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  0012                                                                 03/08/2025 10:34:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 0012.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 0012.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG             0
+0000 020050            2             LJMP    MAIN
+0050                   3             ORG             50H
+                       4     
+0050                   5             MAIN:
+0050 74FE              6                     MOV A,  #0FEH
+0052 7A10              7                     MOV     R2,     #10H
+0054                   8             LOOP:
+0054 F590              9                     MOV     P1,     A
+0056 115B             10                     ACALL   DELAY
+0058 23               11                     RL      A
+0059 80F9             12                     SJMP    LOOP
+                      13     
+005B                  14             DELAY:
+005B 7D0A             15                     MOV     R5,     #10
+005D                  16             DELAY1:
+005D 7E32             17                     MOV     R6,     #50
+005F                  18             DELAY2:
+005F 7F50             19                     MOV     R7,     #80
+0061                  20             DELAY3:
+0061 DFFE             21                     DJNZ    R7,     DELAY3
+0063 DEFA             22                     DJNZ    R6,     DELAY2
+0065 DDF6             23                     DJNZ    R5,     DELAY1
+0067 22               24                     RET
+                      25             END
+                                     END
+*** WARNING #A73 IN 26 (0012.asm, LINE 26): TEXT FOUND BEYOND END STATEMENT - IGNORED
+                                     
+A51 MACRO ASSEMBLER  0012                                                                 03/08/2025 10:34:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   005BH   A   
+DELAY1 . . . . . .  C ADDR   005DH   A   
+DELAY2 . . . . . .  C ADDR   005FH   A   
+DELAY3 . . . . . .  C ADDR   0061H   A   
+LOOP . . . . . . .  C ADDR   0054H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

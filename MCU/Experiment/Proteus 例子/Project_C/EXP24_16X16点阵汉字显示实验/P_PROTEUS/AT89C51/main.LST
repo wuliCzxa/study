@@ -1,0 +1,153 @@
+C51 COMPILER V9.00   MAIN                                                                  10/26/2015 15:30:51 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*******************************************
+   2          文件名:16and16dotled
+   3          MCU :AT89S52
+   4          功能:测试代码 
+   5          编写:广州风标 zw
+   6          日期:2011年01月28日 
+   7          说明： 
+   8          接线方式：74ls595 P1.0-SHC   P1.1-STC  p1.2-DS 
+   9                            74ls138 P2.0-138A1  P2.1-138B1 P2.2-138C1 P2.3-138EN1 P2.4-138A2  P2.5-138B2 P2.6-138C2   P2.7-138EN2
+  10          其他： 
+  11          ********************************************/
+  12          
+  13          #include<reg52.h>
+  14          
+  15          #define uchar unsigned char
+  16          #define uint unsigned int
+  17          
+  18          uchar code dischar[128]={ 
+  19          /*--  文字:  广  --*/
+  20          /*--  华文彩云12;  此字体下对应的点阵为：宽x高=16x17   --*/
+  21          0xFF,0xFF,0x7F,0xF8,0x07,0x07,0xF3,0x7F,0xFB,0x7F,0x1B,0x00,0xDB,0xFF,0xDB,0xFF,
+  22          0xDB,0xFF,0xDB,0xFF,0xDB,0xFF,0xDB,0xFF,0xDD,0xFF,0xED,0xFF,0xED,0xFF,0xF1,0xFF,
+  23          
+  24          /*--  文字:  州  --*/
+  25          /*--  华文彩云12;  此字体下对应的点阵为：宽x高=16x17   --*/
+  26          0xFF,0xFF,0x43,0x84,0xBB,0xBB,0xBB,0xBB,0xA3,0xBB,0x5D,0xB7,0xDD,0xB6,0xDD,0xAE,
+  27          0xDD,0xAE,0xDD,0xAE,0x21,0xB3,0xBB,0xBB,0xBB,0xBB,0x9D,0xBB,0xAD,0xBB,0x63,0x84,
+  28          
+  29          /*--  文字:  风  --*/
+  30          /*--  华文彩云12;  此字体下对应的点阵为：宽x高=16x17   --*/
+  31          0xFF,0xFF,0x03,0xE0,0xFB,0xDF,0xFB,0xDF,0x0B,0xD8,0x6B,0xD6,0xEB,0xD7,0xDB,0xDB,
+  32          0xDB,0xDB,0x9B,0xDB,0xCB,0x13,0xED,0x77,0x6D,0x76,0x8D,0x79,0xED,0xB7,0xF1,0xCF,
+  33          
+  34          /*--  文字:  标  --*/
+  35          /*--  华文彩云12;  此字体下对应的点阵为：宽x高=16x17   --*/
+  36          0xFF,0xFF,0x03,0x80,0xBB,0xBF,0xB9,0xBF,0x7E,0x80,0x7E,0x7F,0x99,0x7F,0x6D,0x5F,
+  37          0xCD,0xA4,0x1E,0xB5,0xBE,0x75,0xDD,0x6C,0xDB,0x6C,0x3B,0x8F,0x3B,0xEF,0xC3,0xE0,
+  38          
+  39          };
+  40          
+  41          /***********端口定义*****************/
+  42          sbit LS138_A1 =P2^0;
+  43          sbit LS138_B1 =P2^1;
+  44          sbit LS138_C1 =P2^2;
+  45          sbit LS138_EN1=P2^3;
+  46          
+  47          sbit LS138_A2 =P2^4;
+  48          sbit LS138_B2 =P2^5;
+  49          sbit LS138_C2 =P2^6;
+  50          
+  51          sbit LS138_EN2=P2^7;
+  52          
+  53          sbit LS595_SHC=P1^0;    //SHcp   锁存时钟-----74HC595 
+  54          sbit LS595_STC=P1^1;    //STcp   移位时钟-----74HC595 
+  55          sbit LS595_DS =P1^2;    //DSI    数据---------74HC595 
+C51 COMPILER V9.00   MAIN                                                                  10/26/2015 15:30:51 PAGE 2   
+
+  56            
+  57          
+  58          /**********nms延时子程序*************/
+  59          void Delay_Nms(uint n)
+  60          {
+  61   1              uint i,j;
+  62   1              for(i=0;i<n;i++)
+  63   1                      for(j=0;j<20;j++)
+  64   1                              ;
+  65   1      }
+  66          
+  67          
+  68          
+  69          /**********发送一字节数据*************/
+  70          void SendOneByte(uchar content)
+  71          {  
+  72   1         uchar i; 
+  73   1          
+  74   1          for(i=0;i<8;i++) 
+  75   1          { 
+  76   2              LS595_DS=(bit)(content & 0x80);      //判断输出数据 
+  77   2              LS595_SHC=0;                                 //初始化移位时钟 
+  78   2              content<<=1;                                             //更新数据 
+  79   2              LS595_SHC=1; 
+  80   2          }    
+  81   1      }
+  82          
+  83          /***********主函数********************/
+  84          void main(void) 
+  85          { 
+  86   1          uchar i;
+  87   1              uchar j;
+  88   1              uchar k;
+  89   1              uchar   ycode; 
+  90   1              LS138_EN1=0;             //不使能138译码器  
+  91   1              LS138_EN2=0;             //不使能138译码器  
+  92   1              while(1) 
+  93   1          {   for(j=0;j<4;j++)
+  94   2                      {
+  95   3                              for(k=0;k<50;k++)
+  96   3                              {
+  97   4                                      for(i=0;i<16;i++) 
+  98   4                              { 
+  99   5                                              LS595_STC=0;                                            
+ 100   5                              SendOneByte(dischar[i*2+j*32+1]); //译码显示 
+ 101   5                                              SendOneByte(dischar[i*2+j*32]);   //译码显示                    
+ 102   5                                              LS595_STC=1;          //数据已准备好
+ 103   5                                              if(i<8)
+ 104   5                                              {
+ 105   6                                                      //ycode=i;
+ 106   6                                                      P2=i;                 //开启扫描的行数据 
+ 107   6                                                      LS138_EN1=1;      //打开前8行输出
+ 108   6                                                      //LS138_EN2=0;    //关闭后8行输出
+ 109   6                                              }        
+ 110   5                                              else 
+ 111   5                                              {
+ 112   6                                                      ycode=i-8;
+ 113   6                                                      P2=ycode<<4;      //开启扫描的行数据 
+ 114   6                                                      //LS138_EN1=0;    //关闭前8行输出
+ 115   6                                                      LS138_EN2=1;      //打开后8行输出
+ 116   6                                              }                
+ 117   5                              Delay_Nms(4);
+C51 COMPILER V9.00   MAIN                                                                  10/26/2015 15:30:51 PAGE 3   
+
+ 118   5                                              LS138_EN1=0;          //关闭行输出
+ 119   5                                              LS138_EN2=0;          //关闭行输出                  
+ 120   5                      }
+ 121   4                              } 
+ 122   3                      }
+ 123   2                      
+ 124   2          }                
+ 125   1      }
+ 126          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    193    ----
+   CONSTANT SIZE    =    128    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

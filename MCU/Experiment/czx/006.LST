@@ -1,0 +1,92 @@
+A51 MACRO ASSEMBLER  006                                                                  04/12/2025 10:53:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN .\006.obj
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE ..\006.asm SET(SMALL) DEBUG OBJECT(.\006.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     org     0000h
+0000 020050            2                     LJMP    MAIN
+0050                   3                     org             50h
+0050 75300A            4     MAIN:   MOV             30H,#0AH
+0053 75310A            5                     MOV             31H,#0AH
+0056 75320A            6                     MOV             32H,#0AH
+0059 75330A            7                     MOV             33H,#0AH
+005C 75340A            8                     MOV             34H,#0AH
+005F 20901E            9     lop:    jb              p1.0,lop2
+0062 90A000           10     lop3:   mov             dptr,#0A000H
+0065 F0               11                     MOVX    @DPTR,A
+0066 7432             12                     MOV             A,#50
+0068 D5E0FD           13                     DJNZ    ACC,$
+006B E0               14                     MOVX    A,@DPTR
+006C 75F00A           15                     MOV             B,#10
+006F 84               16                     DIV             AB
+0070 85F037           17                     MOV             37H,B
+0073 75F00A           18                     MOV             B,#10
+0076 84               19                     DIV             AB
+0077 85F036           20                     MOV             36H,B
+007A F535             21                     MOV             35H,A
+                      22     
+007C 1188             23     tt:             call    disp
+007E 80DF             24                     jmp             lop
+0080                  25     lop2:   
+0080 74C8             26                     mov             a,#200
+0082 909000           27                     mov             dptr,#9000h
+0085 F0               28                     movx    @dptr,a
+0086 80DA             29                     jmp             lop3
+0088 75F080           30     disp:   MOV             B,#80H
+008B 7830             31                     MOV             R0,#30h
+008D 7F08             32                     mov             r7,#8
+008F 908001           33     dip1:   mov             dptr,#8001h
+0092 E4               34                     clr             a
+0093 F0               35                     movx    @dptr,a
+0094 E6               36                     MOV     A, @R0
+0095 9000B4           37                     mov             dptr,#tab1
+0098 93               38                     movc    a,@a+dptr
+0099 BF0302           39                     CJNE    R7,#3,dip2
+009C 4480             40                     orl             a,#80h
+009E 908002           41     dip2:   mov             dptr,#8002h
+00A1 F0               42                     movx    @dptr,a
+00A2 E5F0             43                     mov             a,b
+00A4 908001           44                     mov             dptr,#8001h
+00A7 F0               45                     MOVX    @dptr,a
+00A8 03               46                     rr              a
+00A9 F5F0             47                     mov             b,a
+00AB 7420             48                     mov             a,#32
+00AD D5E0FD           49                     djnz    acc,$
+00B0 08               50                     inc             r0
+00B1 DFDC             51                     djnz    r7,dip1
+00B3 22               52                     ret
+00B4 3F065B4F         53     tab1:   db              3fh, 06h, 5bh, 4fh, 66h, 6dh, 7dh, 07h,7fh, 6fh,0
+00B8 666D7D07                
+00BC 7F6F00                  
+                      54             
+                      55                     END
+A51 MACRO ASSEMBLER  006                                                                  04/12/2025 10:53:16 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DIP1 . . . . . . .  C ADDR   008FH   A   
+DIP2 . . . . . . .  C ADDR   009EH   A   
+DISP . . . . . . .  C ADDR   0088H   A   
+LOP. . . . . . . .  C ADDR   005FH   A   
+LOP2 . . . . . . .  C ADDR   0080H   A   
+LOP3 . . . . . . .  C ADDR   0062H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TAB1 . . . . . . .  C ADDR   00B4H   A   
+TT . . . . . . . .  C ADDR   007CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

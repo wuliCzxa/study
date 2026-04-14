@@ -1,0 +1,62 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\czx\0013.uvproj
+Project File Date:  03/08/2025
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling 0012.asm...
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling 0012.asm...
+0012.asm(26): warning A73: TEXT FOUND BEYOND END STATEMENT - IGNORED
+linking...
+Program Size: data=8.0 xdata=0 code=104
+"0013" - 0 Error(s), 1 Warning(s).

@@ -1,0 +1,4284 @@
+(edif pc
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written
+      (timestamp 2003 10 23 12 22 29)
+      (program "Xilinx ngd2edif" (version "E.38"))
+      (comment "Command line: -w -v fndtn pc.nga time_sim.edn ")))
+  (external SIMPRIMS
+    (edifLevel 0)
+    (technology (numberDefinition
+      (scale 1 (E 1 -12) (unit TIME))))
+    (cell x_xor2
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN0
+              (direction INPUT)
+            )
+            (port IN1
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_lut2
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port ADR0
+              (direction INPUT)
+            )
+            (port ADR1
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_ff
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port CE
+              (direction INPUT)
+            )
+            (port CLK
+              (direction INPUT)
+            )
+            (port SET
+              (direction INPUT)
+            )
+            (port RST
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_buf
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_lut4
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port ADR0
+              (direction INPUT)
+            )
+            (port ADR1
+              (direction INPUT)
+            )
+            (port ADR2
+              (direction INPUT)
+            )
+            (port ADR3
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_lut3
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port ADR0
+              (direction INPUT)
+            )
+            (port ADR1
+              (direction INPUT)
+            )
+            (port ADR2
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_ckbuf
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_ipad
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port PAD
+              (direction INPUT)
+            )
+          )
+      )
+    )
+    (cell x_opad
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port PAD
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_mux2
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port INA
+              (direction INPUT)
+            )
+            (port INB
+              (direction INPUT)
+            )
+            (port SEL
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_or2
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN0
+              (direction INPUT)
+            )
+            (port IN1
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_tri
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port CTL
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_suh
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port CE
+              (direction INPUT)
+            )
+            (port CLK
+              (direction INPUT)
+            )
+          )
+      )
+    )
+    (cell x_one
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_zero
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+    (cell x_inv
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IN
+              (direction INPUT)
+            )
+            (port OUT
+              (direction OUTPUT)
+            )
+          )
+      )
+    )
+  )
+
+  (library pc_lib
+    (edifLevel 0)
+    (technology (numberDefinition
+      (scale 1 (E 1 -12) (unit TIME))))
+    (cell C206_0_1
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port I
+              (direction INPUT)
+            )
+            (port O
+              (direction OUTPUT)
+            )
+          )
+          (contents
+            (instance IBUFG_0
+              (viewRef view_1 (cellRef x_ckbuf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 650) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 650) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance BUFG
+              (viewRef view_1 (cellRef x_ckbuf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 6) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 6) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 679) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 679) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (net I
+              (joined
+                (portRef I)
+                (portRef IN (instanceRef IBUFG_0))
+              )
+            )
+            (net IBUFG
+              (joined
+                (portRef OUT (instanceRef IBUFG_0))
+                (portRef IN (instanceRef BUFG))
+              )
+            )
+            (net O
+              (joined
+                (portRef O)
+                (portRef OUT (instanceRef BUFG))
+              )
+            )
+          )
+      )
+    )
+    (cell pc
+      (cellType GENERIC)
+        (view view_1
+          (viewType NETLIST)
+          (interface
+            (port IR2
+              (direction INPUT)
+              (designator "36")
+            )
+            (port IR3
+              (direction INPUT)
+              (designator "35")
+            )
+            (port (rename D_0__ "D<0>")
+              (direction INPUT)
+              (designator "103")
+            )
+            (port (rename D_1__ "D<1>")
+              (direction INPUT)
+              (designator "102")
+            )
+            (port (rename D_2__ "D<2>")
+              (direction INPUT)
+              (designator "101")
+            )
+            (port (rename D_3__ "D<3>")
+              (direction INPUT)
+              (designator "100")
+            )
+            (port (rename D_4__ "D<4>")
+              (direction INPUT)
+              (designator "97")
+            )
+            (port (rename D_5__ "D<5>")
+              (direction INPUT)
+              (designator "96")
+            )
+            (port (rename D_6__ "D<6>")
+              (direction INPUT)
+              (designator "95")
+            )
+            (port (rename D_7__ "D<7>")
+              (direction INPUT)
+              (designator "94")
+            )
+            (port (rename D_8__ "D<8>")
+              (direction INPUT)
+              (designator "87")
+            )
+            (port (rename D_9__ "D<9>")
+              (direction INPUT)
+              (designator "86")
+            )
+            (port ELP
+              (direction INPUT)
+              (designator "39")
+            )
+            (port PC1
+              (direction INPUT)
+              (designator "38")
+            )
+            (port (rename PC_10__ "PC<10>")
+              (direction OUTPUT)
+              (designator "232")
+            )
+            (port (rename PC_11__ "PC<11>")
+              (direction OUTPUT)
+              (designator "231")
+            )
+            (port (rename PC_12__ "PC<12>")
+              (direction OUTPUT)
+              (designator "230")
+            )
+            (port (rename PC_13__ "PC<13>")
+              (direction OUTPUT)
+              (designator "229")
+            )
+            (port (rename PC_14__ "PC<14>")
+              (direction OUTPUT)
+              (designator "228")
+            )
+            (port (rename PC_15__ "PC<15>")
+              (direction OUTPUT)
+              (designator "224")
+            )
+            (port C
+              (direction INPUT)
+              (designator "41")
+            )
+            (port CLK
+              (direction INPUT)
+              (designator "213")
+            )
+            (port Z
+              (direction INPUT)
+              (designator "40")
+            )
+            (port RST
+              (direction INPUT)
+              (designator "33")
+            )
+            (port (rename D_10__ "D<10>")
+              (direction INPUT)
+              (designator "85")
+            )
+            (port (rename D_11__ "D<11>")
+              (direction INPUT)
+              (designator "84")
+            )
+            (port (rename PC_0__ "PC<0>")
+              (direction OUTPUT)
+              (designator "223")
+            )
+            (port (rename D_12__ "D<12>")
+              (direction INPUT)
+              (designator "82")
+            )
+            (port (rename PC_1__ "PC<1>")
+              (direction OUTPUT)
+              (designator "222")
+            )
+            (port (rename D_13__ "D<13>")
+              (direction INPUT)
+              (designator "81")
+            )
+            (port (rename PC_2__ "PC<2>")
+              (direction OUTPUT)
+              (designator "221")
+            )
+            (port (rename D_14__ "D<14>")
+              (direction INPUT)
+              (designator "80")
+            )
+            (port (rename PC_3__ "PC<3>")
+              (direction OUTPUT)
+              (designator "220")
+            )
+            (port (rename D_15__ "D<15>")
+              (direction INPUT)
+              (designator "79")
+            )
+            (port (rename PC_4__ "PC<4>")
+              (direction OUTPUT)
+              (designator "218")
+            )
+            (port (rename PC_5__ "PC<5>")
+              (direction OUTPUT)
+              (designator "217")
+            )
+            (port (rename PC_6__ "PC<6>")
+              (direction OUTPUT)
+              (designator "216")
+            )
+            (port (rename PC_7__ "PC<7>")
+              (direction OUTPUT)
+              (designator "215")
+            )
+            (port (rename PC_8__ "PC<8>")
+              (direction OUTPUT)
+              (designator "235")
+            )
+            (port (rename PC_9__ "PC<9>")
+              (direction OUTPUT)
+              (designator "234")
+            )
+            (designator "v200pq240-6")
+          )
+          (contents
+            (instance C41_C3_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1301) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1301) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 727) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 727) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C3_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C4_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 586) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 586) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 1096) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1096) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 908) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 908) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C4_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C5_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1141) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1141) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C5_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C6_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1208) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1208) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C6_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C7_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1845) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1845) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C7_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C8_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1726) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1726) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C8_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C9_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2159) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2159) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C9_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C10_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2151) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2151) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C10_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C11_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1884) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1884) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C11_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C12_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1908) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1908) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C12_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C13_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2055) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2055) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C13_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C14_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2174) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2174) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C14_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C15_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1682) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1682) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C15_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C16_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 1900) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1900) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C16_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C17_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2244) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2244) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 406) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 406) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C17_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance C41_C18_C0
+              (viewRef view_1 (cellRef x_xor2 (libraryRef SIMPRIMS)))
+              (portInstance IN1
+                (property RISE (integer 2266) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2266) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 458) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 458) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C18_C3
+              (viewRef view_1 (cellRef x_lut2 (libraryRef SIMPRIMS)))
+              (property INIT (string "A") (owner "Xilinx"))
+            )
+            (instance (rename RPC_reg_0__ "RPC_reg_0_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 780) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 780) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 473) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 473) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_1__ "RPC_reg_1_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 773) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 773) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 446) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 446) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_2__ "RPC_reg_2_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1445) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1445) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 473) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 473) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_3__ "RPC_reg_3_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1445) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1445) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 473) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 473) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_4__ "RPC_reg_4_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1225) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1225) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 476) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 476) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_5__ "RPC_reg_5_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1225) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1225) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 476) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 476) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_6__ "RPC_reg_6_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 931) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 931) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 447) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 447) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_7__ "RPC_reg_7_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 931) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 931) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 447) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 447) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_8__ "RPC_reg_8_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1450) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1450) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_9__ "RPC_reg_9_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1450) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1450) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_10__ "RPC_reg_10_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 911) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 911) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_11__ "RPC_reg_11_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 911) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 911) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_12__ "RPC_reg_12_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1450) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1450) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_13__ "RPC_reg_13_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1450) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1450) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 437) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 437) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_14__ "RPC_reg_14_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1444) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1444) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 476) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 476) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename RPC_reg_15__ "RPC_reg_15_&")
+              (viewRef view_1 (cellRef x_ff (libraryRef SIMPRIMS)))
+              (property RECRSTCLK (integer 678) (unit TIME) (owner "Xilinx"))
+              (property PWCLKHI (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property PWCLKLO (integer 1500) (unit TIME) (owner "Xilinx"))
+              (property SUINHICLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 397) (unit TIME) (owner "Xilinx"))
+              (property SUCELOCLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property SUCEHICLK (integer 735) (unit TIME) (owner "Xilinx"))
+              (property PWRSTHI (integer 2500) (unit TIME) (owner "Xilinx"))
+              (portInstance CE
+                (property RISE (integer 1444) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1444) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance CLK
+                (property RISE (integer 476) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 476) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1065) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1065) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_15__ "C_D_15_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_14__ "C_D_14_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_13__ "C_D_13_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_12__ "C_D_12_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_11__ "C_D_11_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_10__ "C_D_10_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_9__ "C_D_9_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_8__ "C_D_8_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_7__ "C_D_7_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_6__ "C_D_6_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_5__ "C_D_5_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_4__ "C_D_4_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_3__ "C_D_3_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_2__ "C_D_2_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_1__ "C_D_1_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_D_0__ "C_D_0_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_15__ "C_PC_15_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2593) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2593) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_14__ "C_PC_14_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2563) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2563) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_13__ "C_PC_13_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2603) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2603) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_12__ "C_PC_12_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2450) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2450) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_11__ "C_PC_11_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2541) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2541) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_10__ "C_PC_10_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2996) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2996) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_9__ "C_PC_9_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3164) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3164) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_8__ "C_PC_8_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2980) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2980) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_7__ "C_PC_7_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3468) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3468) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_6__ "C_PC_6_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3747) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3747) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_5__ "C_PC_5_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3149) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3149) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_4__ "C_PC_4_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2736) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2736) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_3__ "C_PC_3_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3149) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3149) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_2__ "C_PC_2_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2736) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2736) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_1__ "C_PC_1_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 3271) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3271) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance (rename C_PC_0__ "C_PC_0_&")
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance IN
+                (property RISE (integer 2967) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2967) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_C
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_Z
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_ELP
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC1
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_IR2
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_IR3
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_RST
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+              (portInstance OUT
+                (property RISE (integer 768) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 768) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C184
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3165) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3165) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 2847) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2847) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1753) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1753) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1547) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1547) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C185
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3149) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3149) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3230) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3230) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1496) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1496) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1582) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1582) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C186
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3509) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3509) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3839) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3839) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1251) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1251) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1415) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1415) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C187
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3187) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3187) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3104) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3104) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1091) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1091) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1485) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1485) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C188
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3539) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3539) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 4032) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 4032) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1345) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1345) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1170) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1170) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C189
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3315) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3315) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3202) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3202) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1552) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1552) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1068) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1068) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C190
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3193) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3193) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3617) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3617) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1524) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1524) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1678) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1678) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C191
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3156) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3156) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3225) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3225) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1413) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1413) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1555) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1555) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C192
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3365) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3365) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 2881) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2881) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1382) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1382) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1296) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1296) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C193
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 2673) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2673) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3718) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3718) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1520) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1520) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1359) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1359) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C194
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3378) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3378) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 2959) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2959) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1099) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1099) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1744) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1744) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C195
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3359) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3359) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 2950) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2950) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1161) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1161) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1230) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1230) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C196
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3282) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3282) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3111) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3111) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 516) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 516) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1708) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1708) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C197
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3138) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3138) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3975) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3975) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 647) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 647) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1211) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1211) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C198
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E4F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3530) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3530) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3024) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3024) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 909) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 909) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 914) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 914) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C199
+              (viewRef view_1 (cellRef x_lut3 (libraryRef SIMPRIMS)))
+              (property INIT (string "DC") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3164) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3164) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 1732) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1732) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1051) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1051) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 573) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 573) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C200
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "E2F0") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 3114) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3114) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 3211) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3211) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1080) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1080) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 110) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 110) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 767) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 767) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C201
+              (viewRef view_1 (cellRef x_lut4 (libraryRef SIMPRIMS)))
+              (property INIT (string "FEBA") (owner "Xilinx"))
+              (portInstance ADR0
+                (property RISE (integer 1535) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1535) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR1
+                (property RISE (integer 1497) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1497) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR2
+                (property RISE (integer 1935) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1935) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance ADR3
+                (property RISE (integer 1589) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1589) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 573) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 573) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C206
+              (viewRef view_1 (cellRef C206_0_1 (libraryRef pc_lib)))
+            )
+            (instance IR2_1
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance IR3_2
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_0___3 "D_0_&_3")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_1___4 "D_1_&_4")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_2___5 "D_2_&_5")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_3___6 "D_3_&_6")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_4___7 "D_4_&_7")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_5___8 "D_5_&_8")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_6___9 "D_6_&_9")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_7___10 "D_7_&_10")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_8___11 "D_8_&_11")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_9___12 "D_9_&_12")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance ELP_13
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance PC1_14
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_10___15 "PC_10_&_15")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_11___16 "PC_11_&_16")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_12___17 "PC_12_&_17")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_13___18 "PC_13_&_18")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_14___19 "PC_14_&_19")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_15___20 "PC_15_&_20")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance C_21
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance CLK_22
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance Z_23
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance RST_24
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_10___25 "D_10_&_25")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_11___26 "D_11_&_26")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_0___27 "PC_0_&_27")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_12___28 "D_12_&_28")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_1___29 "PC_1_&_29")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_13___30 "D_13_&_30")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_2___31 "PC_2_&_31")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_14___32 "D_14_&_32")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_3___33 "PC_3_&_33")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename D_15___34 "D_15_&_34")
+              (viewRef view_1 (cellRef x_ipad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_4___35 "PC_4_&_35")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_5___36 "PC_5_&_36")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_6___37 "PC_6_&_37")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_7___38 "PC_7_&_38")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_8___39 "PC_8_&_39")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance (rename PC_9___40 "PC_9_&_40")
+              (viewRef view_1 (cellRef x_opad (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C3_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 1301) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1301) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C3_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C4_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 1201) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1201) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 1121) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1121) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C4_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C5_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 1856) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1856) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C5_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C6_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 1899) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 1899) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C6_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C7_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2560) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2560) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C7_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C8_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2417) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2417) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C8_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C9_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2874) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2874) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C9_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C10_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2842) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2842) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C10_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C11_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2599) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2599) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C11_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C12_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2599) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2599) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C12_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C13_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2770) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2770) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C13_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C14_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2865) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2865) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C14_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C15_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2397) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2397) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C15_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C16_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2591) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2591) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 85) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 85) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C16_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance C41_C17_C1
+              (viewRef view_1 (cellRef x_mux2 (libraryRef SIMPRIMS)))
+              (portInstance SEL
+                (property RISE (integer 2959) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2959) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C41_C17_C1_MUXCY_L_BUF
+              (viewRef view_1 (cellRef x_buf (libraryRef SIMPRIMS)))
+            )
+            (instance RPC_reg_0__GSR_OR_41
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3183) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3183) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_1__GSR_OR_42
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3126) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3126) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_2__GSR_OR_43
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3400) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3400) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_3__GSR_OR_44
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3400) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3400) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_4__GSR_OR_45
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2751) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2751) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_5__GSR_OR_46
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2751) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2751) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_6__GSR_OR_47
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3148) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3148) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_7__GSR_OR_48
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3148) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3148) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_8__GSR_OR_49
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2925) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2925) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_9__GSR_OR_50
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2925) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2925) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_10__GSR_OR_51
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2855) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2855) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_11__GSR_OR_52
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2855) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2855) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_12__GSR_OR_53
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3178) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3178) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_13__GSR_OR_54
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 3178) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 3178) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_14__GSR_OR_55
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2991) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2991) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance RPC_reg_15__GSR_OR_56
+              (viewRef view_1 (cellRef x_or2 (libraryRef SIMPRIMS)))
+              (portInstance IN0
+                (property RISE (integer 2991) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 2991) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance IN1
+                (property RISE (integer 8627) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8627) (unit TIME) (owner "Xilinx"))
+              )
+              (portInstance OUT
+                (property RISE (integer 8) (unit TIME) (owner "Xilinx"))
+                (property FALL (integer 8) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_10__GTS_TRI_57
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_11__GTS_TRI_58
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_12__GTS_TRI_59
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_13__GTS_TRI_60
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_14__GTS_TRI_61
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_15__GTS_TRI_62
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_0__GTS_TRI_63
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_1__GTS_TRI_64
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_2__GTS_TRI_65
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_3__GTS_TRI_66
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_4__GTS_TRI_67
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_5__GTS_TRI_68
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_6__GTS_TRI_69
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_7__GTS_TRI_70
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_8__GTS_TRI_71
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance C_PC_9__GTS_TRI_72
+              (viewRef view_1 (cellRef x_tri (libraryRef SIMPRIMS)))
+              (property OUTDLYLH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZH (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYHL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (property OUTDLYZL (integer 4787) (unit TIME) (owner "Xilinx"))
+              (portInstance CTL
+                (property FALL (integer 63) (unit TIME) (owner "Xilinx"))
+              )
+            )
+            (instance GSUH_Z_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3120 (undefined) 5676)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3120 (undefined) 5676)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_C_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3466 (undefined) 6022)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3466 (undefined) 6022)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_IR3_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3066 (undefined) 5622)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3066 (undefined) 5622)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_IR2_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3028 (undefined) 5584)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3028 (undefined) 5584)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_PC1_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3504 (undefined) 4195)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3504 (undefined) 4195)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_ELP_CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (miNoMax (mnm 3536 (undefined) 5627)) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (miNoMax (mnm 3536 (undefined) 5627)) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_15__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3693) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3693) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_14__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4076) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4076) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_0__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3962) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3962) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_3__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3959) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3959) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_2__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4823) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4823) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_5__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3805) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3805) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_4__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3796) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3796) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_7__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3744) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3744) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_6__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4581) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4581) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_11__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4901) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4901) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_10__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4071) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4071) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_9__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4486) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4486) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_8__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4094) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4094) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_13__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 4708) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 4708) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_12__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3973) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3973) (unit TIME) (owner "Xilinx"))
+            )
+            (instance GSUH_D_1__CLK
+              (viewRef view_1 (cellRef x_suh (libraryRef SIMPRIMS)))
+              (property SUINHICLK (integer 3888) (unit TIME) (owner "Xilinx"))
+              (property SUINLOCLK (integer 3888) (unit TIME) (owner "Xilinx"))
+            )
+            (instance C207_VCC
+              (viewRef view_1 (cellRef x_one (libraryRef SIMPRIMS)))
+            )
+            (instance C208_GND
+              (viewRef view_1 (cellRef x_zero (libraryRef SIMPRIMS)))
+            )
+            (instance NlwTieBlock_pc_GND
+              (viewRef view_1 (cellRef x_zero (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_10__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_11__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_12__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_13__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_14__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_15__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_0__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_1__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_2__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_3__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_4__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_5__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_6__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_7__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_8__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwInverterBlock_C_PC_9__GTS_TRI_CTL
+              (viewRef view_1 (cellRef x_inv (libraryRef SIMPRIMS)))
+            )
+            (instance NlwTieBlock_pc_VCC
+              (viewRef view_1 (cellRef x_one (libraryRef SIMPRIMS)))
+            )
+            (net (rename N_D_15__ "N_D<15>")
+              (joined
+                (portRef OUT (instanceRef C_D_15__))
+                (portRef ADR1 (instanceRef C184))
+              )
+            )
+            (net (rename N_D_14__ "N_D<14>")
+              (joined
+                (portRef OUT (instanceRef C_D_14__))
+                (portRef ADR1 (instanceRef C185))
+              )
+            )
+            (net (rename N_D_13__ "N_D<13>")
+              (joined
+                (portRef OUT (instanceRef C_D_13__))
+                (portRef ADR1 (instanceRef C186))
+              )
+            )
+            (net (rename N_D_12__ "N_D<12>")
+              (joined
+                (portRef OUT (instanceRef C_D_12__))
+                (portRef ADR1 (instanceRef C187))
+              )
+            )
+            (net (rename N_D_11__ "N_D<11>")
+              (joined
+                (portRef OUT (instanceRef C_D_11__))
+                (portRef ADR1 (instanceRef C188))
+              )
+            )
+            (net (rename N_D_10__ "N_D<10>")
+              (joined
+                (portRef OUT (instanceRef C_D_10__))
+                (portRef ADR1 (instanceRef C189))
+              )
+            )
+            (net (rename N_D_9__ "N_D<9>")
+              (joined
+                (portRef OUT (instanceRef C_D_9__))
+                (portRef ADR1 (instanceRef C190))
+              )
+            )
+            (net (rename N_D_8__ "N_D<8>")
+              (joined
+                (portRef OUT (instanceRef C_D_8__))
+                (portRef ADR1 (instanceRef C191))
+              )
+            )
+            (net (rename N_D_7__ "N_D<7>")
+              (joined
+                (portRef OUT (instanceRef C_D_7__))
+                (portRef ADR1 (instanceRef C192))
+              )
+            )
+            (net (rename N_D_6__ "N_D<6>")
+              (joined
+                (portRef OUT (instanceRef C_D_6__))
+                (portRef ADR1 (instanceRef C193))
+              )
+            )
+            (net (rename N_D_5__ "N_D<5>")
+              (joined
+                (portRef OUT (instanceRef C_D_5__))
+                (portRef ADR1 (instanceRef C194))
+              )
+            )
+            (net (rename N_D_4__ "N_D<4>")
+              (joined
+                (portRef OUT (instanceRef C_D_4__))
+                (portRef ADR1 (instanceRef C195))
+              )
+            )
+            (net (rename N_D_3__ "N_D<3>")
+              (joined
+                (portRef OUT (instanceRef C_D_3__))
+                (portRef ADR1 (instanceRef C196))
+              )
+            )
+            (net (rename N_D_2__ "N_D<2>")
+              (joined
+                (portRef OUT (instanceRef C_D_2__))
+                (portRef ADR1 (instanceRef C197))
+              )
+            )
+            (net (rename N_D_1__ "N_D<1>")
+              (joined
+                (portRef OUT (instanceRef C_D_1__))
+                (portRef ADR1 (instanceRef C198))
+              )
+            )
+            (net (rename N_D_0__ "N_D<0>")
+              (joined
+                (portRef OUT (instanceRef C_D_0__))
+                (portRef ADR0 (instanceRef C200))
+              )
+            )
+            (net (rename N_PC_15__ "N_PC<15>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C18_C3))
+                (portRef OUT (instanceRef RPC_reg_15__))
+                (portRef IN (instanceRef C_PC_15__))
+              )
+            )
+            (net (rename N_PC_14__ "N_PC<14>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C17_C3))
+                (portRef OUT (instanceRef RPC_reg_14__))
+                (portRef IN (instanceRef C_PC_14__))
+              )
+            )
+            (net (rename N_PC_13__ "N_PC<13>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C16_C3))
+                (portRef OUT (instanceRef RPC_reg_13__))
+                (portRef IN (instanceRef C_PC_13__))
+              )
+            )
+            (net (rename N_PC_12__ "N_PC<12>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C15_C3))
+                (portRef OUT (instanceRef RPC_reg_12__))
+                (portRef IN (instanceRef C_PC_12__))
+              )
+            )
+            (net (rename N_PC_11__ "N_PC<11>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C14_C3))
+                (portRef OUT (instanceRef RPC_reg_11__))
+                (portRef IN (instanceRef C_PC_11__))
+              )
+            )
+            (net (rename N_PC_10__ "N_PC<10>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C13_C3))
+                (portRef OUT (instanceRef RPC_reg_10__))
+                (portRef IN (instanceRef C_PC_10__))
+              )
+            )
+            (net (rename N_PC_9__ "N_PC<9>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C12_C3))
+                (portRef OUT (instanceRef RPC_reg_9__))
+                (portRef IN (instanceRef C_PC_9__))
+              )
+            )
+            (net (rename N_PC_8__ "N_PC<8>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C11_C3))
+                (portRef OUT (instanceRef RPC_reg_8__))
+                (portRef IN (instanceRef C_PC_8__))
+              )
+            )
+            (net (rename N_PC_7__ "N_PC<7>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C10_C3))
+                (portRef OUT (instanceRef RPC_reg_7__))
+                (portRef IN (instanceRef C_PC_7__))
+              )
+            )
+            (net (rename N_PC_6__ "N_PC<6>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C9_C3))
+                (portRef OUT (instanceRef RPC_reg_6__))
+                (portRef IN (instanceRef C_PC_6__))
+              )
+            )
+            (net (rename N_PC_5__ "N_PC<5>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C8_C3))
+                (portRef OUT (instanceRef RPC_reg_5__))
+                (portRef IN (instanceRef C_PC_5__))
+              )
+            )
+            (net (rename N_PC_4__ "N_PC<4>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C7_C3))
+                (portRef OUT (instanceRef RPC_reg_4__))
+                (portRef IN (instanceRef C_PC_4__))
+              )
+            )
+            (net (rename N_PC_3__ "N_PC<3>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C6_C3))
+                (portRef OUT (instanceRef RPC_reg_3__))
+                (portRef IN (instanceRef C_PC_3__))
+              )
+            )
+            (net (rename N_PC_2__ "N_PC<2>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C5_C3))
+                (portRef OUT (instanceRef RPC_reg_2__))
+                (portRef IN (instanceRef C_PC_2__))
+              )
+            )
+            (net (rename N_PC_1__ "N_PC<1>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C4_C3))
+                (portRef OUT (instanceRef RPC_reg_1__))
+                (portRef IN (instanceRef C_PC_1__))
+              )
+            )
+            (net (rename N_PC_0__ "N_PC<0>")
+              (joined
+                (portRef ADR0 (instanceRef C41_C3_C3))
+                (portRef OUT (instanceRef RPC_reg_0__))
+                (portRef IN (instanceRef C_PC_0__))
+              )
+            )
+            (net N_C
+              (joined
+                (portRef OUT (instanceRef C_C))
+                (portRef ADR2 (instanceRef C201))
+              )
+            )
+            (net N_Z
+              (joined
+                (portRef OUT (instanceRef C_Z))
+                (portRef ADR3 (instanceRef C201))
+              )
+            )
+            (net N_ELP
+              (joined
+                (portRef OUT (instanceRef C_ELP))
+                (portRef ADR0 (instanceRef C184))
+                (portRef ADR0 (instanceRef C185))
+                (portRef ADR0 (instanceRef C186))
+                (portRef ADR0 (instanceRef C187))
+                (portRef ADR0 (instanceRef C188))
+                (portRef ADR0 (instanceRef C189))
+                (portRef ADR0 (instanceRef C190))
+                (portRef ADR0 (instanceRef C191))
+                (portRef ADR0 (instanceRef C192))
+                (portRef ADR0 (instanceRef C193))
+                (portRef ADR0 (instanceRef C194))
+                (portRef ADR0 (instanceRef C195))
+                (portRef ADR0 (instanceRef C196))
+                (portRef ADR0 (instanceRef C197))
+                (portRef ADR0 (instanceRef C198))
+                (portRef ADR0 (instanceRef C199))
+                (portRef ADR1 (instanceRef C200))
+              )
+            )
+            (net N_PC1
+              (joined
+                (portRef OUT (instanceRef C_PC1))
+                (portRef ADR1 (instanceRef C199))
+              )
+            )
+            (net N_IR2
+              (joined
+                (portRef OUT (instanceRef C_IR2))
+                (portRef ADR1 (instanceRef C201))
+              )
+            )
+            (net N_IR3
+              (joined
+                (portRef OUT (instanceRef C_IR3))
+                (portRef ADR0 (instanceRef C201))
+              )
+            )
+            (net N_RST
+              (joined
+                (portRef OUT (instanceRef C_RST))
+                (portRef IN0 (instanceRef RPC_reg_0__GSR_OR_41))
+                (portRef IN0 (instanceRef RPC_reg_1__GSR_OR_42))
+                (portRef IN0 (instanceRef RPC_reg_2__GSR_OR_43))
+                (portRef IN0 (instanceRef RPC_reg_3__GSR_OR_44))
+                (portRef IN0 (instanceRef RPC_reg_4__GSR_OR_45))
+                (portRef IN0 (instanceRef RPC_reg_5__GSR_OR_46))
+                (portRef IN0 (instanceRef RPC_reg_6__GSR_OR_47))
+                (portRef IN0 (instanceRef RPC_reg_7__GSR_OR_48))
+                (portRef IN0 (instanceRef RPC_reg_8__GSR_OR_49))
+                (portRef IN0 (instanceRef RPC_reg_9__GSR_OR_50))
+                (portRef IN0 (instanceRef RPC_reg_10__GSR_OR_51))
+                (portRef IN0 (instanceRef RPC_reg_11__GSR_OR_52))
+                (portRef IN0 (instanceRef RPC_reg_12__GSR_OR_53))
+                (portRef IN0 (instanceRef RPC_reg_13__GSR_OR_54))
+                (portRef IN0 (instanceRef RPC_reg_14__GSR_OR_55))
+                (portRef IN0 (instanceRef RPC_reg_15__GSR_OR_56))
+              )
+            )
+            (net CLK_BUFGPed
+              (joined
+                (portRef CLK (instanceRef RPC_reg_0__))
+                (portRef CLK (instanceRef RPC_reg_1__))
+                (portRef CLK (instanceRef RPC_reg_2__))
+                (portRef CLK (instanceRef RPC_reg_3__))
+                (portRef CLK (instanceRef RPC_reg_4__))
+                (portRef CLK (instanceRef RPC_reg_5__))
+                (portRef CLK (instanceRef RPC_reg_6__))
+                (portRef CLK (instanceRef RPC_reg_7__))
+                (portRef CLK (instanceRef RPC_reg_8__))
+                (portRef CLK (instanceRef RPC_reg_9__))
+                (portRef CLK (instanceRef RPC_reg_10__))
+                (portRef CLK (instanceRef RPC_reg_11__))
+                (portRef CLK (instanceRef RPC_reg_12__))
+                (portRef CLK (instanceRef RPC_reg_13__))
+                (portRef CLK (instanceRef RPC_reg_14__))
+                (portRef CLK (instanceRef RPC_reg_15__))
+                (portRef O (instanceRef C206))
+              )
+            )
+            (net N121
+              (joined
+                (portRef OUT (instanceRef C41_C3_C0))
+                (portRef ADR2 (instanceRef C200))
+              )
+            )
+            (net N122
+              (joined
+                (portRef OUT (instanceRef C41_C4_C0))
+                (portRef ADR2 (instanceRef C198))
+              )
+            )
+            (net N123
+              (joined
+                (portRef OUT (instanceRef C41_C5_C0))
+                (portRef ADR2 (instanceRef C197))
+              )
+            )
+            (net N124
+              (joined
+                (portRef OUT (instanceRef C41_C6_C0))
+                (portRef ADR2 (instanceRef C196))
+              )
+            )
+            (net N125
+              (joined
+                (portRef OUT (instanceRef C41_C7_C0))
+                (portRef ADR2 (instanceRef C195))
+              )
+            )
+            (net N126
+              (joined
+                (portRef OUT (instanceRef C41_C8_C0))
+                (portRef ADR2 (instanceRef C194))
+              )
+            )
+            (net N127
+              (joined
+                (portRef OUT (instanceRef C41_C9_C0))
+                (portRef ADR2 (instanceRef C193))
+              )
+            )
+            (net N128
+              (joined
+                (portRef OUT (instanceRef C41_C10_C0))
+                (portRef ADR2 (instanceRef C192))
+              )
+            )
+            (net N129
+              (joined
+                (portRef OUT (instanceRef C41_C11_C0))
+                (portRef ADR2 (instanceRef C191))
+              )
+            )
+            (net N130
+              (joined
+                (portRef OUT (instanceRef C41_C12_C0))
+                (portRef ADR2 (instanceRef C190))
+              )
+            )
+            (net N131
+              (joined
+                (portRef OUT (instanceRef C41_C13_C0))
+                (portRef ADR2 (instanceRef C189))
+              )
+            )
+            (net N132
+              (joined
+                (portRef OUT (instanceRef C41_C14_C0))
+                (portRef ADR2 (instanceRef C188))
+              )
+            )
+            (net N133
+              (joined
+                (portRef OUT (instanceRef C41_C15_C0))
+                (portRef ADR2 (instanceRef C187))
+              )
+            )
+            (net N134
+              (joined
+                (portRef OUT (instanceRef C41_C16_C0))
+                (portRef ADR2 (instanceRef C186))
+              )
+            )
+            (net N135
+              (joined
+                (portRef OUT (instanceRef C41_C17_C0))
+                (portRef ADR2 (instanceRef C185))
+              )
+            )
+            (net N136
+              (joined
+                (portRef OUT (instanceRef C41_C18_C0))
+                (portRef ADR2 (instanceRef C184))
+              )
+            )
+            (net C41_N0
+              (joined
+                (portRef IN0 (instanceRef C41_C3_C0))
+                (portRef INB (instanceRef C41_C3_C1))
+                (portRef OUT (instanceRef C207_VCC))
+              )
+            )
+            (net C41_N3
+              (joined
+                (portRef IN0 (instanceRef C41_C4_C0))
+                (portRef OUT (instanceRef C41_C3_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C4_C1))
+              )
+            )
+            (net C41_N6
+              (joined
+                (portRef IN0 (instanceRef C41_C5_C0))
+                (portRef OUT (instanceRef C41_C4_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C5_C1))
+              )
+            )
+            (net C41_N9
+              (joined
+                (portRef IN0 (instanceRef C41_C6_C0))
+                (portRef OUT (instanceRef C41_C5_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C6_C1))
+              )
+            )
+            (net C41_N12
+              (joined
+                (portRef IN0 (instanceRef C41_C7_C0))
+                (portRef OUT (instanceRef C41_C6_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C7_C1))
+              )
+            )
+            (net C41_N15
+              (joined
+                (portRef IN0 (instanceRef C41_C8_C0))
+                (portRef OUT (instanceRef C41_C7_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C8_C1))
+              )
+            )
+            (net C41_N18
+              (joined
+                (portRef IN0 (instanceRef C41_C9_C0))
+                (portRef OUT (instanceRef C41_C8_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C9_C1))
+              )
+            )
+            (net C41_N21
+              (joined
+                (portRef IN0 (instanceRef C41_C10_C0))
+                (portRef OUT (instanceRef C41_C9_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C10_C1))
+              )
+            )
+            (net C41_N24
+              (joined
+                (portRef IN0 (instanceRef C41_C11_C0))
+                (portRef OUT (instanceRef C41_C10_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C11_C1))
+              )
+            )
+            (net C41_N27
+              (joined
+                (portRef IN0 (instanceRef C41_C12_C0))
+                (portRef OUT (instanceRef C41_C11_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C12_C1))
+              )
+            )
+            (net C41_N30
+              (joined
+                (portRef IN0 (instanceRef C41_C13_C0))
+                (portRef OUT (instanceRef C41_C12_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C13_C1))
+              )
+            )
+            (net C41_N33
+              (joined
+                (portRef IN0 (instanceRef C41_C14_C0))
+                (portRef OUT (instanceRef C41_C13_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C14_C1))
+              )
+            )
+            (net C41_N36
+              (joined
+                (portRef IN0 (instanceRef C41_C15_C0))
+                (portRef OUT (instanceRef C41_C14_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C15_C1))
+              )
+            )
+            (net C41_N39
+              (joined
+                (portRef IN0 (instanceRef C41_C16_C0))
+                (portRef OUT (instanceRef C41_C15_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C16_C1))
+              )
+            )
+            (net C41_N42
+              (joined
+                (portRef IN0 (instanceRef C41_C17_C0))
+                (portRef OUT (instanceRef C41_C16_C1_MUXCY_L_BUF))
+                (portRef INB (instanceRef C41_C17_C1))
+              )
+            )
+            (net C41_N45
+              (joined
+                (portRef IN0 (instanceRef C41_C18_C0))
+                (portRef OUT (instanceRef C41_C17_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C42_N6
+              (joined
+                (portRef IN (instanceRef RPC_reg_0__))
+                (portRef OUT (instanceRef C200))
+              )
+            )
+            (net C42_N12
+              (joined
+                (portRef IN (instanceRef RPC_reg_1__))
+                (portRef OUT (instanceRef C198))
+              )
+            )
+            (net C42_N18
+              (joined
+                (portRef IN (instanceRef RPC_reg_2__))
+                (portRef OUT (instanceRef C197))
+              )
+            )
+            (net C42_N24
+              (joined
+                (portRef IN (instanceRef RPC_reg_3__))
+                (portRef OUT (instanceRef C196))
+              )
+            )
+            (net C42_N30
+              (joined
+                (portRef IN (instanceRef RPC_reg_4__))
+                (portRef OUT (instanceRef C195))
+              )
+            )
+            (net C42_N36
+              (joined
+                (portRef IN (instanceRef RPC_reg_5__))
+                (portRef OUT (instanceRef C194))
+              )
+            )
+            (net C42_N42
+              (joined
+                (portRef IN (instanceRef RPC_reg_6__))
+                (portRef OUT (instanceRef C193))
+              )
+            )
+            (net C42_N48
+              (joined
+                (portRef IN (instanceRef RPC_reg_7__))
+                (portRef OUT (instanceRef C192))
+              )
+            )
+            (net C42_N54
+              (joined
+                (portRef IN (instanceRef RPC_reg_8__))
+                (portRef OUT (instanceRef C191))
+              )
+            )
+            (net C42_N60
+              (joined
+                (portRef IN (instanceRef RPC_reg_9__))
+                (portRef OUT (instanceRef C190))
+              )
+            )
+            (net C42_N66
+              (joined
+                (portRef IN (instanceRef RPC_reg_10__))
+                (portRef OUT (instanceRef C189))
+              )
+            )
+            (net C42_N72
+              (joined
+                (portRef IN (instanceRef RPC_reg_11__))
+                (portRef OUT (instanceRef C188))
+              )
+            )
+            (net C42_N78
+              (joined
+                (portRef IN (instanceRef RPC_reg_12__))
+                (portRef OUT (instanceRef C187))
+              )
+            )
+            (net C42_N84
+              (joined
+                (portRef IN (instanceRef RPC_reg_13__))
+                (portRef OUT (instanceRef C186))
+              )
+            )
+            (net C42_N90
+              (joined
+                (portRef IN (instanceRef RPC_reg_14__))
+                (portRef OUT (instanceRef C185))
+              )
+            )
+            (net C42_N96
+              (joined
+                (portRef IN (instanceRef RPC_reg_15__))
+                (portRef OUT (instanceRef C184))
+              )
+            )
+            (net C41_C3_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C3_C0))
+                (portRef OUT (instanceRef C41_C3_C3))
+                (portRef SEL (instanceRef C41_C3_C1))
+              )
+            )
+            (net C41_C3_N0
+              (joined
+                (portRef INA (instanceRef C41_C3_C1))
+                (portRef INA (instanceRef C41_C4_C1))
+                (portRef INA (instanceRef C41_C5_C1))
+                (portRef INA (instanceRef C41_C6_C1))
+                (portRef INA (instanceRef C41_C7_C1))
+                (portRef INA (instanceRef C41_C8_C1))
+                (portRef INA (instanceRef C41_C9_C1))
+                (portRef INA (instanceRef C41_C10_C1))
+                (portRef INA (instanceRef C41_C11_C1))
+                (portRef INA (instanceRef C41_C12_C1))
+                (portRef INA (instanceRef C41_C13_C1))
+                (portRef INA (instanceRef C41_C14_C1))
+                (portRef INA (instanceRef C41_C15_C1))
+                (portRef INA (instanceRef C41_C16_C1))
+                (portRef INA (instanceRef C41_C17_C1))
+                (portRef OUT (instanceRef C208_GND))
+              )
+            )
+            (net C41_C4_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C4_C0))
+                (portRef OUT (instanceRef C41_C4_C3))
+                (portRef SEL (instanceRef C41_C4_C1))
+              )
+            )
+            (net C41_C5_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C5_C0))
+                (portRef OUT (instanceRef C41_C5_C3))
+                (portRef SEL (instanceRef C41_C5_C1))
+              )
+            )
+            (net C41_C6_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C6_C0))
+                (portRef OUT (instanceRef C41_C6_C3))
+                (portRef SEL (instanceRef C41_C6_C1))
+              )
+            )
+            (net C41_C7_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C7_C0))
+                (portRef OUT (instanceRef C41_C7_C3))
+                (portRef SEL (instanceRef C41_C7_C1))
+              )
+            )
+            (net C41_C8_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C8_C0))
+                (portRef OUT (instanceRef C41_C8_C3))
+                (portRef SEL (instanceRef C41_C8_C1))
+              )
+            )
+            (net C41_C9_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C9_C0))
+                (portRef OUT (instanceRef C41_C9_C3))
+                (portRef SEL (instanceRef C41_C9_C1))
+              )
+            )
+            (net C41_C10_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C10_C0))
+                (portRef OUT (instanceRef C41_C10_C3))
+                (portRef SEL (instanceRef C41_C10_C1))
+              )
+            )
+            (net C41_C11_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C11_C0))
+                (portRef OUT (instanceRef C41_C11_C3))
+                (portRef SEL (instanceRef C41_C11_C1))
+              )
+            )
+            (net C41_C12_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C12_C0))
+                (portRef OUT (instanceRef C41_C12_C3))
+                (portRef SEL (instanceRef C41_C12_C1))
+              )
+            )
+            (net C41_C13_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C13_C0))
+                (portRef OUT (instanceRef C41_C13_C3))
+                (portRef SEL (instanceRef C41_C13_C1))
+              )
+            )
+            (net C41_C14_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C14_C0))
+                (portRef OUT (instanceRef C41_C14_C3))
+                (portRef SEL (instanceRef C41_C14_C1))
+              )
+            )
+            (net C41_C15_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C15_C0))
+                (portRef OUT (instanceRef C41_C15_C3))
+                (portRef SEL (instanceRef C41_C15_C1))
+              )
+            )
+            (net C41_C16_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C16_C0))
+                (portRef OUT (instanceRef C41_C16_C3))
+                (portRef SEL (instanceRef C41_C16_C1))
+              )
+            )
+            (net C41_C17_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C17_C0))
+                (portRef OUT (instanceRef C41_C17_C3))
+                (portRef SEL (instanceRef C41_C17_C1))
+              )
+            )
+            (net C41_C18_N2
+              (joined
+                (portRef IN1 (instanceRef C41_C18_C0))
+                (portRef OUT (instanceRef C41_C18_C3))
+              )
+            )
+            (net (rename D_15__ "D<15>")
+              (joined
+                (portRef D_15__)
+                (portRef IN (instanceRef C_D_15__))
+                (portRef PAD (instanceRef D_15___34))
+                (portRef IN (instanceRef GSUH_D_15__CLK))
+              )
+            )
+            (net (rename D_14__ "D<14>")
+              (joined
+                (portRef D_14__)
+                (portRef IN (instanceRef C_D_14__))
+                (portRef PAD (instanceRef D_14___32))
+                (portRef IN (instanceRef GSUH_D_14__CLK))
+              )
+            )
+            (net (rename D_13__ "D<13>")
+              (joined
+                (portRef D_13__)
+                (portRef IN (instanceRef C_D_13__))
+                (portRef PAD (instanceRef D_13___30))
+                (portRef IN (instanceRef GSUH_D_13__CLK))
+              )
+            )
+            (net (rename D_12__ "D<12>")
+              (joined
+                (portRef D_12__)
+                (portRef IN (instanceRef C_D_12__))
+                (portRef PAD (instanceRef D_12___28))
+                (portRef IN (instanceRef GSUH_D_12__CLK))
+              )
+            )
+            (net (rename D_11__ "D<11>")
+              (joined
+                (portRef D_11__)
+                (portRef IN (instanceRef C_D_11__))
+                (portRef PAD (instanceRef D_11___26))
+                (portRef IN (instanceRef GSUH_D_11__CLK))
+              )
+            )
+            (net (rename D_10__ "D<10>")
+              (joined
+                (portRef D_10__)
+                (portRef IN (instanceRef C_D_10__))
+                (portRef PAD (instanceRef D_10___25))
+                (portRef IN (instanceRef GSUH_D_10__CLK))
+              )
+            )
+            (net (rename D_9__ "D<9>")
+              (joined
+                (portRef D_9__)
+                (portRef IN (instanceRef C_D_9__))
+                (portRef PAD (instanceRef D_9___12))
+                (portRef IN (instanceRef GSUH_D_9__CLK))
+              )
+            )
+            (net (rename D_8__ "D<8>")
+              (joined
+                (portRef D_8__)
+                (portRef IN (instanceRef C_D_8__))
+                (portRef PAD (instanceRef D_8___11))
+                (portRef IN (instanceRef GSUH_D_8__CLK))
+              )
+            )
+            (net (rename D_7__ "D<7>")
+              (joined
+                (portRef D_7__)
+                (portRef IN (instanceRef C_D_7__))
+                (portRef PAD (instanceRef D_7___10))
+                (portRef IN (instanceRef GSUH_D_7__CLK))
+              )
+            )
+            (net (rename D_6__ "D<6>")
+              (joined
+                (portRef D_6__)
+                (portRef IN (instanceRef C_D_6__))
+                (portRef PAD (instanceRef D_6___9))
+                (portRef IN (instanceRef GSUH_D_6__CLK))
+              )
+            )
+            (net (rename D_5__ "D<5>")
+              (joined
+                (portRef D_5__)
+                (portRef IN (instanceRef C_D_5__))
+                (portRef PAD (instanceRef D_5___8))
+                (portRef IN (instanceRef GSUH_D_5__CLK))
+              )
+            )
+            (net (rename D_4__ "D<4>")
+              (joined
+                (portRef D_4__)
+                (portRef IN (instanceRef C_D_4__))
+                (portRef PAD (instanceRef D_4___7))
+                (portRef IN (instanceRef GSUH_D_4__CLK))
+              )
+            )
+            (net (rename D_3__ "D<3>")
+              (joined
+                (portRef D_3__)
+                (portRef IN (instanceRef C_D_3__))
+                (portRef PAD (instanceRef D_3___6))
+                (portRef IN (instanceRef GSUH_D_3__CLK))
+              )
+            )
+            (net (rename D_2__ "D<2>")
+              (joined
+                (portRef D_2__)
+                (portRef IN (instanceRef C_D_2__))
+                (portRef PAD (instanceRef D_2___5))
+                (portRef IN (instanceRef GSUH_D_2__CLK))
+              )
+            )
+            (net (rename D_1__ "D<1>")
+              (joined
+                (portRef D_1__)
+                (portRef IN (instanceRef C_D_1__))
+                (portRef PAD (instanceRef D_1___4))
+                (portRef IN (instanceRef GSUH_D_1__CLK))
+              )
+            )
+            (net (rename D_0__ "D<0>")
+              (joined
+                (portRef D_0__)
+                (portRef IN (instanceRef C_D_0__))
+                (portRef PAD (instanceRef D_0___3))
+                (portRef IN (instanceRef GSUH_D_0__CLK))
+              )
+            )
+            (net (rename PC_15__ "PC<15>")
+              (joined
+                (portRef PC_15__)
+                (portRef PAD (instanceRef PC_15___20))
+                (portRef OUT (instanceRef C_PC_15__GTS_TRI_62))
+              )
+            )
+            (net (rename PC_14__ "PC<14>")
+              (joined
+                (portRef PC_14__)
+                (portRef PAD (instanceRef PC_14___19))
+                (portRef OUT (instanceRef C_PC_14__GTS_TRI_61))
+              )
+            )
+            (net (rename PC_13__ "PC<13>")
+              (joined
+                (portRef PC_13__)
+                (portRef PAD (instanceRef PC_13___18))
+                (portRef OUT (instanceRef C_PC_13__GTS_TRI_60))
+              )
+            )
+            (net (rename PC_12__ "PC<12>")
+              (joined
+                (portRef PC_12__)
+                (portRef PAD (instanceRef PC_12___17))
+                (portRef OUT (instanceRef C_PC_12__GTS_TRI_59))
+              )
+            )
+            (net (rename PC_11__ "PC<11>")
+              (joined
+                (portRef PC_11__)
+                (portRef PAD (instanceRef PC_11___16))
+                (portRef OUT (instanceRef C_PC_11__GTS_TRI_58))
+              )
+            )
+            (net (rename PC_10__ "PC<10>")
+              (joined
+                (portRef PC_10__)
+                (portRef PAD (instanceRef PC_10___15))
+                (portRef OUT (instanceRef C_PC_10__GTS_TRI_57))
+              )
+            )
+            (net (rename PC_9__ "PC<9>")
+              (joined
+                (portRef PC_9__)
+                (portRef PAD (instanceRef PC_9___40))
+                (portRef OUT (instanceRef C_PC_9__GTS_TRI_72))
+              )
+            )
+            (net (rename PC_8__ "PC<8>")
+              (joined
+                (portRef PC_8__)
+                (portRef PAD (instanceRef PC_8___39))
+                (portRef OUT (instanceRef C_PC_8__GTS_TRI_71))
+              )
+            )
+            (net (rename PC_7__ "PC<7>")
+              (joined
+                (portRef PC_7__)
+                (portRef PAD (instanceRef PC_7___38))
+                (portRef OUT (instanceRef C_PC_7__GTS_TRI_70))
+              )
+            )
+            (net (rename PC_6__ "PC<6>")
+              (joined
+                (portRef PC_6__)
+                (portRef PAD (instanceRef PC_6___37))
+                (portRef OUT (instanceRef C_PC_6__GTS_TRI_69))
+              )
+            )
+            (net (rename PC_5__ "PC<5>")
+              (joined
+                (portRef PC_5__)
+                (portRef PAD (instanceRef PC_5___36))
+                (portRef OUT (instanceRef C_PC_5__GTS_TRI_68))
+              )
+            )
+            (net (rename PC_4__ "PC<4>")
+              (joined
+                (portRef PC_4__)
+                (portRef PAD (instanceRef PC_4___35))
+                (portRef OUT (instanceRef C_PC_4__GTS_TRI_67))
+              )
+            )
+            (net (rename PC_3__ "PC<3>")
+              (joined
+                (portRef PC_3__)
+                (portRef PAD (instanceRef PC_3___33))
+                (portRef OUT (instanceRef C_PC_3__GTS_TRI_66))
+              )
+            )
+            (net (rename PC_2__ "PC<2>")
+              (joined
+                (portRef PC_2__)
+                (portRef PAD (instanceRef PC_2___31))
+                (portRef OUT (instanceRef C_PC_2__GTS_TRI_65))
+              )
+            )
+            (net (rename PC_1__ "PC<1>")
+              (joined
+                (portRef PC_1__)
+                (portRef PAD (instanceRef PC_1___29))
+                (portRef OUT (instanceRef C_PC_1__GTS_TRI_64))
+              )
+            )
+            (net (rename PC_0__ "PC<0>")
+              (joined
+                (portRef PC_0__)
+                (portRef PAD (instanceRef PC_0___27))
+                (portRef OUT (instanceRef C_PC_0__GTS_TRI_63))
+              )
+            )
+            (net C
+              (joined
+                (portRef C)
+                (portRef IN (instanceRef C_C))
+                (portRef PAD (instanceRef C_21))
+                (portRef IN (instanceRef GSUH_C_CLK))
+              )
+            )
+            (net Z
+              (joined
+                (portRef Z)
+                (portRef IN (instanceRef C_Z))
+                (portRef PAD (instanceRef Z_23))
+                (portRef IN (instanceRef GSUH_Z_CLK))
+              )
+            )
+            (net ELP
+              (joined
+                (portRef ELP)
+                (portRef IN (instanceRef C_ELP))
+                (portRef PAD (instanceRef ELP_13))
+                (portRef IN (instanceRef GSUH_ELP_CLK))
+              )
+            )
+            (net PC1
+              (joined
+                (portRef PC1)
+                (portRef IN (instanceRef C_PC1))
+                (portRef PAD (instanceRef PC1_14))
+                (portRef IN (instanceRef GSUH_PC1_CLK))
+              )
+            )
+            (net IR2
+              (joined
+                (portRef IR2)
+                (portRef IN (instanceRef C_IR2))
+                (portRef PAD (instanceRef IR2_1))
+                (portRef IN (instanceRef GSUH_IR2_CLK))
+              )
+            )
+            (net IR3
+              (joined
+                (portRef IR3)
+                (portRef IN (instanceRef C_IR3))
+                (portRef PAD (instanceRef IR3_2))
+                (portRef IN (instanceRef GSUH_IR3_CLK))
+              )
+            )
+            (net RST
+              (joined
+                (portRef RST)
+                (portRef IN (instanceRef C_RST))
+                (portRef PAD (instanceRef RST_24))
+              )
+            )
+            (net CLK
+              (joined
+                (portRef CLK)
+                (portRef I (instanceRef C206))
+                (portRef PAD (instanceRef CLK_22))
+                (portRef CLK (instanceRef GSUH_Z_CLK))
+                (portRef CLK (instanceRef GSUH_C_CLK))
+                (portRef CLK (instanceRef GSUH_IR3_CLK))
+                (portRef CLK (instanceRef GSUH_IR2_CLK))
+                (portRef CLK (instanceRef GSUH_PC1_CLK))
+                (portRef CLK (instanceRef GSUH_ELP_CLK))
+                (portRef CLK (instanceRef GSUH_D_15__CLK))
+                (portRef CLK (instanceRef GSUH_D_14__CLK))
+                (portRef CLK (instanceRef GSUH_D_0__CLK))
+                (portRef CLK (instanceRef GSUH_D_3__CLK))
+                (portRef CLK (instanceRef GSUH_D_2__CLK))
+                (portRef CLK (instanceRef GSUH_D_5__CLK))
+                (portRef CLK (instanceRef GSUH_D_4__CLK))
+                (portRef CLK (instanceRef GSUH_D_7__CLK))
+                (portRef CLK (instanceRef GSUH_D_6__CLK))
+                (portRef CLK (instanceRef GSUH_D_11__CLK))
+                (portRef CLK (instanceRef GSUH_D_10__CLK))
+                (portRef CLK (instanceRef GSUH_D_9__CLK))
+                (portRef CLK (instanceRef GSUH_D_8__CLK))
+                (portRef CLK (instanceRef GSUH_D_13__CLK))
+                (portRef CLK (instanceRef GSUH_D_12__CLK))
+                (portRef CLK (instanceRef GSUH_D_1__CLK))
+              )
+            )
+            (net N229
+              (joined
+                (portRef CE (instanceRef RPC_reg_0__))
+                (portRef CE (instanceRef RPC_reg_1__))
+                (portRef CE (instanceRef RPC_reg_2__))
+                (portRef CE (instanceRef RPC_reg_3__))
+                (portRef CE (instanceRef RPC_reg_4__))
+                (portRef CE (instanceRef RPC_reg_5__))
+                (portRef CE (instanceRef RPC_reg_6__))
+                (portRef CE (instanceRef RPC_reg_7__))
+                (portRef CE (instanceRef RPC_reg_8__))
+                (portRef CE (instanceRef RPC_reg_9__))
+                (portRef CE (instanceRef RPC_reg_10__))
+                (portRef CE (instanceRef RPC_reg_11__))
+                (portRef CE (instanceRef RPC_reg_12__))
+                (portRef CE (instanceRef RPC_reg_13__))
+                (portRef CE (instanceRef RPC_reg_14__))
+                (portRef CE (instanceRef RPC_reg_15__))
+                (portRef OUT (instanceRef C199))
+              )
+            )
+            (net syn360
+              (joined
+                (portRef ADR3 (instanceRef C184))
+                (portRef ADR3 (instanceRef C185))
+                (portRef ADR3 (instanceRef C186))
+                (portRef ADR3 (instanceRef C187))
+                (portRef ADR3 (instanceRef C188))
+                (portRef ADR3 (instanceRef C189))
+                (portRef ADR3 (instanceRef C190))
+                (portRef ADR3 (instanceRef C191))
+                (portRef ADR3 (instanceRef C192))
+                (portRef ADR3 (instanceRef C193))
+                (portRef ADR3 (instanceRef C194))
+                (portRef ADR3 (instanceRef C195))
+                (portRef ADR3 (instanceRef C196))
+                (portRef ADR3 (instanceRef C197))
+                (portRef ADR3 (instanceRef C198))
+                (portRef ADR2 (instanceRef C199))
+                (portRef ADR3 (instanceRef C200))
+                (portRef OUT (instanceRef C201))
+              )
+            )
+            (net C41_C3_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C3_C1))
+                (portRef IN (instanceRef C41_C3_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C4_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C4_C1))
+                (portRef IN (instanceRef C41_C4_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C5_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C5_C1))
+                (portRef IN (instanceRef C41_C5_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C6_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C6_C1))
+                (portRef IN (instanceRef C41_C6_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C7_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C7_C1))
+                (portRef IN (instanceRef C41_C7_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C8_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C8_C1))
+                (portRef IN (instanceRef C41_C8_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C9_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C9_C1))
+                (portRef IN (instanceRef C41_C9_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C10_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C10_C1))
+                (portRef IN (instanceRef C41_C10_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C11_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C11_C1))
+                (portRef IN (instanceRef C41_C11_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C12_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C12_C1))
+                (portRef IN (instanceRef C41_C12_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C13_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C13_C1))
+                (portRef IN (instanceRef C41_C13_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C14_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C14_C1))
+                (portRef IN (instanceRef C41_C14_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C15_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C15_C1))
+                (portRef IN (instanceRef C41_C15_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C16_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C16_C1))
+                (portRef IN (instanceRef C41_C16_C1_MUXCY_L_BUF))
+              )
+            )
+            (net C41_C17_C1_O
+              (joined
+                (portRef OUT (instanceRef C41_C17_C1))
+                (portRef IN (instanceRef C41_C17_C1_MUXCY_L_BUF))
+              )
+            )
+            (net RPC_reg_0__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_0__))
+                (portRef OUT (instanceRef RPC_reg_0__GSR_OR_41))
+              )
+            )
+            (net RPC_reg_1__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_1__))
+                (portRef OUT (instanceRef RPC_reg_1__GSR_OR_42))
+              )
+            )
+            (net RPC_reg_2__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_2__))
+                (portRef OUT (instanceRef RPC_reg_2__GSR_OR_43))
+              )
+            )
+            (net RPC_reg_3__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_3__))
+                (portRef OUT (instanceRef RPC_reg_3__GSR_OR_44))
+              )
+            )
+            (net RPC_reg_4__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_4__))
+                (portRef OUT (instanceRef RPC_reg_4__GSR_OR_45))
+              )
+            )
+            (net RPC_reg_5__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_5__))
+                (portRef OUT (instanceRef RPC_reg_5__GSR_OR_46))
+              )
+            )
+            (net RPC_reg_6__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_6__))
+                (portRef OUT (instanceRef RPC_reg_6__GSR_OR_47))
+              )
+            )
+            (net RPC_reg_7__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_7__))
+                (portRef OUT (instanceRef RPC_reg_7__GSR_OR_48))
+              )
+            )
+            (net RPC_reg_8__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_8__))
+                (portRef OUT (instanceRef RPC_reg_8__GSR_OR_49))
+              )
+            )
+            (net RPC_reg_9__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_9__))
+                (portRef OUT (instanceRef RPC_reg_9__GSR_OR_50))
+              )
+            )
+            (net RPC_reg_10__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_10__))
+                (portRef OUT (instanceRef RPC_reg_10__GSR_OR_51))
+              )
+            )
+            (net RPC_reg_11__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_11__))
+                (portRef OUT (instanceRef RPC_reg_11__GSR_OR_52))
+              )
+            )
+            (net RPC_reg_12__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_12__))
+                (portRef OUT (instanceRef RPC_reg_12__GSR_OR_53))
+              )
+            )
+            (net RPC_reg_13__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_13__))
+                (portRef OUT (instanceRef RPC_reg_13__GSR_OR_54))
+              )
+            )
+            (net RPC_reg_14__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_14__))
+                (portRef OUT (instanceRef RPC_reg_14__GSR_OR_55))
+              )
+            )
+            (net RPC_reg_15__GSR_OR
+              (joined
+                (portRef RST (instanceRef RPC_reg_15__))
+                (portRef OUT (instanceRef RPC_reg_15__GSR_OR_56))
+              )
+            )
+            (net C_PC_10__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_10__))
+                (portRef IN (instanceRef C_PC_10__GTS_TRI_57))
+              )
+            )
+            (net C_PC_11__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_11__))
+                (portRef IN (instanceRef C_PC_11__GTS_TRI_58))
+              )
+            )
+            (net C_PC_12__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_12__))
+                (portRef IN (instanceRef C_PC_12__GTS_TRI_59))
+              )
+            )
+            (net C_PC_13__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_13__))
+                (portRef IN (instanceRef C_PC_13__GTS_TRI_60))
+              )
+            )
+            (net C_PC_14__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_14__))
+                (portRef IN (instanceRef C_PC_14__GTS_TRI_61))
+              )
+            )
+            (net C_PC_15__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_15__))
+                (portRef IN (instanceRef C_PC_15__GTS_TRI_62))
+              )
+            )
+            (net C_PC_0__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_0__))
+                (portRef IN (instanceRef C_PC_0__GTS_TRI_63))
+              )
+            )
+            (net C_PC_1__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_1__))
+                (portRef IN (instanceRef C_PC_1__GTS_TRI_64))
+              )
+            )
+            (net C_PC_2__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_2__))
+                (portRef IN (instanceRef C_PC_2__GTS_TRI_65))
+              )
+            )
+            (net C_PC_3__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_3__))
+                (portRef IN (instanceRef C_PC_3__GTS_TRI_66))
+              )
+            )
+            (net C_PC_4__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_4__))
+                (portRef IN (instanceRef C_PC_4__GTS_TRI_67))
+              )
+            )
+            (net C_PC_5__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_5__))
+                (portRef IN (instanceRef C_PC_5__GTS_TRI_68))
+              )
+            )
+            (net C_PC_6__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_6__))
+                (portRef IN (instanceRef C_PC_6__GTS_TRI_69))
+              )
+            )
+            (net C_PC_7__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_7__))
+                (portRef IN (instanceRef C_PC_7__GTS_TRI_70))
+              )
+            )
+            (net C_PC_8__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_8__))
+                (portRef IN (instanceRef C_PC_8__GTS_TRI_71))
+              )
+            )
+            (net C_PC_9__GTS_TRI
+              (joined
+                (portRef OUT (instanceRef C_PC_9__))
+                (portRef IN (instanceRef C_PC_9__GTS_TRI_72))
+              )
+            )
+            (net GSR
+              (joined
+                (portRef IN1 (instanceRef RPC_reg_0__GSR_OR_41))
+                (portRef IN1 (instanceRef RPC_reg_1__GSR_OR_42))
+                (portRef IN1 (instanceRef RPC_reg_2__GSR_OR_43))
+                (portRef IN1 (instanceRef RPC_reg_3__GSR_OR_44))
+                (portRef IN1 (instanceRef RPC_reg_4__GSR_OR_45))
+                (portRef IN1 (instanceRef RPC_reg_5__GSR_OR_46))
+                (portRef IN1 (instanceRef RPC_reg_6__GSR_OR_47))
+                (portRef IN1 (instanceRef RPC_reg_7__GSR_OR_48))
+                (portRef IN1 (instanceRef RPC_reg_8__GSR_OR_49))
+                (portRef IN1 (instanceRef RPC_reg_9__GSR_OR_50))
+                (portRef IN1 (instanceRef RPC_reg_10__GSR_OR_51))
+                (portRef IN1 (instanceRef RPC_reg_11__GSR_OR_52))
+                (portRef IN1 (instanceRef RPC_reg_12__GSR_OR_53))
+                (portRef IN1 (instanceRef RPC_reg_13__GSR_OR_54))
+                (portRef IN1 (instanceRef RPC_reg_14__GSR_OR_55))
+                (portRef IN1 (instanceRef RPC_reg_15__GSR_OR_56))
+              )
+              (property INITSTATE (string "0") (owner "Xilinx"))
+              (property GLOBAL (boolean (true)) (owner "Xilinx"))
+            )
+            (net GTS
+              (joined
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_10__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_11__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_12__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_13__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_14__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_15__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_0__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_1__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_2__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_3__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_4__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_5__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_6__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_7__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_8__GTS_TRI_CTL))
+                (portRef IN (instanceRef NlwInverterBlock_C_PC_9__GTS_TRI_CTL))
+              )
+              (property INITSTATE (string "0") (owner "Xilinx"))
+              (property GLOBAL (boolean (true)) (owner "Xilinx"))
+            )
+            (net GND
+              (joined
+                (portRef OUT (instanceRef NlwTieBlock_pc_GND))
+                (portRef ADR1 (instanceRef C41_C3_C3))
+                (portRef ADR1 (instanceRef C41_C4_C3))
+                (portRef ADR1 (instanceRef C41_C5_C3))
+                (portRef ADR1 (instanceRef C41_C6_C3))
+                (portRef ADR1 (instanceRef C41_C7_C3))
+                (portRef ADR1 (instanceRef C41_C8_C3))
+                (portRef ADR1 (instanceRef C41_C9_C3))
+                (portRef ADR1 (instanceRef C41_C10_C3))
+                (portRef ADR1 (instanceRef C41_C11_C3))
+                (portRef ADR1 (instanceRef C41_C12_C3))
+                (portRef ADR1 (instanceRef C41_C13_C3))
+                (portRef ADR1 (instanceRef C41_C14_C3))
+                (portRef ADR1 (instanceRef C41_C15_C3))
+                (portRef ADR1 (instanceRef C41_C16_C3))
+                (portRef ADR1 (instanceRef C41_C17_C3))
+                (portRef ADR1 (instanceRef C41_C18_C3))
+                (portRef SET (instanceRef RPC_reg_0__))
+                (portRef SET (instanceRef RPC_reg_1__))
+                (portRef SET (instanceRef RPC_reg_2__))
+                (portRef SET (instanceRef RPC_reg_3__))
+                (portRef SET (instanceRef RPC_reg_4__))
+                (portRef SET (instanceRef RPC_reg_5__))
+                (portRef SET (instanceRef RPC_reg_6__))
+                (portRef SET (instanceRef RPC_reg_7__))
+                (portRef SET (instanceRef RPC_reg_8__))
+                (portRef SET (instanceRef RPC_reg_9__))
+                (portRef SET (instanceRef RPC_reg_10__))
+                (portRef SET (instanceRef RPC_reg_11__))
+                (portRef SET (instanceRef RPC_reg_12__))
+                (portRef SET (instanceRef RPC_reg_13__))
+                (portRef SET (instanceRef RPC_reg_14__))
+                (portRef SET (instanceRef RPC_reg_15__))
+              )
+            )
+            (net NlwInverterSignal_C_PC_10__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_10__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_10__GTS_TRI_57))
+              )
+            )
+            (net NlwInverterSignal_C_PC_11__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_11__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_11__GTS_TRI_58))
+              )
+            )
+            (net NlwInverterSignal_C_PC_12__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_12__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_12__GTS_TRI_59))
+              )
+            )
+            (net NlwInverterSignal_C_PC_13__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_13__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_13__GTS_TRI_60))
+              )
+            )
+            (net NlwInverterSignal_C_PC_14__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_14__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_14__GTS_TRI_61))
+              )
+            )
+            (net NlwInverterSignal_C_PC_15__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_15__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_15__GTS_TRI_62))
+              )
+            )
+            (net NlwInverterSignal_C_PC_0__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_0__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_0__GTS_TRI_63))
+              )
+            )
+            (net NlwInverterSignal_C_PC_1__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_1__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_1__GTS_TRI_64))
+              )
+            )
+            (net NlwInverterSignal_C_PC_2__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_2__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_2__GTS_TRI_65))
+              )
+            )
+            (net NlwInverterSignal_C_PC_3__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_3__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_3__GTS_TRI_66))
+              )
+            )
+            (net NlwInverterSignal_C_PC_4__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_4__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_4__GTS_TRI_67))
+              )
+            )
+            (net NlwInverterSignal_C_PC_5__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_5__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_5__GTS_TRI_68))
+              )
+            )
+            (net NlwInverterSignal_C_PC_6__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_6__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_6__GTS_TRI_69))
+              )
+            )
+            (net NlwInverterSignal_C_PC_7__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_7__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_7__GTS_TRI_70))
+              )
+            )
+            (net NlwInverterSignal_C_PC_8__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_8__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_8__GTS_TRI_71))
+              )
+            )
+            (net NlwInverterSignal_C_PC_9__GTS_TRI_CTL
+              (joined
+                (portRef OUT (instanceRef NlwInverterBlock_C_PC_9__GTS_TRI_CTL))
+                (portRef CTL (instanceRef C_PC_9__GTS_TRI_72))
+              )
+            )
+            (net VCC
+              (joined
+                (portRef OUT (instanceRef NlwTieBlock_pc_VCC))
+                (portRef CE (instanceRef GSUH_Z_CLK))
+                (portRef CE (instanceRef GSUH_C_CLK))
+                (portRef CE (instanceRef GSUH_IR3_CLK))
+                (portRef CE (instanceRef GSUH_IR2_CLK))
+                (portRef CE (instanceRef GSUH_PC1_CLK))
+                (portRef CE (instanceRef GSUH_ELP_CLK))
+                (portRef CE (instanceRef GSUH_D_15__CLK))
+                (portRef CE (instanceRef GSUH_D_14__CLK))
+                (portRef CE (instanceRef GSUH_D_0__CLK))
+                (portRef CE (instanceRef GSUH_D_3__CLK))
+                (portRef CE (instanceRef GSUH_D_2__CLK))
+                (portRef CE (instanceRef GSUH_D_5__CLK))
+                (portRef CE (instanceRef GSUH_D_4__CLK))
+                (portRef CE (instanceRef GSUH_D_7__CLK))
+                (portRef CE (instanceRef GSUH_D_6__CLK))
+                (portRef CE (instanceRef GSUH_D_11__CLK))
+                (portRef CE (instanceRef GSUH_D_10__CLK))
+                (portRef CE (instanceRef GSUH_D_9__CLK))
+                (portRef CE (instanceRef GSUH_D_8__CLK))
+                (portRef CE (instanceRef GSUH_D_13__CLK))
+                (portRef CE (instanceRef GSUH_D_12__CLK))
+                (portRef CE (instanceRef GSUH_D_1__CLK))
+              )
+            )
+          )
+      )
+    )
+  )
+
+  (design pc
+    (cellRef pc
+      (libraryRef pc_lib)
+    )
+  )
+)
+

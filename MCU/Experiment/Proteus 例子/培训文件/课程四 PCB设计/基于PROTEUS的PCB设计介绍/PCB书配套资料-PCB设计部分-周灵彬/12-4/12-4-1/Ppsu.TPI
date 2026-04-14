@@ -1,0 +1,45 @@
+LABCENTER PROTEUS TESTPOINT INFORMATION FILE
+==================--------==================
+
+Testpoint positions for Ppsu.LYT
+
+Fields: ID, Type, X, Y, Net
+Units:  X, Y  - thou
+Notes:  This file lists pads which are accessible from the bottom side of the board.
+        The X, Y value is the centre of drill hole or pad origin relative to the Output Origin.
+        Vias are only listed if they are exposed through the solder resist.
+
+"U1:1","THRU",-209.212,-113.387,"{NC}"
+"U1:2","THRU",-109.212,-113.387,"#00004"
+"U1:3","THRU",-9.21181,-113.387,"ANALOG"
+"U1:4","THRU",90.7882,-113.387,"GND=POWER"
+"U1:5","THRU",90.7882,186.613,"#00007"
+"U1:6","THRU",-9.21181,186.613,"#00000"
+"U1:7","THRU",-109.212,186.613,"UNREG=PP"
+"U1:8","THRU",-209.212,186.613,"#00008"
+"R2:1","THRU",-254.212,-198.387,"#00004"
+"R2:2","THRU",145.788,-198.387,"GND=POWER"
+"C1:1","THRU",290.788,-183.387,"GND=POWER"
+"C1:2","THRU",290.788,-283.387,"ANALOG"
+"C2:1","THRU",-9.21181,286.613,"#00008"
+"C2:2","THRU",90.7882,286.613,"#00007"
+"Q2:1","THRU",-289.212,286.613,"GND=POWER"
+"Q2:2","THRU",-209.212,286.613,"#00008"
+"Q2:3","THRU",-129.212,286.613,"#00009"
+"Q1:1","THRU",240.788,136.613,"#00000"
+"Q1:2","THRU",240.788,36.6134,"UNREG=PP"
+"Q1:3","THRU",240.788,-63.3866,"VOUT"
+"R1:1","THRU",-319.212,-288.387,"VOUT"
+"R1:2","THRU",80.7882,-288.387,"#00004"
+"D1:A","THRU",-359.212,-188.387,"VOUT"
+"D1:K","THRU",-359.212,111.613,"#00008"
+"R3:1","THRU",128.288,429.113,"DIGITAL=XX"
+"R3:2","THRU",-271.712,429.113,"#00009"
+"J1:1","THRU",-134.212,-388.387,"VOUT"
+"J2:1","THRU",240.788,286.613,"UNREG=PP"
+"J3:1","THRU",165.788,-388.387,"ANALOG"
+"J4:1","THRU",230.788,476.613,"DIGITAL=XX"
+"PIN:<NONE>","THRU",370.788,471.613,"<NONE>"
+"PIN:<NONE>","THRU",-374.212,-388.387,"<NONE>"
+"PIN:<NONE>","THRU",370.788,-388.387,"<NONE>"
+"PIN:<NONE>","THRU",-374.212,466.613,"<NONE>"

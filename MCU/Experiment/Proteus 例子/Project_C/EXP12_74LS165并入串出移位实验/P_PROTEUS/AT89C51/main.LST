@@ -1,0 +1,63 @@
+C51 COMPILER V9.00   MAIN                                                                  10/26/2015 11:27:57 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) OBJECT(main.OBJ)
+
+line level    source
+
+   1          /*******************************************************************************     
+   2          文件名称： main.c 
+   3          作 者：    
+   4          版 本：    V1.00
+   5          说 明：    74LS165并入串出移位实验 
+   6          修改记录：  
+   7          -------------------------------------------------------------------------------- 
+   8          功能描述:                                                              
+   9          *          控制74LS165                                                                                    
+             -      
+  10          *          实现并行数据输入,串行数据输出 
+  11          --------------------------------------------------------------------------------
+  12          *接线说明：P30-SO，P31-CP,P32-SH,P10~P17——D1~D8,SW1~SW8——QA~QH,                                   
+  13          *******************************************************************************/
+  14          #include <reg52.h>
+  15          #include <intrins.h>
+  16          
+  17          #define uchar unsigned char
+  18          #define uint unsigned int
+  19          
+  20          #define Dout P1
+  21          
+  22          sbit SH=P3^2;
+  23          /*********主函数***************************************************************/
+  24          void main(void)
+  25          {
+  26   1              SCON=0X10;                  //设定UART方式0,允许接收数据
+  27   1              while(1)
+  28   1              {
+  29   2                      SH=0;              //载入数据
+  30   2                      _nop_();
+  31   2                      _nop_();
+  32   2                      _nop_();
+  33   2                      SH=1;          //数据输出
+  34   2                      RI=0;
+  35   2                      while(!RI);        //判断是否接收完数据
+  36   2                      RI=0;
+  37   2                      Dout=SBUF;         //输出接收到的数据
+  38   2              }
+  39   1      }                                                                                                                                                                        
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     22    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

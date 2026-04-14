@@ -1,0 +1,321 @@
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          #define led_out P2      //定时P2 名为 LED输出
+   7          
+   8          sbit button=P1^0;
+   9          uint count=0;
+  10          uchar a,b;
+  11          ///////////////延时函数/////////////////////////
+  12          void delay1ms(uint j)             //1ms延时
+  13          {
+  14   1      uchar i;
+  15   1      for(   ;j>0;j--)
+  16   1              {
+  17   2               i=250;
+  18   2               while(--i);
+  19   2               i=249;
+  20   2               while(--i);
+  21   2              }
+  22   1      }
+  23          /********************************************************************
+  24          * 名称 : Outside_Init0()
+  25          * 功能 : 外部中断0 的初始化
+  26          * 输入 : 无
+  27          * 输出 : 无
+  28          ***********************************************************************/
+  29          void Outside_Init0(void)
+  30          {
+  31   1              EX0 = 1;  //开外部中断0
+  32   1               EX1=1;
+  33   1      //      IT0 = 0;  //电平触发 
+  34   1              IT0 = 1;  //边沿触发
+  35   1              IT1=1;
+  36   1              EA = 1;   //开总中断
+  37   1      }
+  38          /********************************************************************
+  39          * 名称 : Time0_Init()
+  40          * 功能 : 定时器的初始化，1ms  12M晶振 即初值加1只要1us。
+  41          * 输入 : 无
+  42          * 输出 : 无
+  43          ***********************************************************************/
+  44          void Time0_Init()
+  45          {
+  46   1              TMOD = 0x00;    //方式0，13位定时功能      
+  47   1      //      TMOD = 0x04;    //方式0，13位计数功能
+  48   1              TH0  = 0xE0;    //高八低5位
+  49   1              TL0  = 0x18;
+  50   1           
+  51   1              ET0 = 1;
+  52   1              EA = 1;         
+  53   1              TR0 = 1;                
+  54   1      }
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 2   
+
+  55          ////////主函数////////////////////
+  56          void main(void)
+  57           { 
+  58   1         Outside_Init0();
+  59   1          Time0_Init();
+  60   1          IP=02; //中断嵌套中优先级设置，设置的1位高于设置0的位。
+  61   1         while (1)
+  62   1         {;
+  63   2          }
+  64   1       }
+  65            /////////////外部中断函数0///////////////////////////
+  66           void Outside_Int0(void) interrupt 2
+  67           {
+  68   1      
+  69   1         for(a=0;a<8;a++)
+  70   1         {
+  71   2            led_out=~(0x01<<a);
+  72   2            delay1ms(1000); 
+  73   2            }
+  74   1          
+  75   1        }
+  76            /////////////定时器中断函数0///////////////////////////
+  77          void Time0_Int() interrupt 1
+  78           {
+  79   1          TH0  = 0xE0;
+  80   1          TL0  = 0x18;
+  81   1          count++;
+  82   1          if(count==1000)
+  83   1          {
+  84   2             count=0;
+  85   2             led_out=0x01<<b;
+  86   2             b++;
+  87   2             if(b>7)b=0;
+  88   2            
+  89   2          }
+  90   1        }
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _delay1ms (BEGIN)
+                                           ; SOURCE LINE # 12
+;---- Variable 'j' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 13
+                                           ; SOURCE LINE # 15
+0000         ?C0001:
+0000 D3                SETB    C
+0001 EF                MOV     A,R7
+0002 9400              SUBB    A,#00H
+0004 EE                MOV     A,R6
+0005 9400              SUBB    A,#00H
+0007 400F              JC      ?C0008
+                                           ; SOURCE LINE # 16
+                                           ; SOURCE LINE # 17
+;---- Variable 'i' assigned to Register 'R5' ----
+0009 7DFA              MOV     R5,#0FAH
+000B         ?C0004:
+                                           ; SOURCE LINE # 18
+000B DDFE              DJNZ    R5,?C0004
+000D         ?C0005:
+                                           ; SOURCE LINE # 19
+000D 7DF9              MOV     R5,#0F9H
+000F         ?C0006:
+                                           ; SOURCE LINE # 20
+000F DDFE              DJNZ    R5,?C0006
+0011         ?C0007:
+                                           ; SOURCE LINE # 21
+0011         ?C0003:
+0011 EF                MOV     A,R7
+0012 1F                DEC     R7
+0013 70EB              JNZ     ?C0001
+0015 1E                DEC     R6
+0016         ?C0021:
+0016 80E8              SJMP    ?C0001
+                                           ; SOURCE LINE # 22
+0018         ?C0008:
+0018 22                RET     
+             ; FUNCTION _delay1ms (END)
+
+             ; FUNCTION Outside_Init0 (BEGIN)
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+                                           ; SOURCE LINE # 31
+0000 D2A8              SETB    EX0
+                                           ; SOURCE LINE # 32
+0002 D2AA              SETB    EX1
+                                           ; SOURCE LINE # 34
+0004 D288              SETB    IT0
+                                           ; SOURCE LINE # 35
+0006 D28A              SETB    IT1
+                                           ; SOURCE LINE # 36
+0008 D2AF              SETB    EA
+                                           ; SOURCE LINE # 37
+000A 22                RET     
+             ; FUNCTION Outside_Init0 (END)
+
+             ; FUNCTION Time0_Init (BEGIN)
+                                           ; SOURCE LINE # 44
+                                           ; SOURCE LINE # 45
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 4   
+
+                                           ; SOURCE LINE # 46
+0000 E4                CLR     A
+0001 F589              MOV     TMOD,A
+                                           ; SOURCE LINE # 48
+0003 758CE0            MOV     TH0,#0E0H
+                                           ; SOURCE LINE # 49
+0006 758A18            MOV     TL0,#018H
+                                           ; SOURCE LINE # 51
+0009 D2A9              SETB    ET0
+                                           ; SOURCE LINE # 52
+000B D2AF              SETB    EA
+                                           ; SOURCE LINE # 53
+000D D28C              SETB    TR0
+                                           ; SOURCE LINE # 54
+000F 22                RET     
+             ; FUNCTION Time0_Init (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 56
+                                           ; SOURCE LINE # 57
+                                           ; SOURCE LINE # 58
+0000 1100        R     ACALL   Outside_Init0
+                                           ; SOURCE LINE # 59
+0002 1100        R     ACALL   Time0_Init
+                                           ; SOURCE LINE # 60
+0004 75B802            MOV     IP,#02H
+0007         ?C0011:
+                                           ; SOURCE LINE # 61
+                                           ; SOURCE LINE # 62
+                                           ; SOURCE LINE # 63
+0007 80FE              SJMP    ?C0011
+             ; FUNCTION main (END)
+
+             ; FUNCTION Outside_Int0 (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+0004 75D000            MOV     PSW,#00H
+0007 C000              PUSH    AR0
+0009 C005              PUSH    AR5
+000B C006              PUSH    AR6
+000D C007              PUSH    AR7
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 69
+000F 750000      R     MOV     a,#00H
+0012         ?C0014:
+                                           ; SOURCE LINE # 70
+                                           ; SOURCE LINE # 71
+0012 AF00        R     MOV     R7,a
+0014 7401              MOV     A,#01H
+0016 A807              MOV     R0,AR7
+0018 08                INC     R0
+0019 8002              SJMP    ?C0023
+001B         ?C0022:
+001B C3                CLR     C
+001C 33                RLC     A
+001D         ?C0023:
+001D D8FC              DJNZ    R0,?C0022
+001F F4                CPL     A
+0020 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 72
+0022 7FE8              MOV     R7,#0E8H
+0024 7E03              MOV     R6,#03H
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 5   
+
+0026 1100        R     ACALL   _delay1ms
+                                           ; SOURCE LINE # 73
+0028 0500        R     INC     a
+002A E500        R     MOV     A,a
+002C C3                CLR     C
+002D 9408              SUBB    A,#08H
+002F 40E1              JC      ?C0014
+                                           ; SOURCE LINE # 75
+0031         ?C0017:
+0031 D007              POP     AR7
+0033 D006              POP     AR6
+0035 D005              POP     AR5
+0037 D000              POP     AR0
+0039 D0D0              POP     PSW
+003B D0E0              POP     ACC
+003D 32                RETI    
+             ; FUNCTION Outside_Int0 (END)
+
+             ; FUNCTION Time0_Int (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+0004 75D000            MOV     PSW,#00H
+0007 C000              PUSH    AR0
+0009 C007              PUSH    AR7
+                                           ; SOURCE LINE # 77
+                                           ; SOURCE LINE # 79
+000B 758CE0            MOV     TH0,#0E0H
+                                           ; SOURCE LINE # 80
+000E 758A18            MOV     TL0,#018H
+                                           ; SOURCE LINE # 81
+0011 0500        R     INC     count+01H
+0013 E500        R     MOV     A,count+01H
+0015 7002              JNZ     ?C0024
+0017 0500        R     INC     count
+0019         ?C0024:
+                                           ; SOURCE LINE # 82
+0019 B4E826            CJNE    A,#0E8H,?C0020
+001C E500        R     MOV     A,count
+001E B40321            CJNE    A,#03H,?C0020
+                                           ; SOURCE LINE # 83
+                                           ; SOURCE LINE # 84
+0021 750000      R     MOV     count,#00H
+0024 750000      R     MOV     count+01H,#00H
+                                           ; SOURCE LINE # 85
+0027 AF00        R     MOV     R7,b
+0029 7401              MOV     A,#01H
+002B A807              MOV     R0,AR7
+002D 08                INC     R0
+002E 8002              SJMP    ?C0027
+0030         ?C0026:
+0030 C3                CLR     C
+0031 33                RLC     A
+0032         ?C0027:
+0032 D8FC              DJNZ    R0,?C0026
+0034 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 86
+0036 0500        R     INC     b
+                                           ; SOURCE LINE # 87
+0038 E500        R     MOV     A,b
+003A D3                SETB    C
+003B 9407              SUBB    A,#07H
+003D 4003              JC      ?C0020
+C51 COMPILER V9.00   MAIN                                                                  07/31/2017 13:45:49 PAGE 6   
+
+003F 750000      R     MOV     b,#00H
+                                           ; SOURCE LINE # 89
+                                           ; SOURCE LINE # 90
+0042         ?C0020:
+0042 D007              POP     AR7
+0044 D000              POP     AR0
+0046 D0D0              POP     PSW
+0048 D0E0              POP     ACC
+004A 32                RETI    
+             ; FUNCTION Time0_Int (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    198    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

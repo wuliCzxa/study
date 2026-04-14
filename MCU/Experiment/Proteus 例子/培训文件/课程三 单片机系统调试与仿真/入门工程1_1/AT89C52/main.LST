@@ -1,0 +1,165 @@
+C51 COMPILER V9.00   MAIN                                                                  07/27/2017 11:25:29 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe ..\main.c ROM(SMALL) BROWSE DEBUG CODE OBJECTEXTEND PREPRINT OBJECT(main.OB
+                    -J)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          #define led_out P2      //定时P2 名为 LED输出
+   7          
+   8          sbit button=P1^0;
+   9          ///////////////延时函数/////////////////////////
+  10          void delay1ms(uint j)             //1ms延时
+  11          {
+  12   1      uchar i;
+  13   1      for(;j>0;j--)
+  14   1              {
+  15   2               i=250;
+  16   2               while(--i);
+  17   2               i=249;
+  18   2               while(--i);
+  19   2              }
+  20   1      }
+  21          ////////主函数////////////////////
+  22          void main(void)
+  23           { 
+  24   1         uchar i=0;
+  25   1      //   led_out=0x01;      //寄存器操作
+  26   1         while (1)
+  27   1         {
+  28   2              if(button==1)
+  29   2              {
+  30   3                  led_out=~(0x01<<i);
+  31   3                  i++;
+  32   3                  i&=0x07;
+  33   3                  delay1ms(500); 
+  34   3              }
+  35   2              else
+  36   2              {
+  37   3                 led_out=0xaa;
+  38   3                 delay1ms(500);
+  39   3                 led_out=0x55;
+  40   3                 delay1ms(500);
+  41   3              }
+  42   2          }
+  43   1       }
+C51 COMPILER V9.00   MAIN                                                                  07/27/2017 11:25:29 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION L?0017 (BEGIN)
+0000         L?0018:
+0000 7FF4              MOV     R7,#0F4H
+0002 7E01              MOV     R6,#01H
+             ; FUNCTION _delay1ms (BEGIN)
+                                           ; SOURCE LINE # 10
+;---- Variable 'j' assigned to Register 'R6/R7' ----
+                                           ; SOURCE LINE # 11
+                                           ; SOURCE LINE # 13
+0004         ?C0001:
+0004 D3                SETB    C
+0005 EF                MOV     A,R7
+0006 9400              SUBB    A,#00H
+0008 EE                MOV     A,R6
+0009 9400              SUBB    A,#00H
+000B 400F              JC      ?C0008
+                                           ; SOURCE LINE # 14
+                                           ; SOURCE LINE # 15
+;---- Variable 'i' assigned to Register 'R5' ----
+000D 7DFA              MOV     R5,#0FAH
+000F         ?C0004:
+                                           ; SOURCE LINE # 16
+000F DDFE              DJNZ    R5,?C0004
+0011         ?C0005:
+                                           ; SOURCE LINE # 17
+0011 7DF9              MOV     R5,#0F9H
+0013         ?C0006:
+                                           ; SOURCE LINE # 18
+0013 DDFE              DJNZ    R5,?C0006
+0015         ?C0007:
+                                           ; SOURCE LINE # 19
+0015         ?C0003:
+0015 EF                MOV     A,R7
+0016 1F                DEC     R7
+0017 70EB              JNZ     ?C0001
+0019 1E                DEC     R6
+001A         ?C0014:
+001A 80E8              SJMP    ?C0001
+                                           ; SOURCE LINE # 20
+001C         ?C0008:
+001C 22                RET     
+             ; FUNCTION _delay1ms (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 22
+                                           ; SOURCE LINE # 23
+                                           ; SOURCE LINE # 24
+;---- Variable 'i' assigned to Register 'R4' ----
+0000 E4                CLR     A
+0001 FC                MOV     R4,A
+0002         ?C0009:
+                                           ; SOURCE LINE # 26
+                                           ; SOURCE LINE # 27
+                                           ; SOURCE LINE # 28
+0002 309017            JNB     button,?C0011
+                                           ; SOURCE LINE # 29
+                                           ; SOURCE LINE # 30
+0005 7401              MOV     A,#01H
+0007 A804              MOV     R0,AR4
+C51 COMPILER V9.00   MAIN                                                                  07/27/2017 11:25:29 PAGE 3   
+
+0009 08                INC     R0
+000A 8002              SJMP    ?C0016
+000C         ?C0015:
+000C C3                CLR     C
+000D 33                RLC     A
+000E         ?C0016:
+000E D8FC              DJNZ    R0,?C0015
+0010 F4                CPL     A
+0011 F5A0              MOV     P2,A
+                                           ; SOURCE LINE # 31
+0013 0C                INC     R4
+                                           ; SOURCE LINE # 32
+0014 530407            ANL     AR4,#07H
+                                           ; SOURCE LINE # 33
+0017 120000      R     LCALL   L?0017
+                                           ; SOURCE LINE # 34
+001A 80E6              SJMP    ?C0009
+001C         ?C0011:
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+001C 75A0AA            MOV     P2,#0AAH
+                                           ; SOURCE LINE # 38
+001F 120000      R     LCALL   L?0017
+                                           ; SOURCE LINE # 39
+0022 75A055            MOV     P2,#055H
+                                           ; SOURCE LINE # 40
+0025 1100        R     ACALL   L?0018
+                                           ; SOURCE LINE # 41
+                                           ; SOURCE LINE # 42
+0027 80D9              SJMP    ?C0009
+             ; FUNCTION main (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

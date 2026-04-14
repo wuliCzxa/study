@@ -1,0 +1,266 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	..\..\111\001.asm
+	Object File:	Debug.HEX
+	List File:	Debug.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:				; ----------- 头文件与寄存器定义 -----------
+    2:		N      0000	ORG 0000H            ; 程序起始地址
+    3:	  0000	02 00 10	LJMP MAIN            ; 跳转到主程序
+    4:		N      0003	ORG 0003H            ; 外部中断0向量地址
+    5:	  0003	02 00 2F	LJMP INT0_ISR        ; 中断服务程序
+    6:
+    7:				; ----------- 常量定义 -----------
+    8:		D      0080	SEG_PORT EQU P0      ; 段选数据口（接74HC573）
+    9:		D      00A0	BIT_PORT EQU P2      ; 位选控制口（接74HC138，P2.0-P2.2）
+   10:
+   11:				; 共阳数码管段码表（0-9）
+   12:	  0006			SEG_TABLE:
+   13:	  0006	C0 F9 A4 B0	    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+	  000A	99 92 82 F8
+	  000E	80 90
+   14:
+   15:				; ----------- 变量定义 -----------
+   16:		N	 30	DSEG AT 30H
+   17:	    30	N	 02	COUNT:     DS 2      ; 16位计数器（0-999999）
+   18:	    32	N	 06	DIGITS:    DS 6      ; 存储6位BCD码
+   19:	    38	N	 01	DIG_INDEX: DS 1      ; 当前显示位索引（0-5）
+   20:
+   21:				; ----------- 主程序 -----------
+   22:				CSEG
+   23:	  0010			MAIN:
+   24:	  0010	75 81 5F	    MOV SP, #5FH      ; 初始化栈指针
+   25:	  0013	12 00 1E	    LCALL INIT        ; 初始化硬件
+   26:	  0016	12 00 2B	    LCALL DISPLAY_INIT ; 初始化显示
+   27:
+   28:	  0019			LOOP:
+   29:	  0019	12 00 4E	    LCALL UPDATE_DISPLAY ; 更新数码管显示
+   30:	  001C	80 FB		    SJMP LOOP          ; 主循环
+   31:
+   32:				; ----------- 初始化函数 -----------
+   33:	  001E			INIT:
+   34:				    ; 配置外部中断0（下降沿触发）
+   35:	  001E	D2 88		    SETB IT0          ; 边沿触发模式
+   36:	  0020	D2 A8		    SETB EX0          ; 允许INT0中断
+   37:	  0022	D2 AF		    SETB EA           ; 开总中断
+   38:				    ; 初始化计数器
+   39:	  0024	75 30 00	    MOV COUNT, #0
+   40:	  0027	75 31 00	    MOV COUNT+1, #0
+   41:	  002A	22		    RET
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   42:
+   43:	  002B			DISPLAY_INIT:
+   44:	  002B	75 38 00	    MOV DIG_INDEX, #0 ; 从第0位开始显示
+   45:	  002E	22		    RET
+   46:
+   47:				; ----------- 中断服务程序（按键计数） -----------
+   48:	  002F			INT0_ISR:
+   49:	  002F	C0 E0		    PUSH ACC          ; 保护现场
+   50:	  0031	C0 D0		    PUSH PSW
+   51:				    ; 计数器加1（16位）
+   52:	  0033	E5 30		    MOV A, COUNT
+   53:	  0035	24 01		    ADD A, #1
+   54:	  0037	F5 30		    MOV COUNT, A
+   55:	  0039	E5 31		    MOV A, COUNT+1
+   56:	  003B	34 00		    ADDC A, #0
+   57:	  003D	F5 31		    MOV COUNT+1, A
+   58:				    ; 转换为6位BCD码
+   59:	  003F	12 00 47	    LCALL COUNT_TO_BCD
+   60:	  0042	D0 D0		    POP PSW           ; 恢复现场
+   61:	  0044	D0 E0		    POP ACC
+   62:	  0046	32		    RETI
+   63:
+   64:				; ----------- 计数器转BCD码 -----------
+   65:	  0047			COUNT_TO_BCD:
+   66:	  0047	78 32		    MOV R0, #DIGITS   ; R0指向BCD数组
+   67:	  0049	79 06		    MOV R1, #6        ; 6位数字
+   68:	  004B	7A 00		    MOV R2, #0        ; 清零临时变量
+   69:				    ; 此处省略具体转换代码（可用除法或查表法）
+   70:	  004D	22		    RET
+   71:
+   72:				; ----------- 动态显示更新 -----------
+   73:	  004E			UPDATE_DISPLAY:
+   74:				    ; 1. 关闭当前位选（消隐）
+   75:	  004E	74 07		    MOV A, #07H       ; 74HC138输入111（不选任何位）
+   76:	  0050	F5 A0		    MOV BIT_PORT, A
+   77:				    ; 2. 输出段码
+   78:	  0052	E5 38		    MOV A, DIG_INDEX  ; 获取当前位索引
+   79:	  0054	24 06		    ADD A, #SEG_TABLE ; 计算段码地址
+   80:	  0056	93		    MOVC A, @A+DPTR   ; 读取段码
+   81:	  0057	F5 80		    MOV SEG_PORT, A   ; 输出到74HC573
+   82:				    ; 3. 打开当前位选
+   83:	  0059	E5 38		    MOV A, DIG_INDEX  ; 位索引（0-5）
+   84:	  005B	F5 A0		    MOV BIT_PORT, A    ; 74HC138选择对应位
+   85:				    ; 4. 更新位索引
+   86:	  005D	05 38		    INC DIG_INDEX
+   87:	  005F	E5 38		    MOV A, DIG_INDEX
+   88:	  0061	B4 06 03	    CJNE A, #6, SKIP_RESET
+   89:	  0064	75 38 00	    MOV DIG_INDEX, #0  ; 超过5则归零
+   90:	  0067			SKIP_RESET:
+   91:				    ; 5. 延时1ms
+   92:	  0067	12 00 6B	    LCALL DELAY_1MS
+   93:	  006A	22		    RET
+   94:
+   95:				; ----------- 延时1ms -----------
+   96:	  006B			DELAY_1MS:
+   97:	  006B	7E 0A		    MOV R6, #10
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+ Line  I  Addr  Code            Source
+
+   98:	  006D			DELAY_LOOP:
+   99:	  006D	7F 05		    MOV R7, #5
+  100:	  006F	DF FE		    DJNZ R7, $
+  101:	  0071	DE FA		    DJNZ R6, DELAY_LOOP
+  102:	  0073	22		    RET
+  103:
+  104:				; ----------- 段码表存储 -----------
+  105:		N      0300	ORG 300H
+  106:	  0300			SEG_DATA:
+  107:	  0300	C0 F9 A4 B0	    DB 0C0H, 0F9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+	  0304	99 92 82 F8
+	  0308	80 90
+  108:
+  109:				END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+BIT_PORT			  NUMBER    00A0	   9
+COUNT				  DATA	      30	  17
+COUNT_TO_BCD			  CODE	    0047	  65
+CY				  BIT	      D7
+DELAY_1MS			  CODE	    006B	  96
+DELAY_LOOP			  CODE	    006D	  98
+DIGITS				  DATA	      32	  18
+DIG_INDEX			  DATA	      38	  19
+DISPLAY_INIT			  CODE	    002B	  43
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INIT				  CODE	    001E	  33
+INT0				  BIT	      B2
+INT0_ISR			  CODE	    002F	  48
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+LOOP				  CODE	    0019	  28
+MAIN				  CODE	    0010	  23
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 5
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SEG_DATA			  CODE	    0300	 106
+SEG_PORT			  NUMBER    0080	   8
+SEG_TABLE			  CODE	    0006	  12
+SINT				  CODE	    0023
+SKIP_RESET			  CODE	    0067	  90
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+UPDATE_DISPLAY			  CODE	    004E	  73
+WR				  BIT	      B6

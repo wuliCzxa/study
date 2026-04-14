@@ -1,0 +1,95 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/26/2015  16:04:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     01F0H     UNIT         ?CO?MAIN
+            CODE    01F3H     0091H     INBLOCK      ?PR?_DISPLAY_HZ?MAIN
+            CODE    0284H     004CH     INBLOCK      ?PR?_DISPLAY_ZF?MAIN
+            CODE    02D0H     0044H     INBLOCK      ?PR?DISPLAY?MAIN
+            CODE    0314H     0020H     INBLOCK      ?PR?INITIAL?MAIN
+            CODE    0334H     001FH     INBLOCK      ?PR?CLEAR_SCREEN?MAIN
+            CODE    0353H     001BH     INBLOCK      ?PR?_DELAYMS?MAIN
+            CODE    036EH     0015H     INBLOCK      ?PR?_SELECT?MAIN
+            CODE    0383H     000DH     INBLOCK      ?PR?_SEND_CMD?MAIN
+            CODE    0390H     000DH     INBLOCK      ?PR?_SEND_DATA?MAIN
+            CODE    039DH     000CH     UNIT         ?C_C51STARTUP
+            CODE    03A9H     000AH     INBLOCK      ?PR?MAIN?MAIN
+            CODE    03B3H     0005H     INBLOCK      ?PR?DELAYUS10?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?INITIAL?MAIN
+  +--> ?PR?DISPLAY?MAIN
+  +--> ?PR?CLEAR_SCREEN?MAIN
+
+?PR?INITIAL?MAIN               -----    -----
+  +--> ?PR?_SELECT?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/26/2015  16:04:42  PAGE 2
+
+
+  +--> ?PR?CLEAR_SCREEN?MAIN
+  +--> ?PR?_SEND_CMD?MAIN
+
+?PR?CLEAR_SCREEN?MAIN          -----    -----
+  +--> ?PR?_SELECT?MAIN
+  +--> ?PR?_SEND_CMD?MAIN
+  +--> ?PR?_SEND_DATA?MAIN
+
+?PR?_SEND_CMD?MAIN             -----    -----
+  +--> ?PR?DELAYUS10?MAIN
+
+?PR?_SEND_DATA?MAIN            -----    -----
+  +--> ?PR?DELAYUS10?MAIN
+
+?PR?DISPLAY?MAIN               -----    -----
+  +--> ?PR?_SELECT?MAIN
+  +--> ?PR?_DISPLAY_ZF?MAIN
+  +--> ?PR?_DISPLAY_HZ?MAIN
+
+?PR?_DISPLAY_ZF?MAIN           0008H    0004H
+  +--> ?PR?_SEND_CMD?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND_DATA?MAIN
+
+?PR?_DISPLAY_HZ?MAIN           0008H    0004H
+  +--> ?PR?_SEND_CMD?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND_DATA?MAIN
+
+Program Size: data=13.0 xdata=0 code=952
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

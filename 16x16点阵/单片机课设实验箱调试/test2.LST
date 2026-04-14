@@ -1,0 +1,773 @@
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE test2.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     NAME    LEDSHOW
+                       2     
+0000                   3     ORG     0000H
+0000 020100            4     LJMP    MAIN
+                       5     
+000B                   6     ORG     000BH
+000B 0201B6            7     LJMP    TIMER0_ISR
+                       8     
+                       9     ;-----------------------------------------
+                      10     ; Ó²¼þ¶¨Òå
+                      11     ;-----------------------------------------
+                      12     
+                      13     
+                      14     ;-----------------------------------------
+                      15     ; ÄÚ´æ±äÁ¿
+                      16     ;-----------------------------------------
+0000                  17     ORG     0000H
+0000                  18     FX:     DS 1
+0001                  19     ALT:    DS 1
+0002                  20     NETL:   DS 1
+0003                  21     NETH:   DS 1
+0004                  22     SPEED:  DS 1
+0005                  23     ZI:     DS 1
+0006                  24     ZONGL:  DS 1
+0007                  25     ZONGH:  DS 1
+0008                  26     AA:     DS 1
+0009                  27     I_IDX:  DS 1
+                      28     
+                      29     ;-----------------------------------------
+                      30     ; ³£Á¿
+                      31     ;-----------------------------------------
+  0200                32     FONT_BASE   EQU 0200H
+  00D8                33     TH0_CONST   EQU 0D8H
+  00F0                34     TL0_CONST   EQU 0F0H
+                      35     
+                      36     ;-----------------------------------------
+                      37     ; Ö÷³ÌÐò
+                      38     ;-----------------------------------------
+0100                  39     ORG     0100H
+0100                  40     MAIN:
+0100 758170           41             MOV SP, #0070H
+0103 750035           42             MOV SPEED, #35H
+*** _____________________________________^
+*** ERROR #A48 IN 42 (test2.asm, LINE 42): DATA-ADDRESS EXPECTED
+0106 750000           43             MOV FX, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 43 (test2.asm, LINE 43): DATA-ADDRESS EXPECTED
+0109 750000           44             MOV ALT, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 44 (test2.asm, LINE 44): DATA-ADDRESS EXPECTED
+010C 750000           45             MOV NETL, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 45 (test2.asm, LINE 45): DATA-ADDRESS EXPECTED
+010F 750000           46             MOV NETH, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 46 (test2.asm, LINE 46): DATA-ADDRESS EXPECTED
+0112 75000F           47             MOV ZI, #0FH
+*** _____________________________________^
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     2
+
+*** ERROR #A48 IN 47 (test2.asm, LINE 47): DATA-ADDRESS EXPECTED
+0115 750000           48             MOV ZONGL, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 48 (test2.asm, LINE 48): DATA-ADDRESS EXPECTED
+0118 750002           49             MOV ZONGH, #02H       ; (zi+1)*32 = 512
+*** _____________________________________^
+*** ERROR #A48 IN 49 (test2.asm, LINE 49): DATA-ADDRESS EXPECTED
+                      50     
+011B 758901           51             MOV TMOD, #01H
+011E 758CD8           52             MOV TH0, #TH0_CONST
+0121 758AF0           53             MOV TL0, #TL0_CONST
+0124 D2A9             54             SETB ET0
+0126 D2AF             55             SETB EA
+0128 D28C             56             SETB TR0
+                      57     
+012A                  58     MAIN_LOOP:
+                      59             ;--- °´¼ü S1£ºÆôÍ£ ---
+012A                  60             JB S1, CHECK_S2
+*** ____________________________________^
+*** ERROR #A45 IN 60 (test2.asm, LINE 60): UNDEFINED SYMBOL (PASS-2)
+012D 5111             61             ACALL DEBOUNCE
+012F                  62             JB S1, CHECK_S2
+*** ____________________________________^
+*** ERROR #A45 IN 62 (test2.asm, LINE 62): UNDEFINED SYMBOL (PASS-2)
+0132 B28C             63             CPL TR0
+                      64     
+0134                  65     CHECK_S2:
+                      66             ;--- °´¼ü S2£º·½Ïò ---
+0134                  67             JB S2, CHECK_S3
+*** ____________________________________^
+*** ERROR #A45 IN 67 (test2.asm, LINE 67): UNDEFINED SYMBOL (PASS-2)
+0137 5111             68             ACALL DEBOUNCE
+0139                  69             JB S2, CHECK_S3
+*** ____________________________________^
+*** ERROR #A45 IN 69 (test2.asm, LINE 69): UNDEFINED SYMBOL (PASS-2)
+013C 0500             70             INC FX
+*** _____________________________________^
+*** ERROR #A48 IN 70 (test2.asm, LINE 70): DATA-ADDRESS EXPECTED
+013E E500             71             MOV A, FX
+*** ________________________________________^
+*** ERROR #A48 IN 71 (test2.asm, LINE 71): DATA-ADDRESS EXPECTED
+0140 B40203           72             CJNE A, #02, DIR_OK
+0143 750000           73             MOV FX, #00
+*** _____________________________________^
+*** ERROR #A48 IN 73 (test2.asm, LINE 73): DATA-ADDRESS EXPECTED
+0146                  74     DIR_OK: 
+0146 E500             75             MOV A, FX
+*** ________________________________________^
+*** ERROR #A48 IN 75 (test2.asm, LINE 75): DATA-ADDRESS EXPECTED
+0148 6008             76             JZ  DIR_LEFT
+014A 850000           77             MOV NETL, ZONGL
+*** _____________________________________^
+*** ___________________________________________^
+*** ERROR #A48 IN 77 (test2.asm, LINE 77): DATA-ADDRESS EXPECTED
+*** ERROR #A48 IN 77 (test2.asm, LINE 77): DATA-ADDRESS EXPECTED
+014D 850000           78             MOV NETH, ZONGH
+*** _____________________________________^
+*** ___________________________________________^
+*** ERROR #A48 IN 78 (test2.asm, LINE 78): DATA-ADDRESS EXPECTED
+*** ERROR #A48 IN 78 (test2.asm, LINE 78): DATA-ADDRESS EXPECTED
+0150 8006             79             SJMP CHECK_S3
+0152                  80     DIR_LEFT:
+0152 750000           81             MOV NETL, #00
+*** _____________________________________^
+*** ERROR #A48 IN 81 (test2.asm, LINE 81): DATA-ADDRESS EXPECTED
+0155 750000           82             MOV NETH, #00
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     3
+
+*** _____________________________________^
+*** ERROR #A48 IN 82 (test2.asm, LINE 82): DATA-ADDRESS EXPECTED
+                      83     
+0158                  84     CHECK_S3:
+                      85             ;--- °´¼ü S3£º¼õËÙ ---
+0158                  86             JB S3, CHECK_S4
+*** ____________________________________^
+*** ERROR #A45 IN 86 (test2.asm, LINE 86): UNDEFINED SYMBOL (PASS-2)
+015B 5111             87             ACALL DEBOUNCE
+015D                  88             JB S3, CHECK_S4
+*** ____________________________________^
+*** ERROR #A45 IN 88 (test2.asm, LINE 88): UNDEFINED SYMBOL (PASS-2)
+0160 E500             89             MOV A, SPEED
+*** ________________________________________^
+*** ERROR #A48 IN 89 (test2.asm, LINE 89): DATA-ADDRESS EXPECTED
+0162 B40102           90             CJNE A, #01, SPD_DEC
+0165 8002             91             SJMP CHECK_S4
+0167                  92     SPD_DEC:
+0167 1500             93             DEC SPEED
+*** _____________________________________^
+*** ERROR #A48 IN 93 (test2.asm, LINE 93): DATA-ADDRESS EXPECTED
+                      94     
+0169                  95     CHECK_S4:
+                      96             ;--- °´¼ü S4£º¼ÓËÙ ---
+0169                  97             JB S4, REFRESH
+*** ____________________________________^
+*** ERROR #A45 IN 97 (test2.asm, LINE 97): UNDEFINED SYMBOL (PASS-2)
+016C 5111             98             ACALL DEBOUNCE
+016E                  99             JB S4, REFRESH
+*** ____________________________________^
+*** ERROR #A45 IN 99 (test2.asm, LINE 99): UNDEFINED SYMBOL (PASS-2)
+0171 E500            100             MOV A, SPEED
+*** ________________________________________^
+*** ERROR #A48 IN 100 (test2.asm, LINE 100): DATA-ADDRESS EXPECTED
+0173 B40C02          101             CJNE A, #0CH, SPD_INC
+0176 8002            102             SJMP REFRESH
+0178                 103     SPD_INC:
+0178 0500            104             INC SPEED
+*** _____________________________________^
+*** ERROR #A48 IN 104 (test2.asm, LINE 104): DATA-ADDRESS EXPECTED
+                     105     
+                     106     ;-----------------------------------------
+                     107     ; Ë¢ÐÂµãÕóÏÔÊ¾
+                     108     ;-----------------------------------------
+017A                 109     REFRESH:
+017A 750000          110             MOV I_IDX, #00
+*** _____________________________________^
+*** ERROR #A48 IN 110 (test2.asm, LINE 110): DATA-ADDRESS EXPECTED
+017D 750000          111             MOV AA, #00
+*** _____________________________________^
+*** ERROR #A48 IN 111 (test2.asm, LINE 111): DATA-ADDRESS EXPECTED
+0180                 112     DISP_LOOP:
+0180 E500            113             MOV A, I_IDX
+*** ________________________________________^
+*** ERROR #A48 IN 113 (test2.asm, LINE 113): DATA-ADDRESS EXPECTED
+0182 F5A0            114             MOV P2, A
+                     115     
+                     116             ; ÕâÀïÖ»ÊÇÑÝÊ¾Ð´Èë 0xFF,0x00
+0184 74FF            117             MOV A, #0FFH
+0186 7800            118             MOV R0, #00H
+0188 3194            119             ACALL WRITEDATA
+                     120     
+                     121             ; ÇåÆÁ
+018A 7400            122             MOV A, #00H
+018C 7800            123             MOV R0, #00H
+018E 3194            124             ACALL WRITEDATA
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     4
+
+                     125     
+0190 0500            126             INC I_IDX
+*** _____________________________________^
+*** ERROR #A48 IN 126 (test2.asm, LINE 126): DATA-ADDRESS EXPECTED
+0192                 127             CJNE I_IDX, #10H, DISP_LOOP
+*** ______________________________________^
+*** ERROR #A39 IN 127 (test2.asm, LINE 127): REGISTER OPERAND EXPECTED
+                     128     
+0192 8096            129             SJMP MAIN_LOOP
+                     130     
+                     131     ;-----------------------------------------
+                     132     ; ×Ó³ÌÐò£ºÐ´74HC595
+                     133     ; ÊäÈë£ºA=dat1, R0=dat2
+                     134     ;-----------------------------------------
+0194                 135     WRITEDATA:
+0194 C0D0            136             PUSH PSW
+0196 C0E0            137             PUSH ACC
+0198                 138             PUSH R0
+*** ______________________________________^
+*** ERROR #A22 IN 138 (test2.asm, LINE 138): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+0198                 139             PUSH R1
+*** ______________________________________^
+*** ERROR #A22 IN 139 (test2.asm, LINE 139): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+                     140     
+0198 7F08            141             MOV R7, #08
+019A                 142     WD1_LOOP:
+019A 33              143             RLC A
+019B                 144             MOV DS, C
+*** _____________________________________^
+*** ERROR #A9 IN 144 (test2.asm, LINE 144): SYNTAX ERROR
+019B                 145             SETB SHCP
+*** ______________________________________^
+*** ERROR #A45 IN 145 (test2.asm, LINE 145): UNDEFINED SYMBOL (PASS-2)
+019D                 146             CLR SHCP
+*** _____________________________________^
+*** ERROR #A45 IN 146 (test2.asm, LINE 146): UNDEFINED SYMBOL (PASS-2)
+019F DFF9            147             DJNZ R7, WD1_LOOP
+                     148     
+01A1 E8              149             MOV A, R0
+01A2 7F08            150             MOV R7, #08
+01A4                 151     WD2_LOOP:
+01A4 33              152             RLC A
+01A5                 153             MOV DS, C
+*** _____________________________________^
+*** ERROR #A9 IN 153 (test2.asm, LINE 153): SYNTAX ERROR
+01A5                 154             SETB SHCP
+*** ______________________________________^
+*** ERROR #A45 IN 154 (test2.asm, LINE 154): UNDEFINED SYMBOL (PASS-2)
+01A7                 155             CLR SHCP
+*** _____________________________________^
+*** ERROR #A45 IN 155 (test2.asm, LINE 155): UNDEFINED SYMBOL (PASS-2)
+01A9 DFF9            156             DJNZ R7, WD2_LOOP
+                     157     
+01AB                 158             CLR STCP
+*** _____________________________________^
+*** ERROR #A45 IN 158 (test2.asm, LINE 158): UNDEFINED SYMBOL (PASS-2)
+01AD                 159             SETB STCP
+*** ______________________________________^
+*** ERROR #A45 IN 159 (test2.asm, LINE 159): UNDEFINED SYMBOL (PASS-2)
+01AF                 160             CLR STCP
+*** _____________________________________^
+*** ERROR #A45 IN 160 (test2.asm, LINE 160): UNDEFINED SYMBOL (PASS-2)
+                     161     
+01B1                 162             POP R1
+*** _____________________________________^
+*** ERROR #A22 IN 162 (test2.asm, LINE 162): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     5
+
+01B1                 163             POP R0
+*** _____________________________________^
+*** ERROR #A22 IN 163 (test2.asm, LINE 163): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+01B1 D0E0            164             POP ACC
+01B3 D0D0            165             POP PSW
+01B5 22              166             RET
+                     167     
+                     168     ;-----------------------------------------
+                     169     ; Timer0 ÖÐ¶Ï·þÎñ£º¹ö¶¯Æ«ÒÆ
+                     170     ;-----------------------------------------
+01B6                 171     TIMER0_ISR:
+01B6 C0D0            172             PUSH PSW
+01B8 C0E0            173             PUSH ACC
+01BA                 174             PUSH R0
+*** ______________________________________^
+*** ERROR #A22 IN 174 (test2.asm, LINE 174): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+01BA                 175             PUSH R1
+*** ______________________________________^
+*** ERROR #A22 IN 175 (test2.asm, LINE 175): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+                     176     
+01BA 758CD8          177             MOV TH0, #TH0_CONST
+01BD 758AF0          178             MOV TL0, #TL0_CONST
+                     179     
+01C0 0500            180             INC ALT
+*** _____________________________________^
+*** ERROR #A48 IN 180 (test2.asm, LINE 180): DATA-ADDRESS EXPECTED
+01C2 E500            181             MOV A, ALT
+*** ________________________________________^
+*** ERROR #A48 IN 181 (test2.asm, LINE 181): DATA-ADDRESS EXPECTED
+01C4 B50045          182             CJNE A, SPEED, T0_EXIT
+*** _________________________________________^
+*** ERROR #A48 IN 182 (test2.asm, LINE 182): DATA-ADDRESS EXPECTED
+01C7 750000          183             MOV ALT, #00H
+*** _____________________________________^
+*** ERROR #A48 IN 183 (test2.asm, LINE 183): DATA-ADDRESS EXPECTED
+                     184     
+01CA E500            185             MOV A, FX
+*** ________________________________________^
+*** ERROR #A48 IN 185 (test2.asm, LINE 185): DATA-ADDRESS EXPECTED
+01CC 601E            186             JZ  SCROLL_LEFT
+                     187     
+                     188     ;---- ÓÒ¹ö£ºnet -= 2 ----
+01CE                 189     SCROLL_RIGHT:
+01CE E500            190             MOV A, NETL
+*** ________________________________________^
+*** ERROR #A48 IN 190 (test2.asm, LINE 190): DATA-ADDRESS EXPECTED
+01D0 C3              191             CLR C
+01D1 9402            192             SUBB A, #02
+01D3 F500            193             MOV NETL, A
+*** _____________________________________^
+*** ERROR #A48 IN 193 (test2.asm, LINE 193): DATA-ADDRESS EXPECTED
+01D5 E500            194             MOV A, NETH
+*** ________________________________________^
+*** ERROR #A48 IN 194 (test2.asm, LINE 194): DATA-ADDRESS EXPECTED
+01D7 9400            195             SUBB A, #00
+01D9 F500            196             MOV NETH, A
+*** _____________________________________^
+*** ERROR #A48 IN 196 (test2.asm, LINE 196): DATA-ADDRESS EXPECTED
+                     197     
+                     198             ; if net < 2 -> net = zong
+01DB E500            199             MOV A, NETH
+*** ________________________________________^
+*** ERROR #A48 IN 199 (test2.asm, LINE 199): DATA-ADDRESS EXPECTED
+01DD 702D            200             JNZ T0_EXIT
+01DF E500            201             MOV A, NETL
+*** ________________________________________^
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     6
+
+*** ERROR #A48 IN 201 (test2.asm, LINE 201): DATA-ADDRESS EXPECTED
+01E1 B40228          202             CJNE A, #02, T0_EXIT
+01E4 850000          203             MOV NETL, ZONGL
+*** _____________________________________^
+*** ___________________________________________^
+*** ERROR #A48 IN 203 (test2.asm, LINE 203): DATA-ADDRESS EXPECTED
+*** ERROR #A48 IN 203 (test2.asm, LINE 203): DATA-ADDRESS EXPECTED
+01E7 850000          204             MOV NETH, ZONGH
+*** _____________________________________^
+*** ___________________________________________^
+*** ERROR #A48 IN 204 (test2.asm, LINE 204): DATA-ADDRESS EXPECTED
+*** ERROR #A48 IN 204 (test2.asm, LINE 204): DATA-ADDRESS EXPECTED
+01EA 8020            205             SJMP T0_EXIT
+                     206     
+                     207     ;---- ×ó¹ö£ºnet += 2 ----
+01EC                 208     SCROLL_LEFT:
+01EC E500            209             MOV A, NETL
+*** ________________________________________^
+*** ERROR #A48 IN 209 (test2.asm, LINE 209): DATA-ADDRESS EXPECTED
+01EE 2402            210             ADD A, #02
+01F0 F500            211             MOV NETL, A
+*** _____________________________________^
+*** ERROR #A48 IN 211 (test2.asm, LINE 211): DATA-ADDRESS EXPECTED
+01F2 E500            212             MOV A, NETH
+*** ________________________________________^
+*** ERROR #A48 IN 212 (test2.asm, LINE 212): DATA-ADDRESS EXPECTED
+01F4 3400            213             ADDC A, #00
+01F6 F500            214             MOV NETH, A
+*** _____________________________________^
+*** ERROR #A48 IN 214 (test2.asm, LINE 214): DATA-ADDRESS EXPECTED
+                     215     
+                     216             ; if net > zong -> net=0
+01F8 E500            217             MOV A, NETH
+*** ________________________________________^
+*** ERROR #A48 IN 217 (test2.asm, LINE 217): DATA-ADDRESS EXPECTED
+01FA 9500            218             SUBB A, ZONGH
+*** _________________________________________^
+*** ERROR #A48 IN 218 (test2.asm, LINE 218): DATA-ADDRESS EXPECTED
+01FC 5002            219             JNC CHK_LOW
+01FE 8006            220             SJMP RESET_LEFT
+0200                 221     CHK_LOW:
+0200 E500            222             MOV A, NETL
+*** ________________________________________^
+*** ERROR #A48 IN 222 (test2.asm, LINE 222): DATA-ADDRESS EXPECTED
+0202 9500            223             SUBB A, ZONGL
+*** _________________________________________^
+*** ERROR #A48 IN 223 (test2.asm, LINE 223): DATA-ADDRESS EXPECTED
+0204 4006            224             JC T0_EXIT
+0206                 225     RESET_LEFT:
+0206 750000          226             MOV NETL, #00
+*** _____________________________________^
+*** ERROR #A48 IN 226 (test2.asm, LINE 226): DATA-ADDRESS EXPECTED
+0209 750000          227             MOV NETH, #00
+*** _____________________________________^
+*** ERROR #A48 IN 227 (test2.asm, LINE 227): DATA-ADDRESS EXPECTED
+                     228     
+020C                 229     T0_EXIT:
+020C                 230             POP R1
+*** _____________________________________^
+*** ERROR #A22 IN 230 (test2.asm, LINE 230): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+020C                 231             POP R0
+*** _____________________________________^
+*** ERROR #A22 IN 231 (test2.asm, LINE 231): EXPRESSION TYPE DOES NOT MATCH INSTRUCTION
+020C D0E0            232             POP ACC
+020E D0D0            233             POP PSW
+0210 32              234             RETI
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     7
+
+                     235     
+                     236     ;-----------------------------------------
+                     237     ; Ïû¶¶ÑÓÊ±
+                     238     ;-----------------------------------------
+0211                 239     DEBOUNCE:
+0211 7A32            240             MOV R2, #50
+0213 DAFE            241     DB1:    DJNZ R2, DB1
+0215 22              242             RET
+                     243     
+                     244     ;-----------------------------------------
+                     245     ; ×ÖÄ£Ê¾ÝÇø
+                     246     ;-----------------------------------------
+0200                 247     ORG FONT_BASE
+                     248     ; --- tab ×ÖÄ£ ---
+0200 00000000        249         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0204 00000000                
+0208 00000000                
+020C 00000000                
+0210 00000000        250         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0214 00000000                
+0218 00000000                
+021C 00000000                
+0220 08200620        251         DB 008H,020H,006H,020H,040H,07EH,031H,080H,004H,001H,018H,002H,010H,00CH,010H,030H
+0224 407E3180                
+0228 04011802                
+022C 100C1030                
+0230 11C0FE00        252         DB 011H,0C0H,0FEH,000H,011H,0FCH,010H,002H,014H,002H,018H,002H,010H,00EH,000H,000H
+0234 11FC1002                
+0238 14021802                
+023C 100E0000                
+0240 00007FFF        253         DB 000H,000H,07FH,0FFH,040H,010H,044H,008H,05BH,010H,060H,0E0H,000H,000H,03FH,0FFH
+0244 40104408                
+0248 5B1060E0                
+024C 00003FFF                
+0250 20822082        254         DB 020H,082H,020H,082H,020H,082H,020H,082H,020H,082H,03FH,0FFH,000H,000H,000H,000H
+0254 20822082                
+0258 20823FFF                
+025C 00000000                
+0260 01013FFE        255         DB 001H,001H,03FH,0FEH,069H,040H,0A7H,032H,021H,001H,03FH,0FEH,000H,001H,010H,006H
+0264 6940A732                
+0268 21013FFE                
+026C 00011006                
+0270 13F89200        256         DB 013H,0F8H,092H,000H,052H,000H,013H,0FCH,010H,002H,010H,002H,000H,01EH,000H,000H
+0274 520013FC                
+0278 10021002                
+027C 001E0000                
+0280 08003002        257         DB 008H,000H,030H,002H,022H,002H,024H,082H,028H,082H,020H,082H,0A0H,082H,060H,0FEH
+0284 22022482                
+0288 28822082                
+028C A08260FE                
+0290 20822082        258         DB 020H,082H,020H,082H,028H,082H,024H,082H,022H,002H,028H,002H,030H,000H,000H,000H
+0294 28822482                
+0298 22022802                
+029C 30000000                
+02A0 01013FFE        259         DB 001H,001H,03FH,0FEH,069H,040H,0A7H,032H,021H,001H,03FH,0FEH,000H,001H,010H,006H
+02A4 6940A732                
+02A8 21013FFE                
+02AC 00011006                
+02B0 13F89200        260         DB 013H,0F8H,092H,000H,052H,000H,013H,0FCH,010H,002H,010H,002H,000H,01EH,000H,000H
+02B4 520013FC                
+02B8 10021002                
+02BC 001E0000                
+02C0 02010201        261         DB 002H,001H,002H,001H,042H,002H,042H,004H,042H,008H,042H,030H,042H,0C0H,07FH,000H
+02C4 42024204                
+02C8 42084230                
+02CC 42C07F00                
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     8
+
+02D0 42C04230        262         DB 042H,0C0H,042H,030H,042H,008H,042H,004H,042H,002H,002H,001H,002H,001H,000H,000H
+02D4 42084204                
+02D8 42020201                
+02DC 02010000                
+02E0 04010401        263         DB 004H,001H,004H,001H,004H,002H,004H,004H,004H,008H,004H,030H,004H,0C0H,0FFH,000H
+02E4 04020404                
+02E8 04080430                
+02EC 04C0FF00                
+02F0 04C00430        264         DB 004H,0C0H,004H,030H,004H,008H,004H,004H,004H,002H,004H,001H,004H,001H,000H,000H
+02F4 04080404                
+02F8 04020401                
+02FC 04010000                
+0300 02200C20        265         DB 002H,020H,00CH,020H,088H,020H,069H,020H,009H,020H,009H,022H,089H,021H,069H,07EH
+0304 88206920                
+0308 09200922                
+030C 8921697E                
+0310 096009A0        266         DB 009H,060H,009H,0A0H,019H,020H,028H,020H,0C8H,020H,00AH,020H,00CH,020H,000H,000H
+0314 19202820                
+0318 C8200A20                
+031C 0C200000                
+0320 00080008        267         DB 000H,008H,000H,008H,01FH,0C8H,092H,048H,052H,048H,032H,048H,012H,048H,01FH,0FFH
+0324 1FC89248                
+0328 52483248                
+032C 12481FFF                
+0330 12483248        268         DB 012H,048H,032H,048H,052H,048H,092H,048H,01FH,0C8H,000H,008H,000H,008H,000H,000H
+0334 52489248                
+0338 1FC80008                
+033C 00080000                
+0340 00000001        269         DB 000H,000H,000H,001H,000H,006H,07FH,0F8H,004H,040H,004H,040H,004H,040H,004H,040H
+0344 00067FF8                
+0348 04400440                
+034C 04400440                
+0350 0440FC40        270         DB 004H,040H,0FCH,040H,004H,07FH,004H,000H,004H,000H,004H,000H,000H,000H,000H,000H
+0354 047F0400                
+0358 04000400                
+035C 00000000                
+0360 082008C0        271         DB 008H,020H,008H,0C0H,00BH,000H,0FFH,0FFH,009H,000H,008H,0C1H,000H,006H,07FH,0F8H
+0364 0B00FFFF                
+0368 090008C1                
+036C 00067FF8                
+0370 40004000        272         DB 040H,000H,040H,000H,040H,000H,07FH,0FCH,000H,002H,000H,002H,000H,01EH,000H,000H
+0374 40007FFC                
+0378 00020002                
+037C 001E0000                
+0380 02004200        273         DB 002H,000H,042H,000H,033H,0FCH,000H,008H,000H,010H,000H,044H,07FH,048H,049H,050H
+0384 33FC0008                
+0388 00100044                
+038C 7F484950                
+0390 49607FFF        274         DB 049H,060H,07FH,0FFH,049H,060H,049H,050H,07FH,048H,000H,044H,000H,004H,000H,000H
+0394 49604950                
+0398 7F480044                
+039C 00040000                
+03A0 24102460        275         DB 024H,010H,024H,060H,025H,080H,07FH,0FFH,0C4H,080H,044H,060H,000H,002H,07CH,092H
+03A4 25807FFF                
+03A8 C4804460                
+03AC 00027C92                
+03B0 44924492        276         DB 044H,092H,044H,092H,044H,0FEH,044H,092H,044H,092H,07CH,092H,000H,082H,000H,000H
+03B4 44FE4492                
+03B8 44927C92                
+03BC 00820000                
+03C0 02000200        277         DB 002H,000H,002H,000H,042H,000H,033H,0FCH,000H,009H,002H,011H,005H,002H,079H,0C2H
+03C4 420033FC                
+03C8 00090211                
+03CC 050279C2                
+03D0 41344108        278         DB 041H,034H,041H,008H,041H,014H,079H,062H,005H,082H,004H,001H,004H,001H,000H,000H
+03D4 41147962                
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE     9
+
+03D8 05820401                
+03DC 04010000                
+03E0 02000200        279         DB 002H,000H,002H,000H,042H,000H,033H,0FEH,000H,004H,002H,008H,002H,000H,002H,000H
+03E4 420033FE                
+03E8 00040208                
+03EC 02000200                
+03F0 0200FFFF        280         DB 002H,000H,0FFH,0FFH,002H,000H,002H,000H,002H,000H,002H,000H,002H,000H,000H,000H
+03F4 02000200                
+03F8 02000200                
+03FC 02000000                
+0400 00000000        281         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0404 00000000                
+0408 00000000                
+040C 00000000                
+0410 00000000        282         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0414 00000000                
+0418 00000000                
+041C 00000000                
+                     283     
+                     284     ; --- tab1 ×ÖÄ£ ---
+0420 00000000        285         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0424 00000000                
+0428 00000000                
+042C 00000000                
+0430 00000000        286         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0434 00000000                
+0438 00000000                
+043C 00000000                
+0440 02000200        287         DB 002H,000H,002H,000H,042H,000H,033H,0FEH,000H,004H,002H,008H,002H,000H,002H,000H
+0444 420033FE                
+0448 00040208                
+044C 02000200                
+0450 0200FFFF        288         DB 002H,000H,0FFH,0FFH,002H,000H,002H,000H,002H,000H,002H,000H,002H,000H,000H,000H
+0454 02000200                
+0458 02000200                
+045C 02000000                
+0460 02000200        289         DB 002H,000H,002H,000H,042H,000H,033H,0FCH,000H,009H,002H,011H,005H,002H,079H,0C2H
+0464 420033FC                
+0468 00090211                
+046C 050279C2                
+0470 41344108        290         DB 041H,034H,041H,008H,041H,014H,079H,062H,005H,082H,004H,001H,004H,001H,000H,000H
+0474 41147962                
+0478 05820401                
+047C 04010000                
+0480 24102460        291         DB 024H,010H,024H,060H,025H,080H,07FH,0FFH,0C4H,080H,044H,060H,000H,002H,07CH,092H
+0484 25807FFF                
+0488 C4804460                
+048C 00027C92                
+0490 44924492        292         DB 044H,092H,044H,092H,044H,0FEH,044H,092H,044H,092H,07CH,092H,000H,082H,000H,000H
+0494 44FE4492                
+0498 44927C92                
+049C 00820000                
+04A0 02004200        293         DB 002H,000H,042H,000H,033H,0FCH,000H,008H,000H,010H,000H,044H,07FH,048H,049H,050H
+04A4 33FC0008                
+04A8 00100044                
+04AC 7F484950                
+04B0 49607FFF        294         DB 049H,060H,07FH,0FFH,049H,060H,049H,050H,07FH,048H,000H,044H,000H,004H,000H,000H
+04B4 49604950                
+04B8 7F480044                
+04BC 00040000                
+04C0 082008C0        295         DB 008H,020H,008H,0C0H,00BH,000H,0FFH,0FFH,009H,000H,008H,0C1H,000H,006H,07FH,0F8H
+04C4 0B00FFFF                
+04C8 090008C1                
+04CC 00067FF8                
+04D0 40004000        296         DB 040H,000H,040H,000H,040H,000H,07FH,0FCH,000H,002H,000H,002H,000H,01EH,000H,000H
+04D4 40007FFC                
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE    10
+
+04D8 00020002                
+04DC 001E0000                
+04E0 00000001        297         DB 000H,000H,000H,001H,000H,006H,07FH,0F8H,004H,040H,004H,040H,004H,040H,004H,040H
+04E4 00067FF8                
+04E8 04400440                
+04EC 04400440                
+04F0 0440FC40        298         DB 004H,040H,0FCH,040H,004H,07FH,004H,000H,004H,000H,004H,000H,000H,000H,000H,000H
+04F4 047F0400                
+04F8 04000400                
+04FC 00000000                
+0500 00080008        299         DB 000H,008H,000H,008H,01FH,0C8H,092H,048H,052H,048H,032H,048H,012H,048H,01FH,0FFH
+0504 1FC89248                
+0508 52483248                
+050C 12481FFF                
+0510 12483248        300         DB 012H,048H,032H,048H,052H,048H,092H,048H,01FH,0C8H,000H,008H,000H,008H,000H,000H
+0514 52489248                
+0518 1FC80008                
+051C 00080000                
+0520 02200C20        301         DB 002H,020H,00CH,020H,088H,020H,069H,020H,009H,020H,009H,022H,089H,021H,069H,07EH
+0524 88206920                
+0528 09200922                
+052C 8921697E                
+0530 096009A0        302         DB 009H,060H,009H,0A0H,019H,020H,028H,020H,0C8H,020H,00AH,020H,00CH,020H,000H,000H
+0534 19202820                
+0538 C8200A20                
+053C 0C200000                
+0540 04010401        303         DB 004H,001H,004H,001H,004H,002H,004H,004H,004H,008H,004H,030H,004H,0C0H,0FFH,000H
+0544 04020404                
+0548 04080430                
+054C 04C0FF00                
+0550 04C00430        304         DB 004H,0C0H,004H,030H,004H,008H,004H,004H,004H,002H,004H,001H,004H,001H,000H,000H
+0554 04080404                
+0558 04020401                
+055C 04010000                
+0560 02010201        305         DB 002H,001H,002H,001H,042H,002H,042H,004H,042H,008H,042H,030H,042H,0C0H,07FH,000H
+0564 42024204                
+0568 42084230                
+056C 42C07F00                
+0570 42C04230        306         DB 042H,0C0H,042H,030H,042H,008H,042H,004H,042H,002H,002H,001H,002H,001H,000H,000H
+0574 42084204                
+0578 42020201                
+057C 02010000                
+0580 01013FFE        307         DB 001H,001H,03FH,0FEH,069H,040H,0A7H,032H,021H,001H,03FH,0FEH,000H,001H,010H,006H
+0584 6940A732                
+0588 21013FFE                
+058C 00011006                
+0590 13F89200        308         DB 013H,0F8H,092H,000H,052H,000H,013H,0FCH,010H,002H,010H,002H,000H,01EH,000H,000H
+0594 520013FC                
+0598 10021002                
+059C 001E0000                
+05A0 08003002        309         DB 008H,000H,030H,002H,022H,002H,024H,082H,028H,082H,020H,082H,0A0H,082H,060H,0FEH
+05A4 22022482                
+05A8 28822082                
+05AC A08260FE                
+05B0 20822082        310         DB 020H,082H,020H,082H,028H,082H,024H,082H,022H,002H,028H,002H,030H,000H,000H,000H
+05B4 28822482                
+05B8 22022802                
+05BC 30000000                
+05C0 01013FFE        311         DB 001H,001H,03FH,0FEH,069H,040H,0A7H,032H,021H,001H,03FH,0FEH,000H,001H,010H,006H
+05C4 6940A732                
+05C8 21013FFE                
+05CC 00011006                
+05D0 13F89200        312         DB 013H,0F8H,092H,000H,052H,000H,013H,0FCH,010H,002H,010H,002H,000H,01EH,000H,000H
+05D4 520013FC                
+05D8 10021002                
+05DC 001E0000                
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE    11
+
+05E0 00007FFF        313         DB 000H,000H,07FH,0FFH,040H,010H,044H,008H,05BH,010H,060H,0E0H,000H,000H,03FH,0FFH
+05E4 40104408                
+05E8 5B1060E0                
+05EC 00003FFF                
+05F0 20822082        314         DB 020H,082H,020H,082H,020H,082H,020H,082H,020H,082H,03FH,0FFH,000H,000H,000H,000H
+05F4 20822082                
+05F8 20823FFF                
+05FC 00000000                
+0600 08200620        315         DB 008H,020H,006H,020H,040H,07EH,031H,080H,004H,001H,018H,002H,010H,00CH,010H,030H
+0604 407E3180                
+0608 04011802                
+060C 100C1030                
+0610 11C0FE00        316         DB 011H,0C0H,0FEH,000H,011H,0FCH,010H,002H,014H,002H,018H,002H,010H,00EH,000H,000H
+0614 11FC1002                
+0618 14021802                
+061C 100E0000                
+0620 00000000        317         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0624 00000000                
+0628 00000000                
+062C 00000000                
+0630 00000000        318         DB 000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+0634 00000000                
+0638 00000000                
+063C 00000000                
+                     319     
+                     320     END
+A51 MACRO ASSEMBLER  TEST2                                                                01/01/2013 12:40:00 PAGE    12
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AA . . . . . . . .  C ADDR   0008H   A   
+ACC. . . . . . . .  D ADDR   00E0H   A   
+ALT. . . . . . . .  C ADDR   0001H   A   
+CHECK_S2 . . . . .  C ADDR   0134H   A   
+CHECK_S3 . . . . .  C ADDR   0158H   A   
+CHECK_S4 . . . . .  C ADDR   0169H   A   
+CHK_LOW. . . . . .  C ADDR   0200H   A   
+DB1. . . . . . . .  C ADDR   0213H   A   
+DEBOUNCE . . . . .  C ADDR   0211H   A   
+DIR_LEFT . . . . .  C ADDR   0152H   A   
+DIR_OK . . . . . .  C ADDR   0146H   A   
+DISP_LOOP. . . . .  C ADDR   0180H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+FONT_BASE. . . . .  N NUMB   0200H   A   
+FX . . . . . . . .  C ADDR   0000H   A   
+I_IDX. . . . . . .  C ADDR   0009H   A   
+LEDSHOW. . . . . .  N NUMB   -----       
+MAIN . . . . . . .  C ADDR   0100H   A   
+MAIN_LOOP. . . . .  C ADDR   012AH   A   
+NETH . . . . . . .  C ADDR   0003H   A   
+NETL . . . . . . .  C ADDR   0002H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+REFRESH. . . . . .  C ADDR   017AH   A   
+RESET_LEFT . . . .  C ADDR   0206H   A   
+S1 . . . . . . . .    ----   -----       
+S2 . . . . . . . .    ----   -----       
+S3 . . . . . . . .    ----   -----       
+S4 . . . . . . . .    ----   -----       
+SCROLL_LEFT. . . .  C ADDR   01ECH   A   
+SCROLL_RIGHT . . .  C ADDR   01CEH   A   
+SHCP . . . . . . .    ----   -----       
+SP . . . . . . . .  D ADDR   0081H   A   
+SPD_DEC. . . . . .  C ADDR   0167H   A   
+SPD_INC. . . . . .  C ADDR   0178H   A   
+SPEED. . . . . . .  C ADDR   0004H   A   
+STCP . . . . . . .    ----   -----       
+T0_EXIT. . . . . .  C ADDR   020CH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH0_CONST. . . . .  N NUMB   00D8H   A   
+TIMER0_ISR . . . .  C ADDR   01B6H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL0_CONST. . . . .  N NUMB   00F0H   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WD1_LOOP . . . . .  C ADDR   019AH   A   
+WD2_LOOP . . . . .  C ADDR   01A4H   A   
+WRITEDATA. . . . .  C ADDR   0194H   A   
+ZI . . . . . . . .  C ADDR   0005H   A   
+ZONGH. . . . . . .  C ADDR   0007H   A   
+ZONGL. . . . . . .  C ADDR   0006H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 77 ERROR(S)

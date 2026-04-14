@@ -1,0 +1,138 @@
+                ; 初始化相关寄存器及内存
+00 7C00         MOV A, #00H         ; 清零累加器A
+02 80           MOV R0, A           ; 初始化R0为0
+03 81           MOV R1, A           ; 初始化R1为0
+04 82           MOV R2, A           ; 初始化R2为0
+05 83           MOV R3, A           ; 初始化R3为0
+            
+            MAIN:
+06 8CF4         MOV R0, #0F4H       ; 设置数据起始地址为0F4H
+08 8E0C         MOV R2, #12         ; 设置循环次数为12
+            
+            LOOP_START:
+                ; 每次循环操作逻辑
+0A 74           MOV A, @R0          ; 读取当前地址R0指向的数据
+0B BC21         CALL COPY_BLOCK     ; 调用COPY程序复制缓冲区0E0H~0E3H到0D5H~0D8H
+0D BC3E         CALL SHIFT_BLOCK    ; 调用后移程序，对0E0H~0E3H实施无条件后移
+0F 88E0         MOV 0E0H, A         ; 将读取的数据存入缓冲区头部0E0H
+11 BC67         CALL COMPARE_BLOCK  ; 对比0E0H~0E3H与0D0H~0D3H的数据，并更新命中或未命中计数
+            NEXT_ADDRESS:
+                ; 更新地址和循环计数
+13 70           MOV A, R0
+14 1C01         ADD A, #01H         ; 更新R0指向下一个数据地址
+16 80           MOV R0, A
+17 72           MOV A, R2
+18 3C01         SUB A, #01H         ; 减少循环计数
+1A 82           MOV R2, A
+1B A41F         JZ LOOP_END         ; 若循环计数为0，跳转结束循环
+1D AC0A         JMP LOOP_START      ; 否则继续下一个循环
+            
+            LOOP_END:
+1F AC1F         JMP LOOP_END         ; 程序结束，进入死循环防止意外退出
+            
+            ; COPY程序：复制0E0H~0E3H到0D5H~0D8H
+            COPY_BLOCK:
+21 8FE0         MOV R3, #0E0H       ; 设置R3指向0E0H
+23 8DD5         MOV R1, #0D5H       ; 设置R1指向0D5H
+25 7C04         MOV A, #04H         ; 设置循环计数为4
+27 88EA         MOV 0EAH, A         ; 暂存计数器值
+            
+            COPY_LOOP:
+29 77           MOV A, @R3          ; 从R3指向的地址读取数据
+2A 85           MOV @R1, A          ; 将数据写入R1指向的地址
+2B 73           MOV A, R3
+2C 1C01         ADD A, #01H         ; 移动R3到下一个地址
+2E 83           MOV R3, A
+2F 71           MOV A, R1
+30 1C01         ADD A, #01H         ; 移动R1到下一个地址
+32 81           MOV R1, A
+33 78EA         MOV A, 0EAH
+35 3C01         SUB A, #01H         ; 减少计数器值
+37 88EA         MOV 0EAH, A
+39 A43D         JZ COPY_END         ; 如果计数完成，跳转结束
+3B AC29         JMP COPY_LOOP       ; 否则继续复制
+            
+            COPY_END:
+3D CC           RET                 ; 返回主程序
+            
+            ; SHIFT程序：对0E0H~0E3H实施后移
+            SHIFT_BLOCK:
+3E 8FE3         MOV R3, #0E3H       ; 设置R3指向缓冲区尾部0E3H
+40 7C04         MOV A, #04H         ; 设置后移次数为4
+42 88EA         MOV 0EAH, A         ; 暂存计数器值
+            
+            SHIFT_LOOP:
+44 77           MOV A, @R3          ; 从当前后移位置读取数据
+45 81           MOV R1, A           ; 将读取的数据暂存到寄存器R1
+46 73           MOV A, R3           ; 取当前后移地址
+47 1C01         ADD A, #01H         ; 地址加1，准备移入下一个位置
+49 83           MOV R3, A           ; 更新后移地址
+4A 71           MOV A, R1           ; 将暂存的数据取出
+4B 87           MOV @R3, A          ; 写入到后移位置
+4C 73           MOV A, R3           ; 读取当前后移位置
+4D 3C02         SUB A, #02H         ; 地址回退2个单元
+4F 83           MOV R3, A           ; 更新后移地址
+50 78EA         MOV A, 0EAH         ; 获取后移计数器当前值
+52 3C01         SUB A, #01H         ; 计数器值减1
+54 88EA         MOV 0EAH, A         ; 更新计数器值
+56 A45B         JZ LOOP2            ; 如果计数器值为0，跳转到下一步逻辑
+58 AC44         JMP SHIFT_LOOP      ; 如果计数未结束，继续后移
+5A CC           RET                 ; 返回主程序
+            
+            LOOP2:
+5B 78D0         MOV A, 0D0H         ; 从地址0D0H读取数据
+5D 88E0         MOV 0E0H, A         ; 将读取的数据存入缓冲区头部0E0H
+5F 7C00         MOV A, #00H         ; 清空最后一个缓冲区地址的数据
+61 88E4         MOV 0E4H, A         ; 清零缓冲区尾部数据
+63 BC85         CALL MISS_FOUND           ; 调用未命中页面的处理逻辑
+65 BC13         CALL NEXT_ADDRESS   ; 跳转处理下一个地址
+            
+            ; COMPARE程序：比较0E0H~0E3H与0D0H~0D3H
+            COMPARE_BLOCK:
+67 8FE0         MOV R3, #0E0H       ; 设置R3指向0E0H
+69 8DD0         MOV R1, #0D0H       ; 设置R1指向0D0H
+6B 7C04         MOV A, #04H         ; 设置比较次数为4
+6D 88EA         MOV 0EAH, A         ; 暂存计数器值
+            
+            COMPARE_LOOP:
+6F 77           MOV A, @R3          ; 从R3指向的缓冲区读取数据
+70 35           SUB A, @R1          ; 比较R3和R1指向的数据
+71 A488         JZ HIT_FOUND        ; 如果相等，跳转到命中逻辑
+73 73           MOV A, R3        ; 移动R3到下一个缓冲区地址
+74 1C01         ADD A, #01H
+76 83           MOV R3, A
+77 71           MOV A, R1     ; 移动R1到下一个缓冲区地址
+78 1C01         ADD A, #01H
+7A 81           MOV R1, A
+7B 78EA         MOV A, 0EAH            ; 减少比较计数
+7D 3C01         SUB A, #01H
+7F 88EA         MOV 0EAH, A
+81 A485         JZ MISS_FOUND
+83 AC6F         JMP COMPARE_LOOP    ; 如果计数未完成，继续比较
+            
+            MISS_FOUND:
+85 BC92         CALL UPDATE_MISS    ; 调用未命中更新逻辑
+87 CC           RET                 ; 返回主程序
+            
+            HIT_FOUND:
+88 BC8B         CALL UPDATE_HIT     ; 调用命中更新逻辑
+8A CC           RET                 ; 返回主程序
+            
+            ; 更新命中计数
+            UPDATE_HIT:
+8B 78EF         MOV A, 0EFH         ; 读取命中计数器值
+8D 1C01         ADD A, #01H         ; 计数加1
+8F 88EF         MOV 0EFH, A         ; 更新计数器
+91 CC           RET                 ; 返回主程序
+            
+            ; 更新未命中计数
+            UPDATE_MISS:
+92 78EE         MOV A, 0EEH         ; 读取未命中计数器值
+94 1C01         ADD A, #01H         ; 计数加1
+96 88EE         MOV 0EEH, A         ; 更新计数器
+98 CC           RET                 ; 返回主程序
+            
+            
+            OVER:
+99 AC99          JMP OVER
+            

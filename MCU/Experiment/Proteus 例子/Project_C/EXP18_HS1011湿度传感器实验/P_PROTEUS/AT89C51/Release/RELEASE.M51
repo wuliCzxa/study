@@ -1,0 +1,80 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/26/2015  14:39:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?IMUL)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  ..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?MAIN
+            DATA    000BH     0002H     UNIT         _DATA_GROUP_
+                    000DH     0013H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     000EH     INBLOCK      ?PR?SYS_INIT?MAIN
+            CODE    0011H     000AH     UNIT         ?C_INITSEG
+            CODE    001BH     0002H     ABSOLUTE     
+            CODE    001DH     0256H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    0273H     008CH     UNIT         ?C_C51STARTUP
+            CODE    02FFH     0067H     UNIT         ?C?LIB_CODE
+            CODE    0366H     0036H     INBLOCK      ?PR?TIMER1?MAIN
+            CODE    039CH     000BH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  000BH    0002H
+  +--> ?PR?SYS_INIT?MAIN
+  +--> ?CO?MAIN
+
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/26/2015  14:39:47  PAGE 2
+
+
+
+SYMBOL TABLE OF MODULE:  .\RELEASE.OMF (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?IMUL
+  C:02FFH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?UIDIV
+  C:0311H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=14.1 xdata=0 code=935
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

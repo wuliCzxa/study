@@ -1,0 +1,189 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/11/2018  15:49:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO DEBUG.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  ..\..\..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  DEBUG.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?MAIN
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0019H     INBLOCK      ?PR?_DELAYMS?MAIN
+                    001CH     0007H                  *** GAP ***
+            CODE    0023H     0002H     ABSOLUTE     
+            CODE    0025H     003AH     UNIT         ?CO?MAIN
+            CODE    005FH     002DH     INBLOCK      ?PR?MAIN?MAIN
+            CODE    008CH     0019H     UNIT         ?C?LIB_CODE
+            CODE    00A5H     0016H     INBLOCK      ?PR?_COM_SENDSTR?MAIN
+            CODE    00BBH     0014H     INBLOCK      ?PR?COM_INT?MAIN
+            CODE    00CFH     0013H     INBLOCK      ?PR?COM_INIT?MAIN
+            CODE    00E2H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00EEH     0008H     INBLOCK      ?PR?_COM_SENDBYE?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   DEBUG.OMF (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?COM_INIT?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_COM_SENDSTR?MAIN
+  +--> ?PR?_COM_SENDBYE?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  DEBUG.OMF (MAIN)
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/11/2018  15:49:27  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:00A8H.7       PUBLIC        EA
+  C:00CFH         PUBLIC        Com_Init
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:002FH         PUBLIC        tableYA
+  C:005FH         PUBLIC        main
+  C:00BBH         PUBLIC        Com_Int
+  C:0025H         PUBLIC        tableYI
+  C:00EEH         PUBLIC        _Com_SendBye
+  C:0039H         PUBLIC        buffer1
+  C:0055H         PUBLIC        buffer2
+  D:0008H         PUBLIC        buffer3
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  C:00A5H         PUBLIC        _Com_SendStr
+  D:008DH         PUBLIC        TH1
+  B:0088H.6       PUBLIC        TR1
+  C:0003H         PUBLIC        _delayms
+  -------         PROC          COM_INIT
+  C:00CFH         LINE#         19
+  C:00CFH         LINE#         20
+  C:00CFH         LINE#         21
+  C:00D2H         LINE#         22
+  C:00D5H         LINE#         23
+  C:00D7H         LINE#         24
+  C:00DAH         LINE#         25
+  C:00DDH         LINE#         26
+  C:00DFH         LINE#         27
+  C:00E1H         LINE#         28
+  -------         ENDPROC       COM_INIT
+  -------         PROC          _COM_SENDBYE
+  D:0007H         SYMBOL        dat
+  C:00EEH         LINE#         30
+  C:00EEH         LINE#         31
+  C:00EEH         LINE#         32
+  C:00F0H         LINE#         33
+  C:00F3H         LINE#         34
+  C:00F5H         LINE#         35
+  -------         ENDPROC       _COM_SENDBYE
+  -------         PROC          _COM_SENDSTR
+  D:0001H         SYMBOL        dat
+  C:00A5H         LINE#         37
+  C:00A5H         LINE#         38
+  C:00A5H         LINE#         39
+  C:00A5H         LINE#         40
+  C:00A5H         LINE#         41
+  C:00AAH         LINE#         42
+  C:00ABH         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/11/2018  15:49:27  PAGE 3
+
+
+  C:00ABH         LINE#         45
+  C:00ADH         LINE#         46
+  C:00B0H         LINE#         47
+  C:00B2H         LINE#         48
+  C:00B9H         LINE#         49
+  C:00B9H         LINE#         50
+  -------         ENDPROC       _COM_SENDSTR
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        j
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         53
+  C:0003H         LINE#         54
+  C:0003H         LINE#         56
+  C:000CH         LINE#         57
+  C:000CH         LINE#         58
+  C:000EH         LINE#         59
+  C:0010H         LINE#         60
+  C:0012H         LINE#         61
+  C:0014H         LINE#         62
+  C:001BH         LINE#         63
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:005FH         LINE#         65
+  C:005FH         LINE#         66
+  C:005FH         LINE#         67
+  C:0061H         LINE#         68
+  C:0063H         LINE#         71
+  C:006BH         LINE#         72
+  C:006FH         LINE#         73
+  C:0075H         LINE#         74
+  C:0075H         LINE#         75
+  C:007FH         LINE#         76
+  C:0082H         LINE#         79
+  C:0082H         LINE#         80
+  C:0082H         LINE#         81
+  C:008AH         LINE#         82
+  -------         ENDPROC       MAIN
+  -------         PROC          COM_INT
+  C:00BBH         LINE#         86
+  C:00BFH         LINE#         89
+  C:00C2H         LINE#         90
+  C:00C2H         LINE#         91
+  C:00C8H         LINE#         92
+  C:00CAH         LINE#         93
+  C:00CAH         LINE#         94
+  -------         ENDPROC       COM_INT
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?CLDPTR
+  C:008CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/11/2018  15:49:27  PAGE 4
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAYMS?MAIN
+
+Program Size: data=10.0 xdata=0 code=239
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,66 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/26/2015  16:33:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+BL51.EXE MAIN.OBJ TO .\RELEASE.OMF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  MAIN.OBJ (MAIN)
+  ..\..\..\..\..\..\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\RELEASE.OMF (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            DATA    000AH     0002H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0016H     INBLOCK      ?PR?_DELAY_MUSIC1?MAIN
+                    0019H     0002H                  *** GAP ***
+            CODE    001BH     0002H     ABSOLUTE     
+            CODE    001DH     0060H     UNIT         ?CO?MAIN
+            CODE    007DH     0049H     INBLOCK      ?PR?MAIN?MAIN
+            CODE    00C6H     0016H     INBLOCK      ?PR?_DELAY_MUSIC2?MAIN
+            CODE    00DCH     000CH     INBLOCK      ?PR?_DELAY_MUSIC?MAIN
+            CODE    00E8H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00F4H     0009H     INBLOCK      ?PR?TIME1?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\RELEASE.OMF (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  000AH    0002H
+  +--> ?PR?_DELAY_MUSIC?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAY_MUSIC2?MAIN
+
+?PR?_DELAY_MUSIC2?MAIN         -----    -----
+  +--> ?PR?_DELAY_MUSIC1?MAIN
+
+?PR?_DELAY_MUSIC1?MAIN         -----    -----
+  +--> ?PR?_DELAY_MUSIC?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/26/2015  16:33:19  PAGE 2
+
+
+Program Size: data=13.0 xdata=0 code=251
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

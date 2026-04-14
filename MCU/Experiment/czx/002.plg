@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\czx\002.uvproj
+Project File Date:  03/15/2025
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling 002.asm...
+002.asm(9): error A45: UNDEFINED SYMBOL (PASS-2)
+002.asm(31): error A9: SYNTAX ERROR
+Target not created
+Build target 'Target 1'
+assembling 002.asm...
+002.asm(31): error A9: SYNTAX ERROR
+Target not created
+Build target 'Target 1'
+assembling 002.asm...
+linking...
+Program Size: data=8.0 xdata=0 code=80
+"002" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling 003.asm...
+linking...
+Program Size: data=8.0 xdata=0 code=68
+"002" - 0 Error(s), 0 Warning(s).
